@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        h2 { color: #333; }
+        p { margin-bottom: 20px; }
+        .section { margin-bottom: 40px; }
+        .lang-pl { display: none; }
+    </style>
+</head>
+<body>
+    <div class="section lang-en">
+        <h1>Privacy Policy</h1>
+    <p>This extension, "Wrocławski Kiosk Informacyjny," does not collect or store any personal data. It is designed to provide direct access to publicly available news links from various channels without the need for personal information from its users.</p>
+    <p>All news content and links are owned and produced by the respective news providers. This extension only facilitates the aggregation and easier access to these resources but does not modify or have any editorial control over the content provided through these links.</p>
+    <p>No cookies or tracking mechanisms are implemented within this extension. Therefore, users can confidently use the extension without concern for their privacy.</p>
+    </div>
+
+    <div class="section lang-pl">
+     <h1>Polityka Prywatności</h1>
+    <p>Rozszerzenie "Wrocławski Kiosk Informacyjny" nie zbiera ani nie przechowuje żadnych danych osobowych. Jego celem jest zapewnienie bezpośredniego dostępu do publicznie dostępnych linków do wiadomości z różnych kanałów bez konieczności wykorzystania informacji osobowych użytkowników.</p>
+    <p>Wszystkie treści i linki do wiadomości są własnością i są produkowane przez odpowiednich dostawców wiadomości. To rozszerzenie ułatwia jedynie agregację i łatwiejszy dostęp do tych zasobów, ale nie modyfikuje ani nie ma żadnej kontroli redakcyjnej nad treścią dostarczaną za pośrednictwem tych linków.</p>
+    <p>Rozszerzenie to nie implementuje żadnych ciasteczek ani mechanizmów śledzenia. Użytkownicy mogą więc z pełnym zaufaniem korzystać z rozszerzenia, nie martwiąc się o swoją prywatność.</p>
+   </div>
+
+    <script>
+        // Script to toggle between languages
+        function toggleLanguage(lang) {
+            if (lang === 'pl') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-pl').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.lang-pl').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+
+    <button onclick="toggleLanguage('en')">English</button>
+    <button onclick="toggleLanguage('pl')">Polski</button>
+
+</body>
+</html>
