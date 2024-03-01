@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy / Polityka Prywatności</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2 { color: #333; }
+        p { margin-bottom: 20px; }
+        .section { margin-bottom: 40px; }
+        .lang-pl { display: none; }
+    </style>
+</head>
+<body>
+    <div class="section lang-en">
+        <h1>Privacy Policy</h1>
+        <p>This Privacy Policy outlines how the "Wrocławski Kiosk Informacyjny" extension (hereinafter referred to as "the extension") collects, uses, and discloses information about its users. The extension is committed to ensuring the privacy and security of user data.</p>
+        
+        <h2>Data Collection and Use</h2>
+        <p>The extension does not collect any personal data or browsing history. It operates solely by providing users with direct links to news articles and information hosted on external websites, specifically <a href="https://www.wroclaw.pl">www.wroclaw.pl</a> and related subdomains.</p>
+        
+        <h2>User Permissions</h2>
+        <p>To function properly, the extension requires the following permissions:</p>
+        <ul>
+            <li><strong>"activeTab":</strong> Used to allow the extension to provide functionalities related to the current tab.</li>
+            <li><strong>Host permissions for "https://www.wroclaw.pl/*":</strong> Necessary for the extension to access and display the news feeds from the Wrocław website.</li>
+        </ul>
+        
+        <h2>Data Sharing</h2>
+        <p>The extension does not share any user data with third parties. All data displayed within the extension is derived from publicly accessible web feeds.</p>
+        
+        <h2>Updates to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Users will be notified of any significant changes.</p>
+        
+        <h2>Contact Information</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at [Your Contact Information].</p>
+    </div>
+
+    <div class="section lang-pl">
+        <h1>Polityka Prywatności</h1>
+        <p>Polityka prywatności określa, jak rozszerzenie "Wrocławski Kiosk Informacyjny" (zwane dalej "rozszerzeniem") zbiera, wykorzystuje i ujawnia informacje o użytkownikach. Rozszerzenie jest zobowiązane do zapewnienia prywatności i bezpieczeństwa danych użytkowników.</p>
+        
+        <h2>Zbieranie i wykorzystywanie danych</h2>
+        <p>Rozszerzenie nie zbiera żadnych danych osobowych ani historii przeglądania. Działa wyłącznie poprzez udostępnianie użytkownikom bezpośrednich linków do artykułów i informacji zamieszczonych na zewnętrznych stronach internetowych, w szczególności na <a href="https://www.wroclaw.pl">www.wroclaw.pl</a> i powiązanych poddomenach.</p>
+        
+        <h2>Uprawnienia użytkownika</h2>
+        <p>Dla prawidłowego działania rozszerzenie wymaga następujących uprawnień:</p>
+        <ul>
+            <li><strong>"activeTab":</strong> Używane do umożliwienia rozszerzeniu oferowania funkcji związanych z bieżącą kartą.</li>
+            <li><strong>Uprawnienia hosta dla "https://www.wroclaw.pl/*":</strong> Niezbędne, aby rozszerzenie mogło uzyskać dostęp i wyświetlać kanały informacyjne ze strony internetowej Wrocławia.</li>
+        </ul>
+        
+        <h2>Udostępnianie danych</h2>
+        <p>Rozszerzenie nie udostępnia żadnych danych użytkowników stronom trzecim. Wszystkie wyświetlane dane pochodzą z publicznie dostępnych kanałów internetowych.</p>
+        
+        <h2>Aktualizacje tej polityki</h2>
+        <p>Możemy od czasu do czasu aktualizować tę Politykę Prywatności. Użytkownicy zostaną powiadomieni o wszelkich znaczących zmianach.</p>
+        
+        <h2>Dane kontaktowe</h2>
+        <p>Jeśli masz jakiekolwiek pytania dotyczące tej Polityki Prywatności, prosimy o kontakt pod adresem [Twoje Dane Kontaktowe].</p>
+    </div>
+
+    <script>
+        function toggleLanguage(lang) {
+            if (lang === 'pl') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-pl').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.lang-pl').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+            }
+        }
+    </script>
+
+    <button onclick="toggleLanguage('en')">English</button>
+    <button onclick="toggleLanguage('pl')">Polski</button>
+
+</body>
+</html>
