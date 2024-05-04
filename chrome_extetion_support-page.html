@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chrome Extension Support</title>
+<style>
+    html, body {
+        width: 90 %; 
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+    }
+    header, footer {
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        width: 100%;
+    }
+    form {
+        width: calc(100% - 16px);
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 0 auto; 
+        flex: 1 0 auto;
+    }
+    select, textarea, input[type="submit"] {
+        width: calc(100% - 16px); 
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 16px;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    textarea {
+		width: calc(100% - 36px); 
+    }
+    footer {
+        flex-shrink: 0;
+        font-size: 0.8em;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Chrome Extension Support</h1>
+</header>
+<form action="mailto:example@example.com" method="GET" onsubmit="return submitForm();">
+    <label for="extension">Choose an Extension:</label>
+    <select id="extension" name="extension">
+        <option value="Censor.net RSS Extension">Censor.net RSS Extension</option>
+        <option value="Deities List Viewer">Deities List Viewer</option>
+        <option value="Keep Active Extension Demo">Keep Active Extension Demo</option>
+        <option value="Wrocławski Kiosk Wiadomości">Wrocławski Kiosk Wiadomości</option>
+    </select>
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" name="feedback" rows="4"></textarea>
+    <input type="submit" value="Submit">
+</form>
+<footer>
+    © 2024 by Roman Tsisyk. All rights reserved.
+</footer>
+<script>
+    function submitForm() {
+        var extension = document.getElementById('extension').value;
+        var feedback = document.getElementById('feedback').value;
+        document.location = 'mailto:romantsisyk1@gmail.com?subject=Feedback on ' + extension + '&body=' + encodeURIComponent(feedback);
+        return false; // Prevent actual form submission
+    }
+</script>
+</body>
+</html>
