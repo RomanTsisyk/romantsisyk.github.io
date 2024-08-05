@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy / Політика Конфіденційності</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2 { color: #333; }
+        p, li { margin-bottom: 20px; }
+        .section { display: none; }
+        .lang-en { display: block; }
+    </style>
+    <script>
+        function toggleLanguage(lang) {
+            document.querySelectorAll('.section').forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.querySelector('.lang-' + lang).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <button onclick="toggleLanguage('en')">English</button>
+    <button onclick="toggleLanguage('ua')">Українська</button>
+
+    <div class="section lang-en">
+        <h1>Privacy Policy</h1>
+        <p>This Privacy Policy outlines how the "Ukraine News RSS Reader" extension (hereinafter referred to as "the extension") collects, uses, and discloses information about its users. The extension is committed to ensuring the privacy and security of user data.</p>
+        
+        <h2>Data Collection and Use</h2>
+        <p>The extension does not collect any personal data or browsing history. It operates solely by providing users with direct links to news articles and information hosted on external websites, specifically related to Ukrainian news sources.</p>
+        
+        <h2>User Permissions</h2>
+        <p>To function properly, the extension requires the following permissions:</p>
+        <ul>
+            <li><strong>Host permissions for Ukrainian news sources:</strong> Necessary for the extension to access and display the news feeds.</li>
+        </ul>
+        
+        <h2>Data Sharing</h2>
+        <p>The extension does not share any user data with third parties. All data displayed within the extension is derived from publicly accessible web feeds.</p>
+        
+        <h2>Updates to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Users will be notified of any significant changes.</p>
+        
+        <h2>Contact Information</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us.</p>
+    </div>
+
+    <div class="section lang-ua">
+        <h1>Політика Конфіденційності</h1>
+        <p>Ця Політика Конфіденційності описує, як розширення "Ukraine News RSS Reader" (далі - "розширення") збирає, використовує та розкриває інформацію про своїх користувачів. Розширення зобов'язане забезпечити конфіденційність та безпеку даних користувачів.</p>
+        
+        <h2>Збір та використання даних</h2>
+        <p>Розширення не збирає жодних особистих даних або історії перегляду. Його робота заснована виключно на наданні користувачам прямих посилань на новинні статті та інформацію, розміщену на зовнішніх сайтах, зокрема на українських новинних ресурсах.</p>
+        
+        <h2>Дозволи користувачів</h2>
+        <p>Для належної роботи розширення вимагає наступних дозволів:</p>
+        <ul>
+            <li><strong>Дозволи хоста для українських новинних джерел:</strong> Необхідні для доступу розширення до новинних стрічок та їх відображення.</li>
+        </ul>
+        
+        <h2>Поділ даних</h2>
+        <p>Розширення не передає жодних даних користувачів третім особам. Всі дані, що відображаються в розширенні, походять з відкритих веб-стрічок.</p>
+        
+        <h2>Оновлення цієї політики</h2>
+        <p>Ми можемо час від часу оновлювати цю Політику Конфіденційності. Користувачі будуть повідомлені про будь-які значні зміни.</p>
+        
+        <h2>Контактна інформація</h2>
+        <p>Якщо у вас є будь-які питання щодо цієї Політики Конфіденційності, будь ласка, зв'яжіться з нами.</p>
+    </div>
+</body>
+</html>
