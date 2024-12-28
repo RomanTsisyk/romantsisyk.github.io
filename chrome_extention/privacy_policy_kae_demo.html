@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,34 +25,139 @@
         p {
             margin: 10px 0;
         }
+        #language-selector {
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding: 8px;
+        }
     </style>
+    <script>
+        const translations = {
+            en: {
+                title: "Privacy Policy for Keep Active Extension",
+                effectiveDate: "Effective Date: [01/03/2024]",
+                permissionsTitle: "Permissions and Why They Are Needed",
+                tabsPermission: "'Tabs': The 'tabs' permission is required to manage browser tabs. This includes actions like opening a new tab or refreshing an existing one to keep the session active.",
+                alarmsPermission: "'Alarms': The 'alarms' permission is used to schedule code to run periodically. This is necessary for the extension to trigger actions, like refreshing a page, at the set intervals.",
+                storagePermission: "'Storage': The 'storage' permission allows the extension to save settings and preferences locally on your device. This ensures your settings are persistent across browser sessions.",
+                noDataCollectedTitle: "Information We Do Not Collect",
+                noDataCollectedContent: "We do not collect, use, store, or share any personal information from the users of our Extension. Our Extension operates completely locally on your device, and no data is transmitted off your device in relation to the services provided by the Extension.",
+                noUsageTitle: "Information Usage",
+                noUsageContent: "Since our Extension does not collect any personal data, there is no usage of user data to describe.",
+                noSharingTitle: "Data Sharing and Selling",
+                noSharingContent: "We do not share or sell any personal information because we do not collect any. The Extension does not transmit any information to us or third parties.",
+                securityTitle: "Security of Your Information",
+                securityContent: "As no data is collected, there is no risk of breach of your personal information with respect to the use of our Extension.",
+                changesTitle: "Changes to This Privacy Policy",
+                changesContent: "We may update this Privacy Policy from time to time in response to changing legal, technical, or business developments. When we update our Privacy Policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.",
+                agreement: "By using the Keep Active Extension, you agree to the terms and conditions of this Privacy Policy."
+            },
+            fr: {
+                title: "Politique de confidentialité pour l'extension Keep Active",
+                effectiveDate: "Date d'effet: [01/03/2024]",
+                permissionsTitle: "Autorisations et raisons nécessaires",
+                tabsPermission: "'Onglets': L'autorisation 'tabs' est requise pour gérer les onglets du navigateur. Cela inclut des actions telles que l'ouverture d'un nouvel onglet ou le rafraîchissement d'un existant pour maintenir la session active.",
+                alarmsPermission: "'Alarmes': L'autorisation 'alarms' est utilisée pour planifier le code à exécuter périodiquement. Cela est nécessaire pour que l'extension déclenche des actions, comme actualiser une page, à des intervalles définis.",
+                storagePermission: "'Stockage': L'autorisation 'storage' permet à l'extension de sauvegarder les paramètres et préférences localement sur votre appareil. Cela garantit que vos paramètres persistent entre les sessions de navigation.",
+                noDataCollectedTitle: "Informations que nous ne collectons pas",
+                noDataCollectedContent: "Nous ne collectons, utilisons, stockons ou partageons aucune information personnelle des utilisateurs de notre extension. Notre extension fonctionne entièrement localement sur votre appareil, et aucune donnée n'est transmise hors de votre appareil en rapport avec les services fournis par l'extension.",
+                noUsageTitle: "Utilisation des informations",
+                noUsageContent: "Étant donné que notre extension ne collecte aucune donnée personnelle, il n'y a pas d'utilisation de données utilisateur à décrire.",
+                noSharingTitle: "Partage et vente des données",
+                noSharingContent: "Nous ne partageons ni ne vendons aucune information personnelle car nous n'en collectons pas. L'extension ne transmet aucune information à nous ou à des tiers.",
+                securityTitle: "Sécurité de vos informations",
+                securityContent: "Comme aucune donnée n'est collectée, il n'y a aucun risque de violation de vos informations personnelles en ce qui concerne l'utilisation de notre extension.",
+                changesTitle: "Modifications de cette politique de confidentialité",
+                changesContent: "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre en réponse à des évolutions juridiques, techniques ou commerciales. Lorsque nous mettons à jour notre politique de confidentialité, nous prendrons des mesures appropriées pour vous informer, conformément à l'importance des modifications que nous apportons.",
+                agreement: "En utilisant l'extension Keep Active, vous acceptez les termes et conditions de cette politique de confidentialité."
+            },
+            es: {
+                title: "Política de privacidad para la extensión Keep Active",
+                effectiveDate: "Fecha de vigencia: [01/03/2024]",
+                permissionsTitle: "Permisos y por qué son necesarios",
+                tabsPermission: "'Pestañas': El permiso 'tabs' es necesario para gestionar las pestañas del navegador. Esto incluye acciones como abrir una nueva pestaña o actualizar una existente para mantener activa la sesión.",
+                alarmsPermission: "'Alarmas': El permiso 'alarms' se utiliza para programar la ejecución periódica del código. Esto es necesario para que la extensión desencadene acciones, como actualizar una página, a intervalos establecidos.",
+                storagePermission: "'Almacenamiento': El permiso 'storage' permite a la extensión guardar configuraciones y preferencias localmente en su dispositivo. Esto asegura que sus configuraciones sean persistentes entre las sesiones del navegador.",
+                noDataCollectedTitle: "Información que no recopilamos",
+                noDataCollectedContent: "No recopilamos, usamos, almacenamos ni compartimos ninguna información personal de los usuarios de nuestra extensión. Nuestra extensión opera completamente de forma local en su dispositivo, y no se transmite ningún dato fuera de su dispositivo en relación con los servicios proporcionados por la extensión.",
+                noUsageTitle: "Uso de la información",
+                noUsageContent: "Dado que nuestra extensión no recopila datos personales, no hay uso de datos de usuario que describir.",
+                noSharingTitle: "Compartir y vender datos",
+                noSharingContent: "No compartimos ni vendemos ninguna información personal porque no recopilamos ninguna. La extensión no transmite ninguna información a nosotros ni a terceros.",
+                securityTitle: "Seguridad de su información",
+                securityContent: "Dado que no se recopilan datos, no existe riesgo de violación de su información personal en relación con el uso de nuestra extensión.",
+                changesTitle: "Cambios en esta política de privacidad",
+                changesContent: "Podemos actualizar esta política de privacidad de vez en cuando en respuesta a cambios legales, técnicos o comerciales. Cuando actualicemos nuestra política de privacidad, tomaremos medidas apropiadas para informarle, en función de la importancia de los cambios que hagamos.",
+                agreement: "Al utilizar la extensión Keep Active, usted acepta los términos y condiciones de esta política de privacidad."
+            },
+            de: {
+                title: "Datenschutzrichtlinie für die Keep Active-Erweiterung",
+                effectiveDate: "Gültigkeitsdatum: [01/03/2024]",
+                permissionsTitle: "Berechtigungen und warum sie benötigt werden",
+                tabsPermission: "'Tabs': Die Berechtigung 'tabs' ist erforderlich, um Browser-Tabs zu verwalten. Dazu gehören Aktionen wie das Öffnen eines neuen Tabs oder das Aktualisieren eines vorhandenen, um die Sitzung aktiv zu halten.",
+                alarmsPermission: "'Alarme': Die Berechtigung 'alarms' wird verwendet, um Code periodisch auszuführen. Dies ist erforderlich, damit die Erweiterung Aktionen wie das Aktualisieren einer Seite in festgelegten Intervallen auslöst.",
+                storagePermission: "'Speicher': Die Berechtigung 'storage' ermöglicht der Erweiterung das lokale Speichern von Einstellungen und Präferenzen auf Ihrem Gerät. Dadurch bleiben Ihre Einstellungen über Browser-Sitzungen hinweg bestehen.",
+                noDataCollectedTitle: "Informationen, die wir nicht sammeln",
+                noDataCollectedContent: "Wir sammeln, verwenden, speichern oder teilen keine persönlichen Informationen der Benutzer unserer Erweiterung. Unsere Erweiterung arbeitet vollständig lokal auf Ihrem Gerät, und es werden keine Daten von Ihrem Gerät im Zusammenhang mit den von der Erweiterung bereitgestellten Diensten übertragen.",
+                noUsageTitle: "Informationen Nutzung",
+                noUsageContent: "Da unsere Erweiterung keine persönlichen Daten sammelt, gibt es keine Nutzung von Benutzerdaten zu beschreiben.",
+                noSharingTitle: "Datenweitergabe und -verkauf",
+                noSharingContent: "Wir geben keine persönlichen Informationen weiter oder verkaufen sie, da wir keine sammeln. Die Erweiterung überträgt keine Informationen an uns oder Dritte.",
+                securityTitle: "Sicherheit Ihrer Informationen",
+                securityContent: "Da keine Daten gesammelt werden, besteht kein Risiko eines Verstoßes gegen Ihre persönlichen Informationen im Zusammenhang mit der Nutzung unserer Erweiterung.",
+                changesTitle: "Änderungen dieser Datenschutzrichtlinie",
+                changesContent: "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit als Reaktion auf rechtliche, technische oder geschäftliche Entwicklungen aktualisieren. Wenn wir unsere Datenschutzrichtlinie aktualisieren, werden wir geeignete Maßnahmen ergreifen, um Sie zu informieren, entsprechend der Bedeutung der von uns vorgenommenen Änderungen.",
+                agreement: "Durch die Nutzung der Keep Active-Erweiterung stimmen Sie den Bedingungen dieser Datenschutzrichtlinie zu."
+            }
+        };
+
+        function changeLanguage(language) {
+            const content = translations[language];
+            document.getElementById("title").textContent = content.title;
+            document.getElementById("effectiveDate").textContent = content.effectiveDate;
+            document.getElementById("permissionsTitle").textContent = content.permissionsTitle;
+            document.getElementById("tabsPermission").textContent = content.tabsPermission;
+            document.getElementById("alarmsPermission").textContent = content.alarmsPermission;
+            document.getElementById("storagePermission").textContent = content.storagePermission;
+            document.getElementById("noDataCollectedTitle").textContent = content.noDataCollectedTitle;
+            document.getElementById("noDataCollectedContent").textContent = content.noDataCollectedContent;
+            document.getElementById("noUsageTitle").textContent = content.noUsageTitle;
+            document.getElementById("noUsageContent").textContent = content.noUsageContent;
+            document.getElementById("noSharingTitle").textContent = content.noSharingTitle;
+            document.getElementById("noSharingContent").textContent = content.noSharingContent;
+            document.getElementById("securityTitle").textContent = content.securityTitle;
+            document.getElementById("securityContent").textContent = content.securityContent;
+            document.getElementById("changesTitle").textContent = content.changesTitle;
+            document.getElementById("changesContent").textContent = content.changesContent;
+            document.getElementById("agreement").textContent = content.agreement;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Privacy Policy for Keep Active Extension</h1>
-        <p>Effective Date: [01/03/2024]</p>
-
-        <h2>Permissions and Why They Are Needed</h2>
-        <p><strong>Tabs:</strong> The 'tabs' permission is required to manage browser tabs. This includes actions like opening a new tab or refreshing an existing one to keep the session active.</p>
-        <p><strong>Alarms:</strong> The 'alarms' permission is used to schedule code to run periodically. This is necessary for the extension to trigger actions, like refreshing a page, at the set intervals.</p>
-        <p><strong>Storage:</strong> The 'storage' permission allows the extension to save settings and preferences locally on your device. This ensures your settings are persistent across browser sessions.</p>
-
-        <h2>Information We Do Not Collect</h2>
-        <p>We do not collect, use, store, or share any personal information from the users of our Extension. Our Extension operates completely locally on your device, and no data is transmitted off your device in relation to the services provided by the Extension.</p>
-
-        <h2>Information Usage</h2>
-        <p>Since our Extension does not collect any personal data, there is no usage of user data to describe.</p>
-
-        <h2>Data Sharing and Selling</h2>
-        <p>We do not share or sell any personal information because we do not collect any. The Extension does not transmit any information to us or third parties.</p>
-
-        <h2>Security of Your Information</h2>
-        <p>As no data is collected, there is no risk of breach of your personal information with respect to the use of our Extension.</p>
-
-        <h2>Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time in response to changing legal, technical, or business developments. When we update our Privacy Policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.</p>
-
-        <p>By using the Keep Active Extension, you agree to the terms and conditions of this Privacy Policy.</p>
+        <select id="language-selector" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+        </select>
+        <h1 id="title">Privacy Policy for Keep Active Extension</h1>
+        <p id="effectiveDate">Effective Date: [01/03/2024]</p>
+        <h2 id="permissionsTitle">Permissions and Why They Are Needed</h2>
+        <p id="tabsPermission">'Tabs': The 'tabs' permission is required to manage browser tabs. This includes actions like opening a new tab or refreshing an existing one to keep the session active.</p>
+        <p id="alarmsPermission">'Alarms': The 'alarms' permission is used to schedule code to run periodically. This is necessary for the extension to trigger actions, like refreshing a page, at the set intervals.</p>
+        <p id="storagePermission">'Storage': The 'storage' permission allows the extension to save settings and preferences locally on your device. This ensures your settings are persistent across browser sessions.</p>
+        <h2 id="noDataCollectedTitle">Information We Do Not Collect</h2>
+        <p id="noDataCollectedContent">We do not collect, use, store, or share any personal information from the users of our Extension. Our Extension operates completely locally on your device, and no data is transmitted off your device in relation to the services provided by the Extension.</p>
+        <h2 id="noUsageTitle">Information Usage</h2>
+        <p id="noUsageContent">Since our Extension does not collect any personal data, there is no usage of user data to describe.</p>
+        <h2 id="noSharingTitle">Data Sharing and Selling</h2>
+        <p id="noSharingContent">We do not share or sell any personal information because we do not collect any. The Extension does not transmit any information to us or third parties.</p>
+        <h2 id="securityTitle">Security of Your Information</h2>
+        <p id="securityContent">As no data is collected, there is no risk of breach of your personal information with respect to the use of our Extension.</p>
+        <h2 id="changesTitle">Changes to This Privacy Policy</h2>
+        <p id="changesContent">We may update this Privacy Policy from time to time in response to changing legal, technical, or business developments. When we update our Privacy Policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.</p>
+        <p id="agreement">By using the Keep Active Extension, you agree to the terms and conditions of this Privacy Policy.</p>
     </div>
 </body>
 </html>
