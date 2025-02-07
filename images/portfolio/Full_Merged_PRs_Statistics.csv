@@ -1,0 +1,26 @@
+No,Title,Date,Comments
+1,[LENS-23055] Remove Shoreline (Spoonbill's CC) from the products.json,Sep 4,Approved
+2,[LENS-23392] Include new 'peer' type connections between headset and...,Sep 10,"Approved, 3 tasks, 14 comments"
+3,[LENS-23407] Fix extra charge case briefly shown,Aug 28,"Approved, 11 comments"
+4,[LENS 22574] fix login process crash,Aug 23,Approved
+5,[LENS-20211] Fix app navigation for DFU,Aug 28,"Approved, 1 task"
+6,[LENS-23399] Fixing app navigation for one-step DFU,Aug 21,Approved
+7,[LENS-22675] add cloud IDs to enable new ANC/T policy testing,Jul 8,"Approved, 3 tasks"
+8,[LENS-22461] replace old settings,Jul 4,"Approved, 2 tasks"
+9,[LENS-17158] add setting translation,Jul 4,"Approved, 2 comments"
+10,[LENS-22460] add rename settings to Spoonbill,Jun 25,"Approved, 3 comments"
+11,[LENS-22461] add missing settings,Jun 27,Approved
+12,[LENS-21480] Change dialog background,Jun 20,"Review required, 1 task, 1 comment"
+13,[LENS-17040] General menu notification text style mismatch,Jun 20,"Approved, 1 task, 9 comments"
+14,[LENS-22167] Rollback the cc dfu screen in the onboarding,Jun 11,"Approved, 2 tasks, 2 comments"
+15,[LENS-14948] Notification Tones setting should be removed as per spec,Jun 13,"Approved, 1 comment"
+16,[LENS-21967] Adding unit tests for new logic,Jun 12,"Approved, 15 comments"
+17,[LENS-20343] Adding ids for test automation,Jun 13,"Approved, 9 comments"
+18,[LENS-21636] add text for mute on/off languages,May 31,"Approved, 1 task"
+19,[LENS-17895] add BT rename setting for Flamingo,May 28,"Approved, 3 tasks, 14 comments"
+20,[LENS-21487] remove heron auto-answer setting,May 16,"Approved, 2 comments"
+21,[LENS-13161] Second Incoming Call setting is shown as unchanged until the app is restarted,May 13,Approved
+22,[LENS-19639] Remove Previous Device Settings Bug,May 22,"Approved, 3 tasks, 19 comments"
+23,"[LENS-18079] Refined device.config.json: fixed titles, descriptions, and added missing settings",May 7,"Review required, 1 comment"
+24,[LENS-19766] Add new EMU images for Onboarding and QSG,May 2,"Review required, 11 comments"
+25,Feature/[LENS-20617] Emu quick guide text changes,Apr 25,Review required
