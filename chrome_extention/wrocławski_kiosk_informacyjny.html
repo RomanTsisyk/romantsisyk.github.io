@@ -1,48 +1,410 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wrocławski Kiosk Informacyjny - Discover Wroclaw Like Never Before</title>
+    <title>Wrocławski Kiosk Wiadomości - Twoje okno na Wrocław</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
-        h1, h2 { color: #333; }
-        p { margin: 10px 0; }
-        .features, .benefits { margin-bottom: 20px; }
-        li { margin-bottom: 10px; }
+        :root {
+            --primary: #d32f2f;
+            --secondary: #1976d2;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --accent: #ffeb3b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .how-it-works {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            margin: 1rem;
+            position: relative;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .audience {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .audience-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .audience-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: background-color 0.3s;
+        }
+        
+        .audience-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonials {
+            background-color: var(--light);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .extension-id {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            margin-top: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Wrocławski Kiosk Informacyjny</h1>
-    <p>Discover the beauty and dynamism of Wrocław with our innovative extension, designed for locals and enthusiasts alike. "Wrocławski Kiosk Informacyjny" brings the latest news, events, and cultural insights of Wrocław directly to your browser.</p>
+    <header>
+        <div class="container">
+            <div class="logo">WKW</div>
+            <h1>Wrocławski Kiosk Wiadomości</h1>
+            <p class="tagline">Twoje okno na Wrocław - zawsze aktualne informacje z Twojego ulubionego miasta</p>
+            <a href="#download" class="cta-btn">Pobierz rozszerzenie</a>
+        </div>
+    </header>
     
-    <h2>Why Did I Create It?</h2>
-    <p>As a passionate advocate for the vibrant city of Wrocław, I noticed a gap in how easily accessible tailored local news was for the digital age. This extension bridges that gap, making it simpler than ever to stay connected with the city's pulse.</p>
-
-    <h2>Why Is It Useful?</h2>
-    <p>This extension is more than just a news aggregator; it's a window into the life of Wrocław, enabling you to:</p>
-    <ul class="benefits">
-        <li>Stay updated with the latest news and events.</li>
-        <li>Discover cultural insights and historical anecdotes.</li>
-        <li>Plan your social and cultural calendar with ease.</li>
-        <li>Engage with a community of like-minded Wrocław enthusiasts.</li>
-    </ul>
-
-    <h2>Key Features:</h2>
-    <ul class="features">
-        <li>Real-time updates from a variety of trusted news sources.</li>
-        <li>Customizable feed based on your interests.</li>
-        <li>User-friendly interface designed for seamless browsing.</li>
-        <li>Completely free to use, with no ads or subscriptions.</li>
-    </ul>
-
-    <h2>Get Started Now!</h2>
-    <p>Embark on your journey with "Wrocławski Kiosk Informacyjny" today and transform the way you interact with Wrocław. It's easy, informative, and, most importantly, brings our beloved city closer to you.</p>
-
-    <p>For more information and to download the extension, visit [Your Extension Download Link].</p>
-
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">Codzienne połączenie z pulsem Wrocławia</h2>
+            <p>Z dumą prezentujemy "Wrocławski Kiosk Wiadomości" - innowacyjne rozszerzenie do przeglądarki, które zmieni Twój sposób na śledzenie lokalnych wiadomości. Stworzone z myślą o mieszkańcach Wrocławia, ale także dla tych, którzy kochają to miasto i chcą być na bieżąco z jego pulsującym życiem.</p>
+            <div class="hero-image">
+                <img src="https://lh3.googleusercontent.com/3Nim291K_0bqgcUKnF88zHjfbEGStbIH_j_oYmCOam4uv2gNWGuFKjzjh76K4fxhN51vBKMTmbLgiwXJNXbi4g7etg=s1280-w1280-h800" alt="Wrocławski Kiosk Wiadomości - zrzut ekranu">
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Funkcje i zalety</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📰</div>
+                    <h3 class="feature-title">Łatwy Dostęp do Informacji</h3>
+                    <p>Bez względu na to, czy interesujesz się kulturą, sportem, wiadomościami biznesowymi, czy najnowszymi wydarzeniami społecznymi, "Wrocławski Kiosk Wiadomości" zapewnia aktualne informacje z wiarygodnych źródeł.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🖱️</div>
+                    <h3 class="feature-title">Prosta i Intuicyjna Obsługa</h3>
+                    <p>Rozszerzenie charakteryzuje się minimalistycznym i użytkowniczym interfejsem, co sprawia, że nawigacja i czytanie wiadomości stają się przyjemnością.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title">Dostosowanie do Użytkownika</h3>
+                    <p>Możliwość wyboru kategorii tematycznych, dzięki czemu otrzymujesz tylko te informacje, które są dla Ciebie najważniejsze.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Zawsze Aktualne</h3>
+                    <p>Automatyczne aktualizacje kanałów RSS gwarantują, że żadna ważna wiadomość Cię nie ominie.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💸</div>
+                    <h3 class="feature-title">Bezpłatne Użytkowanie</h3>
+                    <p>Rozszerzenie jest całkowicie darmowe, co oznacza, że możesz cieszyć się najnowszymi informacjami bez dodatkowych opłat.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏙️</div>
+                    <h3 class="feature-title">Lokalne Miejsce Informacyjne</h3>
+                    <p>To narzędzie, które zbliża Cię do serca Wrocławia, gdziekolwiek jesteś. Pozwala na utrzymanie kontaktu z dynamicznie rozwijającym się miastem i jego społecznością.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container how-it-works">
+            <h2 class="section-title">Jak to działa?</h2>
+            <p>Po prostu zainstaluj rozszerzenie w swojej przeglądarce, wybierz interesujące Cię kategorie i gotowe! Od tego momentu każde otwarcie nowej karty przeglądarki da Ci dostęp do aktualnych wiadomości z Twojego ulubionego miasta.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Instalacja</h3>
+                    <p>Zainstaluj rozszerzenie ze sklepu z dodatkami do Twojej przeglądarki</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Konfiguracja</h3>
+                    <p>Wybierz interesujące Cię kategorie wiadomości i tematy</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Korzystanie</h3>
+                    <p>Otwórz nową kartę i ciesz się aktualnymi wiadomościami z Wrocławia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="audience">
+        <div class="container">
+            <h2 class="section-title">Dla kogo jest to rozszerzenie?</h2>
+            <div class="audience-groups">
+                <div class="audience-card">
+                    <h3>Mieszkańcy Wrocławia</h3>
+                    <p>Śledzenie lokalnych wiadomości nigdy nie było prostsze. Bądź na bieżąco z tym, co dzieje się w Twojej okolicy.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <h3>Profesjonaliści w mediach</h3>
+                    <p>Dla osób pracujących w sektorze mediów i komunikacji, które potrzebują stałego dostępu do aktualnych wiadomości.</p>
+                </div>
+                
+                <div class="audience-card">
+                    <h3>Miłośnicy Wrocławia</h3>
+                    <p>Niezależnie od tego, gdzie jesteś, pozostań w kontakcie z miastem, które kochasz i śledź jego rozwój.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Co mówią użytkownicy?</h2>
+            <div class="testimonial-slider">
+                <p class="testimonial-text">"Wrocławski Kiosk Wiadomości to moje codzienne źródło informacji. Praktyczne, szybkie i zawsze aktualne. Polecam każdemu mieszkańcowi Wrocławia!"</p>
+                <p class="testimonial-author">- Anna K., wrocławianka</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="download">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Pobierz teraz</h2>
+            <p>Przygotuj się na dostęp do najświeższych informacji z Wrocławia, które teraz znajdziesz w jednym miejscu - dzięki "Wrocławskiemu Kioskowi Wiadomości". To Twój osobisty przewodnik po najważniejszych wydarzeniach i aktualnościach z miasta spotkań.</p>
+            <a href="#" class="cta-btn">Pobierz rozszerzenie</a>
+            <p style="margin-top: 1.5rem;">Identyfikator rozszerzenia:</p>
+            <code class="extension-id">phppjbjchpklccfjejjekaoeeakcacfk</code>
+        </div>
+    </section>
+    
     <footer>
-        <p>Made with ❤️ by Roman Tsisyk. Visit <a href="https://roman-tsisyk.com">my website</a> for more innovative projects and personal insights.</p>
+        <div class="container">
+            <p>© 2025 Wrocławski Kiosk Wiadomości. Wszystkie prawa zastrzeżone.</p>
+            <div class="footer-links">
+                <a href="#">Polityka prywatności</a>
+                <a href="#">Warunki użytkowania</a>
+                <a href="#">Kontakt</a>
+                <a href="#">Wsparcie</a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
