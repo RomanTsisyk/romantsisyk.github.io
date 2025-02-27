@@ -1,82 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chrome Extension Support</title>
-<style>
-    html, body {
-        width: 90 %; 
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        display: flex;
-        flex-direction: column;
-    }
-    header, footer {
-        background-color: #007BFF;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        width: 100%;
-    }
-    form {
-        width: calc(100% - 16px);
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 0 auto; 
-        flex: 1 0 auto;
-    }
-    select, textarea, input[type="submit"] {
-        width: calc(100% - 16px); 
-        padding: 10px;
-        margin-top: 8px;
-        margin-bottom: 16px;
-        display: block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    textarea {
-		width: calc(100% - 36px); 
-    }
-    footer {
-        flex-shrink: 0;
-        font-size: 0.8em;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Extension Support</title>
+    <style>
+        :root {
+            --primary-color: #0072CE;
+            --primary-dark: #005ba1;
+            --light-bg: #f8f9fa;
+            --dark-text: #333;
+            --light-text: #fff;
+            --border-radius: 6px;
+            --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .support-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0,114,206,0.2);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+            
+            .support-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Chrome Extension Support</h1>
-</header>
-<form action="mailto:example@example.com" method="GET" onsubmit="return submitForm();">
-    <label for="extension">Choose an Extension:</label>
-    <select id="extension" name="extension">
-        <option value="Censor.net RSS Extension">Censor.net RSS Extension</option>
-        <option value="Deities List Viewer">Deities List Viewer</option>
-        <option value="Keep Active Extension Demo">Keep Active Extension Demo</option>
-        <option value="Wrocławski Kiosk Wiadomości">Wrocławski Kiosk Wiadomości</option>
-    </select>
-    <label for="feedback">Your Feedback:</label>
-    <textarea id="feedback" name="feedback" rows="4"></textarea>
-    <input type="submit" value="Submit">
-</form>
-<footer>
-    © 2024 by Roman Tsisyk. All rights reserved.
-</footer>
-<script>
-    function submitForm() {
-        var extension = document.getElementById('extension').value;
-        var feedback = document.getElementById('feedback').value;
-        document.location = 'mailto:romantsisyk1@gmail.com?subject=Feedback on ' + extension + '&body=' + encodeURIComponent(feedback);
-        return false; // Prevent actual form submission
-    }
-</script>
+    <header>
+        <h1>Chrome Extension Support</h1>
+    </header>
+    
+    <main>
+        <div class="support-form">
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="extension">Choose an Extension:</label>
+                    <select id="extension" name="extension" required aria-label="Select an extension">
+                        <option value="" disabled selected>-- Select an extension --</option>
+                        <option value="Censor.net RSS Extension">Censor.net RSS Extension</option>
+                        <option value="Deities List Viewer">Deities List Viewer</option>
+                        <option value="Keep Active Extension Demo">Keep Active Extension Demo</option>
+                        <option value="Wrocławski Kiosk Wiadomości">Wrocławski Kiosk Wiadomości</option>
+			<option value="Hide Suggested & Sponsored Posts for LinkedIn">Hide Suggested & Sponsored Posts for LinkedIn</option>
+			<option value="LinkedIn Feed Cleaner">LinkedIn Feed Cleaner</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedback">Your Feedback:</label>
+                    <textarea id="feedback" name="feedback" rows="5" placeholder="Please describe your issue or suggestion in detail..." required aria-label="Enter your feedback"></textarea>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">Submit Feedback</button>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 by Roman Tsisyk. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const extension = document.getElementById('extension').value;
+            const feedback = document.getElementById('feedback').value;
+            
+            if (!extension || !feedback) {
+                alert('Please fill out all fields before submitting.');
+                return;
+            }
+            
+            const mailtoLink = `mailto:romantsisyk1@gmail.com?subject=Feedback on ${encodeURIComponent(extension)}&body=${encodeURIComponent(feedback)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
 </body>
 </html>
