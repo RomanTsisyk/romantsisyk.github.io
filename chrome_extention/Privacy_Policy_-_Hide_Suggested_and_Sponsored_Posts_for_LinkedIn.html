@@ -5,65 +5,168 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Hide Suggested & Sponsored Posts for LinkedIn</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
+    :root {
+      --linkedin-blue: #0a66c2;
+      --linkedin-light-blue: #e8f3ff;
+      --text-primary: #333;
+      --text-secondary: #555;
+      --bg-primary: #fff;
+      --bg-secondary: #f3f2ef;
+      --spacing-sm: 10px;
+      --spacing-md: 20px;
+      --spacing-lg: 40px;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: var(--spacing-md);
+    }
+    
     .container {
       max-width: 800px;
       margin: 0 auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: var(--bg-primary);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
     }
-    h1, h2 {
-      color: #0073b1;
+    
+    header {
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: var(--spacing-md);
     }
+    
+    h1 {
+      color: var(--linkedin-blue);
+      font-size: 2.2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .last-updated {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .intro {
+      background-color: var(--linkedin-light-blue);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .intro p {
+      margin: 0;
+    }
+    
+    h2 {
+      color: var(--linkedin-blue);
+      font-size: 1.5rem;
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--linkedin-light-blue);
+    }
+    
+    p {
+      margin-bottom: var(--spacing-md);
+    }
+    
     ul {
-      margin: 0 0 1em 1.5em;
+      margin: 0 0 var(--spacing-lg) 1.5em;
     }
+    
+    li {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    strong {
+      color: var(--linkedin-blue);
+    }
+    
+    .section {
+      margin-bottom: var(--spacing-lg);
+    }
+    
     footer {
       text-align: center;
-      margin-top: 20px;
-      font-size: 0.9em;
-      color: #777;
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid #eaeaea;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        padding: var(--spacing-md);
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Privacy Policy</h1>
-    <p><strong>Last Updated:</strong> 02-05-2025 </p>
+    <header>
+      <h1>Privacy Policy</h1>
+      <div class="last-updated"><strong>Last Updated:</strong> February 5, 2025</div>
+    </header>
     
-    <p>This Privacy Policy describes how the "Hide Suggested &amp; Sponsored Posts for LinkedIn" Chrome extension ("Extension") handles your information. This Extension is developed solely to enhance your experience on LinkedIn by hiding sponsored or suggested posts. We take your privacy seriously and want you to know that <strong>no personal data is collected, stored, or transmitted by this Extension</strong>.</p>
+    <div class="intro">
+      <p>This Privacy Policy describes how the <strong>"Hide Suggested &amp; Sponsored Posts for LinkedIn"</strong> Chrome extension enhances your LinkedIn experience by removing unwanted content. We prioritize your privacy and want to assure you that <strong>no personal data is collected, stored, or transmitted</strong> by this Extension.</p>
+    </div>
     
-    <h2>Data Collection and Processing</h2>
-    <p><strong>No Data Collection:</strong> This Extension does not collect, store, or transmit any personal or usage data. All processing is performed locally on your device within your browser.</p>
-    <p><strong>Local Processing:</strong> The Extension operates entirely on your local device. All modifications to the LinkedIn feed (DOM manipulations, filtering, etc.) occur locally, ensuring that your data remains private.</p>
+    <div class="section">
+      <h2>Data Collection and Processing</h2>
+      <p><strong>No Data Collection:</strong> This Extension does not collect, store, or transmit any personal or usage data. All processing is performed locally on your device within your browser.</p>
+      <p><strong>Local Processing:</strong> The Extension operates entirely on your local device. All modifications to the LinkedIn feed (DOM manipulations, filtering, etc.) occur locally, ensuring that your data remains private.</p>
+    </div>
     
-    <h2>Permissions and Their Usage</h2>
-    <p>The Extension requests the following permissions solely for its proper functioning:</p>
-    <ul>
-      <li>
-        <strong>scripting:</strong> Used to inject and execute code on web pages. This permission enables dynamic modifications of the LinkedIn feed's Document Object Model (DOM) to hide unwanted posts. No data is collected through this process.
-      </li>
-      <li>
-        <strong>activeTab:</strong> Grants temporary access to the currently active tab when you interact with the Extension (for example, by clicking its icon). This permission ensures that actions are performed only on the active LinkedIn feed page without collecting or storing any data.
-      </li>
-      <li>
-        <strong>Host Permissions (via content_scripts matches):</strong> Restricted to LinkedIn feed pages (URLs containing "/feed/"). This permission allows the Extension to operate exclusively on LinkedIn, ensuring it does not access or modify content on other websites.
-      </li>
-    </ul>
+    <div class="section">
+      <h2>Permissions and Their Usage</h2>
+      <p>The Extension requests the following permissions solely for its proper functioning:</p>
+      <ul>
+        <li>
+          <strong>scripting:</strong> Used to inject and execute code on web pages. This permission enables dynamic modifications of the LinkedIn feed's Document Object Model (DOM) to hide unwanted posts. No data is collected through this process.
+        </li>
+        <li>
+          <strong>activeTab:</strong> Grants temporary access to the currently active tab when you interact with the Extension (for example, by clicking its icon). This permission ensures that actions are performed only on the active LinkedIn feed page without collecting or storing any data.
+        </li>
+        <li>
+          <strong>Host Permissions (via content_scripts matches):</strong> Restricted to LinkedIn feed pages (URLs containing "/feed/"). This permission allows the Extension to operate exclusively on LinkedIn, ensuring it does not access or modify content on other websites.
+        </li>
+      </ul>
+    </div>
     
-    <h2>Security</h2>
-    <p>Since no personal data is transmitted or stored, there is minimal risk to your privacy. All operations are executed within your browser, and the Extension does not communicate with any external servers.</p>
+    <div class="section">
+      <h2>Security</h2>
+      <p>Since no personal data is transmitted or stored, there is minimal risk to your privacy. All operations are executed within your browser, and the Extension does not communicate with any external servers.</p>
+    </div>
     
-    <h2>Changes to This Privacy Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and the "Last Updated" date will be revised accordingly. We encourage you to review this policy periodically for any updates.</p>
+    <div class="section">
+      <h2>Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and the "Last Updated" date will be revised accordingly. We encourage you to review this policy periodically for any updates.</p>
+    </div>
     
     <footer>
       <p>&copy; 2025 Roman Tsisyk. All rights reserved.</p>
