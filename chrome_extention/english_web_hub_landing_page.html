@@ -1,53 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EnglishWebHub - Chrome Extension</title>
+    <title>EnglishWebHub - Enhance Your English Skills</title>
     <style>
-        /*Add your CSS styles here*/
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Main Content Styles */
+        .about-section, .features-section, .why-choose-section {
+            padding: 60px 0;
+        }
+        
+        .about-section {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .features-section {
+            background-color: #f1f8fe;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+        
+        .why-choose-section {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .why-choose-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Get Started Section */
+        .get-started-section {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .get-started-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .get-started-content h2 {
+            color: white;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Lists */
+        ul.feature-list {
+            list-style-type: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        ul.feature-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        ul.feature-list li:before {
+            content: "✓";
+            color: #2ecc71;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
     </style>
 </head>
-
 <body>
+    <!-- Header Section -->
     <header>
-        <nav>
-            <!--Navigation bar goes here-->
-        </nav>
-        <h1>Enhance Your English Skills with EnglishWebHub!</h1>
+        <div class="container">
+            <h1>Enhance Your English Skills with EnglishWebHub!</h1>
+            <p>Access a world of English learning resources right from your browser</p>
+            <a href="#" class="cta-button">Get EnglishWebHub from Chrome Web Store</a>
+        </div>
     </header>
     
-    <section>
-        <h2>About EnglishWebHub</h2>
-        <p>EnglishWebHub is a free Chrome extension that provides access to an extensive collection of web resources for English learning. From interactive exercises to exam prep, we've got you covered at every step of your language learning journey.</p>
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2>About EnglishWebHub</h2>
+                <p>EnglishWebHub is a free Chrome extension that provides access to an extensive collection of web resources for English learning. From interactive exercises to exam prep, we've got you covered at every step of your language learning journey.</p>
+            </div>
+        </div>
     </section>
-
-    <section>
-        <h2>Key Features</h2>
-        <ul>
-            <li><b>Extensive Resource Library:</b> Free access to a wide range of online English learning materials.</li>
-            <li><b>Categorized Content:</b> Easily find materials tailored to your learning needs.</li>
-            <li><b>Quick Links:</b> Direct access to popular English learning platforms.</li>
-            <li><b>User-Friendly Interface:</b> Seamless browsing and effortless access to resources.</li>
-            <li><b>Constant Updates:</b> Always stay up to date with the latest additions to the resource library.</li>
-        </ul>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Extensive Resource Library</h3>
+                    <p>Free access to a wide range of online English learning materials for all levels.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Categorized Content</h3>
+                    <p>Easily find materials tailored to your specific learning needs and goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Quick Links</h3>
+                    <p>Direct access to popular English learning platforms with just one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">User-Friendly Interface</h3>
+                    <p>Seamless browsing and effortless access to resources for learners of all ages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Constant Updates</h3>
+                    <p>Always stay up to date with the latest additions to the resource library.</p>
+                </div>
+            </div>
+        </div>
     </section>
-
-    <section>
-        <h2>Why Choose EnglishWebHub?</h2>
-        <p>EnglishWebHub empowers learners of all levels to explore a world of online resources, enabling self-paced learning and providing a valuable support system in your language journey. Discover new websites, access high-quality materials, and take your English skills to new heights with EnglishWebHub.</p>
+    
+    <!-- Why Choose Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="why-choose-content">
+                <h2>Why Choose EnglishWebHub?</h2>
+                <p>EnglishWebHub empowers learners of all levels to explore a world of online resources, enabling self-paced learning and providing a valuable support system in your language journey. Discover new websites, access high-quality materials, and take your English skills to new heights with EnglishWebHub.</p>
+            </div>
+        </div>
     </section>
-
-    <section>
-        <h2>Get Started</h2>
-        <p>Unlock a wealth of English learning resources with the EnglishWebHub Chrome Extension. Click the link below to install from the Chrome Web Store.</p>
-        <a href="https://chrome.google.com/webstore/detail/englishwebhub/..." target="_blank">Get EnglishWebHub from Chrome Web Store</a>
+    
+    <!-- Get Started Section -->
+    <section class="get-started-section">
+        <div class="container">
+            <div class="get-started-content">
+                <h2>Get Started</h2>
+                <p>Unlock a wealth of English learning resources with the EnglishWebHub Chrome Extension. Click the button below to install from the Chrome Web Store.</p>
+                <a href="#" class="cta-button">Get EnglishWebHub Now</a>
+            </div>
+        </div>
     </section>
-
+    
+    <!-- Footer -->
     <footer>
-        <!--Footer content goes here-->
+        <div class="container">
+            <p>&copy; 2025 EnglishWebHub. All rights reserved.</p>
+        </div>
     </footer>
 </body>
-
 </html>
