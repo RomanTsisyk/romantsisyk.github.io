@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - AccessibleMeetings</title>
+    <style>
+        :root {
+            --primary-color: #3563E9;
+            --secondary-color: #6B8AFB;
+            --accent-color: #34D399;
+            --text-color: #1E293B;
+            --light-text: #64748B;
+            --bg-color: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .blog-hero {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .blog-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .blog-content {
+            display: flex;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .blog-main {
+            flex: 2;
+        }
+
+        .blog-sidebar {
+            flex: 1;
+        }
+
+        .featured-post {
+            margin-bottom: 3rem;
+        }
+
+        .featured-post-image {
+            width: 100%;
+            height: 400px;
+            background-color: #e2e8f0;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .post-category {
+            background-color: rgba(53, 99, 233, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .post-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .post-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .post-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .post-excerpt {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .post-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .post-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-card-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .post-card-content {
+            padding: 1.5rem;
+        }
+
+        .post-card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .post-card-excerpt {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            border: 1px solid #e2e8f0;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.2s;
+        }
+
+        .pagination-item:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .pagination-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .sidebar-section {
+            margin-bottom: 3rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-color);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .category-link {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: all 0.2s;
+        }
+
+        .category-link:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .category-count {
+            background-color: #e2e8f0;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .popular-post-image {
+            width: 80px;
+            height: 80px;
+            background-color: #e2e8f0;
+            border-radius: var(--border-radius);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .popular-post-content {
+            flex: 1;
+        }
+
+        .popular-post-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .popular-post-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .popular-post-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .popular-post-meta {
+            font-size: 0.75rem;
+            color: var(--light-text);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .newsletter {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .newsletter-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .newsletter-description {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-size: 0.875rem;
+        }
+
+        .newsletter-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .newsletter-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        footer {
+            background-color: var(--light-bg);
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-links-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .footer-link {
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-content {
+                flex-direction: column;
+            }
+
+            .post-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">AM</div>
+                AccessibleMeetings
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="accessibility-guide.html">Accessibility Guide</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#download" class="cta-button">Install 100% FREE</a>
+        </div>
+    </header>
+
+    <section class="blog-hero">
+        <div class="container">
+            <h1 class="blog-title">AccessibleMeetings Blog</h1>
+            <p class="blog-description">Explore articles about accessibility, productivity, and making the most of your online meetings.</p>
+        </div>
+    </section>
+
+    <section class="container blog-content">
+        <main class="blog-main">
+            <article class="featured-post">
+                <div class="featured-post-image">Featured Post Image Placeholder</div>
+                <div class="post-meta">
+                    <span class="post-date">February 20, 2025</span>
+                    <span class="post-category">Accessibility</span>
+                </div>
+                <h2 class="post-title">Making Online Meetings Accessible for Everyone: Why It Matters</h2>
+                <p class="post-excerpt">With remote work becoming the norm, ensuring that online meetings are accessible for all participants is not just a nice-to-have—it's essential. In this article, we explore the importance of meeting accessibility and how it benefits everyone, not just those with disabilities.</p>
+                <a href="blog.html" class="post-link">Read More →</a>
+            </article>
+
+            <h2 class="section-title">Latest Articles</h2>
+            <div class="post-grid">
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">February 15, 2025</span>
+                            <span class="post-category">Tips & Tricks</span>
+                        </div>
+                        <h3 class="post-card-title">5 Ways to Make Your Virtual Meetings More Productive</h3>
+                        <p class="post-card-excerpt">Virtual meetings can be challenging, but with the right approach, they can be just as productive as in-person meetings. Here are five proven strategies to elevate your online meeting game.</p>
+                        <a href="blog.html" class="post-link">Read More →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">February 10, 2025</span>
+                            <span class="post-category">Case Studies</span>
+                        </div>
+                        <h3 class="post-card-title"><a href="#">How TranscriptPro Improved Team Communication at Remote Co.</a></h3>
+                        <p class="post-card-excerpt">Learn how a remote-first company with team members who have hearing impairments used AccessibleMeetings to foster better communication and inclusivity.</p>
+                        <a href="#" class="post-link">Read More →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">February 5, 2025</span>
+                            <span class="post-category">Features</span>
+                        </div>
+                        <h3 class="post-card-title"><a href="#">Introducing High Contrast Mode for Better Readability</a></h3>
+                        <p class="post-card-excerpt">We're excited to announce our new High Contrast Mode feature, designed to make transcriptions even more readable for users with visual impairments.</p>
+                        <a href="#" class="post-link">Read More →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">January 30, 2025</span>
+                            <span class="post-category">Guides</span>
+                        </div>
+                        <h3 class="post-card-title"><a href="#">The Complete Guide to Keyboard Shortcuts in AccessibleMeetings</a></h3>
+                        <p class="post-card-excerpt">Maximize your efficiency with our comprehensive guide to all the keyboard shortcuts available in the AccessibleMeetings extension.</p>
+                        <a href="#" class="post-link">Read More →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">January 25, 2025</span>
+                            <span class="post-category">Accessibility</span>
+                        </div>
+                        <h3 class="post-card-title"><a href="#">Understanding Web Content Accessibility Guidelines (WCAG) for Meetings</a></h3>
+                        <p class="post-card-excerpt">A deep dive into how WCAG standards apply to online meetings and how AccessibleMeetings helps you meet these guidelines.</p>
+                        <a href="#" class="post-link">Read More →</a>
+                    </div>
+                </article>
+                <article class="post-card">
+                    <div class="post-card-image">Post Image Placeholder</div>
+                    <div class="post-card-content">
+                        <div class="post-meta">
+                            <span class="post-date">January 20, 2025</span>
+                            <span class="post-category">Tips & Tricks</span>
+                        </div>
+                        <h3 class="post-card-title"><a href="#">How to Get the Most Accurate Transcriptions in Noisy Environments</a></h3>
+                        <p class="post-card-excerpt">Working from a coffee shop or a busy home? Learn how to optimize your setup for the best possible transcription quality.</p>
+                        <a href="#" class="post-link">Read More →</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="pagination-item">«</a>
+                <a href="#" class="pagination-item active">1</a>
+                <a href="#" class="pagination-item">2</a>
+                <a href="#" class="pagination-item">3</a>
+                <a href="#" class="pagination-item">»</a>
+            </div>
+        </main>
+
+        <aside class="blog-sidebar">
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Categories</h2>
+                <ul class="category-list">
+                    <li class="category-item">
+                        <a href="#" class="category-link">
+                            <span>Accessibility</span>
+                            <span class="category-count">8</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link">
+                            <span>Tips & Tricks</span>
+                            <span class="category-count">12</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link">
+                            <span>Case Studies</span>
+                            <span class="category-count">5</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link">
+                            <span>Features</span>
+                            <span class="category-count">7</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link">
+                            <span>Guides</span>
+                            <span class="category-count">9</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Popular Posts</h2>
+                <div class="popular-post">
+                    <div class="popular-post-image">Post Image</div>
+                    <div class="popular-post-content">
+                        <h3 class="popular-post-title"><a href="#">10 Essential Accessibility Features for Online Meetings</a></h3>
+                        <div class="popular-post-meta">February 12, 2025</div>
+                    </div>
+                </div>
+                <div class="popular-post">
+                    <div class="popular-post-image">Post Image</div>
+                    <div class="popular-post-content">
+                        <h3 class="popular-post-title"><a href="#">The Future of Meeting Transcription Technology</a></h3>
+                        <div class="popular-post-meta">January 28, 2025</div>
+                    </div>
+                </div>
+                <div class="popular-post">
+                    <div class="popular-post-image">Post Image</div>
+                    <div class="popular-post-content">
+                        <h3 class="popular-post-title"><a href="#">How to Effectively Save and Use Meeting Transcripts</a></h3>
+                        <div class="popular-post-meta">January 15, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Tags</h2>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">Accessibility</a>
+                    <a href="#" class="tag">Transcription</a>
+                    <a href="#" class="tag">Remote Work</a>
+                    <a href="#" class="tag">Google Meet</a>
+                    <a href="#" class="tag">Teams</a>
+                    <a href="#" class="tag">Zoom</a>
+                    <a href="#" class="tag">Productivity</a>
+                    <a href="#" class="tag">Meetings</a>
+                    <a href="#" class="tag">Chrome Extension</a>
+                    <a href="#" class="tag">Speech Recognition</a>
+                    <a href="#" class="tag">High Contrast</a>
+                    <a href="#" class="tag">Keyboard Shortcuts</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="newsletter">
+                    <h3 class="newsletter-title">Subscribe to Our Newsletter</h3>
+                    <p class="newsletter-description">Get the latest articles, tips, and updates delivered directly to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="index.html" class="logo footer-logo">
+                        <div class="logo-icon">AM</div>
+                        AccessibleMeetings
+                    </a>
+                    <p class="footer-description">Making online meetings accessible for everyone with real-time transcription.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">T</a>
+                        <a href="#" class="social-link">F</a>
+                        <a href="#" class="social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Product</h3>
+                    <a href="index.html#features" class="footer-link">Features</a>
+                    <a href="index.html#how-it-works" class="footer-link">How It Works</a>
+                    <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Resources</h3>
+                    <a href="help-center.html" class="footer-link">Help Center</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="accessibility-guide.html" class="footer-link">Accessibility Guide</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Company</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="index.html#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2025 AccessibleMeetings by Roman Tsisyk. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

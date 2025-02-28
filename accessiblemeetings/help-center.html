@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - AccessibleMeetings</title>
+    <style>
+        :root {
+            --primary-color: #3563E9;
+            --secondary-color: #6B8AFB;
+            --accent-color: #34D399;
+            --text-color: #1E293B;
+            --light-text: #64748B;
+            --bg-color: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .help-hero {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .help-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .help-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .help-search {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .help-search input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .help-search button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .help-content {
+            display: flex;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .help-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .help-main {
+            flex: 1;
+        }
+
+        .help-categories {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-color);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .category-link {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: all 0.2s;
+        }
+
+        .category-link:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .category-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .article {
+            margin-bottom: 3rem;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .article-description {
+            color: var(--light-text);
+            font-size: 1.125rem;
+        }
+
+        .article-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section-content {
+            color: var(--text-color);
+        }
+
+        .step-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .help-card-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .note {
+            background-color: rgba(53, 99, 233, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .note-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .image-container {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e2e8f0;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .image-caption {
+            color: var(--light-text);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background-color: rgba(53, 99, 233, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-description {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        footer {
+            background-color: var(--light-bg);
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-links-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .footer-link {
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .help-content {
+                flex-direction: column;
+            }
+
+            .help-sidebar {
+                width: 100%;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">AM</div>
+                AccessibleMeetings
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="accessibility-guide.html">Accessibility Guide</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#download" class="cta-button">Install 100% FREE</a>
+        </div>
+    </header>
+
+    <section class="help-hero">
+        <div class="container">
+            <h1 class="help-title">How can we help you?</h1>
+            <p class="help-description">Browse our help resources or search for specific topics to get the most out of AccessibleMeetings.</p>
+            <div class="help-search">
+                <input type="text" placeholder="Search for help...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="container help-content">
+        <aside class="help-sidebar">
+            <div class="help-categories">
+                <h2 class="category-title">Getting Started</h2>
+                <ul class="category-list">
+                    <li class="category-item"><a href="#installation" class="category-link active">Installation Guide</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="help-main">
+            <article class="article" id="installation">
+                <header class="article-header">
+                    <h1 class="article-title">Installation Guide</h1>
+                    <p class="article-description">Learn how to install the AccessibleMeetings extension on your Chrome browser.</p>
+                </header>
+
+                <div class="article-section">
+                    <h2 class="section-title">System Requirements</h2>
+                    <div class="section-content">
+                        <p>Before installing AccessibleMeetings, make sure your system meets the following requirements:</p>
+                        <ul>
+                            <li>Google Chrome browser (version 89 or later)</li>
+                            <li>Working microphone</li>
+                            <li>Permissions to access the microphone in your browser</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="section-title">Installation Steps</h2>
+                    <div class="section-content">
+                        <p>Follow these simple steps to install AccessibleMeetings:</p>
+                        
+                        <ol class="step-list">
+                            <li class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Visit the Chrome Web Store</h3>
+                                    <p>Go to the <a href="#">AccessibleMeetings page</a> on the Chrome Web Store.</p>
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Add to Chrome</h3>
+                                    <p>Click the "Add to Chrome" button at the top right of the page.</p>
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Review Permissions</h3>
+                                    <p>A dialog will appear showing the permissions required. Click "Add extension" to continue.</p>
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3 class="step-title">Confirm Installation</h3>
+                                    <p>The AccessibleMeetings icon will appear in your browser toolbar, indicating successful installation.</p>
+                                </div>
+                            </li>
+                        </ol>
+
+                        <div class="image-container">
+                            <div class="image-placeholder">Installation Screenshot</div>
+                            <p class="image-caption">Example of the Chrome Web Store installation page for AccessibleMeetings</p>
+                        </div>
+
+                        <div class="note">
+                            <h4 class="note-title">Important Note</h4>
+                            <p>AccessibleMeetings requires microphone access to transcribe speech. You'll be prompted to grant this permission the first time you use the extension in a meeting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="section-title">After Installation</h2>
+                    <div class="section-content">
+                        <p>Once installed, you're ready to use AccessibleMeetings in your online meetings. Here's what to do next:</p>
+                        
+                        <div class="help-card">
+                            <h3 class="help-card-title">Verify Installation</h3>
+                            <p>Click the AccessibleMeetings icon in your toolbar. A popup should appear showing the extension is ready to use.</p>
+                        </div>
+                        
+                        <div class="help-card">
+                            <h3 class="help-card-title">Configure Settings (Optional)</h3>
+                            <p>You can configure your preferred text size, display mode, and other settings before joining a meeting.</p>
+                        </div>
+                        
+                        <div class="help-card">
+                            <h3 class="help-card-title">Join a Meeting</h3>
+                            <p>Join your Google Meet, Microsoft Teams, or Zoom meeting as you normally would.</p>
+                        </div>
+                        
+                        <div class="help-card">
+                            <h3 class="help-card-title">Start Transcribing</h3>
+                            <p>Click the AccessibleMeetings icon and select "Start Transcribing" to begin live transcription.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="section-title">Additional Resources</h2>
+                    <div class="section-content">
+                        <p>Check out these additional resources to get the most out of AccessibleMeetings:</p>
+                        
+                        <div class="resource-grid">
+                            <div class="resource-card">
+                                <div class="resource-icon">📝</div>
+                                <h3 class="resource-title">Quick Start Guide</h3>
+                                <p class="resource-description">Learn the basics of using AccessibleMeetings in your meetings.</p>
+                                <a href="#" class="resource-link">Read Guide</a>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-icon">⌨️</div>
+                                <h3 class="resource-title">Keyboard Shortcuts</h3>
+                                <p class="resource-description">Boost your productivity with keyboard shortcuts.</p>
+                                <a href="#" class="resource-link">View Shortcuts</a>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-icon">❓</div>
+                                <h3 class="resource-title">Troubleshooting</h3>
+                                <p class="resource-description">Solutions for common issues you might encounter.</p>
+                                <a href="#" class="resource-link">Troubleshoot</a>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-icon">📱</div>
+                                <h3 class="resource-title">Platform Guides</h3>
+                                <p class="resource-description">Specific guides for Google Meet, Teams, and Zoom.</p>
+                                <a href="#" class="resource-link">See Guides</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="index.html" class="logo footer-logo">
+                        <div class="logo-icon">AM</div>
+                        AccessibleMeetings
+                    </a>
+                    <p class="footer-description">Making online meetings accessible for everyone with real-time transcription.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">T</a>
+                        <a href="#" class="social-link">F</a>
+                        <a href="#" class="social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Product</h3>
+                    <a href="index.html#features" class="footer-link">Features</a>
+                    <a href="index.html#how-it-works" class="footer-link">How It Works</a>
+                    <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Resources</h3>
+                    <a href="help-center.html" class="footer-link">Help Center</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="accessibility-guide.html" class="footer-link">Accessibility Guide</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Company</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="index.html#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2025 AccessibleMeetings by Roman Tsisyk. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

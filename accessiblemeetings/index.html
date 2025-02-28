@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessibleMeetings - Real-time transcription for everyone</title>
+                <style>
+        :root {
+            --primary-color: #3563E9;
+            --secondary-color: #6B8AFB;
+            --accent-color: #34D399;
+            --text-color: #1E293B;
+            --light-text: #64748B;
+            --bg-color: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        /* Contact form styles */
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+        }
+        
+        .contact-method {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: rgba(53, 99, 233, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .contact-detail h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .no-account-needed,
+        .completely-free {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+        }
+        
+        .no-account-needed h3,
+        .completely-free h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .completely-free {
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(53, 99, 233, 0.1);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .hero {
+            background: linear-gradient(100deg, var(--bg-color) 50%, var(--light-bg) 50%);
+            padding: 6rem 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-headline {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .hero-headline span {
+            color: var(--primary-color);
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .browser-mockup {
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            width: 100%;
+            background-color: white;
+        }
+
+        .browser-header {
+            background-color: #f1f5f9;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .browser-dot {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background-color: #ef4444;
+        }
+
+        .dot-yellow {
+            background-color: #eab308;
+        }
+
+        .dot-green {
+            background-color: #22c55e;
+        }
+
+        .browser-address {
+            flex: 1;
+            background-color: white;
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            color: var(--light-text);
+            margin-left: 0.5rem;
+        }
+
+        .browser-content {
+            height: 300px;
+            padding: 1rem;
+            position: relative;
+            background-color: white;
+        }
+
+        .transcription-box {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 300px;
+            height: 260px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        .transcription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .transcription-title {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .transcription-content {
+            font-size: 0.875rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .transcription-line {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .transcription-time {
+            color: var(--light-text);
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            min-width: 60px;
+        }
+
+        .transcription-text {
+            flex: 1;
+        }
+
+        .speaker {
+            font-weight: 600;
+            margin-right: 0.25rem;
+        }
+
+        .current-line {
+            background-color: rgba(53, 99, 233, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.5rem;
+        }
+
+        .meeting-participants {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .participant {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .participant-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .participant-name {
+            font-weight: 500;
+        }
+
+        .features {
+            background-color: var(--light-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background-color: rgba(53, 99, 233, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .feature-description {
+            color: var(--light-text);
+        }
+
+        .how-it-works-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .steps {
+            flex: 1;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            padding-top: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .step-description {
+            color: var(--light-text);
+        }
+
+        .testimonials {
+            background-color: var(--light-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .testimonial-content {
+            color: var(--text-color);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .author-title {
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .cta-section {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .cta-button {
+            background-color: white;
+            color: var(--primary-color);
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+        }
+
+        .cta-section .cta-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        footer {
+            background-color: var(--light-bg);
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-links-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .footer-link {
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-link {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .how-it-works-content {
+                flex-direction: column;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">AM</div>
+                AccessibleMeetings
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="#download" class="cta-button">Install 100% FREE Extension</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="hero-headline">Never Miss <span>What's Being Said</span> In Meetings Again</h1>
+                <p class="hero-description">Real-time transcription for Google Meet, Microsoft Teams, and Zoom. Making online meetings accessible for everyone, especially those with hearing impairments.</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="cta-button">Install 100% FREE Extension</a>
+                    <a href="#how-it-works" class="secondary-button">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dot dot-red"></div>
+                        <div class="browser-dot dot-yellow"></div>
+                        <div class="browser-dot dot-green"></div>
+                        <div class="browser-address">meet.google.com/abc-defg-hij</div>
+                    </div>
+                    <div class="browser-content">
+                        <div class="meeting-participants">
+                            <div class="participant">
+                                <div class="participant-avatar">JD</div>
+                                <div class="participant-name">John Doe</div>
+                            </div>
+                            <div class="participant">
+                                <div class="participant-avatar">AS</div>
+                                <div class="participant-name">Amy Smith</div>
+                            </div>
+                            <div class="participant">
+                                <div class="participant-avatar">MJ</div>
+                                <div class="participant-name">Mike Johnson</div>
+                            </div>
+                        </div>
+                        <div class="transcription-box">
+                            <div class="transcription-header">
+                                <div class="transcription-title">Live Transcription</div>
+                                <div>⚙️</div>
+                            </div>
+                            <div class="transcription-content">
+                                <div class="transcription-line">
+                                    <div class="transcription-time">10:03</div>
+                                    <div class="transcription-text"><span class="speaker">John:</span> Let's discuss the Q2 marketing strategy.</div>
+                                </div>
+                                <div class="transcription-line">
+                                    <div class="transcription-time">10:04</div>
+                                    <div class="transcription-text"><span class="speaker">Amy:</span> I've prepared a presentation with our key metrics.</div>
+                                </div>
+                                <div class="transcription-line current-line">
+                                    <div class="transcription-time">10:05</div>
+                                    <div class="transcription-text"><span class="speaker">Mike:</span> Great! I'd like to focus on our social media performance.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Features Designed for Accessibility</h2>
+                <p class="section-description">Our Chrome extension is built with accessibility in mind, offering features that make online meetings more inclusive.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3 class="feature-title">Real-time Transcription</h3>
+                    <p class="feature-description">Accurate speech-to-text conversion that keeps up with your meeting, making it easier to follow conversations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <h3 class="feature-title">High Contrast Mode</h3>
+                    <p class="feature-description">Yellow text on black background option for those with visual impairments, ensuring maximum readability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Adjustable Text Size</h3>
+                    <p class="feature-description">Customize the text display from small to extra large, making it comfortable for all users.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Multi-language Support</h3>
+                    <p class="feature-description">Leverages Chrome's built-in speech recognition to support dozens of languages for diverse meeting participants.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Privacy-Focused</h3>
+                    <p class="feature-description">All speech processing happens in your browser. No audio or transcripts are sent to any servers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 class="feature-title">Save & Access Later</h3>
+                    <p class="feature-description">Download your transcripts as text files to reference later - never lose important meeting content again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3 class="feature-title">Keyboard Shortcuts</h3>
+                    <p class="feature-description">Control the extension without touching your mouse, improving accessibility for all users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-description">Get started in just a few simple steps - no account creation or complicated setup required.</p>
+            </div>
+            <div class="how-it-works-content">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Install the Extension</h3>
+                            <p class="step-description">Add AccessibleMeetings to Chrome from the Web Store with just one click. No account creation required.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Join Your Meeting</h3>
+                            <p class="step-description">Enter your Google Meet, Microsoft Teams, or Zoom meeting as you normally would.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Start Transcribing</h3>
+                            <p class="step-description">Click the AccessibleMeetings icon in your toolbar and select "Start Transcribing".</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Customize Your Experience</h3>
+                            <p class="step-description">Adjust text size, display mode, and window positioning to suit your needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dot dot-red"></div>
+                        <div class="browser-dot dot-yellow"></div>
+                        <div class="browser-dot dot-green"></div>
+                        <div class="browser-address">teams.microsoft.com/meeting</div>
+                    </div>
+                    <div class="browser-content">
+                        <div class="meeting-participants">
+                            <div class="participant">
+                                <div class="participant-avatar">EW</div>
+                                <div class="participant-name">Emma Wilson</div>
+                            </div>
+                            <div class="participant">
+                                <div class="participant-avatar">TG</div>
+                                <div class="participant-name">Tom Green</div>
+                            </div>
+                        </div>
+                        <div class="transcription-box">
+                            <div class="transcription-header">
+                                <div class="transcription-title">Live Transcription</div>
+                                <div>⚙️</div>
+                            </div>
+                            <div class="transcription-content">
+                                <div class="transcription-line">
+                                    <div class="transcription-time">14:22</div>
+                                    <div class="transcription-text"><span class="speaker">Emma:</span> I've reviewed the project timeline.</div>
+                                </div>
+                                <div class="transcription-line">
+                                    <div class="transcription-time">14:23</div>
+                                    <div class="transcription-text"><span class="speaker">Emma:</span> We need to adjust the delivery date.</div>
+                                </div>
+                                <div class="transcription-line current-line">
+                                    <div class="transcription-time">14:24</div>
+                                    <div class="transcription-text"><span class="speaker">Tom:</span> I agree. Let's push it back by two weeks.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Beta Testers Say</h2>
+                <p class="section-description">Feedback from our early access testers who have been helping us improve AccessibleMeetings.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"As someone with hearing loss, this extension has completely transformed my ability to participate in online meetings. The real-time transcription is accurate and the high contrast mode makes it easy to read."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SL</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Lewis</div>
+                            <div class="author-title">Marketing Director</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Our team includes remote members from different countries. The transcription helps non-native English speakers follow along, making our meetings more inclusive and productive."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DP</div>
+                        <div class="author-info">
+                            <div class="author-name">David Parker</div>
+                            <div class="author-title">Team Lead, Engineering</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"As a university professor, I use this for online lectures. Students with hearing impairments can follow along, and everyone benefits from having a record of what was discussed."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RJ</div>
+                        <div class="author-info">
+                            <div class="author-name">Rebecca Johnson</div>
+                            <div class="author-title">Professor of Computer Science</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"The keyboard shortcuts and adjustable text size make this extension perfect for my needs. It's clearly designed with accessibility as a priority, not an afterthought."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CM</div>
+                        <div class="author-info">
+                            <div class="author-name">Carlos Martinez</div>
+                            <div class="author-title">Accessibility Advocate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="download">
+        <div class="container">
+            <h2 class="cta-title">Start Making Your Meetings Accessible Today</h2>
+            <p class="cta-description">Free during our beta period. Install in seconds and join the thousands of users already benefiting from AccessibleMeetings.</p>
+            <a href="#" class="cta-button">Add to Chrome - 100% FREE</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo footer-logo">
+                        <div class="logo-icon">AM</div>
+                        AccessibleMeetings
+                    </div>
+                    <p class="footer-description">Making online meetings accessible for everyone with real-time transcription.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">T</a>
+                        <a href="#" class="social-link">F</a>
+                        <a href="#" class="social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Product</h3>
+                    <a href="#features" class="footer-link">Features</a>
+                    <a href="#how-it-works" class="footer-link">How It Works</a>
+                    <a href="#testimonials" class="footer-link">Testimonials</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Resources</h3>
+                    <a href="help-center.html" class="footer-link">Help Center</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="accessibility-guide.html" class="footer-link">Accessibility Guide</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Company</h3>
+                    <a href="#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2025 AccessibleMeetings by Roman Tsisyk. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

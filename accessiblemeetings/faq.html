@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - AccessibleMeetings</title>
+    <style>
+        :root {
+            --primary-color: #3563E9;
+            --secondary-color: #6B8AFB;
+            --accent-color: #34D399;
+            --text-color: #1E293B;
+            --light-text: #64748B;
+            --bg-color: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .faq-hero {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .faq-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .faq-search input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .faq-search button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .faq-content {
+            padding: 4rem 0;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-button {
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .category-button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .faq-accordion {
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem;
+            background-color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background-color: var(--light-bg);
+        }
+
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .show-more {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-cta {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .highlight {
+            background-color: rgba(52, 211, 153, 0.2);
+            color: var(--accent-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: var(--light-bg);
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-links-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .footer-link {
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">AM</div>
+                AccessibleMeetings
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="accessibility-guide.html">Accessibility Guide</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#download" class="cta-button">Install 100% FREE</a>
+        </div>
+    </header>
+
+    <section class="faq-hero">
+        <div class="container">
+            <h1 class="faq-title">Frequently Asked Questions</h1>
+            <p class="faq-description">Find answers to the most common questions about AccessibleMeetings.</p>
+            <div class="faq-search">
+                <input type="text" placeholder="Search for questions...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-categories">
+                <button class="category-button active">All Questions</button>
+            </div>
+
+            <div class="faq-section">
+                <h2 class="faq-section-title">General Questions</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>What is AccessibleMeetings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AccessibleMeetings is a Chrome extension that provides real-time transcription for online meetings on Google Meet, Microsoft Teams, and Zoom. It's designed to make meetings more accessible, especially for people with hearing impairments. The extension transcribes speech into text in real-time and displays it in an easy-to-read format.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Is AccessibleMeetings really free?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! AccessibleMeetings is <span class="highlight">100% free</span> to use with all features available to everyone. There are no premium tiers, no hidden costs, and no in-app purchases. We believe in making online meetings accessible to everyone without barriers.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Do I need to create an account to use AccessibleMeetings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, you don't need to create an account or register to use AccessibleMeetings. Simply install the extension from the Chrome Web Store, and it's ready to use immediately. We designed it to be as frictionless as possible.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Which meeting platforms are supported?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AccessibleMeetings currently supports:</p>
+                        <ul>
+                            <li>Google Meet</li>
+                            <li>Microsoft Teams</li>
+                            <li>Zoom (web version)</li>
+                        </ul>
+                        <p>We're working on adding support for more platforms in the future.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2 class="faq-section-title">Installation & Setup</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>How do I install AccessibleMeetings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Installing AccessibleMeetings is simple:</p>
+                        <ol>
+                            <li>Visit the <a href="#">AccessibleMeetings page</a> on the Chrome Web Store</li>
+                            <li>Click the "Add to Chrome" button</li>
+                            <li>Review the permissions and click "Add extension"</li>
+                            <li>The AccessibleMeetings icon will appear in your browser toolbar</li>
+                        </ol>
+                        <p>For more detailed instructions, visit our <a href="help-center.html">Help Center</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>What are the system requirements?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AccessibleMeetings requires:</p>
+                        <ul>
+                            <li>Google Chrome browser (version 89 or later)</li>
+                            <li>Working microphone</li>
+                            <li>Permissions to access the microphone in your browser</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Why does AccessibleMeetings need microphone access?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AccessibleMeetings requires microphone access to capture audio from your meeting and convert it to text using Chrome's built-in speech recognition. The extension only processes audio while you're actively transcribing a meeting.</p>
+                        <p>All speech processing happens locally in your browser - no audio is sent to any servers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2 class="faq-section-title">Usage & Features</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>How do I start transcribing a meeting?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To start transcribing:</p>
+                        <ol>
+                            <li>Join your meeting on Google Meet, Microsoft Teams, or Zoom</li>
+                            <li>Click the AccessibleMeetings icon in your browser toolbar</li>
+                            <li>Click "Start Transcribing"</li>
+                            <li>Allow microphone access when prompted (first time only)</li>
+                            <li>The transcription window will appear on your meeting page</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>What languages are supported?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AccessibleMeetings uses Chrome's built-in speech recognition, which supports multiple languages. The exact languages available depend on your Chrome browser's language capabilities.</p>
+                        <p>To change the language:</p>
+                        <ol>
+                            <li>Click the AccessibleMeetings icon</li>
+                            <li>Select "Settings"</li>
+                            <li>Choose your preferred language from the dropdown menu</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>How do I save a transcript?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To save a transcript:</p>
+                        <ol>
+                            <li>After or during your meeting, click the "Save Transcript" button in the transcription window</li>
+                            <li>Choose where to save the text file on your computer</li>
+                            <li>The complete transcript will be saved as a text file</li>
+                        </ol>
+                        <p>You can also click "Copy" to copy the entire transcript to your clipboard.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Can I customize the appearance of the transcription?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, AccessibleMeetings offers several customization options:</p>
+                        <ul>
+                            <li><strong>Text Size:</strong> Small (16px), Medium (18px), Large (22px), or Extra Large (26px)</li>
+                            <li><strong>Display Mode:</strong> Normal (black text on white), Dark Mode (white text on dark gray), or High Contrast (yellow text on black)</li>
+                            <li><strong>Window Size:</strong> Small, Medium, Large, or Fullscreen</li>
+                            <li><strong>Auto-scroll:</strong> Toggle to automatically scroll to show the latest text</li>
+                            <li><strong>Show timestamps:</strong> Toggle to include time with each entry</li>
+                        </ul>
+                        <p>Access these settings from the extension popup before starting transcription.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2 class="faq-section-title">Privacy & Security</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>How is my privacy protected when using AccessibleMeetings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We take privacy very seriously:</p>
+                        <ul>
+                            <li>All speech processing happens in your browser</li>
+                            <li>No audio or transcripts are sent to any servers</li>
+                            <li>Transcripts are only saved locally when you choose to download them</li>
+                            <li>We don't collect any personal data or meeting content</li>
+                            <li>No account creation or login required</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>Can others see that I'm using AccessibleMeetings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The transcription window is only visible on your screen, not to other meeting participants. However, if you're sharing your screen, others will be able to see the transcription window if it's visible in the shared area.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2 class="faq-section-title">Troubleshooting</h2>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>The extension isn't working on my meeting platform</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If the extension isn't working:</p>
+                        <ul>
+                            <li>Make sure you're on a supported site (Google Meet, Microsoft Teams, or Zoom web version)</li>
+                            <li>Check that you're using a supported Chrome version (89 or later)</li>
+                            <li>Try disabling other extensions that might interfere</li>
+                            <li>Refresh the page and try again</li>
+                            <li>Make sure you've granted microphone permissions</li>
+                        </ul>
+                        <p>If problems persist, try reinstalling the extension.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>The transcription quality is poor</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To improve transcription quality:</p>
+                        <ul>
+                            <li>Use a high-quality microphone when possible</li>
+                            <li>Reduce background noise</li>
+                            <li>Speak clearly and at a moderate pace</li>
+                            <li>Position yourself closer to the microphone</li>
+                            <li>Make sure you've selected the correct language in the settings</li>
+                        </ul>
+                        <p>Remember that speech recognition technology isn't perfect and may struggle with accents, technical terminology, or noisy environments.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-question">
+                        <span>My microphone isn't being detected</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If your microphone isn't being detected:</p>
+                        <ul>
+                            <li>Make sure you've granted microphone permissions in Chrome (click the lock icon in your address bar)</li>
+                            <li>Check that no other applications are using your microphone</li>
+                            <li>Verify your microphone is connected and working properly</li>
+                            <li>Try selecting a different microphone if you have multiple options</li>
+                            <li>Restart your browser</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="show-more">
+                <a href="#" class="cta-button">Load More Questions</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-cta">
+        <div class="container">
+            <h2 class="cta-title">Still have questions?</h2>
+            <p class="cta-description">If you couldn't find the answer you were looking for, feel free to reach out to us directly.</p>
+            <a href="index.html#contact" class="cta-button">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="index.html" class="logo footer-logo">
+                        <div class="logo-icon">AM</div>
+                        AccessibleMeetings
+                    </a>
+                    <p class="footer-description">Making online meetings accessible for everyone with real-time transcription.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">T</a>
+                        <a href="#" class="social-link">F</a>
+                        <a href="#" class="social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Product</h3>
+                    <a href="index.html#features" class="footer-link">Features</a>
+                    <a href="index.html#how-it-works" class="footer-link">How It Works</a>
+                    <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Resources</h3>
+                    <a href="help-center.html" class="footer-link">Help Center</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="accessibility-guide.html" class="footer-link">Accessibility Guide</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Company</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="index.html#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2025 AccessibleMeetings by Roman Tsisyk. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Guide - AccessibleMeetings</title>
+    <style>
+        :root {
+            --primary-color: #3563E9;
+            --secondary-color: #6B8AFB;
+            --accent-color: #34D399;
+            --text-color: #1E293B;
+            --light-text: #64748B;
+            --bg-color: #FFFFFF;
+            --light-bg: #F8FAFC;
+            --border-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .guide-hero {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .guide-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .guide-description {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .guide-content {
+            display: flex;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .guide-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .guide-main {
+            flex: 1;
+        }
+
+        .toc {
+            position: sticky;
+            top: 100px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+        }
+
+        .toc-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: all 0.2s;
+        }
+
+        .toc-link:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .toc-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .toc-sublist {
+            list-style: none;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .toc-subitem {
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection {
+            margin-bottom: 2.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .guide-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .image-caption {
+            color: var(--light-text);
+            font-size: 0.875rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: rgba(52, 211, 153, 0.1);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .checklist-content {
+            flex: 1;
+        }
+
+        .checklist-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .checklist-description {
+            color: var(--light-text);
+        }
+
+        .tip-box {
+            background-color: rgba(53, 99, 233, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-content {
+            color: var(--text-color);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background-color: rgba(53, 99, 233, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-description {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .resource-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .guide-cta {
+            background-color: var(--light-bg);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-heading {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .cta-text {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background-color: var(--light-bg);
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            max-width: 300px;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-links-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-group-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .footer-link {
+            color: var(--light-text);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .guide-content {
+                flex-direction: column;
+            }
+
+            .guide-sidebar {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .toc {
+                position: static;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">AM</div>
+                AccessibleMeetings
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="accessibility-guide.html">Accessibility Guide</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#download" class="cta-button">Install 100% FREE</a>
+        </div>
+    </header>
+
+    <section class="guide-hero">
+        <div class="container">
+            <h1 class="guide-title">Accessibility Guide for Online Meetings</h1>
+            <p class="guide-description">Best practices, recommendations, and resources for making your virtual meetings accessible and inclusive for everyone.</p>
+        </div>
+    </section>
+
+    <section class="container guide-content">
+        <aside class="guide-sidebar">
+            <nav class="toc">
+                <h2 class="toc-title">Table of Contents</h2>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#introduction" class="toc-link active">Introduction</a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#why-accessibility" class="toc-link">Why Accessibility Matters</a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#using-accessiblemeetings" class="toc-link">Using AccessibleMeetings</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="guide-main">
+            <section id="introduction" class="guide-section">
+                <h2 class="section-title">Introduction</h2>
+                <p>As remote and hybrid work environments become the norm, ensuring that online meetings are accessible for all participants is not just a nice-to-have feature—it's essential. This guide provides practical advice for making your virtual meetings more accessible, with a focus on supporting participants with hearing impairments as well as other accessibility needs.</p>
+                <p>The recommendations in this guide apply to meetings on any platform, including Google Meet, Microsoft Teams, Zoom, and others. Many of these suggestions are helpful not only for participants with disabilities but for everyone involved in the meeting.</p>
+                <div class="guide-image">
+                    <div class="image-placeholder">Diverse group in a virtual meeting with accessibility features highlighted</div>
+                    <p class="image-caption">Making meetings accessible benefits everyone, not just those with disabilities</p>
+                </div>
+            </section>
+
+            <section id="why-accessibility" class="guide-section">
+                <h2 class="section-title">Why Accessibility Matters</h2>
+                <p>Approximately 15% of the global population lives with some form of disability. In the context of online meetings, these can include:</p>
+                <ul>
+                    <li>Hearing impairments (from mild hearing loss to complete deafness)</li>
+                    <li>Visual impairments (from low vision to blindness)</li>
+                    <li>Motor disabilities that affect the ability to use traditional input devices</li>
+                    <li>Cognitive disabilities that may impact processing information</li>
+                    <li>Temporary disabilities (such as a broken arm or ear infection)</li>
+                    <li>Situational limitations (noisy environments, poor internet connections)</li>
+                </ul>
+                <p>By making your meetings accessible, you:</p>
+                <ul>
+                    <li>Ensure all team members can fully participate and contribute</li>
+                    <li>Comply with legal accessibility requirements in many jurisdictions</li>
+                    <li>Create a more inclusive workplace culture</li>
+                    <li>Improve the meeting experience for everyone, including those without disabilities</li>
+                    <li>Increase productivity and engagement</li>
+                </ul>
+                <div class="tip-box">
+                    <h3 class="tip-title">💡 Remember</h3>
+                    <div class="tip-content">
+                        <p>Accessibility isn't about special treatment—it's about equal access. Many accessibility features, like clear audio, well-structured presentations, and written summaries, benefit all participants.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="before-meeting" class="guide-section">
+                <h2 class="section-title">Before the Meeting</h2>
+                
+                <div id="planning" class="subsection">
+                    <h3 class="subsection-title">Planning Accessible Meetings</h3>
+                    <p>Proper planning is key to ensuring your meetings are accessible from the start:</p>
+                    <ol class="checklist">
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Choose accessible platforms</h4>
+                                <p class="checklist-description">Select meeting platforms with built-in accessibility features like closed captioning, screen reader compatibility, and keyboard navigation. Google Meet, Microsoft Teams, and Zoom all offer varying levels of accessibility features.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Schedule with accessibility in mind</h4>
+                                <p class="checklist-description">Allow sufficient breaks for longer meetings. Consider time zones and flexibility for participants who may need additional time for setup or assistance.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Plan for transcription or captioning</h4>
+                                <p class="checklist-description">Arrange for live captioning or install AccessibleMeetings to provide real-time transcription. This is essential for participants with hearing impairments.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Check technical requirements</h4>
+                                <p class="checklist-description">Ensure all participants have access to the necessary technology, including any assistive technologies they may use. Offer support or alternative options if needed.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div id="invitations" class="subsection">
+                    <h3 class="subsection-title">Creating Accessible Invitations</h3>
+                    <p>Your meeting invitation is often the first point of contact for participants. Make it accessible by:</p>
+                    <ul>
+                        <li>Using clear, simple language and a logical structure</li>
+                        <li>Including all necessary information (date, time, platform, agenda)</li>
+                        <li>Providing multiple ways to join (link, phone number, meeting ID)</li>
+                        <li>Mentioning available accessibility features (e.g., "Live transcription will be available")</li>
+                        <li>Inviting participants to request any additional accommodations they might need</li>
+                        <li>Sharing how to test the meeting platform before the actual meeting</li>
+                    </ul>
+                    <div class="guide-image">
+                        <div class="image-placeholder">Sample of an accessible meeting invitation with key elements highlighted</div>
+                        <p class="image-caption">Example of an accessible meeting invitation with clear structure and accessibility information</p>
+                    </div>
+                </div>
+                
+                <div id="materials" class="subsection">
+                    <h3 class="subsection-title">Preparing Accessible Materials</h3>
+                    <p>Any documents or presentations used during the meeting should be accessible:</p>
+                    <ol class="checklist">
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Send materials in advance</h4>
+                                <p class="checklist-description">Provide meeting materials at least 24 hours before the meeting so participants can review them at their own pace, especially important for those using screen readers or who need more time to process information.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Use accessible document formats</h4>
+                                <p class="checklist-description">Ensure documents are structured with proper headings, alternative text for images, and accessible formats. Use accessible templates in Word, PowerPoint, or Google Docs.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Create accessible presentations</h4>
+                                <p class="checklist-description">Use high contrast colors, legible fonts (min 18pt), simple backgrounds, and descriptive text. Avoid relying solely on color to convey information.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Provide alternative formats</h4>
+                                <p class="checklist-description">Offer materials in multiple formats (e.g., Word, PDF, HTML) to accommodate different preferences and assistive technologies.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="during-meeting" class="guide-section">
+                <h2 class="section-title">During the Meeting</h2>
+                
+                <div id="introductions" class="subsection">
+                    <h3 class="subsection-title">Starting with Accessible Introductions</h3>
+                    <p>How you begin your meeting sets the tone for accessibility:</p>
+                    <ul>
+                        <li>Start with a brief overview of the meeting format and agenda</li>
+                        <li>Describe any accessibility features being used (e.g., "We have live transcription running")</li>
+                        <li>Ask everyone to introduce themselves before speaking, which helps people with hearing impairments identify speakers</li>
+                        <li>Encourage participants to keep video on when possible, which assists those who lip-read</li>
+                        <li>Establish clear communication protocols (e.g., how to request to speak, using the chat function)</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h3 class="tip-title">💡 Pro Tip</h3>
+                        <div class="tip-content">
+                            <p>Consider asking participants to share their accessibility preferences during introductions. For example, "Please let me know your name, role, and any accessibility preferences you have for this meeting."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="communication" class="subsection">
+                    <h3 class="subsection-title">Accessible Communication Practices</h3>
+                    <p>Clear communication benefits everyone but is essential for accessibility:</p>
+                    <ol class="checklist">
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Speak clearly and at a moderate pace</h4>
+                                <p class="checklist-description">This improves comprehension for everyone and allows captioning or transcription tools to work more accurately.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Use plain language</h4>
+                                <p class="checklist-description">Avoid unnecessary jargon, acronyms, or complex terminology. When specialized terms must be used, explain them.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Prevent overlapping speech</h4>
+                                <p class="checklist-description">Only one person should speak at a time. This is crucial for accurate transcription and for participants with hearing impairments.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Face the camera when speaking</h4>
+                                <p class="checklist-description">This helps participants who lip-read and generally improves communication clarity.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Use multiple communication channels</h4>
+                                <p class="checklist-description">Encourage the use of chat for questions or comments, which provides an alternative way to participate.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Check in regularly</h4>
+                                <p class="checklist-description">Pause periodically to check if participants have questions or if clarification is needed.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div id="visual-content" class="subsection">
+                    <h3 class="subsection-title">Sharing Accessible Visual Content</h3>
+                    <p>When sharing screens or presenting visual information:</p>
+                    <ul>
+                        <li>Verbally describe important visual content for those who cannot see it</li>
+                        <li>Ensure text is large enough to be read by all participants</li>
+                        <li>Use your mouse pointer or highlighting tools to draw attention to specific content</li>
+                        <li>Share presentation files through chat so participants can follow along on their own devices</li>
+                        <li>Keep presentations simple and well-organized with consistent navigation</li>
+                        <li>Use high contrast color combinations (avoid red/green combinations which are problematic for colorblind participants)</li>
+                    </ul>
+                    <div class="guide-image">
+                        <div class="image-placeholder">Comparison of accessible vs. non-accessible presentation slides</div>
+                        <p class="image-caption">Examples of accessible (right) vs. non-accessible (left) presentation design</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="after-meeting" class="guide-section">
+                <h2 class="section-title">After the Meeting</h2>
+                <p>Accessibility extends beyond the meeting itself. After your meeting:</p>
+                <ol class="checklist">
+                    <li class="checklist-item">
+                        <div class="checklist-icon">✓</div>
+                        <div class="checklist-content">
+                            <h4 class="checklist-title">Share recordings with captions</h4>
+                            <p class="checklist-description">If the meeting was recorded, ensure captions are accurate before sharing. AccessibleMeetings can help by providing a transcript you can reference.</p>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checklist-icon">✓</div>
+                        <div class="checklist-content">
+                            <h4 class="checklist-title">Distribute accessible meeting notes</h4>
+                            <p class="checklist-description">Send out clear, structured notes that summarize key points, decisions, and action items. Use accessible document formats.</p>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checklist-icon">✓</div>
+                        <div class="checklist-content">
+                            <h4 class="checklist-title">Provide transcripts</h4>
+                            <p class="checklist-description">Share meeting transcripts with all participants. With AccessibleMeetings, you can save and distribute these easily.</p>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checklist-icon">✓</div>
+                        <div class="checklist-content">
+                            <h4 class="checklist-title">Follow up on accessibility issues</h4>
+                            <p class="checklist-description">Address any accessibility challenges that arose during the meeting to improve future meetings.</p>
+                        </div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checklist-icon">✓</div>
+                        <div class="checklist-content">
+                            <h4 class="checklist-title">Gather feedback</h4>
+                            <p class="checklist-description">Regularly ask participants if their accessibility needs are being met and how you can improve.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="using-accessiblemeetings" class="guide-section">
+                <h2 class="section-title">Using AccessibleMeetings to Enhance Accessibility</h2>
+                <p>AccessibleMeetings provides real-time transcription for online meetings, making them more accessible for participants with hearing impairments and anyone who benefits from text-based content.</p>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Key Features for Accessibility</h3>
+                    <ol class="checklist">
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Real-time transcription</h4>
+                                <p class="checklist-description">Converts speech to text in real-time, making meetings instantly more accessible for participants with hearing impairments.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Adjustable text size</h4>
+                                <p class="checklist-description">Choose from small (16px) to extra large (26px) text to accommodate different visual needs.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">High contrast mode</h4>
+                                <p class="checklist-description">Yellow text on black background offers optimal readability for many users with visual impairments.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Keyboard shortcuts</h4>
+                                <p class="checklist-description">Control the extension without using a mouse, essential for users with motor disabilities.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Auto-scroll functionality</h4>
+                                <p class="checklist-description">Keeps the latest text visible without requiring manual scrolling.</p>
+                            </div>
+                        </li>
+                        <li class="checklist-item">
+                            <div class="checklist-icon">✓</div>
+                            <div class="checklist-content">
+                                <h4 class="checklist-title">Multiple language support</h4>
+                                <p class="checklist-description">Leverages Chrome's speech recognition to support various languages, helping multilingual teams.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Best Practices for Using AccessibleMeetings</h3>
+                    <ul>
+                        <li>Install the extension before your meeting to ensure it's ready to use</li>
+                        <li>Select the appropriate language in the settings for your meeting</li>
+                        <li>Choose display settings (text size, contrast) that work best for your participants</li>
+                        <li>Position the transcription window where it won't obstruct other important content</li>
+                        <li>Save transcripts after meetings for reference and to share with participants</li>
+                        <li>Remember that while transcription technology is advanced, it's not perfect—speakers should still follow good communication practices</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h3 class="tip-title">💡 Maximizing Transcription Quality</h3>
+                        <div class="tip-content">
+                            <p>For the best transcription results with AccessibleMeetings:</p>
+                            <ul>
+                                <li>Use a good quality microphone</li>
+                                <li>Minimize background noise</li>
+                                <li>Speak clearly and at a moderate pace</li>
+                                <li>Avoid overlapping speech</li>
+                                <li>Define specialized terms or acronyms when first used</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="additional-resources" class="guide-section">
+                <h2 class="section-title">Additional Resources</h2>
+                <p>Here are some resources to further help you improve the accessibility of your online meetings:</p>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">📚</div>
+                        <h3 class="resource-title">Web Content Accessibility Guidelines (WCAG)</h3>
+                        <p class="resource-description">International standards for web accessibility that can be applied to online meetings.</p>
+                        <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" class="resource-link" target="_blank">Visit WCAG Website</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">🔍</div>
+                        <h3 class="resource-title">WebAIM Color Contrast Checker</h3>
+                        <p class="resource-description">Tool to check if your presentation colors have sufficient contrast for readability.</p>
+                        <a href="https://webaim.org/resources/contrastchecker/" class="resource-link" target="_blank">Use Contrast Checker</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">📝</div>
+                        <h3 class="resource-title">Microsoft's Accessible Presentations Guide</h3>
+                        <p class="resource-description">Comprehensive guide for creating accessible PowerPoint presentations.</p>
+                        <a href="https://support.microsoft.com/en-us/office/make-your-powerpoint-presentations-accessible-to-people-with-disabilities-6f7772b2-2f33-4bd2-8ca7-dae3b2b3ef25" class="resource-link" target="_blank">Read Guide</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">🎦</div>
+                        <h3 class="resource-title">Accessible Virtual Meetings Guide</h3>
+                        <p class="resource-description">Resources from the Disability:IN organization on hosting inclusive virtual events.</p>
+                        <a href="https://disabilityin.org/resource/accessible-virtual-events-meetings/" class="resource-link" target="_blank">View Resources</a>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Accessibility Tools Complementary to AccessibleMeetings</h3>
+                    <p>While AccessibleMeetings provides real-time transcription, consider these additional tools to enhance accessibility:</p>
+                    <ul>
+                        <li><strong>Screen readers:</strong> NVDA (free), JAWS, or VoiceOver (built into macOS) for participants with visual impairments</li>
+                        <li><strong>Voice recognition software:</strong> Dragon Naturally Speaking or built-in OS options for participants with motor disabilities</li>
+                        <li><strong>Color contrast analyzers:</strong> To ensure your visual content is readable by all participants</li>
+                        <li><strong>Meeting platform native tools:</strong> Most platforms have some built-in accessibility features that can be used alongside AccessibleMeetings</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <section class="guide-cta">
+        <div class="container">
+            <div class="cta-card">
+                <h2 class="cta-heading">Ready to Make Your Meetings More Accessible?</h2>
+                <p class="cta-text">Start using AccessibleMeetings today—it's completely free and requires no account creation. Join the thousands of users already making their online meetings more inclusive.</p>
+                <a href="index.html#download" class="cta-button">Install 100% FREE Extension</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="index.html" class="logo footer-logo">
+                        <div class="logo-icon">AM</div>
+                        AccessibleMeetings
+                    </a>
+                    <p class="footer-description">Making online meetings accessible for everyone with real-time transcription.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">T</a>
+                        <a href="#" class="social-link">F</a>
+                        <a href="#" class="social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Product</h3>
+                    <a href="index.html#features" class="footer-link">Features</a>
+                    <a href="index.html#how-it-works" class="footer-link">How It Works</a>
+                    <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Resources</h3>
+                    <a href="help-center.html" class="footer-link">Help Center</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="accessibility-guide.html" class="footer-link">Accessibility Guide</a>
+                </div>
+                <div class="footer-links-group">
+                    <h3 class="footer-group-title">Company</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="index.html#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2025 AccessibleMeetings by Roman Tsisyk. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
