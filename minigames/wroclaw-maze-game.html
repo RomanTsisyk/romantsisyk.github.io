@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrocław Market Square Maze</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+            background-size: cover;
+            color: #333;
+        }
+
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .game-description {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .game-container {
+            position: relative;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        #game-board {
+            border: 2px solid #333;
+            margin: 0 auto;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #level-display, #moves-display, #time-display {
+            background-color: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .landmark {
+            position: absolute;
+            font-size: 0.8em;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .game-container {
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .game-description {
+                font-size: 0.9rem;
+                padding: 0 10px;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h2 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wrocław Market Square Maze</h1>
+    <p class="game-description">
+        Navigate through the maze of Wrocław's historic Market Square! 
+        Guide your character (🧍) to the finish (🏆) while avoiding walls. 
+        Use arrow keys or the on-screen buttons to move.
+    </p>
+
+    <div class="game-info">
+        <div id="level-display">Level: 1</div>
+        <div id="moves-display">Moves: 0</div>
+        <div id="time-display">Time: 0s</div>
+    </div>
+
+    <div class="game-container">
+        <canvas id="game-board" width="400" height="400"></canvas>
+    </div>
+
+    <div class="controls">
+        <div class="button-group">
+            <button id="up-btn">↑</button>
+        </div>
+        <div class="button-group">
+            <button id="left-btn">←</button>
+            <button id="down-btn">↓</button>
+            <button id="right-btn">→</button>
+        </div>
+        <div class="button-group">
+            <button id="restart-btn">Restart Level</button>
+            <button id="new-game-btn">New Game</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Inspired by the beautiful architecture and layout of Wrocław's Market Square
+    </div>
+
+    <div id="level-complete-modal" class="modal">
+        <div class="modal-content">
+            <h2>Level Complete!</h2>
+            <p id="level-stats"></p>
+            <button id="next-level-btn">Next Level</button>
+        </div>
+    </div>
+
+    <div id="game-complete-modal" class="modal">
+        <div class="modal-content">
+            <h2>Congratulations!</h2>
+            <p>You've completed all levels of the Wrocław Market Square Maze!</p>
+            <p id="game-stats"></p>
+            <button id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Game constants
+        const CELL_SIZE = 40;
+        const GRID_SIZE = 10;
+        const EMPTY = 0;
+        const WALL = 1;
+        const PLAYER = 2;
+        const EXIT = 3;
+        const LANDMARK = 4;
+
+        // Game variables
+        let currentLevel = 1;
+        let maxLevel = 3;
+        let playerPosition = { x: 0, y: 0 };
+        let grid = [];
+        let moves = 0;
+        let startTime;
+        let gameTime = 0;
+        let timerInterval;
+        let isGameActive = false;
+
+        // DOM elements
+        const canvas = document.getElementById('game-board');
+        const ctx = canvas.getContext('2d');
+        const levelDisplay = document.getElementById('level-display');
+        const movesDisplay = document.getElementById('moves-display');
+        const timeDisplay = document.getElementById('time-display');
+        const levelCompleteModal = document.getElementById('level-complete-modal');
+        const gameCompleteModal = document.getElementById('game-complete-modal');
+        const levelStats = document.getElementById('level-stats');
+        const gameStats = document.getElementById('game-stats');
+
+        // Game levels
+        const levels = [
+            // Level 1 - Easy
+            [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 0, 0, 0, 0, 1, 0, 0, 1],
+                [1, 1, 1, 0, 1, 0, 1, 0, 0, 1],
+                [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 0, 0, 3, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ],
+            // Level 2 - Medium
+            [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1, 1, 0, 3, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ],
+            // Level 3 - Hard
+            [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+                [1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 1, 1, 1, 3, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ]
+        ];
+        
+        // Wrocław landmarks for each level
+        const landmarks = [
+            // Level 1
+            [
+                { text: "Town Hall", x: 5, y: 3 },
+                { text: "St. Elizabeth's Church", x: 8, y: 2 }
+            ],
+            // Level 2
+            [
+                { text: "Old Shambles", x: 2, y: 6 },
+                { text: "Salt Square", x: 7, y: 4 },
+                { text: "Market Hall", x: 5, y: 8 }
+            ],
+            // Level 3
+            [
+                { text: "Tenement Houses", x: 1, y: 4 },
+                { text: "St. Mary Magdalene Church", x: 6, y: 2 },
+                { text: "Ossolineum", x: 8, y: 6 }
+            ]
+        ];
+
+        // Initialize the game
+        function initGame() {
+            loadLevel(currentLevel);
+            isGameActive = true;
+            startTimer();
+            
+            // Event listeners for keyboard controls
+            document.addEventListener('keydown', handleKeyDown);
+            
+            // Event listeners for button controls
+            document.getElementById('up-btn').addEventListener('click', () => movePlayer(0, -1));
+            document.getElementById('down-btn').addEventListener('click', () => movePlayer(0, 1));
+            document.getElementById('left-btn').addEventListener('click', () => movePlayer(-1, 0));
+            document.getElementById('right-btn').addEventListener('click', () => movePlayer(1, 0));
+            document.getElementById('restart-btn').addEventListener('click', restartLevel);
+            document.getElementById('new-game-btn').addEventListener('click', startNewGame);
+            document.getElementById('next-level-btn').addEventListener('click', goToNextLevel);
+            document.getElementById('play-again-btn').addEventListener('click', startNewGame);
+        }
+
+        // Load a specific level
+        function loadLevel(levelNum) {
+            moves = 0;
+            grid = JSON.parse(JSON.stringify(levels[levelNum - 1]));
+            
+            // Find the player's starting position
+            for (let y = 0; y < GRID_SIZE; y++) {
+                for (let x = 0; x < GRID_SIZE; x++) {
+                    if (grid[y][x] === PLAYER) {
+                        playerPosition = { x, y };
+                        // Keep the player marker at the starting position
+                    }
+                }
+            }
+            
+            levelDisplay.textContent = `Level: ${levelNum}`;
+            movesDisplay.textContent = `Moves: ${moves}`;
+            drawGrid();
+        }
+
+        // Draw the game grid
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let y = 0; y < GRID_SIZE; y++) {
+                for (let x = 0; x < GRID_SIZE; x++) {
+                    const cellX = x * CELL_SIZE;
+                    const cellY = y * CELL_SIZE;
+                    
+                    // Draw cell background
+                    ctx.fillStyle = '#f5f5f5';
+                    ctx.fillRect(cellX, cellY, CELL_SIZE, CELL_SIZE);
+                    
+                    // Draw cell content
+                    switch (grid[y][x]) {
+                        case WALL:
+                            // Draw wall with a brick pattern
+                            ctx.fillStyle = '#8B4513';
+                            ctx.fillRect(cellX, cellY, CELL_SIZE, CELL_SIZE);
+                            
+                            // Add brick pattern
+                            ctx.strokeStyle = '#6B3100';
+                            ctx.lineWidth = 1;
+                            
+                            // Horizontal brick lines
+                            for (let i = 0; i < 2; i++) {
+                                ctx.beginPath();
+                                ctx.moveTo(cellX, cellY + (i + 1) * CELL_SIZE / 3);
+                                ctx.lineTo(cellX + CELL_SIZE, cellY + (i + 1) * CELL_SIZE / 3);
+                                ctx.stroke();
+                            }
+                            
+                            // Vertical brick lines (staggered)
+                            for (let i = 0; i < 3; i++) {
+                                const offset = (y % 2 === 0) ? 0 : CELL_SIZE / 2;
+                                const brickX = cellX + offset + i * CELL_SIZE / 2;
+                                if (brickX < cellX + CELL_SIZE && brickX > cellX) {
+                                    ctx.beginPath();
+                                    ctx.moveTo(brickX, cellY);
+                                    ctx.lineTo(brickX, cellY + CELL_SIZE);
+                                    ctx.stroke();
+                                }
+                            }
+                            break;
+                        case EXIT:
+                            // Draw exit (goal) with a trophy
+                            ctx.fillStyle = '#FFD700';
+                            ctx.fillRect(cellX + 2, cellY + 2, CELL_SIZE - 4, CELL_SIZE - 4);
+                            ctx.font = '24px Arial';
+                            ctx.fillStyle = '#000';
+                            ctx.fillText('🏆', cellX + 8, cellY + 28);
+                            break;
+                    }
+                    
+                    // Draw grid lines
+                    ctx.strokeStyle = '#ddd';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(cellX, cellY, CELL_SIZE, CELL_SIZE);
+                }
+            }
+            
+            // Draw player at current position
+            const playerX = playerPosition.x * CELL_SIZE;
+            const playerY = playerPosition.y * CELL_SIZE;
+            ctx.font = '24px Arial';
+            ctx.fillStyle = '#000';
+            ctx.fillText('🧍', playerX + 8, playerY + 28);
+            
+            // Draw landmarks for the current level
+            const currentLandmarks = landmarks[currentLevel - 1];
+            if (currentLandmarks) {
+                for (const landmark of currentLandmarks) {
+                    const landmarkX = landmark.x * CELL_SIZE;
+                    const landmarkY = landmark.y * CELL_SIZE;
+                    
+                    // Only draw landmarks on empty spaces
+                    if (grid[landmark.y][landmark.x] === EMPTY) {
+                        ctx.font = '10px Arial';
+                        ctx.fillStyle = '#d32f2f';
+                        ctx.fillText('🏛️', landmarkX + 15, landmarkY + 15);
+                    }
+                }
+            }
+        }
+
+        // Handle keyboard input
+        function handleKeyDown(e) {
+            if (!isGameActive) return;
+            
+            switch (e.key) {
+                case 'ArrowUp':
+                    movePlayer(0, -1);
+                    break;
+                case 'ArrowDown':
+                    movePlayer(0, 1);
+                    break;
+                case 'ArrowLeft':
+                    movePlayer(-1, 0);
+                    break;
+                case 'ArrowRight':
+                    movePlayer(1, 0);
+                    break;
+            }
+        }
+
+        // Move the player
+        function movePlayer(dx, dy) {
+            if (!isGameActive) return;
+            
+            const newX = playerPosition.x + dx;
+            const newY = playerPosition.y + dy;
+            
+            // Check if the new position is within bounds
+            if (newX < 0 || newX >= GRID_SIZE || newY < 0 || newY >= GRID_SIZE) {
+                return;
+            }
+            
+            // Check what's in the new position
+            switch (grid[newY][newX]) {
+                case EMPTY:
+                    // Move to empty space
+                    // Update the grid and player position
+                    grid[playerPosition.y][playerPosition.x] = EMPTY;
+                    playerPosition = { x: newX, y: newY };
+                    grid[newY][newX] = PLAYER;
+                    moves++;
+                    movesDisplay.textContent = `Moves: ${moves}`;
+                    drawGrid();
+                    break;
+                case EXIT:
+                    // Reached the exit
+                    grid[playerPosition.y][playerPosition.x] = EMPTY;
+                    playerPosition = { x: newX, y: newY };
+                    grid[newY][newX] = PLAYER;
+                    moves++;
+                    movesDisplay.textContent = `Moves: ${moves}`;
+                    drawGrid();
+                    
+                    // Level complete
+                    completeLevel();
+                    break;
+                case WALL:
+                    // Hit a wall, do nothing
+                    break;
+            }
+        }
+
+        // Complete current level
+        function completeLevel() {
+            isGameActive = false;
+            clearInterval(timerInterval);
+            
+            if (currentLevel < maxLevel) {
+                // Show level complete modal
+                levelStats.textContent = `You completed Level ${currentLevel} in ${moves} moves and ${gameTime} seconds!`;
+                levelCompleteModal.style.display = 'flex';
+            } else {
+                // Show game complete modal
+                gameStats.textContent = `You completed all levels in ${gameTime} total seconds!`;
+                gameCompleteModal.style.display = 'flex';
+            }
+        }
+
+        // Go to next level
+        function goToNextLevel() {
+            levelCompleteModal.style.display = 'none';
+            currentLevel++;
+            loadLevel(currentLevel);
+            isGameActive = true;
+            startTimer();
+        }
+
+        // Restart current level
+        function restartLevel() {
+            loadLevel(currentLevel);
+            clearInterval(timerInterval);
+            startTimer();
+            isGameActive = true;
+        }
+
+        // Start a new game
+        function startNewGame() {
+            levelCompleteModal.style.display = 'none';
+            gameCompleteModal.style.display = 'none';
+            currentLevel = 1;
+            gameTime = 0;
+            loadLevel(currentLevel);
+            clearInterval(timerInterval);
+            startTimer();
+            isGameActive = true;
+        }
+
+        // Start the timer
+        function startTimer() {
+            startTime = Date.now() - (gameTime * 1000);
+            clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // Update the timer
+        function updateTimer() {
+            gameTime = Math.floor((Date.now() - startTime) / 1000);
+            timeDisplay.textContent = `Time: ${gameTime}s`;
+        }
+
+        // Initialize the game when the page loads
+        window.onload = initGame;
+    </script>
+</body>
+</html>
