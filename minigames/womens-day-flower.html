@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grow a Flower for Women's Day</title>
+    <style>
+        :root {
+            --primary-color: #ff69b4;
+            --secondary-color: #9370db;
+            --background-color: #fff5f8;
+            --text-color: #333;
+            --accent-color: #ff1493;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            background-image: radial-gradient(circle, #fff5f8 70%, #ffe6ee 100%);
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subheading {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .flower-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            transition: all 0.5s ease;
+        }
+        
+        .flower-pot {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 90px;
+            background: linear-gradient(to right, #cd853f, #d2b48c, #cd853f);
+            border-radius: 0 0 50px 50px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .flower-pot:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            height: 20px;
+            background-color: #a0522d;
+            border-radius: 5px;
+        }
+        
+        .soil {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 20px;
+            background-color: #5d4037;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .stem {
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 0;
+            background-color: #4CAF50;
+            z-index: 1;
+            transition: height 1s ease;
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background-color: #4CAF50;
+            border-radius: 50px 0 50px 0;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .leaf.left {
+            transform: rotate(-30deg);
+            left: -25px;
+        }
+        
+        .leaf.right {
+            transform: rotate(30deg) scaleX(-1);
+            right: -25px;
+        }
+        
+        .bud {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            z-index: 3;
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .petals {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+            transform-origin: bottom center;
+            opacity: 0.9;
+        }
+        
+        .water-can {
+            width: 80px;
+            height: 100px;
+            position: relative;
+            margin: 30px auto;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .water-can-body {
+            width: 60px;
+            height: 80px;
+            background-color: #b3e5fc;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .water-can-body:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(179,229,252,0.2) 100%);
+            animation: water-level 3s ease-in-out infinite;
+        }
+        
+        @keyframes water-level {
+            0%, 100% { height: 100%; }
+            50% { height: 85%; }
+        }
+        
+        .water-can-handle {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            border: 6px solid #b3e5fc;
+            border-left: 0;
+            border-radius: 0 50px 50px 0;
+            top: 15px;
+            right: -15px;
+        }
+        
+        .water-can-spout {
+            position: absolute;
+            width: 10px;
+            height: 30px;
+            background-color: #b3e5fc;
+            top: 20px;
+            left: -8px;
+            transform: rotate(-45deg);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background-color: #29B6F6;
+            border-radius: 50%;
+            opacity: 0;
+            top: 35px;
+            left: -15px;
+        }
+        
+        .water-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .water-button:hover {
+            background-color: #0b7dda;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-container {
+            width: 80%;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px auto;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .message-container {
+            margin-top: 20px;
+            font-style: italic;
+            min-height: 50px;
+            color: var(--secondary-color);
+        }
+        
+        .gift-section {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: none;
+        }
+        
+        .gift-title {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .gift-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .gift-form input, .gift-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        .gift-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .send-gift-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .send-gift-btn:hover {
+            background-color: #e50e82;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .final-message {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: none;
+            text-align: center;
+        }
+        
+        .womens-day-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: rotate(15deg);
+            text-align: center;
+            line-height: 1.2;
+            z-index: 100;
+        }
+        
+        .womens-day-badge span {
+            transform: rotate(-15deg);
+            display: block;
+        }
+        
+        .water-animation {
+            position: absolute;
+            width: 8px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(41, 182, 246, 0.7), rgba(41, 182, 246, 0.3));
+            top: 35px;
+            left: -15px;
+            border-radius: 5px;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            opacity: 0;
+        }
+        
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subheading {
+                font-size: 1rem;
+            }
+            
+            .womens-day-badge {
+                width: 60px;
+                height: 60px;
+                font-size: 0.7rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="womens-day-badge">
+        <span>March 8<br>Women's Day</span>
+    </div>
+    
+    <div class="container">
+        <h1>Grow a Digital Flower</h1>
+        <p class="subheading">Water it with love for International Women's Day</p>
+        
+        <div class="flower-container">
+            <div class="flower-pot"></div>
+            <div class="soil"></div>
+            <div class="stem" id="stem">
+                <div class="leaf left" id="leaf-1"></div>
+                <div class="leaf right" id="leaf-2"></div>
+                <div class="leaf left" id="leaf-3"></div>
+            </div>
+            <div class="bud" id="bud"></div>
+            <div class="petals" id="petals"></div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="progress-label" id="progress-label">0%</div>
+        </div>
+        
+        <div class="water-can" id="water-can">
+            <div class="water-can-spout"></div>
+            <div class="water-can-body"></div>
+            <div class="water-can-handle"></div>
+            <div class="water-drop" id="water-drop"></div>
+            <div class="water-animation" id="water-animation"></div>
+        </div>
+        
+        <button class="water-button" id="water-button">Water the Flower</button>
+        
+        <div class="message-container" id="message-container">
+            Start growing your flower with love!
+        </div>
+    </div>
+    
+    <div class="gift-section" id="gift-section">
+        <h2 class="gift-title">Gift Your Flower</h2>
+        <p>Your beautiful flower is fully grown! Now you can gift it to someone special for Women's Day.</p>
+        
+        <div class="gift-form">
+            <label for="recipient-name">Recipient's Name:</label>
+            <input type="text" id="recipient-name" placeholder="Who are you sending this to?">
+            
+            <label for="your-name">Your Name:</label>
+            <input type="text" id="your-name" placeholder="Your name">
+            
+            <label for="message">Your Message:</label>
+            <textarea id="message" placeholder="Write a beautiful Women's Day message..."></textarea>
+            
+            <button class="send-gift-btn" id="send-gift-btn">Send Gift</button>
+        </div>
+    </div>
+    
+    <div class="final-message" id="final-message">
+        <h2>🎉 Your Gift is Ready! 🎉</h2>
+        <p>Share this link with your special someone:</p>
+        <p><strong id="gift-link">https://your-flower-gift.com/gift/123456</strong></p>
+        <p>When they open it, they'll see your beautiful flower and message!</p>
+        <p>Happy International Women's Day! 💐</p>
+    </div>
+    
+    <div class="footer">
+        Created by <a href="https://www.linkedin.com/in/roman-tsisyk/" target="_blank">Roman Tsisyk</a> | For International Women's Day 2025
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const waterButton = document.getElementById('water-button');
+            const waterCan = document.getElementById('water-can');
+            const waterDrop = document.getElementById('water-drop');
+            const waterAnimation = document.getElementById('water-animation');
+            const progressBar = document.getElementById('progress-bar');
+            const progressLabel = document.getElementById('progress-label');
+            const messageContainer = document.getElementById('message-container');
+            const stem = document.getElementById('stem');
+            const leaf1 = document.getElementById('leaf-1');
+            const leaf2 = document.getElementById('leaf-2');
+            const leaf3 = document.getElementById('leaf-3');
+            const bud = document.getElementById('bud');
+            const petals = document.getElementById('petals');
+            const giftSection = document.getElementById('gift-section');
+            const sendGiftBtn = document.getElementById('send-gift-btn');
+            const finalMessage = document.getElementById('final-message');
+            const giftLink = document.getElementById('gift-link');
+            
+            // Create petals
+            const petalCount = 8;
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                const angle = (i / petalCount) * 360;
+                petal.style.transform = `rotate(${angle}deg) translateY(-20px)`;
+                petals.appendChild(petal);
+            }
+            
+            // Growth stages
+            const growthStages = [
+                { 
+                    progress: 0, 
+                    stemHeight: 0, 
+                    message: "The seed is planted. Water it to start growing!" 
+                },
+                { 
+                    progress: 20, 
+                    stemHeight: 50, 
+                    leaf1Opacity: 1,
+                    message: "A tiny sprout appears! Keep watering..." 
+                },
+                { 
+                    progress: 40, 
+                    stemHeight: 100, 
+                    leaf2Opacity: 1,
+                    message: "Your plant is growing nicely!" 
+                },
+                { 
+                    progress: 60, 
+                    stemHeight: 150, 
+                    leaf3Opacity: 1,
+                    message: "Almost there! The stem is getting taller." 
+                },
+                { 
+                    progress: 80, 
+                    stemHeight: 200, 
+                    budOpacity: 1,
+                    message: "A bud is forming! One more step..." 
+                },
+                { 
+                    progress: 100, 
+                    stemHeight: 200, 
+                    petalsOpacity: 1,
+                    message: "Beautiful! Your flower has fully bloomed. Ready to gift it!" 
+                }
+            ];
+            
+            let currentStage = 0;
+            let currentProgress = 0;
+            
+            // Update the flower based on current stage
+            function updateFlower() {
+                const stage = growthStages[currentStage];
+                
+                // Update progress bar
+                progressBar.style.width = `${currentProgress}%`;
+                progressLabel.textContent = `${currentProgress}%`;
+                
+                // Update stem
+                stem.style.height = `${stage.stemHeight}px`;
+                
+                // Update leaves
+                if (stage.leaf1Opacity !== undefined) leaf1.style.opacity = stage.leaf1Opacity;
+                if (stage.leaf2Opacity !== undefined) leaf2.style.opacity = stage.leaf2Opacity;
+                if (stage.leaf3Opacity !== undefined) leaf3.style.opacity = stage.leaf3Opacity;
+                
+                // Position leaves along stem
+                leaf1.style.bottom = '30px';
+                leaf2.style.bottom = '90px';
+                leaf3.style.bottom = '150px';
+                
+                // Update bud
+                if (stage.budOpacity !== undefined) {
+                    bud.style.opacity = stage.budOpacity;
+                    bud.style.top = `${-stage.stemHeight}px`;
+                }
+                
+                // Update petals
+                if (stage.petalsOpacity !== undefined) {
+                    petals.style.opacity = stage.petalsOpacity;
+                    petals.style.top = `${-stage.stemHeight}px`;
+                    bud.style.transform = 'scale(0.7)';
+                }
+                
+                // Update message
+                messageContainer.textContent = stage.message;
+                
+                // Show gift section when flower is fully grown
+                if (currentProgress === 100) {
+                    setTimeout(() => {
+                        giftSection.style.display = 'block';
+                        setTimeout(() => {
+                            giftSection.style.opacity = 1;
+                        }, 100);
+                    }, 1000);
+                    
+                    // Create confetti celebration
+                    createConfetti();
+                }
+            }
+            
+            // Water the flower
+            function waterFlower() {
+                if (currentProgress >= 100) return;
+                
+                // Disable button during animation
+                waterButton.disabled = true;
+                
+                // Animate water can
+                waterCan.style.animation = 'none';
+                void waterCan.offsetWidth; // Trigger reflow
+                waterCan.style.animation = 'float 3s ease-in-out infinite';
+                
+                // Water drop animation
+                waterDrop.style.opacity = 1;
+                waterDrop.style.animation = 'none';
+                void waterDrop.offsetWidth; // Trigger reflow
+                waterDrop.style.animation = 'dropFall 1s ease-in';
+                
+                // Water stream animation
+                waterAnimation.style.height = '100px';
+                setTimeout(() => {
+                    waterAnimation.style.height = '0';
+                }, 1000);
+                
+                // Progress to next stage
+                currentProgress += 20;
+                if (currentProgress > 100) currentProgress = 100;
+                
+                currentStage = Math.floor(currentProgress / 20);
+                
+                // Update the flower appearance
+                updateFlower();
+                
+                // Re-enable button after animation
+                setTimeout(() => {
+                    waterButton.disabled = false;
+                    waterDrop.style.opacity = 0;
+                }, 1000);
+            }
+            
+            // Handle gift sending
+            function sendGift() {
+                const recipientName = document.getElementById('recipient-name').value.trim();
+                const yourName = document.getElementById('your-name').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (!recipientName || !yourName) {
+                    alert('Please enter both names to send your gift.');
+                    return;
+                }
+                
+                // Generate a random gift code
+                const giftCode = Math.random().toString(36).substring(2, 10);
+                
+                // In a real app, you would save the gift data to a server here
+                
+                // Show the final message with link
+                giftSection.style.opacity = 0;
+                setTimeout(() => {
+                    giftSection.style.display = 'none';
+                    finalMessage.style.display = 'block';
+                    giftLink.textContent = `https://flower-gift.com/${giftCode}`;
+                    
+                    setTimeout(() => {
+                        finalMessage.style.opacity = 1;
+                    }, 100);
+                }, 1000);
+            }
+            
+            // Create confetti celebration
+            function createConfetti() {
+                const colors = ['#ff69b4', '#9370db', '#ff8c00', '#32cd32', '#1e90ff'];
+                const confettiCount = 50;
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        
+                        // Random properties
+                        const size = Math.random() * 10 + 5;
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        
+                        confetti.style.width = `${size}px`;
+                        confetti.style.height = `${size}px`;
+                        confetti.style.backgroundColor = color;
+                        
+                        // Random position
+                        const left = Math.random() * 100;
+                        confetti.style.left = `${left}%`;
+                        confetti.style.top = '0';
+                        
+                        // Add to container
+                        document.querySelector('.flower-container').appendChild(confetti);
+                        
+                        // Animate
+                        confetti.style.opacity = 1;
+                        
+                        const animationDuration = Math.random() * 3 + 2;
+                        const horizontalMovement = (Math.random() - 0.5) * 100;
+                        
+                        confetti.animate([
+                            { transform: 'translateY(0) rotate(0)', opacity: 1 },
+                            { transform: `translateY(300px) translateX(${horizontalMovement}px) rotate(360deg)`, opacity: 0 }
+                        ], {
+                            duration: animationDuration * 1000,
+                            easing: 'ease-out',
+                            fill: 'forwards'
+                        });
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, animationDuration * 1000);
+                    }, Math.random() * 1000);
+                }
+            }
+            
+            // Add CSS animation for water drop
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes dropFall {
+                    0% { transform: translateY(0) scale(1); opacity: 1; }
+                    100% { transform: translateY(200px) scale(0.5); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Set up event listeners
+            waterButton.addEventListener('click', waterFlower);
+            waterCan.addEventListener('click', waterFlower);
+            sendGiftBtn.addEventListener('click', sendGift);
+            
+            // Position the leaves
+            leaf1.style.bottom = '30px';
+            leaf2.style.bottom = '90px';
+            leaf3.style.bottom = '150px';
+            
+            // Initialize the flower
+            updateFlower();
+        });
+    </script>
+</body>
+</html>
