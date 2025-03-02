@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Check if user is already logged in (token in localStorage)
     checkLoginState();
-}
+});
 
 // --- UI Helper Functions --- //
 function showLoading(message = 'Loading...') {
@@ -68,7 +68,7 @@ window.resetZoom = function(chartId) {
     } else {
         console.error('Chart not found:', chartId);
     }
-};);
+};
 
 // --- UI Initialization --- //
 function initializeUI() {
@@ -412,6 +412,7 @@ const zoomOptions = {
     }
 };
 
+
 // Create views chart
 function createViewsChart(labels, datasetsData) {
     try {
@@ -432,6 +433,60 @@ function createViewsChart(labels, datasetsData) {
         }
         
         const ctx = document.getElementById('viewsChart').getContext('2d');
+        window.viewsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Daily Views per Repository'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20
+                        }
+                    },
+                    zoom: zoomOptions
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Views'
+                        }
+                    }
+                }
+            }
+        });
+        console.log('Views chart created');
+    } catch (error) {
+        console.error('Error creating views chart:', error);
+    }
+}
+
+// Create overall views chart
+function createOverallViewsChart(labels, data) {
+    try {
+        const ctx = document.getElementById('overallViewsChart').getContext('2d');
         window.overallViewsChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -488,7 +543,29 @@ function createViewsChart(labels, datasetsData) {
     } catch (error) {
         console.error('Error creating overall views chart:', error);
     }
-}.viewsChart = new Chart(ctx, {
+}
+
+// Create clones chart
+function createClonesChart(labels, datasetsData) {
+    try {
+        const datasets = [];
+        let colorIndex = 0;
+        
+        for (const repo in datasetsData) {
+            datasets.push({
+                label: repo,
+                data: datasetsData[repo],
+                borderColor: chartColors[colorIndex % chartColors.length],
+                backgroundColor: chartColors[colorIndex % chartColors.length],
+                fill: false,
+                tension: 0.3,
+                pointRadius: 4
+            });
+            colorIndex++;
+        }
+        
+        const ctx = document.getElementById('clonesChart').getContext('2d');
+        window.clonesChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
@@ -500,7 +577,7 @@ function createViewsChart(labels, datasetsData) {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Daily Views per Repository'
+                        text: 'Daily Clones per Repository'
                     },
                     tooltip: {
                         mode: 'index',
@@ -526,20 +603,76 @@ function createViewsChart(labels, datasetsData) {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Views'
+                            text: 'Clones'
                         }
                     }
                 }
             }
         });
-        console.log('Views chart created');
+        console.log('Clones chart created');
     } catch (error) {
-        console.error('Error creating views chart:', error);
+        console.error('Error creating clones chart:', error);
     }
 }
 
-// Create overall views chart
-function createOverallViewsChart(labels, data) {
+// Create overall clones chart
+function createOverallClonesChart(labels, data) {
     try {
-        const ctx = document.getElementById('overallViewsChart').getContext('2d');
-        window
+        const ctx = document.getElementById('overallClonesChart').getContext('2d');
+        window.overallClonesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Clones',
+                    data: data,
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgb(75, 192, 192)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Overall Daily Clones'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' clones';
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                    zoom: zoomOptions
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Clones'
+                        }
+                    }
+                }
+            }
+        });
+        console.log('Overall clones chart created');
+    } catch (error) {
+        console.error('Error creating overall clones chart:', error);
+    }
+}
