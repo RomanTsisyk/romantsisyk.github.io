@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f2f3f5" rx="15" ry="15"/>
+  
+  <!-- Chrome browser window -->
+  <rect x="120" y="120" width="560" height="400" rx="10" ry="10" fill="white" stroke="#dadce0" stroke-width="2"/>
+  
+  <!-- Browser toolbar -->
+  <rect x="120" y="120" width="560" height="60" rx="10" ry="10" fill="#f1f3f4" stroke="#dadce0" stroke-width="2"/>
+  
+  <!-- URL bar -->
+  <rect x="220" y="135" width="300" height="30" rx="15" ry="15" fill="white" stroke="#dadce0" stroke-width="1"/>
+  <text x="240" y="155" font-family="Arial, sans-serif" font-size="14" fill="#5f6368">https://example.com</text>
+  
+  <!-- Back/forward buttons -->
+  <circle cx="150" cy="150" r="15" fill="#f1f3f4" stroke="#dadce0" stroke-width="1"/>
+  <polyline points="145,150 155,143 155,157" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="190" cy="150" r="15" fill="#f1f3f4" stroke="#dadce0" stroke-width="1"/>
+  <polyline points="195,150 185,143 185,157" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Extension icons -->
+  <circle cx="550" cy="150" r="12" fill="#1a73e8" stroke="#dadce0" stroke-width="1"/>
+  <circle cx="585" cy="150" r="12" fill="#fbbc04" stroke="#dadce0" stroke-width="1"/>
+  <circle cx="620" cy="150" r="12" fill="#34a853" stroke="#dadce0" stroke-width="1"/>
+  <circle cx="655" cy="150" r="12" fill="#ea4335" stroke="#dadce0" stroke-width="1"/>
+  
+  <!-- Extension popup panel 1 - main feature -->
+  <g transform="translate(250, 230)">
+    <rect width="300" height="220" rx="8" ry="8" fill="white" stroke="#dadce0" stroke-width="2"/>
+    
+    <!-- Panel header -->
+    <rect width="300" height="40" rx="8" ry="8" fill="#4285f4"/>
+    <text x="150" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">Developer Toolkit</text>
+    
+    <!-- Extension content -->
+    <!-- Feature toggle switches -->
+    <rect x="30" y="60" width="240" height="40" rx="4" ry="4" fill="#f1f3f4"/>
+    <text x="50" y="85" font-family="Arial, sans-serif" font-size="14" fill="#202124">JSON Formatter</text>
+    <rect x="200" y="65" width="50" height="30" rx="15" ry="15" fill="#34a853"/>
+    <circle cx="230" cy="80" r="12" fill="white"/>
+    
+    <rect x="30" y="110" width="240" height="40" rx="4" ry="4" fill="#f1f3f4"/>
+    <text x="50" y="135" font-family="Arial, sans-serif" font-size="14" fill="#202124">CSS Inspector</text>
+    <rect x="200" y="115" width="50" height="30" rx="15" ry="15" fill="#34a853"/>
+    <circle cx="230" cy="130" r="12" fill="white"/>
+    
+    <rect x="30" y="160" width="240" height="40" rx="4" ry="4" fill="#f1f3f4"/>
+    <text x="50" y="185" font-family="Arial, sans-serif" font-size="14" fill="#202124">Performance Monitor</text>
+    <rect x="200" y="165" width="50" height="30" rx="15" ry="15" fill="#dadce0"/>
+    <circle cx="220" cy="180" r="12" fill="white"/>
+  </g>
+  
+  <!-- Small extension panels as overlaps/examples -->
+  <!-- Extension popup panel 2 - small feature -->
+  <g transform="translate(180, 270)">
+    <rect width="150" height="120" rx="8" ry="8" fill="white" stroke="#dadce0" stroke-width="2" opacity="0.9"/>
+    
+    <!-- Panel header -->
+    <rect width="150" height="30" rx="8" ry="8" fill="#fbbc04"/>
+    <text x="75" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Theme Switcher</text>
+    
+    <!-- Color options -->
+    <circle cx="40" cy="60" r="15" fill="#4285f4"/>
+    <circle cx="75" cy="60" r="15" fill="#34a853"/>
+    <circle cx="110" cy="60" r="15" fill="#ea4335"/>
+    
+    <!-- Dark/light slider -->
+    <rect x="40" y="90" width="70" height="20" rx="10" ry="10" fill="#f1f3f4" stroke="#dadce0" stroke-width="1"/>
+    <circle cx="90" cy="100" r="10" fill="#5f6368"/>
+  </g>
+  
+  <!-- Extension popup panel 3 - small feature -->
+  <g transform="translate(470, 270)">
+    <rect width="150" height="120" rx="8" ry="8" fill="white" stroke="#dadce0" stroke-width="2" opacity="0.8"/>
+    
+    <!-- Panel header -->
+    <rect width="150" height="30" rx="8" ry="8" fill="#ea4335"/>
+    <text x="75" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Quick Notes</text>
+    
+    <!-- Note content -->
+    <rect x="15" y="40" width="120" height="70" rx="4" ry="4" fill="#f1f3f4"/>
+    <line x1="25" y1="55" x2="125" y2="55" stroke="#5f6368" stroke-width="1"/>
+    <line x1="25" y1="70" x2="125" y2="70" stroke="#5f6368" stroke-width="1"/>
+    <line x1="25" y1="85" x2="125" y2="85" stroke="#5f6368" stroke-width="1"/>
+    <line x1="25" y1="100" x2="90" y2="100" stroke="#5f6368" stroke-width="1"/>
+  </g>
+  
+  <!-- Title at the top -->
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#202124">Chrome Extensions Collection</text>
+  
+  <!-- Chrome logo styled element -->
+  <g transform="translate(400, 530) scale(0.7)">
+    <circle cx="0" cy="0" r="50" fill="#ffffff"/>
+    <circle cx="0" cy="0" r="45" fill="#4285f4"/>
+    <circle cx="0" cy="0" r="20" fill="#ffffff"/>
+    <circle cx="0" cy="0" r="15" fill="#ea4335"/>
+  </g>
+</svg>
