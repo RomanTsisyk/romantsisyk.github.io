@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Background -->
+  <rect width="400" height="300" rx="15" fill="#f8f9fa" />
+  
+  <!-- Card/Container -->
+  <rect x="75" y="50" width="250" height="200" rx="10" fill="white" stroke="#e9ecef" stroke-width="2" />
+  
+  <!-- Title -->
+  <text x="200" y="80" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#343a40">Keep Active Extension</text>
+  
+  <!-- Time interval section -->
+  <text x="100" y="115" font-family="Arial, sans-serif" font-size="14" fill="#495057">Time Interval (minutes):</text>
+  <rect x="100" y="125" width="200" height="30" rx="5" fill="#f1f3f5" stroke="#ced4da" stroke-width="1" />
+  <text x="120" y="145" font-family="Arial, sans-serif" font-size="14" fill="#495057">3</text>
+  <polygon points="285,130 295,140 275,140" fill="#6c757d" />
+  
+  <!-- URL section -->
+  <text x="100" y="175" font-family="Arial, sans-serif" font-size="14" fill="#495057">URL:</text>
+  <rect x="100" y="185" width="200" height="30" rx="5" fill="white" stroke="#ced4da" stroke-width="1" />
+  <text x="110" y="205" font-family="Arial, sans-serif" font-size="12" fill="#adb5bd">put your URL here</text>
+  
+  <!-- Start button -->
+  <rect x="125" y="230" width="150" height="35" rx="5" fill="#4CAF50" />
+  <text x="200" y="253" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Start</text>
+  
+  <!-- Refresh icon -->
+  <g transform="translate(320, 120) scale(0.6)">
+    <circle cx="0" cy="0" r="30" fill="#e9ecef" />
+    <path d="M0,-20 A20,20 0 1,1 -20,0 L-15,0 L-20,10 L-25,0 L-20,0 A20,20 0 1,0 0,-20 Z" fill="#4CAF50" stroke="none" />
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" dur="5s" repeatCount="indefinite" />
+  </g>
+  
+  <!-- Browser frame elements -->
+  <rect x="45" y="30" width="310" height="15" rx="7" fill="#343a40" />
+  <circle cx="55" cy="37" r="3" fill="#ff6b6b" />
+  <circle cx="65" cy="37" r="3" fill="#ffd43b" />
+  <circle cx="75" cy="37" r="3" fill="#51cf66" />
+</svg>

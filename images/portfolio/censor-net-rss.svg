@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Background with Ukrainian national colors gradient -->
+  <defs>
+    <linearGradient id="ukrGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0057b7;stop-opacity:0.1" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="400" height="300" rx="10" fill="url(#ukrGradient)" />
+  
+  <!-- Chrome Extension Frame -->
+  <rect x="50" y="40" width="300" height="220" rx="8" fill="white" stroke="#e0e0e0" stroke-width="2" filter="drop-shadow(0px 4px 6px rgba(0,0,0,0.1))" />
+  
+  <!-- Extension Header -->
+  <rect x="50" y="40" width="300" height="40" rx="8" fill="#0057b7" />
+  <text x="75" y="65" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="white">Censor.net RSS Agent</text>
+  
+  <!-- Extension Icon -->
+  <g transform="translate(310, 60) scale(0.8)">
+    <circle cx="0" cy="0" r="15" fill="white" />
+    <g transform="scale(0.6)">
+      <circle cx="0" cy="0" r="10" fill="#ffd700" />
+      <path d="M-7,-7 L7,7 M-7,7 L7,-7" stroke="#0057b7" stroke-width="3" stroke-linecap="round" />
+    </g>
+  </g>
+  
+  <!-- News Feed Articles -->
+  <!-- Article 1 -->
+  <rect x="60" y="90" width="280" height="40" rx="4" fill="#f9f9f9" stroke="#eeeeee" />
+  <text x="70" y="105" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Міністр оборони анонсував нові поставки зброї</text>
+  <text x="70" y="120" font-family="Arial, sans-serif" font-size="8" fill="#666">20 хвилин тому • Політика</text>
+  <circle cx="325" cy="110" r="8" fill="#0057b7" opacity="0.8" />
+  <text x="325" y="113" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">1</text>
+  
+  <!-- Article 2 -->
+  <rect x="60" y="140" width="280" height="40" rx="4" fill="#f9f9f9" stroke="#eeeeee" />
+  <text x="70" y="155" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Економіка України: позитивні тенденції зростання</text>
+  <text x="70" y="170" font-family="Arial, sans-serif" font-size="8" fill="#666">1 година тому • Економіка</text>
+  <circle cx="325" cy="160" r="8" fill="#0057b7" opacity="0.8" />
+  <text x="325" y="163" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">2</text>
+  
+  <!-- Article 3 -->
+  <rect x="60" y="190" width="280" height="40" rx="4" fill="#f9f9f9" stroke="#eeeeee" />
+  <text x="70" y="205" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Культурна спадщина: нові об'єкти ЮНЕСКО</text>
+  <text x="70" y="220" font-family="Arial, sans-serif" font-size="8" fill="#666">3 години тому • Культура</text>
+  <circle cx="325" cy="210" r="8" fill="#0057b7" opacity="0.8" />
+  <text x="325" y="213" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">3</text>
+  
+  <!-- RSS Icon -->
+  <g transform="translate(200, 250)">
+    <circle cx="0" cy="0" r="15" fill="#ff6600" />
+    <circle cx="-5" cy="5" r="3" fill="white" />
+    <path d="M-5,0 A5,5 0 0,1 0,5" stroke="white" stroke-width="2" fill="none" />
+    <path d="M-5,-5 A10,10 0 0,1 5,5" stroke="white" stroke-width="2" fill="none" />
+  </g>
+  
+  <!-- Chrome Extension Elements -->
+  <rect x="180" y="35" width="40" height="10" rx="5" fill="#e0e0e0" />
+  
+  <!-- Ukrainian Flag Elements -->
+  <rect x="35" y="40" width="10" height="220" fill="#0057b7" />
+  <rect x="35" y="150" width="10" height="110" fill="#ffd700" />
+  
+  <rect x="355" y="40" width="10" height="220" fill="#0057b7" />
+  <rect x="355" y="150" width="10" height="110" fill="#ffd700" />
+  
+  <!-- Footer -->
+  <text x="200" y="285" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">Censor.net RSS Agent Chrome Extension</text>
+</svg>
