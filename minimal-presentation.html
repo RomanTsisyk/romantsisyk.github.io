@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Portfolio - Roman Tsisyk</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --accent-color-gl: #0056b3; /* GlobalLogic blue */
+            --accent-color-hp: #0096D6; /* HP blue */
+            --secondary-color: #f7f7f7;
+            --border-color: #e9e9e9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        
+        .presentation {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 5vh 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+            scroll-margin-top: 80px;
+        }
+        
+        .title-slide {
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-color-gl), var(--accent-color-hp));
+            color: white;
+        }
+        
+        .title-slide h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        .title-slide .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .title-slide .author {
+            margin-top: 5vh;
+            font-size: 1.2rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 5vh;
+        }
+        
+        .gl-section h2 {
+            color: var(--accent-color-gl);
+        }
+        
+        .hp-section h2 {
+            color: var(--accent-color-hp);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .feature-box {
+            margin-bottom: 5vh;
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5vh;
+        }
+        
+        .gl-section .feature-box h3 {
+            color: var(--accent-color-gl);
+        }
+        
+        .hp-section .feature-box h3 {
+            color: var(--accent-color-hp);
+        }
+        
+        .feature-box ul {
+            list-style-type: none;
+        }
+        
+        .feature-box li {
+            margin-bottom: 2vh;
+            padding-left: 1.5em;
+            position: relative;
+        }
+        
+        .feature-box li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+        }
+        
+        .gl-section .feature-box li:before {
+            color: var(--accent-color-gl);
+        }
+        
+        .hp-section .feature-box li:before {
+            color: var(--accent-color-hp);
+        }
+        
+        .nav {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2vh 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+        }
+        
+        .nav-link {
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .nav-link.gl {
+            color: var(--accent-color-gl);
+        }
+        
+        .nav-link.hp {
+            color: var(--accent-color-hp);
+        }
+        
+        .section-divider {
+            background-color: var(--secondary-color);
+            text-align: center;
+            padding: 10vh 5vw;
+            margin: 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .gl-section .section-divider {
+            border-left: 5px solid var(--accent-color-gl);
+        }
+        
+        .hp-section .section-divider {
+            border-left: 5px solid var(--accent-color-hp);
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 5vh;
+        }
+        
+        .tech-tag {
+            background-color: var(--secondary-color);
+            padding: 0.5em 1em;
+            margin: 0.5em;
+            border-radius: 2em;
+            font-size: 0.9rem;
+        }
+        
+        .gl-section .tech-tag {
+            border-bottom: 2px solid var(--accent-color-gl);
+        }
+        
+        .hp-section .tech-tag {
+            border-bottom: 2px solid var(--accent-color-hp);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3vh 0;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .title-slide h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-box h3 {
+                font-size: 1.3rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                padding: 1vh 2vw;
+            }
+            
+            .nav-links {
+                margin-top: 1vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="logo">Roman Tsisyk</div>
+        <div class="nav-links">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#globallogic" class="nav-link gl">GlobalLogic</a>
+            <a href="#hp" class="nav-link hp">HP</a>
+        </div>
+    </div>
+
+    <div class="presentation">
+        <!-- Title Slide -->
+        <div id="overview" class="slide title-slide">
+            <div class="content">
+                <h1>Android Development Portfolio</h1>
+                <div class="subtitle">Clean Architecture • Data Optimization • IoT</div>
+                <div class="author">Roman Tsisyk</div>
+            </div>
+        </div>
+        
+        <!-- GlobalLogic Section -->
+        <div id="globallogic" class="section-divider gl-section">
+            <h2>GlobalLogic Project</h2>
+        </div>
+        
+        <!-- GlobalLogic Data Repository -->
+        <div class="slide gl-section">
+            <div class="content">
+                <h2>Repository Module</h2>
+                
+                <div class="feature-box">
+                    <h3>Key Implementations</h3>
+                    <ul>
+                        <li>Utilized Repository pattern to abstract different data sources</li>
+                        <li>Implemented Single Source of Truth pattern for consistent data</li>
+                        <li>Added repository-level caching to reduce database load</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">Repository Pattern</div>
+                    <div class="tech-tag">Single Source of Truth</div>
+                    <div class="tech-tag">Kotlin</div>
+                    <div class="tech-tag">Data Caching</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GlobalLogic Database Optimization -->
+        <div class="slide gl-section">
+            <div class="content">
+                <h2>Database Optimization</h2>
+                
+                <div class="feature-box">
+                    <h3>Structural Improvements</h3>
+                    <ul>
+                        <li>Optimized database schema for faster data reading</li>
+                        <li>Added indexes to accelerate frequent queries</li>
+                        <li>Created intermediate tables for aggregated data</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">Room</div>
+                    <div class="tech-tag">SQLite</div>
+                    <div class="tech-tag">Query Optimization</div>
+                    <div class="tech-tag">Database Indexing</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GlobalLogic Testing -->
+        <div class="slide gl-section">
+            <div class="content">
+                <h2>Testing Infrastructure</h2>
+                
+                <div class="feature-box">
+                    <h3>Tools Development</h3>
+                    <ul>
+                        <li>Developed utilities for generating diverse test data sets</li>
+                        <li>Used Room to validate table schemas during compilation</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">Test Data Generation</div>
+                    <div class="tech-tag">JUnit</div>
+                    <div class="tech-tag">Room Schema Validation</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HP Section -->
+        <div id="hp" class="section-divider hp-section">
+            <h2>HP Project</h2>
+        </div>
+        
+        <!-- HP Clean Architecture -->
+        <div class="slide hp-section">
+            <div class="content">
+                <h2>Clean Architecture</h2>
+                
+                <div class="feature-box">
+                    <h3>Architecture Implementation</h3>
+                    <ul>
+                        <li>Designed and implemented multi-modular architecture from scratch</li>
+                        <li>Applied MVVM pattern for clear separation of concerns</li>
+                        <li>Implemented dependency injection using Hilt for better testability</li>
+                        <li>Created domain-driven design with clear boundaries between layers</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">MVVM</div>
+                    <div class="tech-tag">Clean Architecture</div>
+                    <div class="tech-tag">Multi-Module</div>
+                    <div class="tech-tag">Hilt</div>
+                    <div class="tech-tag">Kotlin</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HP UI -->
+        <div class="slide hp-section">
+            <div class="content">
+                <h2>Modern UI Development</h2>
+                
+                <div class="feature-box">
+                    <h3>Jetpack Compose Implementation</h3>
+                    <ul>
+                        <li>Created clean, responsive UI components with Jetpack Compose</li>
+                        <li>Developed custom composables for device-specific interfaces</li>
+                        <li>Ensured feature parity with iOS for consistent brand experience</li>
+                        <li>Collaborated with UX team on design implementation and app behavior</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">Jetpack Compose</div>
+                    <div class="tech-tag">Material Design</div>
+                    <div class="tech-tag">Responsive UI</div>
+                    <div class="tech-tag">Custom Composables</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HP IoT -->
+        <div class="slide hp-section">
+            <div class="content">
+                <h2>IoT & Bluetooth Integration</h2>
+                
+                <div class="feature-box">
+                    <h3>Device Connectivity</h3>
+                    <ul>
+                        <li>Developed robust IoT communication modules for stable device connectivity</li>
+                        <li>Implemented Bluetooth Low Energy (BLE) protocols for efficient battery usage</li>
+                        <li>Created data synchronization mechanisms between mobile app and devices</li>
+                        <li>Designed and implemented device firmware update functionality</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-tags">
+                    <div class="tech-tag">BLE</div>
+                    <div class="tech-tag">IoT</div>
+                    <div class="tech-tag">Device Firmware</div>
+                    <div class="tech-tag">Data Synchronization</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HP Technical Improvements -->
+        <div class="slide hp-section">
+            <div class="content">
+                <h2>Technical Improvements</h2>
+                
+                <div class="feature-box">
+                    <h3>Security & Performance</h3>
+                    <ul>
+                        <li>Implemented web certificate pinning for enhanced security</li>
+                        <li>Developed custom network solutions for reliable communication</li>
+                        <li>Integrated Firebase Analytics and Crashlytics for monitoring</li>
+                        <li>Refactored legacy code and integrated Java classes into Kotlin</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-box">
+                    <h3>Key Achievements</h3>
+                    <ul>
+                        <li>Reduced app load times by 30% through performance optimization</li>
+                        <li>Increased crash-free sessions by 0.2% with improved error handling</li>
+                        <li>Reduced app size by 60% through efficient architecture and resources</li>
+                        <li>Successfully passed external security audit with advanced protocols</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Final Slide -->
+        <div class="slide">
+            <div class="content" style="text-align: center;">
+                <h2>Thank You</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 5vh;">Roman Tsisyk</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2025 Roman Tsisyk
+        </div>
+    </div>
+</body>
+</html>
