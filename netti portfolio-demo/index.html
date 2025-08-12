@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netti - Professional Network Testing Suite | Portfolio</title>
+    <meta name="description" content="Android app for comprehensive network testing and monitoring. Built with Kotlin, Jetpack Compose, and Material Design 3.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loader">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo gradient-text">Netti</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#tech">Tech Stack</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="gradient-text">Netti</span><br>
+                        Professional Network Testing Suite
+                    </h1>
+                    <p>
+                        A comprehensive Android application for network testing and monitoring. 
+                        Built with cutting-edge Android technologies and modern Material Design 3 principles.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                            <span>🚀</span> View on GitHub
+                        </a>
+                        <a href="https://www.figma.com/design/BKeIsQSIBP6Q4hgfUvcZOi/Netti-UX-UI-Final" class="btn btn-secondary">
+                            <span>🎨</span> Figma Design
+                        </a>
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="mock-app-screen">
+                                <div class="app-header">
+                                    <div class="app-logo gradient-text">Netti</div>
+                                    <div class="app-subtitle">Choose a service to start</div>
+                                </div>
+                                
+                                <!-- Animated Services Grid -->
+                                <div class="services-grid">
+                                    <div class="service-card card-blue">
+                                        <span>⚡</span>
+                                        <span>Speed Test</span>
+                                    </div>
+                                    <div class="service-card card-purple">
+                                        <span>🔧</span>
+                                        <span>iPerf3 Client</span>
+                                    </div>
+                                    <div class="service-card card-green">
+                                        <span>📡</span>
+                                        <span>Ping</span>
+                                    </div>
+                                    <div class="service-card card-orange">
+                                        <span>🗺️</span>
+                                        <span>Trace Route</span>
+                                    </div>
+                                </div>
+
+                                <div class="active-services-bar">
+                                    <span class="active-dot"></span>
+                                    <span>2 Active Services</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>All the tools you need for professional network testing in one app</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-speed">⚡</div>
+                    <h3>Speed Test</h3>
+                    <p>Measure download and upload speeds with detailed statistics. Features a circular speedometer with real-time animations and graphs.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-iperf-client">🔧</div>
+                    <h3>iPerf3 Client & Server</h3>
+                    <p>Professional bandwidth testing tool. Supports TCP/UDP protocols with customizable test parameters and comprehensive results.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-ping">📡</div>
+                    <h3>Ping Tool</h3>
+                    <p>Network latency diagnostics with visual results. Track packet loss, jitter, and round-trip time statistics.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-trace">🗺️</div>
+                    <h3>Trace Route</h3>
+                    <p>Trace packet paths through the network with hop-by-hop visualization and detailed information for each node.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-network">🌐</div>
+                    <h3>Network Information</h3>
+                    <p>Detailed connection info for Wi-Fi, Cellular, and Ethernet. Shows IP addresses, DNS servers, signal strength, and more.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-transfer">📊</div>
+                    <h3>Data Transfer Rate</h3>
+                    <p>Real-time monitoring of data transfer speeds with graphs and historical data tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technology Stack</h2>
+                <p>Built with modern Android development tools and best practices</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Kotlin</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Jetpack Compose</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">💉</div>
+                    <div class="tech-name">Hilt DI</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🏗️</div>
+                    <div class="tech-name">Clean Architecture</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🔄</div>
+                    <div class="tech-name">Coroutines & Flow</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Material 3</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🗂️</div>
+                    <div class="tech-name">Room Database</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🧭</div>
+                    <div class="tech-name">Navigation Compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>App Interface</h2>
+                <p>Dark theme with vibrant accents and smooth animations</p>
+            </div>
+            <div class="screenshot-carousel">
+                <div class="screenshot">
+                    <div class="screenshot-content screen-home">
+                        <h4>Home Screen</h4>
+                        <div class="mini-grid">
+                            <div class="mini-card">Speed Test</div>
+                            <div class="mini-card">iPerf3</div>
+                            <div class="mini-card">Ping</div>
+                            <div class="mini-card">Trace Route</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Main Dashboard</div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-content screen-speed">
+                        <div class="speed-gauge">
+                            <div class="speed-value">456</div>
+                            <div class="speed-unit">Mbps</div>
+                        </div>
+                        <div class="speed-details">
+                            <div>
+                                <span>Upload</span>
+                                <strong>123 Mbps</strong>
+                            </div>
+                            <div>
+                                <span>Ping</span>
+                                <strong>12 ms</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Speed Test</div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-content screen-iperf">
+                        <h4>iPerf3 Client</h4>
+                        <div class="config-item">
+                            <span>Server</span>
+                            <strong>Frankfurt, Germany</strong>
+                        </div>
+                        <div class="config-item">
+                            <span>Protocol</span>
+                            <strong>TCP</strong>
+                        </div>
+                        <div class="config-item">
+                            <span>Duration</span>
+                            <strong>30 seconds</strong>
+                        </div>
+                        <button class="start-button">Start Test</button>
+                    </div>
+                    <div class="screenshot-label">iPerf3 Configuration</div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-content screen-network">
+                        <h4>Network Info</h4>
+                        <div class="info-item">
+                            <span>Type</span>
+                            <strong>Wi-Fi 6</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>SSID</span>
+                            <strong>HomeNetwork</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>IP Address</span>
+                            <strong>192.168.1.100</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Signal</span>
+                            <strong>-45 dBm</strong>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Network Information</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design System -->
+    <section class="design-system">
+        <div class="container">
+            <div class="section-header">
+                <h2>Design System</h2>
+                <p>Dark theme with vibrant accents for optimal readability</p>
+            </div>
+            <div class="color-palette">
+                <div class="color-chip" style="background: #007AFF;">
+                    <span class="color-label">Primary</span>
+                    <span class="color-hex">#007AFF</span>
+                </div>
+                <div class="color-chip" style="background: #FE6D33;">
+                    <span class="color-label">Orange</span>
+                    <span class="color-hex">#FE6D33</span>
+                </div>
+                <div class="color-chip" style="background: #319375;">
+                    <span class="color-label">Green</span>
+                    <span class="color-hex">#319375</span>
+                </div>
+                <div class="color-chip" style="background: #8C9EFF;">
+                    <span class="color-label">Purple</span>
+                    <span class="color-hex">#8C9EFF</span>
+                </div>
+                <div class="color-chip" style="background: #ECAB4B;">
+                    <span class="color-label">Yellow</span>
+                    <span class="color-hex">#ECAB4B</span>
+                </div>
+                <div class="color-chip" style="background: #C659A1;">
+                    <span class="color-label">Pink</span>
+                    <span class="color-hex">#C659A1</span>
+                </div>
+                <div class="color-chip" style="background: #1C1C1E;">
+                    <span class="color-label">Surface</span>
+                    <span class="color-hex">#1C1C1E</span>
+                </div>
+                <div class="color-chip" style="background: #2C2C2E;">
+                    <span class="color-label">Card</span>
+                    <span class="color-hex">#2C2C2E</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Project Metrics</h2>
+                <p>Development statistics and capabilities</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">6+</div>
+                    <div class="metric-label">Core Features</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Kotlin Code</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">Material 3</div>
+                    <div class="metric-label">Design System</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">60fps</div>
+                    <div class="metric-label">Smooth Animations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in This Project?</h2>
+                <p>Check out the source code on GitHub or explore the design in Figma</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                        View Source Code
+                    </a>
+                    <a href="mailto:your.email@example.com" class="btn btn-secondary">
+                        Contact Developer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>© 2025 Netti - Professional Network Testing Suite</div>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/yourusername">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/yourusername">LinkedIn</a></li>
+                    <li><a href="mailto:your.email@example.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Inline critical styles for immediate rendering */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0E0E0E;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0E0E0E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeOut 0.5s forwards 1.5s;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #007AFF, transparent);
+            top: -200px;
+            right: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #FE6D33, transparent);
+            bottom: -200px;
+            left: -200px;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #319375, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -100px) scale(1.1); }
+            50% { transform: translate(-100px, 100px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #8E8E93;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #007AFF;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #8E8E93;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            position: relative;
+            width: 350px;
+            height: 700px;
+            margin: 0 auto;
+            animation: float-phone 6s ease-in-out infinite;
+        }
+
+        @keyframes float-phone {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            25% { transform: translateY(-20px) rotate(2deg); }
+            75% { transform: translateY(10px) rotate(-2deg); }
+        }
+
+        .phone-frame {
+            width: 100%;
+            height: 100%;
+            background: #1C1C1E;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .mock-app-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: linear-gradient(135deg, #1C1C1E, #000);
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .app-logo {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .app-subtitle {
+            color: #8E8E93;
+            margin-top: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .card-blue { background: rgba(0, 122, 255, 0.2); }
+        .card-purple { background: rgba(140, 158, 255, 0.2); }
+        .card-green { background: rgba(49, 147, 117, 0.2); }
+        .card-orange { background: rgba(236, 171, 75, 0.2); }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .active-services-bar {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 122, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .active-dot {
+            width: 8px;
+            height: 8px;
+            background: #00FF00;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: #1C1C1E;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: #8E8E93;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #2C2C2E;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #007AFF, #00f2fe);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 122, 255, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            padding: 6rem 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: #1C1C1E;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: #007AFF;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Screenshots */
+        .screenshots {
+            padding: 6rem 0;
+            background: #1C1C1E;
+        }
+
+        .screenshot-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-thumb {
+            background: #007AFF;
+            border-radius: 4px;
+        }
+
+        .screenshot {
+            flex: 0 0 280px;
+            height: 560px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-content {
+            width: 100%;
+            height: 100%;
+            background: #1C1C1E;
+            padding: 20px;
+            color: white;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1rem 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Design System */
+        .design-system {
+            padding: 6rem 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .color-chip {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .color-chip:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Metrics */
+        .metrics {
+            padding: 6rem 0;
+            background: #1C1C1E;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: #2C2C2E;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #007AFF, #FE6D33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: #8E8E93;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(254, 109, 51, 0.1));
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: #8E8E93;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1C1C1E;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #8E8E93;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #007AFF;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Screenshot mockup styles */
+        .mini-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .speed-gauge {
+            width: 180px;
+            height: 180px;
+            border: 8px solid #007AFF;
+            border-radius: 50%;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .speed-value {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .speed-unit {
+            color: #8E8E93;
+            font-size: 0.9rem;
+        }
+
+        .speed-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .speed-details div {
+            text-align: center;
+        }
+
+        .speed-details span {
+            display: block;
+            color: #8E8E93;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .config-item, .info-item {
+            background: #2C2C2E;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .config-item span, .info-item span {
+            color: #8E8E93;
+        }
+
+        .start-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            background: #007AFF;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

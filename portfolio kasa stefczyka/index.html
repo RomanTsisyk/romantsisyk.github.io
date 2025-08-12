@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mSKOK - Modern Mobile Banking App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">mSKOK</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">mSKOK</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#tech">Technology</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#download">Download</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="gradient-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">🏦 Next-Gen Banking</div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">mSKOK</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Experience the future of mobile banking with our secure, intuitive, and feature-rich application designed for modern financial management
+                </p>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <span class="feature-icon">🔐</span>
+                        <span>Biometric Security</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="feature-icon">⚡</span>
+                        <span>Instant Transfers</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="feature-icon">📱</span>
+                        <span>QR Payments</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M13 2L3 14h7l-2 8 10-12h-7l2-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Get Started
+                    </a>
+                    <a href="https://github.com/yourusername/mSKOK" class="btn btn-secondary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        View Source
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-mockup">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="app-interface">
+                            <div class="app-header">
+                                <div class="app-time">9:41</div>
+                                <div class="app-status">
+                                    <span>●●●</span>
+                                    <span>📶</span>
+                                    <span>🔋</span>
+                                </div>
+                            </div>
+                            <div class="app-content">
+                                <div class="balance-card">
+                                    <span class="balance-label">Total Balance</span>
+                                    <span class="balance-amount">$24,562.00</span>
+                                    <div class="balance-change">+12.5% ↑</div>
+                                </div>
+                                <div class="quick-actions">
+                                    <div class="action-btn">
+                                        <span class="action-icon">💳</span>
+                                        <span>Cards</span>
+                                    </div>
+                                    <div class="action-btn">
+                                        <span class="action-icon">💸</span>
+                                        <span>Transfer</span>
+                                    </div>
+                                    <div class="action-btn">
+                                        <span class="action-icon">📊</span>
+                                        <span>Analytics</span>
+                                    </div>
+                                    <div class="action-btn">
+                                        <span class="action-icon">🎯</span>
+                                        <span>Savings</span>
+                                    </div>
+                                </div>
+                                <div class="transaction-list">
+                                    <div class="transaction">
+                                        <span class="trans-icon">🛒</span>
+                                        <div class="trans-details">
+                                            <span>Grocery Store</span>
+                                            <span class="trans-time">Today, 14:23</span>
+                                        </div>
+                                        <span class="trans-amount">-$125.00</span>
+                                    </div>
+                                    <div class="transaction">
+                                        <span class="trans-icon">💰</span>
+                                        <div class="trans-details">
+                                            <span>Salary Deposit</span>
+                                            <span class="trans-time">Yesterday</span>
+                                        </div>
+                                        <span class="trans-amount positive">+$3,200.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Everything you need for modern banking in one secure app</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>💳</span>
+                    </div>
+                    <h3>Credit Card Management</h3>
+                    <p>Manage multiple cards, track spending, set limits, and instantly freeze/unfreeze cards with a single tap</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🔄</span>
+                    </div>
+                    <h3>Smart Transfers</h3>
+                    <p>Instant transfers between accounts, scheduled payments, and recurring transactions with intelligent categorization</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🎯</span>
+                    </div>
+                    <h3>Savings Goals</h3>
+                    <p>Create custom savings goals, track progress visually, and get AI-powered recommendations for reaching targets faster</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>📷</span>
+                    </div>
+                    <h3>QR Code Payments</h3>
+                    <p>Scan to pay instantly, generate payment QR codes, and share payment links securely with anyone</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🔐</span>
+                    </div>
+                    <h3>Biometric Security</h3>
+                    <p>Advanced fingerprint and face recognition authentication with encrypted local storage for maximum security</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🌐</span>
+                    </div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Available in Polish and English with automatic language detection based on device settings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built with Modern Technology</h2>
+                <p class="section-subtitle">Leveraging cutting-edge tools for optimal performance</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+                    </div>
+                    <span>Flutter</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart">
+                    </div>
+                    <span>Dart</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                    </div>
+                    <span>Firebase</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
+                    </div>
+                    <span>Azure DevOps</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <svg viewBox="0 0 128 128" fill="#4285F4">
+                            <path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0zm0 48c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16z"/>
+                        </svg>
+                    </div>
+                    <span>BLoC Pattern</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <svg viewBox="0 0 128 128" fill="#00ACC1">
+                            <path d="M64 20c24.3 0 44 19.7 44 44s-19.7 44-44 44-44-19.7-44-44 19.7-44 44-44m0-20C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0z"/>
+                        </svg>
+                    </div>
+                    <span>Retrofit</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">App Screenshots</h2>
+                <p class="section-subtitle">See mSKOK in action</p>
+            </div>
+            
+            <div class="screenshots-carousel">
+                <div class="screenshot-track">
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/1a1f3a/ffffff?text=Dashboard" alt="Dashboard">
+                        <p>Dashboard Overview</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/1a1f3a/ffffff?text=Cards" alt="Cards">
+                        <p>Card Management</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/1a1f3a/ffffff?text=Transfers" alt="Transfers">
+                        <p>Quick Transfers</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/1a1f3a/ffffff?text=Savings" alt="Savings">
+                        <p>Savings Goals</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/1a1f3a/ffffff?text=QR+Scanner" alt="QR">
+                        <p>QR Scanner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="metric-value" data-value="99.9">0</span>
+                    <span class="metric-suffix">%</span>
+                    <span class="metric-label">Uptime</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="50">0</span>
+                    <span class="metric-suffix">K+</span>
+                    <span class="metric-label">Active Users</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="4.8">0</span>
+                    <span class="metric-suffix">★</span>
+                    <span class="metric-label">App Rating</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="256">0</span>
+                    <span class="metric-suffix">bit</span>
+                    <span class="metric-label">Encryption</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Ready to Transform Your Banking?</h2>
+                <p class="download-subtitle">Join thousands of users already enjoying seamless mobile banking</p>
+                
+                <div class="download-buttons">
+                    <a href="#" class="store-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                    </a>
+                    <a href="#" class="store-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+                    </a>
+                </div>
+                
+                <div class="download-features">
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>Free to download</span>
+                    </div>
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>No hidden fees</span>
+                    </div>
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>mSKOK</h3>
+                    <p>Modern mobile banking for everyone</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/yourusername/mSKOK" aria-label="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 mSKOK. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

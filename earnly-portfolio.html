@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnly - Financial Aggregator for Android</title>
+    <style>
+        :root {
+            --primary: #0052cc;
+            --secondary: #0a2540;
+            --accent: #e56ed5;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --gray: #95a5a6;
+            --green: #4cd2a9;
+            --red: #e74c3c;
+            --yellow: #ffb941;
+            --blue: #4284fb;
+            --orange: #ff7846;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .app-mockup {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            background-color: var(--dark);
+            border-radius: 36px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin: 0 15px;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 44px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #fff;
+            font-weight: 500;
+        }
+        
+        .app-content {
+            padding: 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .overview {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon svg {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .feature-icon.auth {
+            background-color: rgba(66, 132, 251, 0.15);
+        }
+        
+        .feature-icon.integration {
+            background-color: rgba(76, 210, 169, 0.15);
+        }
+        
+        .feature-icon.dashboard {
+            background-color: rgba(255, 120, 70, 0.15);
+        }
+        
+        .feature-icon.history {
+            background-color: rgba(140, 124, 255, 0.15);
+        }
+        
+        .feature-icon.account {
+            background-color: rgba(255, 185, 65, 0.15);
+        }
+        
+        .feature-icon.subscription {
+            background-color: rgba(229, 110, 213, 0.15);
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .app-screens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .screen-card {
+            background-color: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .screen-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            font-weight: 500;
+            border-bottom: 1px solid #f2f2f2;
+        }
+        
+        .screen-content {
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .tech-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .tech-item strong {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
+        .challenges {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .challenge-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .challenge-card h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .challenge-label {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: #0043a4;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(10, 37, 64, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #071c2f;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-text {
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features, .challenges {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-mockup {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .phone-frame {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Earnly</h1>
+            <p>Financial Aggregator for Android</p>
+            <div class="app-mockup">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 6C16.4183 6 20 9.58172 20 14V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14C4 9.58172 7.58172 6 12 6Z" stroke="#0052cc" stroke-width="2"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="22.5" cy="22.5" r="15" fill="#0052cc"/>
+                                    <path d="M22.5 10L28.5 20H16.5L22.5 10Z" fill="white"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10V17C19 17.5523 18.5523 18 18 18H6C5.44772 18 5 17.5523 5 17V10Z" stroke="#0052cc" stroke-width="2"/>
+                                    <path d="M12 21V22" stroke="#0052cc" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="app-content">
+                            <svg viewBox="0 0 240 440" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Dashboard Screen -->
+                                <text x="120" y="30" fill="#0052cc" font-size="20" text-anchor="middle" font-weight="bold">e</text>
+                                <circle cx="210" cy="30" r="20" fill="#0052cc"/>
+                                <rect x="195" y="25" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="205" y="25" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="195" y="35" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="205" y="35" width="10" height="10" fill="white" rx="2"/>
+                                
+                                <!-- Gauge Chart -->
+                                <text x="125" y="70" fill="#333" font-size="16" text-anchor="middle">Total Earnings</text>
+                                <path d="M70,210 A80,80 0 0,1 180,210" stroke="#eee" stroke-width="30" fill="none"/>
+                                <path d="M70,210 A80,80 0 0,1 123,135" stroke="#4cd2a9" stroke-width="30" fill="none"/>
+                                <path d="M123,135 A80,80 0 0,1 160,160" stroke="#ffb941" stroke-width="30" fill="none"/>
+                                <path d="M160,160 A80,80 0 0,1 180,210" stroke="#e74c3c" stroke-width="30" fill="none"/>
+                                
+                                <!-- Gauge Needle -->
+                                <line x1="125" y1="210" x2="90" y2="155" stroke="#333" stroke-width="3"/>
+                                <circle cx="125" cy="210" r="10" fill="#333"/>
+                                
+                                <!-- Gauge Labels -->
+                                <text x="70" y="240" fill="#333" font-size="14" text-anchor="middle">£0</text>
+                                <text x="125" y="240" fill="#333" font-size="14" text-anchor="middle">£125K</text>
+                                <text x="180" y="240" fill="#333" font-size="14" text-anchor="middle">£200K</text>
+                                
+                                <!-- Information Panel -->
+                                <rect x="20" y="270" width="200" height="150" rx="8" fill="#f8f9fa"/>
+                                
+                                <!-- Financial Info -->
+                                <text x="30" y="290" fill="#333" font-size="14">Tax Breakdown</text>
+                                <line x1="30" y1="300" x2="210" y2="300" stroke="#ddd" stroke-width="1"/>
+                                
+                                <text x="30" y="320" fill="#666" font-size="12">Income Tax</text>
+                                <text x="190" y="320" fill="#333" font-size="12" text-anchor="end">£31,428</text>
+                                
+                                <text x="30" y="340" fill="#666" font-size="12">National Insurance</text>
+                                <text x="190" y="340" fill="#333" font-size="12" text-anchor="end">£6,936</text>
+                                
+                                <text x="30" y="360" fill="#666" font-size="12">Self Assessment</text>
+                                <text x="190" y="360" fill="#333" font-size="12" text-anchor="end">£7,500</text>
+                                
+                                <text x="30" y="380" fill="#666" font-size="12">Student Loan</text>
+                                <text x="190" y="380" fill="#333" font-size="12" text-anchor="end">£2,500</text>
+                                
+                                <line x1="30" y1="390" x2="210" y2="390" stroke="#ddd" stroke-width="1"/>
+                                
+                                <text x="30" y="410" fill="#333" font-size="14" font-weight="bold">Total</text>
+                                <text x="190" y="410" fill="#333" font-size="14" text-anchor="end" font-weight="bold">£48,364</text>
+                                
+                                <!-- Bottom Navigation -->
+                                <rect x="0" y="440" width="240" height="60" fill="#0052cc"/>
+                                
+                                <circle cx="40" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="40" y="475" fill="white" font-size="10" text-anchor="middle">Home</text>
+                                
+                                <circle cx="100" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="100" y="475" fill="white" font-size="10" text-anchor="middle">History</text>
+                                
+                                <circle cx="160" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="160" y="475" fill="white" font-size="10" text-anchor="middle">Integrate</text>
+                                
+                                <circle cx="220" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="220" y="475" fill="white" font-size="10" text-anchor="middle">Settings</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 6C16.4183 6 20 9.58172 20 14V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14C4 9.58172 7.58172 6 12 6Z" stroke="#0052cc" stroke-width="2"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="22.5" cy="22.5" r="15" fill="#0052cc"/>
+                                    <path d="M22.5 10L28.5 20H16.5L22.5 10Z" fill="white"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 10C5 6.13401 8.13401 3 12 3C15.866 3 19 6.13401 19 10V17C19 17.5523 18.5523 18 18 18H6C5.44772 18 5 17.5523 5 17V10Z" stroke="#0052cc" stroke-width="2"/>
+                                    <path d="M12 21V22" stroke="#0052cc" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="app-content">
+                            <svg viewBox="0 0 240 440" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Integrations Screen -->
+                                <text x="120" y="30" fill="#0052cc" font-size="20" text-anchor="middle" font-weight="bold">e</text>
+                                <circle cx="210" cy="30" r="20" fill="#0052cc"/>
+                                <rect x="195" y="25" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="205" y="25" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="195" y="35" width="10" height="10" fill="white" rx="2"/>
+                                <rect x="205" y="35" width="10" height="10" fill="white" rx="2"/>
+                                
+                                <text x="30" y="70" fill="#333" font-size="26" font-weight="bold">Integrations</text>
+                                <text x="30" y="95" fill="#666" font-size="14">Applications with green tick have been connected.</text>
+                                
+                                <!-- HMRC Integration -->
+                                <rect x="20" y="120" width="200" height="60" rx="8" fill="#f8f9fa"/>
+                                <text x="30" y="145" fill="#333" font-size="18" font-weight="bold">HMRC</text>
+                                <text x="30" y="165" fill="#666" font-size="12">Connect with HMRC for tax data</text>
+                                <rect x="170" y="130" width="40" height="30" rx="15" fill="#0052cc"/>
+                                <text x="190" y="150" fill="white" font-size="12" text-anchor="middle">Connect</text>
+                                
+                                <!-- Xero Integration -->
+                                <rect x="20" y="190" width="200" height="60" rx="8" fill="#f8f9fa"/>
+                                <text x="30" y="215" fill="#333" font-size="18" font-weight="bold">Xero</text>
+                                <text x="190" y="215" fill="#666" font-size="12" text-anchor="end">1 of 5</text>
+                                <text x="30" y="235" fill="#666" font-size="12">Bee Intelligent</text>
+                                <rect x="170" y="210" width="40" height="30" rx="15" fill="#e74c3c"/>
+                                <text x="190" y="230" fill="white" font-size="10" text-anchor="middle">Disconnect</text>
+                                
+                                <!-- QuickBooks Integration -->
+                                <rect x="20" y="260" width="200" height="60" rx="8" fill="#f8f9fa"/>
+                                <text x="30" y="285" fill="#333" font-size="18" font-weight="bold">QuickBooks</text>
+                                <text x="190" y="285" fill="#666" font-size="12" text-anchor="end">1 of 5</text>
+                                <text x="30" y="305" fill="#666" font-size="12">Earnly</text>
+                                <rect x="170" y="280" width="40" height="30" rx="15" fill="#e74c3c"/>
+                                <text x="190" y="300" fill="white" font-size="10" text-anchor="middle">Disconnect</text>
+                                
+                                <!-- Sage Integration -->
+                                <rect x="20" y="330" width="200" height="60" rx="8" fill="#f8f9fa"/>
+                                <text x="30" y="355" fill="#333" font-size="18" font-weight="bold">Sage</text>
+                                <text x="190" y="355" fill="#666" font-size="12" text-anchor="end">1 of 5</text>
+                                <text x="30" y="375" fill="#666" font-size="12">Earnly</text>
+                                <rect x="170" y="350" width="40" height="30" rx="15" fill="#e74c3c"/>
+                                <text x="190" y="370" fill="white" font-size="10" text-anchor="middle">Disconnect</text>
+                                
+                                <!-- Bottom Navigation -->
+                                <rect x="0" y="440" width="240" height="60" fill="#0052cc"/>
+                                
+                                <circle cx="40" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="40" y="475" fill="white" font-size="10" text-anchor="middle">Home</text>
+                                
+                                <circle cx="100" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="100" y="475" fill="white" font-size="10" text-anchor="middle">History</text>
+                                
+                                <circle cx="160" cy="470" r="20" fill="rgba(255,255,255,0.3)"/>
+                                <text x="160" y="475" fill="white" font-size="10" text-anchor="middle">Integrate</text>
+                                
+                                <circle cx="220" cy="470" r="20" fill="rgba(255,255,255,0.1)"/>
+                                <text x="220" y="475" fill="white" font-size="10" text-anchor="middle">Settings</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Overview</h2>
+            <p class="overview">
+                Earnly is a powerful and intuitive mobile application for Android, designed for freelancers and small businesses in the UK who need to manage their finances, track earnings, and estimate tax liabilities. The goal was to provide a unified dashboard that aggregates data from various accounting platforms, offering clear financial insights in a user-friendly interface.
+            </p>
+            
+            <h2 class="section-title">Key Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon auth">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15V17M6 21H18C19.1046 21 20 20.1046 20 19V13C20 11.8954 19.1046 11 18 11H6C4.89543 11 4 11.8954 4 13V19C4 20.1046 4.89543 21 6 21ZM16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11H16Z" stroke="#4284fb" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Secure Authentication</h3>
+                    <ul class="feature-list">
+                        <li>Registration and login with email verification</li>
+                        <li>Password recovery with secure reset process</li>
+                        <li>Biometric authentication options</li>
+                        <li>Session management for security</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon integration">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 17H13V13H17V17ZM11 17H7V13H11V17ZM17 11H13V7H17V11ZM11 11H7V7H11V11Z" stroke="#4cd2a9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#4cd2a9" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Platform Integrations</h3>
+                    <ul class="feature-list">
+                        <li>Connect with Xero, QuickBooks, Sage accounts</li>
+                        <li>HMRC integration for tax data</li>
+                        <li>Secure OAuth authentication for third-party services</li>
+                        <li>Data synchronization across platforms</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon dashboard">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3V4M19.0784 5.92157L18.3784 6.62157M21 12H20M19.0784 18.0784L18.3784 17.3784M12 20V21M5.62157 17.3784L4.92157 18.0784M4 12H3M5.62157 6.62157L4.92157 5.92157" stroke="#ff7846" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="5" stroke="#ff7846" stroke-width="2"/>
+                        </svg>
+						</div>
+                    <h3 class="feature-title">Financial Dashboard</h3>
+                    <ul class="feature-list">
+                        <li>Summary of earnings, expenses, and profits</li>
+                        <li>Tax calculations (VAT, Corporation Tax, Self Assessment)</li>
+                        <li>Interactive data visualizations and charts</li>
+                        <li>Financial goal tracking and projections</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon history">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" stroke="#8c7cff" stroke-width="2"/>
+                            <path d="M12 7V12L15 15" stroke="#8c7cff" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Earnings History</h3>
+                    <ul class="feature-list">
+                        <li>View and analyze financial data for the last 5 years</li>
+                        <li>Year-over-year performance comparison</li>
+                        <li>Detailed transaction history</li>
+                        <li>Income categorization and filtering</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon account">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="8" r="5" stroke="#ffb941" stroke-width="2"/>
+                            <path d="M20 21C20 16.5817 16.4183 13 12 13C7.58172 13 4 16.5817 4 21" stroke="#ffb941" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Account Management</h3>
+                    <ul class="feature-list">
+                        <li>User profile editing and management</li>
+                        <li>Secure password change functionality</li>
+                        <li>Account preferences and settings</li>
+                        <li>Data export and backup options</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon subscription">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 6V18M12 6L7 11M12 6L17 11" stroke="#e56ed5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Subscription Management</h3>
+                    <ul class="feature-list">
+                        <li>Multiple subscription tiers (Trial, Bronze, Silver, Gold)</li>
+                        <li>In-app payments via Google Play Billing</li>
+                        <li>Billing history and invoice access</li>
+                        <li>Subscription upgrade/downgrade handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Feature Highlights</h2>
+            <div class="app-screens">
+                <div class="screen-card">
+                    <div class="screen-header">
+                        <span>Company Summary</span>
+                        <span>✕</span>
+                    </div>
+                    <div class="screen-content">
+                        <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Company Name -->
+                            <text x="30" y="30" fill="#333" font-size="16" font-weight="bold">Company Name: Bee Intelligent</text>
+                            
+                            <!-- Chart -->
+                            <line x1="30" y1="150" x2="270" y2="150" stroke="#ddd" stroke-width="1"/>
+                            <line x1="30" y1="50" x2="30" y2="150" stroke="#ddd" stroke-width="1"/>
+                            
+                            <!-- Chart Points and Lines Current Year -->
+                            <path d="M40,100 C60,80 80,90 100,120 L120,110 L140,100 L160,80 L180,60 L200,80 L220,90 L240,100 L260,90" stroke="#0052cc" stroke-width="2" fill="none"/>
+                            <circle cx="40" cy="100" r="3" fill="#0052cc"/>
+                            <circle cx="60" cy="80" r="3" fill="#0052cc"/>
+                            <circle cx="80" cy="90" r="3" fill="#0052cc"/>
+                            <circle cx="100" cy="120" r="3" fill="#0052cc"/>
+                            <circle cx="120" cy="110" r="3" fill="#0052cc"/>
+                            <circle cx="140" cy="100" r="3" fill="#0052cc"/>
+                            <circle cx="160" cy="80" r="3" fill="#0052cc"/>
+                            <circle cx="180" cy="60" r="3" fill="#0052cc"/>
+                            <circle cx="200" cy="80" r="3" fill="#0052cc"/>
+                            <circle cx="220" cy="90" r="3" fill="#0052cc"/>
+                            <circle cx="240" cy="100" r="3" fill="#0052cc"/>
+                            <circle cx="260" cy="90" r="3" fill="#0052cc"/>
+                            
+                            <!-- Chart Points and Lines Previous Year -->
+                            <path d="M40,120 C60,110 80,130 100,120 L120,110 L140,100 L160,90 L180,70 L200,90 L220,100 L240,90 L260,100" stroke="#e74c3c" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+                            <circle cx="40" cy="120" r="2" fill="#e74c3c"/>
+                            <circle cx="60" cy="110" r="2" fill="#e74c3c"/>
+                            <circle cx="80" cy="130" r="2" fill="#e74c3c"/>
+                            <circle cx="100" cy="120" r="2" fill="#e74c3c"/>
+                            <circle cx="120" cy="110" r="2" fill="#e74c3c"/>
+                            <circle cx="140" cy="100" r="2" fill="#e74c3c"/>
+                            <circle cx="160" cy="90" r="2" fill="#e74c3c"/>
+                            <circle cx="180" cy="70" r="2" fill="#e74c3c"/>
+                            <circle cx="200" cy="90" r="2" fill="#e74c3c"/>
+                            <circle cx="220" cy="100" r="2" fill="#e74c3c"/>
+                            <circle cx="240" cy="90" r="2" fill="#e74c3c"/>
+                            <circle cx="260" cy="100" r="2" fill="#e74c3c"/>
+                            
+                            <!-- Chart Legend -->
+                            <circle cx="40" cy="170" r="3" fill="#0052cc"/>
+                            <text x="50" y="175" fill="#333" font-size="12">Current Financial Year</text>
+                            
+                            <circle cx="40" cy="190" r="2" fill="#e74c3c"/>
+                            <line x1="35" y1="190" x2="45" y2="190" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,2"/>
+                            <text x="50" y="195" fill="#333" font-size="12">Last Financial Year</text>
+                            
+                            <!-- Financial Data -->
+                            <text x="30" y="220" fill="#333" font-size="14" font-weight="bold">Overview</text>
+                            <text x="30" y="240" fill="#666" font-size="12">This section shows earnings across all accounts.</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <div class="screen-header">
+                        <span>Tax Breakdown</span>
+                        <span>✕</span>
+                    </div>
+                    <div class="screen-content">
+                        <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Title -->
+                            <text x="30" y="30" fill="#333" font-size="16" font-weight="bold">Self Assessment for 23/24</text>
+                            <text x="270" y="30" fill="#333" font-size="16" font-weight="bold" text-anchor="end">£7,500</text>
+                            
+                            <!-- Divider -->
+                            <line x1="30" y1="40" x2="270" y2="40" stroke="#0052cc" stroke-width="2"/>
+                            
+                            <!-- Tax Breakdown Data -->
+                            <text x="30" y="60" fill="#666" font-size="12">Total PAYE Paid:</text>
+                            <text x="270" y="60" fill="#333" font-size="12" text-anchor="end">£9,202.50</text>
+                            
+                            <text x="30" y="80" fill="#666" font-size="12">Remaining PAYE:</text>
+                            <text x="270" y="80" fill="#333" font-size="12" text-anchor="end">£3,297.50</text>
+                            
+                            <text x="30" y="100" fill="#666" font-size="12">Total Dividends Paid:</text>
+                            <text x="270" y="100" fill="#333" font-size="12" text-anchor="end">£28,297.50</text>
+                            
+                            <text x="30" y="120" fill="#666" font-size="12">Remaining Months:</text>
+                            <text x="270" y="120" fill="#333" font-size="12" text-anchor="end">3</text>
+                            
+                            <text x="30" y="140" fill="#666" font-size="12">Expected PAYE per Month:</text>
+                            <text x="270" y="140" fill="#333" font-size="12" text-anchor="end">£1,099.16</text>
+                            
+                            <text x="30" y="160" fill="#666" font-size="12">Expected Dividends per Month:</text>
+                            <text x="270" y="160" fill="#333" font-size="12" text-anchor="end">£9,734.16</text>
+                            
+                            <!-- Tax Rates Section -->
+                            <text x="30" y="190" fill="#333" font-size="14" font-weight="bold">Tax Breakdown</text>
+                            
+                            <text x="30" y="210" fill="#666" font-size="12">Tax Code:</text>
+                            <text x="270" y="210" fill="#333" font-size="12" text-anchor="end">1147T</text>
+                            
+                            <text x="30" y="230" fill="#666" font-size="12">Personal Allowance:</text>
+                            <text x="270" y="230" fill="#333" font-size="12" text-anchor="end">£12,570</text>
+                            
+                            <text x="30" y="250" fill="#666" font-size="12">Total Tax Paid:</text>
+                            <text x="270" y="250" fill="#333" font-size="12" text-anchor="end">£11,120</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <div class="screen-header">
+                        <span>Corporation Tax</span>
+                        <span>✕</span>
+                    </div>
+                    <div class="screen-content">
+                        <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Title -->
+                            <text x="30" y="30" fill="#333" font-size="16" font-weight="bold">Summary</text>
+                            
+                            <!-- Divider -->
+                            <line x1="30" y1="45" x2="270" y2="45" stroke="#0052cc" stroke-width="2"/>
+                            
+                            <!-- Corporation Tax Value -->
+                            <text x="150" y="80" fill="#333" font-size="26" font-weight="bold" text-anchor="middle">£65,108.75</text>
+                            <text x="150" y="100" fill="#666" font-size="12" text-anchor="middle">Corporation Tax</text>
+                            
+                            <!-- Divider -->
+                            <line x1="30" y1="120" x2="270" y2="120" stroke="#ddd" stroke-width="1"/>
+                            
+                            <!-- Sales and Income Section -->
+                            <text x="30" y="140" fill="#333" font-size="14" font-weight="bold">Sales and Income</text>
+                            
+                            <text x="30" y="160" fill="#666" font-size="12">Sales:</text>
+                            <text x="270" y="160" fill="#333" font-size="12" text-anchor="end">£300,000</text>
+                            
+                            <text x="30" y="180" fill="#666" font-size="12">Interest Income:</text>
+                            <text x="270" y="180" fill="#333" font-size="12" text-anchor="end">£100</text>
+                            
+                            <text x="30" y="200" fill="#666" font-size="12">Total Income:</text>
+                            <text x="270" y="200" fill="#333" font-size="12" text-anchor="end">£300,100</text>
+                            
+                            <!-- Overheads Section -->
+                            <text x="30" y="220" fill="#333" font-size="14" font-weight="bold">Overheads</text>
+                            
+                            <text x="30" y="240" fill="#666" font-size="12">Total Overheads:</text>
+                            <text x="270" y="240" fill="#333" font-size="12" text-anchor="end">£39,465</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Technical Stack</h2>
+            <div class="tech-stack">
+                <div class="tech-item"><strong>Language:</strong> Kotlin</div>
+                <div class="tech-item"><strong>Architecture:</strong> MVVM</div>
+                <div class="tech-item"><strong>UI:</strong> XML Layouts, Material Design</div>
+                <div class="tech-item"><strong>Async:</strong> Kotlin Coroutines</div>
+                <div class="tech-item"><strong>Network:</strong> Retrofit, OkHttp</div>
+                <div class="tech-item"><strong>Database:</strong> Room Persistence</div>
+                <div class="tech-item"><strong>Settings:</strong> SharedPreferences</div>
+                <div class="tech-item"><strong>DI:</strong> Hilt</div>
+                <div class="tech-item"><strong>Charting:</strong> MPAndroidChart</div>
+                <div class="tech-item"><strong>Payments:</strong> Google Play Billing</div>
+                <div class="tech-item"><strong>Notifications:</strong> FCM</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Development Challenges & Solutions</h2>
+            <div class="challenges">
+                <div class="challenge-card">
+                    <span class="challenge-label">Challenge</span>
+                    <h3>Multi-Platform API Integration</h3>
+                    <p>Implementing a cohesive integration system for multiple accounting platforms (Xero, QuickBooks, Sage) with different API structures and authentication mechanisms posed a significant challenge.</p>
+                    <span class="challenge-label">Solution</span>
+                    <p>Created an abstraction layer with platform-specific adapters that standardized data access across services. Used OAuth for secure authentication and implemented a robust refresh token mechanism to maintain persistent connections.</p>
+                </div>
+
+                <div class="challenge-card">
+                    <span class="challenge-label">Challenge</span>
+                    <h3>Complex Financial Calculations</h3>
+                    <p>Implementing accurate tax calculations for different UK tax schemes (Self Assessment, Corporation Tax, PAYE, VAT) required handling complex scenarios and staying updated with tax regulations.</p>
+                    <span class="challenge-label">Solution</span>
+                    <p>Developed a modular tax calculation engine with separate modules for each tax type. Used strategy pattern to support different calculation rules and created a configuration system to facilitate tax rate updates without code changes.</p>
+                </div>
+
+                <div class="challenge-card">
+                    <span class="challenge-label">Challenge</span>
+                    <h3>Data Visualization Performance</h3>
+                    <p>Creating responsive, interactive charts for financial data visualization across multiple time ranges while maintaining smooth performance on various devices.</p>
+                    <span class="challenge-label">Solution</span>
+                    <p>Implemented data aggregation strategies to optimize rendering for different zoom levels. Used MPAndroidChart with custom renderers for performance and enhanced the user experience with gestures for intuitive interaction with financial data.</p>
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="#" class="btn">Google Play Store</a>
+                <a href="#" class="btn btn-secondary">Case Study</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Professional Android Development by [Your Name]</p>
+        </div>
+    </footer>
+</body>
+</html>
+                

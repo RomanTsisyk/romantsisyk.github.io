@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantronics HUB - Android Companion App for Premium Headsets</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Plantronics HUB - The ultimate Android companion app for managing Plantronics headsets with real-time monitoring, settings control, and wear detection.">
+    <meta name="keywords" content="Plantronics, Android app, headset management, Bluetooth, Android Wear, companion app">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Plantronics HUB - Android Companion App">
+    <meta property="og:description" content="Professional headset management app with advanced features for Plantronics devices.">
+    <meta property="og:type" content="website">
+    
+    <!-- Preload fonts for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="headset-icon">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                </svg>
+            </div>
+            <div class="loading-text">Loading Plantronics HUB...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                </svg>
+                <span>Plantronics HUB</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#tech">Technology</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#metrics">Metrics</a>
+                <a href="#download" class="nav-cta">Download</a>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" class="mobile-menu-item">Features</a>
+        <a href="#tech" class="mobile-menu-item">Technology</a>
+        <a href="#screenshots" class="mobile-menu-item">Screenshots</a>
+        <a href="#metrics" class="mobile-menu-item">Metrics</a>
+        <a href="#download" class="mobile-menu-item">Download</a>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb1"></div>
+        <div class="gradient-orb orb2"></div>
+        <div class="gradient-orb orb3"></div>
+        <div class="floating-element element1"></div>
+        <div class="floating-element element2"></div>
+        <div class="floating-element element3"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">🎧 Premium Headset Management</div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Plantronics HUB</span>
+                    <br>for Android
+                </h1>
+                <p class="hero-description">
+                    The ultimate companion app for your Plantronics headsets. Monitor battery life, customize settings, 
+                    and unlock the full potential of your premium audio devices with seamless Android integration.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download App
+                    </a>
+                    <a href="https://github.com/plantronics/hub-android" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">50K+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">4.5★</span>
+                        <span class="stat-label">Play Store Rating</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">30+</span>
+                        <span class="stat-label">Supported Devices</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-interface">
+                                <div class="app-header">
+                                    <div class="app-status-bar">
+                                        <span>9:41</span>
+                                        <div class="status-icons">
+                                            <span>📶</span>
+                                            <span>📶</span>
+                                            <span>🔋</span>
+                                        </div>
+                                    </div>
+                                    <div class="app-title-bar">
+                                        <h3>Voyager Edge</h3>
+                                        <span class="connection-status">Connected</span>
+                                    </div>
+                                </div>
+                                <div class="app-content">
+                                    <div class="battery-widget">
+                                        <div class="battery-icon">
+                                            <div class="battery-level" style="width: 85%"></div>
+                                        </div>
+                                        <span class="battery-text">85% Battery</span>
+                                    </div>
+                                    <div class="quick-settings">
+                                        <div class="setting-card">
+                                            <span class="setting-icon">🔊</span>
+                                            <span>Volume</span>
+                                        </div>
+                                        <div class="setting-card">
+                                            <span class="setting-icon">🎵</span>
+                                            <span>Equalizer</span>
+                                        </div>
+                                        <div class="setting-card">
+                                            <span class="setting-icon">📱</span>
+                                            <span>Find Phone</span>
+                                        </div>
+                                        <div class="setting-card">
+                                            <span class="setting-icon">⚙️</span>
+                                            <span>Settings</span>
+                                        </div>
+                                    </div>
+                                    <div class="wear-status">
+                                        <div class="status-indicator active"></div>
+                                        <span>Headset is being worn</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-badges">
+                    <div class="badge badge-1">
+                        <span>🔋</span> Smart Battery
+                    </div>
+                    <div class="badge badge-2">
+                        <span>📡</span> Bluetooth 5.0
+                    </div>
+                    <div class="badge badge-3">
+                        <span>⌚</span> Wear OS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Everything you need to manage your Plantronics headsets</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3>Device Documentation</h3>
+                    <p>Access comprehensive guides and manuals for all supported Plantronics headsets directly from the app.</p>
+                    <div class="feature-tags">
+                        <span class="tag">User Guides</span>
+                        <span class="tag">Quick Start</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Battery Monitoring</h3>
+                    <p>Real-time battery level tracking with smart notifications to ensure you never run out of power.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Real-time</span>
+                        <span class="tag">Alerts</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                            <line x1="16" y1="8" x2="2" y2="22"></line>
+                            <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Connection Status</h3>
+                    <p>Monitor Bluetooth connection quality and manage multiple device pairings effortlessly.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Multi-device</span>
+                        <span class="tag">Auto-connect</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Wear Detection</h3>
+                    <p>Smart DON/DOFF sensors automatically pause music and answer calls when you wear your headset.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Smart Sensors</span>
+                        <span class="tag">Auto-pause</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 8.54l4.24 4.24m12.68 0l4.24 4.24M1.54 15.46l4.24-4.24"></path>
+                        </svg>
+                    </div>
+                    <h3>Custom Settings</h3>
+                    <p>Personalize audio profiles, button controls, and voice prompts to match your preferences.</p>
+                    <div class="feature-tags">
+                        <span class="tag">EQ Presets</span>
+                        <span class="tag">Voice Alerts</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                            <circle cx="12" cy="12" r="2"></circle>
+                            <path d="M6 6h.01M18 18h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Android Wear Support</h3>
+                    <p>Control your headset directly from your Android Wear smartwatch with our companion app.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Wear OS</span>
+                        <span class="tag">Remote Control</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section class="tech-stack" id="tech">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built with Modern Technology</h2>
+                <p class="section-subtitle">Powered by robust Android frameworks and libraries</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233DDC84'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Android">
+                    </div>
+                    <span>Android SDK</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F89820'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Java">
+                    </div>
+                    <span>Java</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230082FC'%3E%3Cpath d='M5 10.25c-.69 0-1.25.56-1.25 1.25S4.31 12.75 5 12.75s1.25-.56 1.25-1.25S5.69 10.25 5 10.25zm14 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm-7 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25z'/%3E%3C/svg%3E" alt="Bluetooth">
+                    </div>
+                    <span>Bluetooth API</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234285F4'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z'/%3E%3C/svg%3E" alt="Wear OS">
+                    </div>
+                    <span>Wear OS</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFA726'%3E%3Cpath d='M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z'/%3E%3C/svg%3E" alt="Fastlane">
+                    </div>
+                    <span>Fastlane</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236DB33F'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="Gradle">
+                    </div>
+                    <span>Gradle</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23181717'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E" alt="Git">
+                    </div>
+                    <span>Git</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF6F00'%3E%3Cpath d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="SQLite">
+                    </div>
+                    <span>SQLite</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Carousel -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">App Screenshots</h2>
+                <p class="section-subtitle">Experience the intuitive interface</p>
+            </div>
+            <div class="screenshots-carousel">
+                <div class="screenshot-container">
+                    <div class="screenshot-track" id="screenshotTrack">
+                        <div class="screenshot-item">
+                            <div class="screenshot-phone">
+                                <div class="screenshot-content">
+                                    <div class="screen-header">Home Dashboard</div>
+                                    <div class="screen-preview home-screen">
+                                        <div class="device-card">
+                                            <h4>Voyager Legend</h4>
+                                            <div class="device-status">Connected</div>
+                                            <div class="battery-bar">
+                                                <div class="battery-fill" style="width: 75%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <div class="screenshot-phone">
+                                <div class="screenshot-content">
+                                    <div class="screen-header">Device Settings</div>
+                                    <div class="screen-preview settings-screen">
+                                        <div class="settings-list">
+                                            <div class="setting-item">Audio Settings</div>
+                                            <div class="setting-item">Button Configuration</div>
+                                            <div class="setting-item">Voice Alerts</div>
+                                            <div class="setting-item">Firmware Update</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <div class="screenshot-phone">
+                                <div class="screenshot-content">
+                                    <div class="screen-header">Battery Monitor</div>
+                                    <div class="screen-preview battery-screen">
+                                        <div class="battery-visual">
+                                            <div class="battery-percentage">85%</div>
+                                            <div class="battery-time">8 hours talk time</div>
+                                            <div class="battery-chart"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-item">
+                            <div class="screenshot-phone">
+                                <div class="screenshot-content">
+                                    <div class="screen-header">Wear OS App</div>
+                                    <div class="screen-preview wear-screen">
+                                        <div class="wear-interface">
+                                            <div class="wear-controls">
+                                                <button class="wear-btn">▶️</button>
+                                                <button class="wear-btn">⏸️</button>
+                                                <button class="wear-btn">⏭️</button>
+                                            </div>
+                                            <div class="wear-battery">🔋 85%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next" id="nextBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics" id="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Performance Metrics</h2>
+                <p class="section-subtitle">Numbers that speak for themselves</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">📱</div>
+                    <div class="metric-value" data-target="50000">0</div>
+                    <div class="metric-label">Active Users</div>
+                    <div class="metric-growth">+25% this month</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">⭐</div>
+                    <div class="metric-value" data-target="4.5">0</div>
+                    <div class="metric-label">Play Store Rating</div>
+                    <div class="metric-growth">1.2K reviews</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🎧</div>
+                    <div class="metric-value" data-target="30">0</div>
+                    <div class="metric-label">Supported Devices</div>
+                    <div class="metric-growth">All Plantronics models</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value" data-target="99.9">0</div>
+                    <div class="metric-label">Uptime %</div>
+                    <div class="metric-growth">Enterprise reliability</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Ready to Transform Your Headset Experience?</h2>
+                <p class="download-subtitle">Download Plantronics HUB now and unlock the full potential of your device</p>
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.plantronics.headsetservice" class="download-btn google-play">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l10.13 10.13L3.84 21.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 4.37l10.76 10.76c-.29.15-.62.24-.97.24-.02 0-.03 0-.03-.01zm3.04-1.83l-2.23-1.23L14.89 15l2.73 2.73 2.23-1.23c.7-.39 1.15-1.14 1.15-1.99 0-.85-.45-1.6-1.15-1.99z"/>
+                        </svg>
+                        <div class="btn-text">
+                            <span class="small-text">GET IT ON</span>
+                            <span class="main-text">Google Play</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/plantronics/hub-android" class="download-btn github">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        <div class="btn-text">
+                            <span class="small-text">VIEW SOURCE</span>
+                            <span class="main-text">GitHub</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="compatibility-note">
+                    <p>✅ Compatible with Android 5.0+ and Wear OS 2.0+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                        </svg>
+                        <span>Plantronics HUB</span>
+                    </div>
+                    <p>The ultimate companion app for Plantronics headsets on Android.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#features">Features</a>
+                        <a href="#download">Download</a>
+                        <a href="#">Documentation</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="#">Help Center</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/plantronics">GitHub</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Plantronics HUB. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span class="badge">Android</span>
+                    <span class="badge">Wear OS</span>
+                    <span class="badge">Bluetooth 5.0</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('fade-out');
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Screenshot Carousel
+        const track = document.getElementById('screenshotTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 25}%)`;
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-rotate carousel
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }, 5000);
+
+        // Animate metrics on scroll
+        const animateValue = (element, start, end, duration, isDecimal = false) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = progress * (end - start) + start;
+                element.textContent = isDecimal ? value.toFixed(1) : Math.floor(value).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseFloat(entry.target.dataset.target);
+                    const isDecimal = target % 1 !== 0;
+                    animateValue(entry.target, 0, target, 2000, isDecimal);
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.metric-value').forEach(metric => {
+            metricsObserver.observe(metric);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-visual');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Add scroll animations
+        const scrollElements = document.querySelectorAll('.feature-card, .tech-item, .metric-card');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <=
+                (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('scrolled');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+
+        // Initialize animations on load
+        handleScrollAnimation();
+    </script>
+</body>
+</html>

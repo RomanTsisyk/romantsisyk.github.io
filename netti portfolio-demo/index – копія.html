@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netti - Network Testing Suite | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #007AFF;
+            --accent-orange: #FE6D33;
+            --accent-green: #319375;
+            --accent-purple: #8C9EFF;
+            --accent-pink: #C659A1;
+            --dark-bg: #0E0E0E;
+            --dark-surface: #1C1C1E;
+            --dark-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #007AFF, transparent);
+            top: -200px;
+            right: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #FE6D33, transparent);
+            bottom: -200px;
+            left: -200px;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #319375, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -100px) scale(1.1); }
+            50% { transform: translate(-100px, 100px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #007AFF, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 50%, #FE6D33 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            position: relative;
+            width: 350px;
+            height: 700px;
+            margin: 0 auto;
+            animation: float-phone 6s ease-in-out infinite;
+        }
+
+        @keyframes float-phone {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            25% { transform: translateY(-20px) rotate(2deg); }
+            75% { transform: translateY(10px) rotate(-2deg); }
+        }
+
+        .phone-frame {
+            width: 100%;
+            height: 100%;
+            background: var(--dark-surface);
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: slideScreens 15s infinite;
+        }
+
+        @keyframes slideScreens {
+            0%, 20% { opacity: 1; }
+            25%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--dark-surface);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-orange));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 122, 255, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--primary-color), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+        }
+
+        .icon-speed { background: linear-gradient(135deg, #007AFF, #00f2fe); }
+        .icon-iperf { background: linear-gradient(135deg, #8C9EFF, #667eea); }
+        .icon-ping { background: linear-gradient(135deg, #319375, #10D876); }
+        .icon-trace { background: linear-gradient(135deg, #ECAB4B, #FE6D33); }
+        .icon-network { background: linear-gradient(135deg, #007AFF, #0062D6); }
+        .icon-transfer { background: linear-gradient(135deg, #C659A1, #F093FB); }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            padding: 6rem 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            opacity: 0.1;
+        }
+
+        .tech-item:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Screenshots Gallery */
+        .screenshots {
+            padding: 6rem 0;
+            background: var(--dark-surface);
+        }
+
+        .screenshot-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1rem 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Design System */
+        .design-system {
+            padding: 6rem 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .color-chip {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-chip::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .color-chip:hover::after {
+            opacity: 1;
+        }
+
+        .color-chip:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Metrics */
+        .metrics {
+            padding: 6rem 0;
+            background: var(--dark-surface);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            opacity: 0.05;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-content {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(254, 109, 51, 0.1));
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: var(--dark-surface);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeOut 0.5s forwards 2s;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 122, 255, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Netti</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#tech">Tech Stack</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="gradient-text">Netti</span><br>
+                        Network Testing Suite
+                    </h1>
+                    <p>
+                        Професійний інструмент для тестування та моніторингу мережі. 
+                        Створений з використанням найновіших технологій Android розробки 
+                        та сучасного дизайну Material You.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                            <span>🚀</span> View on GitHub
+                        </a>
+                        <a href="https://www.figma.com/design/BKeIsQSIBP6Q4hgfUvcZOi/Netti-UX-UI-Final" class="btn btn-secondary">
+                            <span>🎨</span> Figma Design
+                        </a>
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div style="background: linear-gradient(135deg, #1C1C1E, #000); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+                                <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #007AFF, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Netti</div>
+                                <div style="color: #8E8E93; margin-top: 10px;">Network Testing Suite</div>
+                                
+                                <!-- Animated Services Grid -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 40px; width: 100%;">
+                                    <div style="background: rgba(0, 122, 255, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">📊</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Speed Test</div>
+                                    </div>
+                                    <div style="background: rgba(140, 158, 255, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">🔧</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">iPerf3</div>
+                                    </div>
+                                    <div style="background: rgba(49, 147, 117, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">📡</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Ping</div>
+                                    </div>
+                                    <div style="background: rgba(236, 171, 75, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">🗺️</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Trace Route</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ключові можливості</h2>
+                <p>Всі інструменти для професійного тестування мережі в одному додатку</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-speed">⚡</div>
+                    <h3>Speed Test</h3>
+                    <p>Вимірювання швидкості завантаження та відвантаження з детальною статистикою. Круговий спідометр з анімацією та графіки в реальному часі.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-iperf">🔧</div>
+                    <h3>iPerf3 Client & Server</h3>
+                    <p>Професійне тестування пропускної здатності мережі. Підтримка TCP/UDP протоколів, налаштування параметрів тесту.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-ping">📡</div>
+                    <h3>Ping Tool</h3>
+                    <p>Діагностика затримок мережі з візуалізацією результатів. Статистика втрати пакетів та jitter.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-trace">🗺️</div>
+                    <h3>Trace Route</h3>
+                    <p>Відстеження маршруту пакетів через мережу з візуалізацією на карті та детальною інформацією про кожен хоп.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-network">🌐</div>
+                    <h3>Network Information</h3>
+                    <p>Детальна інформація про поточне підключення: Wi-Fi, Cellular, Ethernet. IP адреси, DNS сервери, signal strength.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-transfer">📊</div>
+                    <h3>Data Transfer Rate</h3>
+                    <p>Моніторинг швидкості передачі даних в реальному часі з графіками та історією вимірювань.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Технології</h2>
+                <p>Створено з використанням найсучасніших інструментів Android розробки</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Kotlin</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Jetpack Compose</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">💉</div>
+                    <div class="tech-name">Hilt DI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🏗️</div>
+                    <div class="tech-name">Clean Architecture</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔄</div>
+                    <div class="tech-name">Coroutines & Flow</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Material 3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🗂️</div>
+                    <div class="tech-name">Room Database</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🧭</div>
+                    <div class="tech-name">Navigation Compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>Інтерфейс додатку</h2>
+                <p>Темна тема з акцентними кольорами та сучасними анімаціями</p>
+            </div>
+            <div class="screenshot-carousel">
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">Home Screen</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div style="background: rgba(0, 122, 255, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Speed Test</div>
+                            <div style="background: rgba(140, 158, 255, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">iPerf3</div>
+                            <div style="background: rgba(49, 147, 117, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Ping</div>
+                            <div style="background: rgba(236, 171, 75, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Trace Route</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Головний екран</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div style="width: 200px; height: 200px; border-radius: 50%; border: 8px solid #007AFF; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <div style="font-size: 3rem; font-weight: bold;">456</div>
+                            <div style="position: absolute; bottom: 60px; font-size: 0.8rem; color: #8E8E93;">Mbps</div>
+                        </div>
+                        <div style="margin-top: 30px; text-align: center;">
+                            <div style="color: #8E8E93;">Download Speed</div>
+                            <div style="margin-top: 20px; display: flex; gap: 30px;">
+                                <div>
+                                    <div style="color: #8E8E93; font-size: 0.8rem;">Upload</div>
+                                    <div style="font-size: 1.2rem;">123 Mbps</div>
+                                </div>
+                                <div>
+                                    <div style="color: #8E8E93; font-size: 0.8rem;">Ping</div>
+                                    <div style="font-size: 1.2rem;">12 ms</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Speed Test</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">iPerf3 Client</h4>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Server</div>
+                            <div>Frankfurt, Germany</div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Protocol</div>
+                            <div>TCP</div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Duration</div>
+                            <div>30 seconds</div>
+                        </div>
+                        <button style="width: 100%; margin-top: 30px; padding: 15px; background: #007AFF; border: none; border-radius: 12px; color: white; font-size: 1.1rem; font-weight: 600;">Start Test</button>
+                    </div>
+                    <div class="screenshot-label">iPerf3 налаштування</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">Network Info</h4>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">Type</span>
+                                <span>Wi-Fi 6</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">SSID</span>
+                                <span>HomeNetwork</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">IP Address</span>
+                                <span>192.168.1.100</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">Signal</span>
+                                <span>-45 dBm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Інформація про мережу</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design System -->
+    <section class="design-system">
+        <div class="container">
+            <div class="section-header">
+                <h2>Дизайн система</h2>
+                <p>Темна тема з яскравими акцентами для кращої читабельності</p>
+            </div>
+            <div class="color-palette">
+                <div class="color-chip" style="background: #007AFF;">
+                    <span class="color-label">Primary</span>
+                    <span class="color-hex">#007AFF</span>
+                </div>
+                <div class="color-chip" style="background: #FE6D33;">
+                    <span class="color-label">Orange</span>
+                    <span class="color-hex">#FE6D33</span>
+                </div>
+                <div class="color-chip" style="background: #319375;">
+                    <span class="color-label">Green</span>
+                    <span class="color-hex">#319375</span>
+                </div>
+                <div class="color-chip" style="background: #8C9EFF;">
+                    <span class="color-label">Purple</span>
+                    <span class="color-hex">#8C9EFF</span>
+                </div>
+                <div class="color-chip" style="background: #ECAB4B;">
+                    <span class="color-label">Yellow</span>
+                    <span class="color-hex">#ECAB4B</span>
+                </div>
+                <div class="color-chip" style="background: #C659A1;">
+                    <span class="color-label">Pink</span>
+                    <span class="color-hex">#C659A1</span>
+                </div>
+                <div class="color-chip" style="background: #1C1C1E;">
+                    <span class="color-label">Surface</span>
+                    <span class="color-hex">#1C1C1E</span>
+                </div>
+                <div class="color-chip" style="background: #2C2C2E;">
+                    <span class="color-label">Card</span>
+                    <span class="color-hex">#2C2C2E</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Показники проекту</h2>
+                <p>Статистика розробки та функціональності</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">6+</div>
+                    <div class="metric-label">Основних функцій</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Kotlin код</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Material 3</div>
+                    <div class="metric-label">Design System</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">60fps</div>
+                    <div class="metric-label">Smooth animations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Зацікавлені в проекті?</h2>
+                <p>Перегляньте код на GitHub або дизайн в Figma</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                        View Source Code
+                    </a>
+                    <a href="mailto:your.email@example.com" class="btn btn-secondary">
+                        Contact Developer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>© 2025 Netti. Network Testing Suite</div>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/yourusername">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/yourusername">LinkedIn</a></li>
+                    <li><a href="mailto:your.email@example.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>-type: x mandatory;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .screenshot {
+            flex: 0 0 280px;
+            height: 560px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1rem 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Design System */
+        .design-system {
+            padding: 6rem 0;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .color-chip {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-chip::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .color-chip:hover::after {
+            opacity: 1;
+        }
+
+        .color-chip:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Metrics */
+        .metrics {
+            padding: 6rem 0;
+            background: var(--dark-surface);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            opacity: 0.05;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-content {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(254, 109, 51, 0.1));
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: var(--dark-surface);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeOut 0.5s forwards 2s;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 122, 255, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Netti</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#tech">Tech Stack</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="gradient-text">Netti</span><br>
+                        Network Testing Suite
+                    </h1>
+                    <p>
+                        Професійний інструмент для тестування та моніторингу мережі. 
+                        Створений з використанням найновіших технологій Android розробки 
+                        та сучасного дизайну Material You.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                            <span>🚀</span> View on GitHub
+                        </a>
+                        <a href="https://www.figma.com/design/BKeIsQSIBP6Q4hgfUvcZOi/Netti-UX-UI-Final" class="btn btn-secondary">
+                            <span>🎨</span> Figma Design
+                        </a>
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div style="background: linear-gradient(135deg, #1C1C1E, #000); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+                                <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #007AFF, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Netti</div>
+                                <div style="color: #8E8E93; margin-top: 10px;">Network Testing Suite</div>
+                                
+                                <!-- Animated Services Grid -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 40px; width: 100%;">
+                                    <div style="background: rgba(0, 122, 255, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">📊</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Speed Test</div>
+                                    </div>
+                                    <div style="background: rgba(140, 158, 255, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">🔧</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">iPerf3</div>
+                                    </div>
+                                    <div style="background: rgba(49, 147, 117, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">📡</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Ping</div>
+                                    </div>
+                                    <div style="background: rgba(236, 171, 75, 0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                                        <div style="font-size: 2rem;">🗺️</div>
+                                        <div style="font-size: 0.9rem; margin-top: 8px;">Trace Route</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ключові можливості</h2>
+                <p>Всі інструменти для професійного тестування мережі в одному додатку</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-speed">⚡</div>
+                    <h3>Speed Test</h3>
+                    <p>Вимірювання швидкості завантаження та відвантаження з детальною статистикою. Круговий спідометр з анімацією та графіки в реальному часі.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-iperf">🔧</div>
+                    <h3>iPerf3 Client & Server</h3>
+                    <p>Професійне тестування пропускної здатності мережі. Підтримка TCP/UDP протоколів, налаштування параметрів тесту.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-ping">📡</div>
+                    <h3>Ping Tool</h3>
+                    <p>Діагностика затримок мережі з візуалізацією результатів. Статистика втрати пакетів та jitter.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-trace">🗺️</div>
+                    <h3>Trace Route</h3>
+                    <p>Відстеження маршруту пакетів через мережу з візуалізацією на карті та детальною інформацією про кожен хоп.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-network">🌐</div>
+                    <h3>Network Information</h3>
+                    <p>Детальна інформація про поточне підключення: Wi-Fi, Cellular, Ethernet. IP адреси, DNS сервери, signal strength.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-transfer">📊</div>
+                    <h3>Data Transfer Rate</h3>
+                    <p>Моніторинг швидкості передачі даних в реальному часі з графіками та історією вимірювань.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Технології</h2>
+                <p>Створено з використанням найсучасніших інструментів Android розробки</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Kotlin</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Jetpack Compose</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">💉</div>
+                    <div class="tech-name">Hilt DI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🏗️</div>
+                    <div class="tech-name">Clean Architecture</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔄</div>
+                    <div class="tech-name">Coroutines & Flow</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Material 3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🗂️</div>
+                    <div class="tech-name">Room Database</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🧭</div>
+                    <div class="tech-name">Navigation Compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>Інтерфейс додатку</h2>
+                <p>Темна тема з акцентними кольорами та сучасними анімаціями</p>
+            </div>
+            <div class="screenshot-carousel">
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">Home Screen</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div style="background: rgba(0, 122, 255, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Speed Test</div>
+                            <div style="background: rgba(140, 158, 255, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">iPerf3</div>
+                            <div style="background: rgba(49, 147, 117, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Ping</div>
+                            <div style="background: rgba(236, 171, 75, 0.2); border-radius: 12px; padding: 30px 15px; text-align: center;">Trace Route</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Головний екран</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div style="width: 200px; height: 200px; border-radius: 50%; border: 8px solid #007AFF; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <div style="font-size: 3rem; font-weight: bold;">456</div>
+                            <div style="position: absolute; bottom: 60px; font-size: 0.8rem; color: #8E8E93;">Mbps</div>
+                        </div>
+                        <div style="margin-top: 30px; text-align: center;">
+                            <div style="color: #8E8E93;">Download Speed</div>
+                            <div style="margin-top: 20px; display: flex; gap: 30px;">
+                                <div>
+                                    <div style="color: #8E8E93; font-size: 0.8rem;">Upload</div>
+                                    <div style="font-size: 1.2rem;">123 Mbps</div>
+                                </div>
+                                <div>
+                                    <div style="color: #8E8E93; font-size: 0.8rem;">Ping</div>
+                                    <div style="font-size: 1.2rem;">12 ms</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Speed Test</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">iPerf3 Client</h4>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Server</div>
+                            <div>Frankfurt, Germany</div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Protocol</div>
+                            <div>TCP</div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px;">
+                            <div style="color: #8E8E93; font-size: 0.8rem;">Duration</div>
+                            <div>30 seconds</div>
+                        </div>
+                        <button style="width: 100%; margin-top: 30px; padding: 15px; background: #007AFF; border: none; border-radius: 12px; color: white; font-size: 1.1rem; font-weight: 600;">Start Test</button>
+                    </div>
+                    <div class="screenshot-label">iPerf3 налаштування</div>
+                </div>
+                <div class="screenshot">
+                    <div style="background: #1C1C1E; height: 100%; padding: 20px; color: white;">
+                        <h4 style="margin-bottom: 20px;">Network Info</h4>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">Type</span>
+                                <span>Wi-Fi 6</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">SSID</span>
+                                <span>HomeNetwork</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">IP Address</span>
+                                <span>192.168.1.100</span>
+                            </div>
+                        </div>
+                        <div style="background: #2C2C2E; border-radius: 12px; padding: 15px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #8E8E93;">Signal</span>
+                                <span>-45 dBm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Інформація про мережу</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design System -->
+    <section class="design-system">
+        <div class="container">
+            <div class="section-header">
+                <h2>Дизайн система</h2>
+                <p>Темна тема з яскравими акцентами для кращої читабельності</p>
+            </div>
+            <div class="color-palette">
+                <div class="color-chip" style="background: #007AFF;">
+                    <span class="color-label">Primary</span>
+                    <span class="color-hex">#007AFF</span>
+                </div>
+                <div class="color-chip" style="background: #FE6D33;">
+                    <span class="color-label">Orange</span>
+                    <span class="color-hex">#FE6D33</span>
+                </div>
+                <div class="color-chip" style="background: #319375;">
+                    <span class="color-label">Green</span>
+                    <span class="color-hex">#319375</span>
+                </div>
+                <div class="color-chip" style="background: #8C9EFF;">
+                    <span class="color-label">Purple</span>
+                    <span class="color-hex">#8C9EFF</span>
+                </div>
+                <div class="color-chip" style="background: #ECAB4B;">
+                    <span class="color-label">Yellow</span>
+                    <span class="color-hex">#ECAB4B</span>
+                </div>
+                <div class="color-chip" style="background: #C659A1;">
+                    <span class="color-label">Pink</span>
+                    <span class="color-hex">#C659A1</span>
+                </div>
+                <div class="color-chip" style="background: #1C1C1E;">
+                    <span class="color-label">Surface</span>
+                    <span class="color-hex">#1C1C1E</span>
+                </div>
+                <div class="color-chip" style="background: #2C2C2E;">
+                    <span class="color-label">Card</span>
+                    <span class="color-hex">#2C2C2E</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Показники проекту</h2>
+                <p>Статистика розробки та функціональності</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">6+</div>
+                    <div class="metric-label">Основних функцій</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Kotlin код</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Material 3</div>
+                    <div class="metric-label">Design System</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">60fps</div>
+                    <div class="metric-label">Smooth animations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Зацікавлені в проекті?</h2>
+                <p>Перегляньте код на GitHub або дизайн в Figma</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="https://github.com/yourusername/netti" class="btn btn-primary">
+                        View Source Code
+                    </a>
+                    <a href="mailto:your.email@example.com" class="btn btn-secondary">
+                        Contact Developer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>© 2025 Netti. Network Testing Suite</div>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/yourusername">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/yourusername">LinkedIn</a></li>
+                    <li><a href="mailto:your.email@example.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
