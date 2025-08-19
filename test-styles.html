@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Styles</title>
+    
+    <!-- Import all CSS files in correct order -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <style>
+        /* Inline test styles to ensure styles are working -->
+        body {
+            background: #0E0E0E !important;
+            color: white !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+            padding: 2rem !important;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #1C1C1E;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #007AFF, #FE6D33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #007AFF;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+        }
+        
+        .card {
+            background: #2C2C2E;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .status.success {
+            background: rgba(0, 200, 83, 0.2);
+            color: #00C853;
+            border: 1px solid rgba(0, 200, 83, 0.3);
+        }
+        
+        .status.error {
+            background: rgba(255, 59, 48, 0.2);
+            color: #FF3B30;
+            border: 1px solid rgba(255, 59, 48, 0.3);
+        }
+        
+        .status.warning {
+            background: rgba(255, 179, 0, 0.2);
+            color: #FFB300;
+            border: 1px solid rgba(255, 179, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Style Test Page</h1>
+        <p>This page tests if CSS files are loading correctly.</p>
+        
+        <div class="card">
+            <h2>CSS Files Status</h2>
+            <div id="css-status"></div>
+        </div>
+        
+        <div class="card">
+            <h2>Test Components</h2>
+            <a href="#" class="btn">Primary Button</a>
+            <a href="#" class="btn" style="background: #FE6D33;">Secondary Button</a>
+            <a href="#" class="btn" style="background: transparent; border: 2px solid #007AFF;">Outline Button</a>
+        </div>
+        
+        <div class="card">
+            <h2>Navigation Links</h2>
+            <p>
+                <a href="index.html">Go to Main Portfolio</a><br>
+                <a href="projects/netti/index.html">Go to Netti Project</a><br>
+                <a href="projects/earnly/index.html">Go to Earnly Project</a>
+            </p>
+        </div>
+        
+        <div class="card">
+            <h2>CSS Variables Test</h2>
+            <div id="css-vars"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Test if CSS files are loaded
+        function checkCSS() {
+            const statusDiv = document.getElementById('css-status');
+            const links = document.querySelectorAll('link[rel="stylesheet"]');
+            
+            links.forEach(link => {
+                const url = link.href;
+                const filename = url.split('/').pop();
+                const status = document.createElement('div');
+                status.className = 'status';
+                
+                // Check if stylesheet is loaded
+                try {
+                    if (link.sheet && link.sheet.cssRules) {
+                        status.className += ' success';
+                        status.textContent = `✓ ${filename} - Loaded (${link.sheet.cssRules.length} rules)`;
+                    } else {
+                        status.className += ' warning';
+                        status.textContent = `⚠ ${filename} - Loaded but no rules accessible`;
+                    }
+                } catch (e) {
+                    status.className += ' error';
+                    status.textContent = `✗ ${filename} - Error loading`;
+                }
+                
+                statusDiv.appendChild(status);
+            });
+        }
+        
+        // Check CSS variables
+        function checkCSSVars() {
+            const varsDiv = document.getElementById('css-vars');
+            const computed = getComputedStyle(document.documentElement);
+            
+            const vars = [
+                '--primary',
+                '--secondary',
+                '--bg-primary',
+                '--bg-secondary',
+                '--text-primary',
+                '--text-secondary'
+            ];
+            
+            vars.forEach(varName => {
+                const value = computed.getPropertyValue(varName);
+                const item = document.createElement('div');
+                item.className = 'status';
+                
+                if (value) {
+                    item.className += ' success';
+                    item.innerHTML = `<strong>${varName}:</strong> ${value}`;
+                    if (varName.includes('bg') || varName.includes('primary') || varName.includes('secondary')) {
+                        item.style.borderLeft = `20px solid ${value}`;
+                    }
+                } else {
+                    item.className += ' error';
+                    item.textContent = `${varName}: Not defined`;
+                }
+                
+                varsDiv.appendChild(item);
+            });
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', () => {
+            checkCSS();
+            checkCSSVars();
+        });
+    </script>
+</body>
+</html>

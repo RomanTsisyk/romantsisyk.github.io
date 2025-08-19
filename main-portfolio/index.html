@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Developer Portfolio | Your Name</title>
+    <meta name="description" content="Professional Android Developer specializing in Kotlin, Jetpack Compose, and modern Android architecture">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="global.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-icon">👨‍💻</span>
+                <span class="logo-text">Portfolio</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <canvas id="particleCanvas"></canvas>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="badge-icon">🚀</span>
+                    <span>Open to Work</span>
+                </div>
+                <h1 class="hero-title">
+                    Hi, I'm <span class="gradient-text">Your Name</span>
+                </h1>
+                <h2 class="hero-subtitle">
+                    Android Developer & UI/UX Enthusiast
+                </h2>
+                <p class="hero-description">
+                    Crafting exceptional Android experiences with Kotlin, Jetpack Compose, and modern architecture patterns. 
+                    Passionate about clean code, beautiful interfaces, and performance optimization.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View Projects</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/yourusername" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">8+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">3+</span>
+                        <span class="stat-label">Years Exp</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">15+</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="window-header">
+                        <div class="window-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="window-title">MainActivity.kt</span>
+                    </div>
+                    <pre class="code-content"><code><span class="keyword">class</span> <span class="class">MainActivity</span> : <span class="class">ComponentActivity</span>() {
+    <span class="keyword">override fun</span> <span class="function">onCreate</span>(savedInstanceState: <span class="class">Bundle</span>?) {
+        <span class="keyword">super</span>.onCreate(savedInstanceState)
+        setContent {
+            <span class="function">MyAwesomeApp</span> {
+                <span class="comment">// Building amazing Android apps</span>
+                <span class="comment">// with modern tools and best practices</span>
+            }
+        }
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">PORTFOLIO</span>
+                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="section-description">A showcase of my best Android applications and UI/UX work</p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="android">Android Apps</button>
+                <button class="filter-btn" data-filter="fintech">FinTech</button>
+                <button class="filter-btn" data-filter="utility">Utilities</button>
+                <button class="filter-btn" data-filter="ui">UI/UX Design</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Netti Project -->
+                <article class="project-card" data-category="android utility">
+                    <div class="project-image">
+                        <img src="assets/images/netti-preview.png" alt="Netti App">
+                        <div class="project-overlay">
+                            <a href="projects/netti/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Netti</h3>
+                            <span class="project-badge">Featured</span>
+                        </div>
+                        <p>Professional network testing suite with speed test, iPerf3, ping, and trace route tools</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Jetpack Compose</span>
+                            <span class="tech-tag">Material 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/netti/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/netti" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Earnly Project -->
+                <article class="project-card" data-category="android fintech">
+                    <div class="project-image">
+                        <img src="assets/images/earnly-preview.png" alt="Earnly App">
+                        <div class="project-overlay">
+                            <a href="projects/earnly/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Earnly</h3>
+                            <span class="project-badge badge-new">New</span>
+                        </div>
+                        <p>Smart tax management app for UK businesses with HMRC integration and real-time calculations</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Room DB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/earnly/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/earnly" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Poly Lens Project -->
+                <article class="project-card" data-category="android utility">
+                    <div class="project-image">
+                        <img src="assets/images/poly-lens-preview.png" alt="Poly Lens App">
+                        <div class="project-overlay">
+                            <a href="projects/poly-lens/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Poly Lens</h3>
+                        </div>
+                        <p>AI-powered image recognition and object detection app with real-time analysis</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">ML Kit</span>
+                            <span class="tech-tag">CameraX</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/poly-lens/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/poly-lens" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Job Recruiter Project -->
+                <article class="project-card" data-category="android">
+                    <div class="project-image">
+                        <img src="assets/images/job-recruiter-preview.png" alt="Job Recruiter App">
+                        <div class="project-overlay">
+                            <a href="projects/job-recruiter/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Job Recruiter</h3>
+                        </div>
+                        <p>Modern recruitment platform connecting job seekers with employers efficiently</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">MVVM</span>
+                            <span class="tech-tag">Retrofit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/job-recruiter/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/job-recruiter" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Portfolio Adapter Project -->
+                <article class="project-card" data-category="android utility">
+                    <div class="project-image">
+                        <img src="assets/images/adapter-preview.png" alt="Portfolio Adapter">
+                        <div class="project-overlay">
+                            <a href="projects/portfolio-adapter/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Portfolio Adapter</h3>
+                        </div>
+                        <p>Dynamic portfolio generator with customizable templates and themes</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Compose</span>
+                            <span class="tech-tag">Material You</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/portfolio-adapter/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/portfolio-adapter" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Fels Project -->
+                <article class="project-card" data-category="android fintech">
+                    <div class="project-image">
+                        <img src="assets/images/fels-preview.png" alt="Fels App">
+                        <div class="project-overlay">
+                            <a href="projects/fels/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Fels</h3>
+                        </div>
+                        <p>Personal finance management app with budgeting and expense tracking</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Charts</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/fels/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/fels" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Kasa Stefczyka Project -->
+                <article class="project-card" data-category="android fintech">
+                    <div class="project-image">
+                        <img src="assets/images/kasa-preview.png" alt="Kasa Stefczyka">
+                        <div class="project-overlay">
+                            <a href="projects/kasa-stefczyka/" class="project-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Kasa Stefczyka</h3>
+                        </div>
+                        <p>Banking application with secure transactions and account management</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Biometrics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/kasa-stefczyka/" class="link-demo">Live Demo</a>
+                            <a href="https://github.com/yourusername/kasa" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- More Projects Button -->
+                <div class="more-projects">
+                    <button class="btn btn-outline" id="loadMore">
+                        Load More Projects
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">EXPERTISE</span>
+                <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
+                <p class="section-description">My technical stack and proficiency levels</p>
+            </div>
+
+            <div class="skills-container">
+                <!-- Android Development -->
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">📱</span>
+                        Android Development
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Kotlin</span>
+                                <span class="skill-level">Expert</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Jetpack Compose</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Android SDK</span>
+                                <span class="skill-level">Expert</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Material Design</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture & Patterns -->
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🏗️</span>
+                        Architecture & Patterns
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">MVVM</span>
+                                <span class="skill-level">Expert</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Clean Architecture</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Dependency Injection</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Coroutines & Flow</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend & Database -->
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🗄️</span>
+                        Backend & Database
+                    </h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Firebase</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Room Database</span>
+                                <span class="skill-level">Expert</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 93%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">REST APIs</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">SQLite</span>
+                                <span class="skill-level">Advanced</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🛠️</span>
+                        Tools & Others
+                    </h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Android Studio</span>
+                        <span class="skill-tag">Gradle</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Unit Testing</span>
+                        <span class="skill-tag">UI Testing</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">ABOUT ME</span>
+                <h2 class="section-title">Passionate <span class="gradient-text">Android Developer</span></h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm an Android developer with a passion for creating beautiful, functional, and user-friendly mobile applications. 
+                        With over 3 years of experience in Android development, I specialize in building robust applications using Kotlin 
+                        and modern Android architecture patterns.
+                    </p>
+                    <p>
+                        My journey in mobile development started with a curiosity about how apps work and evolved into a career focused on 
+                        crafting exceptional user experiences. I'm particularly interested in fintech applications, UI/UX design, and 
+                        performance optimization.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight">
+                            <span class="highlight-icon">🎓</span>
+                            <div>
+                                <h4>Education</h4>
+                                <p>Computer Science Degree</p>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">💼</span>
+                            <div>
+                                <h4>Experience</h4>
+                                <p>3+ Years in Android Development</p>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">🏆</span>
+                            <div>
+                                <h4>Achievements</h4>
+                                <p>10+ Apps Published</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="assets/images/profile.jpg" alt="Profile">
+                        <div class="image-decoration"></div>
+                    </div>
+                    <div class="about-socials">
+                        <a href="https://github.com/yourusername" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/yourusername" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">GET IN TOUCH</span>
+                <h2 class="section-title">Let's <span class="gradient-text">Work Together</span></h2>
+                <p class="section-description">Have a project in mind? Let's discuss how we can collaborate</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:your.email@example.com">your.email@example.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <div>
+                            <h4>Phone</h4>
+                            <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Warsaw, Poland</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span>Send Message</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Android Developer Portfolio</h3>
+                    <p>Building exceptional mobile experiences</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/yourusername">GitHub</a>
+                        <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+                        <a href="https://twitter.com/yourusername">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p>Made with ❤️ using modern web technologies</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script src="global.js"></script>
+</body>
+</html>

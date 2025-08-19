@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasa Stefczyka - Mobile Banking Application | Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Complete Kasa Stefczyka Styles with Animations -->
+    <style>
+        /* ========== KASA STEFCZYKA - COMPLETE STYLES WITH ANIMATIONS ========== */
+        :root {
+            --primary: #005A9C;
+            --secondary: #00A651;
+            --accent: #FFC107;
+            --danger: #DC3545;
+            --dark-bg: #0A0E1A;
+            --dark-surface: #141825;
+            --dark-card: #1E2333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A8B2C7;
+            --gradient-primary: linear-gradient(135deg, #005A9C, #0074C7);
+            --gradient-secondary: linear-gradient(135deg, #00A651, #00D463);
+            --gradient-accent: linear-gradient(135deg, #FFC107, #FFD54F);
+            --gradient-banking: linear-gradient(135deg, #005A9C 0%, #00A651 50%, #FFC107 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-banking);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-cards {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-float {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, #005A9C, #00A651);
+            border-radius: 8px;
+            opacity: 0.1;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            to {
+                transform: translateY(-100vh) rotate(180deg);
+            }
+        }
+
+        .card-float:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+        .card-float:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: 2s; }
+        .card-float:nth-child(3) { left: 40%; animation-duration: 20s; animation-delay: 1s; }
+        .card-float:nth-child(4) { left: 60%; animation-duration: 16s; animation-delay: 3s; }
+        .card-float:nth-child(5) { left: 75%; animation-duration: 19s; animation-delay: 4s; }
+        .card-float:nth-child(6) { left: 90%; animation-duration: 17s; animation-delay: 2.5s; }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #005A9C, transparent);
+            top: -200px;
+            left: -200px;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #00A651, transparent);
+            bottom: -150px;
+            right: -150px;
+            animation: drift 30s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #FFC107, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-glow 8s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, -30px); }
+            50% { transform: translate(-30px, 50px); }
+            75% { transform: translate(30px, 30px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Project Switcher */
+        .project-switcher {
+            position: relative;
+        }
+
+        .switcher-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .switcher-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: var(--dark-surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 0.5rem;
+            min-width: 250px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-switcher.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .project-item.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gradient-text {
+            background: var(--gradient-banking);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-flow 3s ease infinite;
+        }
+
+        @keyframes gradient-flow {
+            to { background-position: 200% center; }
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 90, 156, 0.5);
+        }
+
+        /* Phone Mockup */
+        .hero-visual {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-mockup {
+            width: 320px;
+            height: 640px;
+            background: var(--dark-surface);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #005A9C, #0074C7);
+            border-radius: 28px;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .banking-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .account-balance {
+            color: #1A1A1A;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            color: #005A9C;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .action-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .action-label {
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .transaction-list {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .transaction-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .transaction-amount {
+            font-weight: 600;
+        }
+
+        .amount-positive {
+            color: #00A651;
+        }
+
+        .amount-negative {
+            color: #DC3545;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 2rem;
+            background: var(--dark-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-banking);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 90, 156, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Tech Stack */
+        .tech {
+            padding: 100px 2rem;
+        }
+
+        .tech-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-item {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px) rotate(2deg);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 90, 156, 0.3);
+        }
+
+        /* Metrics */
+        .metrics {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, rgba(0, 90, 156, 0.05), rgba(0, 166, 81, 0.05));
+        }
+
+        .metrics-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            background: var(--dark-surface);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+                margin: 2rem auto 0;
+            }
+
+            .nav-left {
+                flex: 1;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">KS</div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-cards">
+            <div class="card-float"></div>
+            <div class="card-float"></div>
+            <div class="card-float"></div>
+            <div class="card-float"></div>
+            <div class="card-float"></div>
+            <div class="card-float"></div>
+        </div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation with Project Switcher -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">Kasa Stefczyka</div>
+                <div class="project-switcher" id="projectSwitcher">
+                    <button class="switcher-button" onclick="toggleDropdown()">
+                        <span>Switch Project</span>
+                        <span class="arrow-icon">▼</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="../earnly/index.html" class="project-item">
+                            <span>£</span>
+                            <span>Earnly - Tax Manager</span>
+                        </a>
+                        <a href="../netti/index.html" class="project-item">
+                            <span>🌐</span>
+                            <span>Netti - Network Testing</span>
+                        </a>
+                        <a href="../poly-lens/index.html" class="project-item">
+                            <span>📸</span>
+                            <span>Poly Lens - AI Vision</span>
+                        </a>
+                        <a href="../fels/index.html" class="project-item">
+                            <span>💰</span>
+                            <span>Fels - Finance Manager</span>
+                        </a>
+                        <a href="../job-recruiter/index.html" class="project-item">
+                            <span>💼</span>
+                            <span>Job Recruiter</span>
+                        </a>
+                        <a href="../portfolio-adapter/index.html" class="project-item">
+                            <span>🎨</span>
+                            <span>Portfolio Adapter</span>
+                        </a>
+                        <a href="../kasa-stefczyka/index.html" class="project-item active">
+                            <span>🏦</span>
+                            <span>Kasa Stefczyka</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right" style="display: flex; gap: 1rem;">
+                <a href="../../index.html" style="padding: 0.75rem 1.25rem; color: #A8B2C7; text-decoration: none; transition: color 0.3s;">Home</a>
+                <a href="../../index.html#projects" style="padding: 0.75rem 1.25rem; color: #A8B2C7; text-decoration: none; transition: color 0.3s;">All Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span class="gradient-text">Kasa Stefczyka</span><br>
+                    Mobile Banking
+                </h1>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+                    Secure and modern banking application for Polish credit union members. 
+                    Full-featured mobile banking with biometric authentication and real-time transactions.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>📱</span> View on Play Store
+                    </a>
+                    <a href="https://github.com/yourusername/kasa-stefczyka" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
+                        <span>💻</span> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="banking-header">
+                            <div class="account-balance">Saldo konta</div>
+                            <div class="balance-amount">12 450,00 zł</div>
+                        </div>
+                        <div class="quick-actions">
+                            <div class="action-card">
+                                <div class="action-icon">💸</div>
+                                <div class="action-label">Przelew</div>
+                            </div>
+                            <div class="action-card">
+                                <div class="action-icon">📱</div>
+                                <div class="action-label">BLIK</div>
+                            </div>
+                            <div class="action-card">
+                                <div class="action-icon">💳</div>
+                                <div class="action-label">Karty</div>
+                            </div>
+                            <div class="action-card">
+                                <div class="action-icon">📊</div>
+                                <div class="action-label">Lokaty</div>
+                            </div>
+                        </div>
+                        <div class="transaction-list">
+                            <h4 style="color: #333; margin-bottom: 12px;">Ostatnie transakcje</h4>
+                            <div class="transaction-item">
+                                <span class="transaction-name">Wynagrodzenie</span>
+                                <span class="transaction-amount amount-positive">+5 200 zł</span>
+                            </div>
+                            <div class="transaction-item">
+                                <span class="transaction-name">Biedronka</span>
+                                <span class="transaction-amount amount-negative">-123 zł</span>
+                            </div>
+                            <div class="transaction-item">
+                                <span class="transaction-name">Orange</span>
+                                <span class="transaction-amount amount-negative">-79 zł</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Funkcje Aplikacji</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Kompleksowa bankowość mobilna w Twoim telefonie</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Bezpieczne Logowanie</h3>
+                <p style="color: var(--text-secondary);">Biometryczne uwierzytelnianie i wielopoziomowe zabezpieczenia</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: var(--gradient-secondary);">💸</div>
+                <h3>Szybkie Przelewy</h3>
+                <p style="color: var(--text-secondary);">Natychmiastowe przelewy krajowe i międzynarodowe SEPA</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: var(--gradient-accent);">📱</div>
+                <h3>BLIK</h3>
+                <p style="color: var(--text-secondary);">Płatności mobilne i wypłaty z bankomatów bez karty</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC3545, #F87171);">💳</div>
+                <h3>Zarządzanie Kartami</h3>
+                <p style="color: var(--text-secondary);">Blokowanie, odblokowywanie i zarządzanie limitami kart</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #6C757D, #ADB5BD);">📊</div>
+                <h3>Lokaty i Kredyty</h3>
+                <p style="color: var(--text-secondary);">Zakładanie lokat i wnioski kredytowe online</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #17A2B8, #5DADE2);">📈</div>
+                <h3>Analiza Wydatków</h3>
+                <p style="color: var(--text-secondary);">Szczegółowe raporty i kategoryzacja transakcji</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech">
+        <div class="section-header">
+            <h2>Technologie</h2>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
+                <div>Kotlin</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
+                <div>Jetpack Compose</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
+                <div>Biometric API</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+                <div>SQLCipher</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
+                <div>Retrofit</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💉</div>
+                <div>Hilt</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏗️</div>
+                <div>Clean Architecture</div>
+            </div>
+            <div class="tech-item">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧪</div>
+                <div>JUnit & Espresso</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="section-header">
+            <h2>Wyniki i Statystyki</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">100K+</div>
+                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Aktywnych Użytkowników</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">4.7★</div>
+                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Ocena w Sklepie</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">99.9%</div>
+                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Dostępność</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">256-bit</div>
+                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Szyfrowanie</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hide loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hide');
+            }, 500);
+        });
+
+        // Project switcher
+        function toggleDropdown() {
+            document.getElementById('projectSwitcher').classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.project-switcher')) {
+                document.getElementById('projectSwitcher').classList.remove('open');
+            }
+        });
+
+        // Animate on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

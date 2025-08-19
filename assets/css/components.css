@@ -1,0 +1,621 @@
+/**
+ * Navigation Components Styles
+ * Unified navigation system for all project pages
+ */
+
+/* ============================================
+   PROJECT HEADER NAVIGATION
+   ============================================ */
+
+.project-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(14, 14, 14, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.project-nav.scrolled {
+    padding: 0.75rem 0;
+    background: rgba(14, 14, 14, 0.98);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* Back to Portfolio Button */
+.back-to-home {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.back-to-home:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-2px);
+}
+
+.back-to-home svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Project Switcher */
+.project-switcher {
+    position: relative;
+}
+
+.current-project-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.current-project-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(28, 28, 30, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.project-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.dropdown-item:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 1.25rem;
+}
+
+.project-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--project-color);
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover .project-dot {
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--project-color);
+}
+
+/* Section Navigation */
+.section-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.section-link {
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.section-link.active {
+    color: var(--primary);
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.section-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover span {
+    background: var(--primary);
+}
+
+/* ============================================
+   BOTTOM NAVIGATION
+   ============================================ */
+
+.project-bottom-nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    z-index: 999;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.nav-prev,
+.nav-next,
+.nav-home {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-prev:hover,
+.nav-next:hover,
+.nav-home:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.nav-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-project-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+}
+
+.nav-home {
+    background: rgba(0, 122, 255, 0.1);
+    border: 1px solid rgba(0, 122, 255, 0.2);
+}
+
+.nav-home:hover {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: rgba(0, 122, 255, 0.3);
+}
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.mobile-menu.active {
+    pointer-events: all;
+}
+
+.mobile-menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active .mobile-menu-overlay {
+    opacity: 1;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 85vw;
+    background: rgba(28, 28, 30, 0.98);
+    backdrop-filter: blur(20px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu.active .mobile-menu-content {
+    transform: translateX(0);
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.mobile-menu-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.mobile-menu-nav {
+    padding: 1rem;
+}
+
+.mobile-menu-section {
+    margin-top: 1.5rem;
+}
+
+.mobile-menu-section h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin: 0 0 1rem 1rem;
+    opacity: 0.7;
+}
+
+.mobile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    margin-bottom: 0.25rem;
+}
+
+.mobile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    padding-left: 1.25rem;
+}
+
+.mobile-menu-item.active {
+    background: rgba(0, 122, 255, 0.1);
+    color: var(--primary);
+}
+
+.current-badge {
+    margin-left: auto;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    background: rgba(0, 122, 255, 0.2);
+    color: var(--primary);
+    border-radius: 4px;
+}
+
+/* ============================================
+   PROGRESS INDICATOR
+   ============================================ */
+
+.project-progress {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    position: absolute;
+    right: 2rem;
+    top: -1.5rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+/* ============================================
+   SWIPE INDICATOR
+   ============================================ */
+
+.swipe-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1rem 1.5rem;
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    z-index: 3000;
+    animation: slideIn 0.3s ease;
+}
+
+.swipe-indicator.next {
+    right: 2rem;
+}
+
+.swipe-indicator.prev {
+    left: 2rem;
+}
+
+.swipe-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* ============================================
+   QUICK SWITCH HINT
+   ============================================ */
+
+.project-quick-switch {
+    position: fixed;
+    bottom: 7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.project-quick-switch.visible {
+    opacity: 1;
+}
+
+.switch-indicator {
+    padding: 0.5rem 1rem;
+    background: rgba(28, 28, 30, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.switch-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .section-nav {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .project-bottom-nav {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+        justify-content: space-between;
+    }
+    
+    .nav-label {
+        display: none;
+    }
+    
+    .nav-project-name {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .project-switcher {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .back-to-home span {
+        display: none;
+    }
+    
+    .project-bottom-nav {
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .nav-prev,
+    .nav-next,
+    .nav-home {
+        padding: 0.75rem;
+    }
+    
+    .nav-text {
+        display: none;
+    }
+    
+    .nav-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-bottom-nav {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .mobile-menu-content {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-nav {
+    animation: fadeInUp 0.6s ease;
+}
+
+.project-bottom-nav {
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* Smooth transitions for theme changes */
+* {
+    transition: background-color 0.3s ease, 
+                border-color 0.3s ease;
+}

@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-    --primary-color: #00ADEF;
+    --primary-color: #00B4D8;  /* Cyan Blue from app */
     --secondary-color: #A5A5A5;
     --accent-color: #00D2BE;
     --dark-bg: #0A0E27;
@@ -8,8 +8,10 @@
     --text-primary: #FFFFFF;
     --text-secondary: #B8BCC8;
     --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-2: linear-gradient(135deg, #00ADEF 0%, #00D2BE 100%);
+    --gradient-2: linear-gradient(135deg, #00B4D8 0%, #00D2BE 100%);
     --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --mercedes-dark: #1A1A1A;  /* Dark from screenshots */
+    --mercedes-blue: #00B4D8;  /* Blue from app */
 }
 
 * {
@@ -336,6 +338,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .floating-card {
@@ -567,9 +570,13 @@ body {
 }
 
 .screenshot-item img {
+    width: 250px;
+    height: 500px;
+    object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s;
+    display: block;
 }
 
 .screenshot-item:hover img {

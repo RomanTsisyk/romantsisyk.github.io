@@ -1,305 +1,396 @@
-// =====================
-// Portfolio JavaScript
-// =====================
+// FollowMyMoney Portfolio JavaScript
 
-// Loading Screen
-window.addEventListener('load', () => {
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide loader after page loads
     setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) {
             loader.classList.add('hidden');
         }
     }, 1500);
-});
 
-// Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    // Showcase screen switching
+    const showcaseButtons = document.querySelectorAll('.showcase-nav-btn');
+    const showcaseImages = document.querySelectorAll('.showcase-image');
+    let currentScreen = 1;
+    let autoSwitchInterval;
+
+    function switchScreen(screenNumber) {
+        // Update buttons
+        showcaseButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.screen === screenNumber.toString()) {
+                btn.classList.add('active');
+            }
+        });
+
+        // Update images
+        showcaseImages.forEach(img => {
+            img.classList.remove('active');
+            if (img.dataset.screen === screenNumber.toString()) {
+                img.classList.add('active');
+            }
+        });
+
+        currentScreen = screenNumber;
     }
-});
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+    // Manual switching
+    showcaseButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            clearInterval(autoSwitchInterval);
+            switchScreen(parseInt(btn.dataset.screen));
+            startAutoSwitch(); // Restart auto-switch after manual interaction
+        });
     });
-});
 
-// Screenshot Carousel
-let currentScreenshot = 0;
-const screenshots = document.querySelectorAll('.screenshot-item');
-const dots = document.querySelectorAll('.dot');
-
-function changeScreenshot(index) {
-    screenshots.forEach(item => item.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    screenshots[index].classList.add('active');
-    dots[index].classList.add('active');
-    currentScreenshot = index;
-}
-
-// Auto-rotate screenshots
-setInterval(() => {
-    const nextIndex = (currentScreenshot + 1) % screenshots.length;
-    changeScreenshot(nextIndex);
-}, 5000);
-
-// Animated Counter for Metrics
-function animateCounter(element) {
-    const target = parseFloat(element.dataset.target);
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    let current = 0;
-
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            element.textContent = Math.floor(current);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target;
-        }
-    };
-
-    updateCounter();
-}
-
-// Intersection Observer for Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            
-            // Trigger counter animation for metrics
-            if (entry.target.classList.contains('metric-card')) {
-                const counter = entry.target.querySelector('.metric-value');
-                if (counter && !counter.classList.contains('animated')) {
-                    animateCounter(counter);
-                    counter.classList.add('animated');
-                }
-            }
-        }
-    });
-}, observerOptions);
-
-// Observe elements for scroll animations
-document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
-    el.classList.add('scroll-reveal');
-    observer.observe(el);
-});
-
-// Parallax Effect for Hero Section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.gradient-orb');
-    
-    parallaxElements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.1);
-        element.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
-
-// Trading Interface Animation
-function animateTradingInterface() {
-    const prices = ['$178.50', '$179.20', '$178.80', '$179.50', '$180.10'];
-    const changes = ['+2.4%', '+2.8%', '+2.5%', '+3.1%', '+3.5%'];
-    let index = 0;
-
-    setInterval(() => {
-        const priceElement = document.querySelector('.trading-price');
-        const changeElement = document.querySelector('.trading-change');
-        
-        if (priceElement && changeElement) {
-            index = (index + 1) % prices.length;
-            priceElement.textContent = prices[index];
-            changeElement.textContent = changes[index];
-            
-            // Add animation class
-            priceElement.style.animation = 'none';
-            setTimeout(() => {
-                priceElement.style.animation = 'fadeIn 0.5s ease';
-            }, 10);
-        }
-    }, 3000);
-}
-
-animateTradingInterface();
-
-// Mobile Menu Toggle (for future implementation)
-function createMobileMenu() {
-    const navbar = document.querySelector('.navbar');
-    const navContainer = document.querySelector('.nav-container');
-    
-    // Create hamburger menu button
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-toggle';
-    menuButton.innerHTML = `
-        <span></span>
-        <span></span>
-        <span></span>
-    `;
-    
-    // Add styles for mobile menu
-    const style = document.createElement('style');
-    style.textContent = `
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-        
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-primary);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 250px;
-                height: calc(100vh - 70px);
-                background: var(--dark-surface);
-                flex-direction: column;
-                padding: 30px;
-                transition: right 0.3s ease;
-            }
-            
-            .nav-links.active {
-                right: 0;
-            }
-        }
-    `;
-    
-    document.head.appendChild(style);
-    navContainer.appendChild(menuButton);
-    
-    // Toggle mobile menu
-    menuButton.addEventListener('click', () => {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('active');
-    });
-}
-
-// Initialize mobile menu
-if (window.innerWidth <= 768) {
-    createMobileMenu();
-}
-
-// Form Validation (for future contact form)
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.classList.add('error');
-        } else {
-            input.classList.remove('error');
-        }
-    });
-    
-    return isValid;
-}
-
-// Typing Effect for Hero Title
-function typeWriter() {
-    const text = "Smart Trading";
-    const element = document.querySelector('.title-gradient');
-    if (!element) return;
-    
-    let index = 0;
-    const originalText = element.textContent;
-    element.textContent = '';
-    
-    function type() {
-        if (index < text.length) {
-            element.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, 100);
-        }
+    // Auto-switch screens
+    function startAutoSwitch() {
+        autoSwitchInterval = setInterval(() => {
+            currentScreen = currentScreen >= 4 ? 1 : currentScreen + 1;
+            switchScreen(currentScreen);
+        }, 4000);
     }
+
+    // Start auto-switching
+    startAutoSwitch();
+
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.nav-mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
     
-    setTimeout(type, 2000);
-}
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+            mobileToggle.classList.toggle('active');
+        });
+    }
 
-// Initialize typing effect
-// typeWriter(); // Uncomment to enable typing effect
-
-// Performance optimization - Lazy loading images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
     });
-    
-    document.querySelectorAll('img.lazy').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
 
-// Add ripple effect to buttons
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
+    // Navbar background on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(10, 14, 39, 0.98)';
+            navbar.style.backdropFilter = 'blur(20px)';
+        } else {
+            navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+            navbar.style.backdropFilter = 'blur(10px)';
+        }
+    });
+
+    // Animate metrics counting
+    const animateValue = (element, start, end, duration) => {
+        const startTimestamp = Date.now();
+        const step = (timestamp) => {
+            const progress = Math.min((Date.now() - startTimestamp) / duration, 1);
+            const value = progress * (end - start) + start;
+            
+            if (element.dataset.format === 'currency') {
+                element.textContent = `€${Math.floor(value)}M+`;
+            } else if (element.dataset.format === 'percentage') {
+                element.textContent = `${value.toFixed(2)}%`;
+            } else if (element.dataset.format === 'number') {
+                element.textContent = `${Math.floor(value).toLocaleString()}+`;
+            } else {
+                element.textContent = `${Math.floor(value)}+`;
+            }
+            
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        };
+        requestAnimationFrame(step);
+    };
+
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Fade in animation
+                if (entry.target.classList.contains('fade-in')) {
+                    entry.target.classList.add('visible');
+                }
+                
+                // Metric counting animation
+                if (entry.target.classList.contains('metric-value')) {
+                    const value = parseFloat(entry.target.dataset.value);
+                    if (!entry.target.animated) {
+                        entry.target.animated = true;
+                        
+                        if (entry.target.textContent.includes('€')) {
+                            entry.target.dataset.format = 'currency';
+                            animateValue(entry.target, 0, value, 2000);
+                        } else if (entry.target.textContent.includes('%')) {
+                            entry.target.dataset.format = 'percentage';
+                            animateValue(entry.target, 0, value, 2000);
+                        } else if (value > 1000) {
+                            entry.target.dataset.format = 'number';
+                            animateValue(entry.target, 0, value, 2000);
+                        } else {
+                            animateValue(entry.target, 0, value, 2000);
+                        }
+                    }
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Observe metric values
+    document.querySelectorAll('.metric-value').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Screenshot carousel
+    const screenshotTrack = document.querySelector('.screenshot-track');
+    const screenshots = document.querySelectorAll('.screenshot-item');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentScreenshot = 0;
+    const totalScreenshots = screenshots.length;
+
+    function showScreenshot(index) {
+        // Update active states
+        screenshots.forEach((screenshot, i) => {
+            screenshot.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
         
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
+        // Calculate transform
+        const slideWidth = screenshots[0].offsetWidth + 32; // width + gap
+        const translateX = -index * slideWidth;
+        screenshotTrack.style.transform = `translateX(${translateX}px)`;
+    }
+
+    // Navigation buttons
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentScreenshot = currentScreenshot > 0 ? currentScreenshot - 1 : totalScreenshots - 1;
+            showScreenshot(currentScreenshot);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentScreenshot = (currentScreenshot + 1) % totalScreenshots;
+            showScreenshot(currentScreenshot);
+        });
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentScreenshot = index;
+            showScreenshot(currentScreenshot);
+        });
+    });
+
+    // Auto-rotate screenshots
+    setInterval(() => {
+        currentScreenshot = (currentScreenshot + 1) % totalScreenshots;
+        showScreenshot(currentScreenshot);
+    }, 5000);
+
+    // Add animation to quick stats bar
+    const statsBarItems = document.querySelectorAll('.stat-bar-item');
+    const statsBarObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    }, observerOptions);
+
+    statsBarItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'all 0.5s ease';
+        statsBarObserver.observe(item);
+    });
+
+    // Add parallax effect to orbs
+    const orbs = document.querySelectorAll('.orb');
+    window.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
         
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
+        orbs.forEach((orb, index) => {
+            const speed = (index + 1) * 10;
+            const xOffset = (x - 0.5) * speed;
+            const yOffset = (y - 0.5) * speed;
+            
+            orb.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
+    });
+
+    // Trading card hover effects
+    const traderCards = document.querySelectorAll('.trader-card');
+    traderCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px)';
+        });
         
-        this.appendChild(ripple);
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Follow button animation
+    const followButtons = document.querySelectorAll('.btn-follow');
+    followButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!this.classList.contains('following')) {
+                this.classList.add('following');
+                this.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Following
+                `;
+                this.style.background = 'rgba(0, 200, 83, 0.2)';
+                this.style.border = '1px solid var(--primary-color)';
+            } else {
+                this.classList.remove('following');
+                this.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4L20 8V14C20 18 16 20 12 21C8 20 4 18 4 14V8L12 4Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Follow Trader
+                `;
+                this.style.background = 'var(--gradient-primary)';
+                this.style.border = 'none';
+            }
+        });
+    });
+
+    // Performance bar animation
+    const performanceBars = document.querySelectorAll('.bar-fill');
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.animated) {
+                entry.target.animated = true;
+                const width = entry.target.style.width;
+                entry.target.style.width = '0';
+                setTimeout(() => {
+                    entry.target.style.width = width;
+                }, 100);
+            }
+        });
+    }, observerOptions);
+
+    performanceBars.forEach(bar => {
+        barObserver.observe(bar);
+    });
+
+    // Add ripple effect to buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Add typing effect to hero title
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const originalText = heroTitle.innerHTML;
+        heroTitle.style.opacity = '0';
         
         setTimeout(() => {
-            ripple.remove();
-        }, 600);
+            heroTitle.style.opacity = '1';
+            heroTitle.style.animation = 'fadeInUp 1s ease forwards';
+        }, 500);
+    }
+
+    // Add glow effect on scroll
+    const glowElements = document.querySelectorAll('.feature-card, .trader-card, .metric-card');
+    window.addEventListener('scroll', () => {
+        glowElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                const opacity = Math.min(scrollProgress * 0.1, 0.05);
+                element.style.boxShadow = `0 0 50px rgba(0, 200, 83, ${opacity})`;
+            }
+        });
+    });
+
+    // Initialize tooltips
+    const elementsWithTooltips = document.querySelectorAll('[data-tooltip]');
+    elementsWithTooltips.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = this.dataset.tooltip;
+            document.body.appendChild(tooltip);
+            
+            const rect = this.getBoundingClientRect();
+            tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+            tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
+            
+            this.tooltip = tooltip;
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            if (this.tooltip) {
+                this.tooltip.remove();
+                delete this.tooltip;
+            }
+        });
     });
 });
 
-// Add ripple effect styles
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
     .btn {
         position: relative;
         overflow: hidden;
@@ -309,21 +400,93 @@ rippleStyle.textContent = `
         position: absolute;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
         animation: ripple-animation 0.6s ease-out;
         pointer-events: none;
     }
     
     @keyframes ripple-animation {
+        from {
+            transform: scale(0);
+            opacity: 1;
+        }
         to {
             transform: scale(4);
             opacity: 0;
         }
     }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .tooltip {
+        position: fixed;
+        background: var(--card-bg);
+        color: var(--text-primary);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 10000;
+        pointer-events: none;
+        animation: tooltip-appear 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+    
+    @keyframes tooltip-appear {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .nav-links.mobile-active {
+            display: flex;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--dark-bg);
+            flex-direction: column;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .nav-mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .nav-mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    }
 `;
-document.head.appendChild(rippleStyle);
 
-// Console Easter Egg
-console.log('%c🚀 Fels Trader Portfolio', 'font-size: 24px; font-weight: bold; color: #00C853;');
-console.log('%cBuilt with ❤️ for Android', 'font-size: 14px; color: #2196F3;');
-console.log('%cInterested in the project? Check out our GitHub!', 'font-size: 12px; color: #888;');
+document.head.appendChild(style);

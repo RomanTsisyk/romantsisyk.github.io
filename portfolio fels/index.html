@@ -3,127 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fels Trader - Smart Investment Platform for Android</title>
+    <title>FollowMyMoney - Professional Wealth Management Platform</title>
     <link rel="stylesheet" href="styles.css">
-    <meta name="description" content="Fels Trader - Professional trading and investment app for Android. Follow expert traders, manage your portfolio, and make informed investment decisions.">
-    <meta property="og:title" content="Fels Trader - Smart Investment Platform">
-    <meta property="og:description" content="Professional trading app with expert recommendations and social trading features">
-    <meta property="og:image" content="https://i.imgur.com/placeholder.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Loading Screen -->
-    <div id="loader" class="loader">
+    <div id="loader">
         <div class="loader-content">
-            <div class="loader-logo">
-                <svg width="60" height="60" viewBox="0 0 100 100">
-                    <rect x="20" y="50" width="10" height="30" fill="#FFD700">
-                        <animate attributeName="height" values="30;60;30" dur="1s" repeatCount="indefinite"/>
-                        <animate attributeName="y" values="50;35;50" dur="1s" repeatCount="indefinite"/>
-                    </rect>
-                    <rect x="40" y="40" width="10" height="40" fill="#00C853">
-                        <animate attributeName="height" values="40;70;40" dur="1s" begin="0.2s" repeatCount="indefinite"/>
-                        <animate attributeName="y" values="40;25;40" dur="1s" begin="0.2s" repeatCount="indefinite"/>
-                    </rect>
-                    <rect x="60" y="45" width="10" height="35" fill="#2196F3">
-                        <animate attributeName="height" values="35;55;35" dur="1s" begin="0.4s" repeatCount="indefinite"/>
-                        <animate attributeName="y" values="45;30;45" dur="1s" begin="0.4s" repeatCount="indefinite"/>
-                    </rect>
-                </svg>
+            <div class="chart-loader">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
+            <p>Initializing Portfolio...</p>
         </div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-        <div class="gradient-orb orb-4"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">Fels<span class="logo-accent">Trader</span></span>
+                <span class="logo-text">FollowMyMoney</span>
+                <span class="logo-badge">Pro</span>
             </div>
             <div class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#technology" class="nav-link">Technology</a>
-                <a href="#screenshots" class="nav-link">Screenshots</a>
-                <a href="#metrics" class="nav-link">Performance</a>
-                <a href="https://github.com/felsgroup/fels-trader" class="nav-link nav-cta" target="_blank">View on GitHub</a>
+                <a href="#features">Features</a>
+                <a href="#trading">Trading</a>
+                <a href="#security">Security</a>
+                <a href="#metrics">Metrics</a>
+                <a href="#download" class="nav-cta">Get Started</a>
+            </div>
+            <div class="nav-mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="floating-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
+        </div>
+        
         <div class="hero-content">
             <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    <span>🇩🇪 BaFin Regulated Platform</span>
+                </div>
                 <h1 class="hero-title">
-                    <span class="title-gradient">Smart Trading</span>
-                    <br>
-                    <span class="title-secondary">Made Simple</span>
+                    <span>Vermögensaufbau und</span><br>
+                    <span class="gradient-text">Vermögensverwaltung</span><br>
+                    <span>in einer App.</span>
                 </h1>
                 <p class="hero-description">
-                    Professional investment platform for Android that connects you with expert traders, provides real-time recommendations, and helps you build your portfolio with confidence.
+                    Professional wealth management platform with copy trading, expert fund recommendations, 
+                    and real-time portfolio tracking. Build wealth like the pros with German security standards.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-value">50K+</span>
-                        <span class="stat-label">Active Traders</span>
+                        <span class="stat-value">€918K+</span>
+                        <span class="stat-label">Assets Under Management</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value">€2M+</span>
-                        <span class="stat-label">Daily Volume</span>
+                        <span class="stat-value">76.19%</span>
+                        <span class="stat-label">Success Rate</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value">4.8★</span>
-                        <span class="stat-label">User Rating</span>
+                        <span class="stat-value">20+</span>
+                        <span class="stat-label">Star Traders</span>
                     </div>
                 </div>
-                <div class="hero-cta">
-                    <a href="https://play.google.com/store/apps/details?id=de.felsgroup.trader" class="btn btn-primary">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                <div class="hero-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=de.followmytrader" target="_blank" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5Z" fill="currentColor"/>
+                            <path d="M13.69 12L20.12 5.57C20.36 5.77 20.5 6.07 20.5 6.41V17.59C20.5 17.93 20.36 18.23 20.12 18.43L13.69 12Z" fill="currentColor"/>
                         </svg>
-                        Get on Google Play
+                        Download on Google Play
                     </a>
-                    <a href="#demo" class="btn btn-secondary">
-                        Watch Demo
+                    <a href="#features" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Explore Features
                     </a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="phone-mockup">
-                    <div class="phone-screen">
-                        <div class="trading-interface">
-                            <div class="trading-header">
-                                <span class="trading-symbol">AAPL</span>
-                                <span class="trading-price">$178.50</span>
-                                <span class="trading-change positive">+2.4%</span>
-                            </div>
-                            <div class="trading-chart">
-                                <svg viewBox="0 0 300 150" class="chart-svg">
-                                    <defs>
-                                        <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                            <stop offset="0%" stop-color="#00C853" stop-opacity="0.6"/>
-                                            <stop offset="100%" stop-color="#00C853" stop-opacity="0.05"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <path d="M0,120 L30,100 L60,110 L90,85 L120,90 L150,70 L180,60 L210,65 L240,45 L270,50 L300,30 L300,150 L0,150 Z" 
-                                          fill="url(#chartGradient)" class="chart-area"/>
-                                    <path d="M0,120 L30,100 L60,110 L90,85 L120,90 L150,70 L180,60 L210,65 L240,45 L270,50 L300,30" 
-                                          stroke="#00C853" stroke-width="3" fill="none" class="chart-line"/>
-                                </svg>
-                            </div>
-                            <div class="trading-actions">
-                                <button class="trade-btn buy">BUY</button>
-                                <button class="trade-btn sell">SELL</button>
+                <div class="app-showcase">
+                    <div class="showcase-header">
+                        <div class="showcase-dots">
+                            <span class="showcase-dot"></span>
+                            <span class="showcase-dot"></span>
+                            <span class="showcase-dot"></span>
+                        </div>
+                        <div class="showcase-title">Live App Preview - FollowMyMoney</div>
+                    </div>
+                    <div class="showcase-screen">
+                        <div class="screen-container">
+                            <img src="../assets/images/fels/unnamed (5).webp" alt="Asset Allocation" class="showcase-image active" data-screen="1">
+                            <img src="../assets/images/fels/unnamed (4).webp" alt="Fund Recommendations" class="showcase-image" data-screen="2">
+                            <img src="../assets/images/fels/unnamed (6).webp" alt="Portfolio Overview" class="showcase-image" data-screen="3">
+                            <img src="../assets/images/fels/unnamed (7).webp" alt="Trading Performance" class="showcase-image" data-screen="4">
+                        </div>
+                    </div>
+                    <div class="showcase-nav">
+                        <button class="showcase-nav-btn active" data-screen="1">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Assets</span>
+                        </button>
+                        <button class="showcase-nav-btn" data-screen="2">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-label">Funds</span>
+                        </button>
+                        <button class="showcase-nav-btn" data-screen="3">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-label">Portfolio</span>
+                        </button>
+                        <button class="showcase-nav-btn" data-screen="4">
+                            <span class="nav-icon">🎯</span>
+                            <span class="nav-label">Trading</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="floating-cards">
+                    <div class="float-card card-1">
+                        <div class="trade-signal">
+                            <span class="signal-icon">📈</span>
+                            <span>New Trade: DAX +2.3%</span>
+                        </div>
+                    </div>
+                    <div class="float-card card-2">
+                        <div class="trader-badge">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234CAF50'/%3E%3C/svg%3E" alt="Trader">
+                            <div>
+                                <span class="trader-name">Trading Brothers</span>
+                                <span class="trader-profit">+20.02%</span>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats Bar -->
+    <section class="quick-stats-bar">
+        <div class="container">
+            <div class="stats-bar-grid">
+                <div class="stat-bar-item">
+                    <div class="stat-bar-icon">🏦</div>
+                    <div class="stat-bar-content">
+                        <span class="stat-bar-value">BaFin</span>
+                        <span class="stat-bar-label">Regulated</span>
+                    </div>
+                </div>
+                <div class="stat-bar-item">
+                    <div class="stat-bar-icon">🔒</div>
+                    <div class="stat-bar-content">
+                        <span class="stat-bar-value">€100K</span>
+                        <span class="stat-bar-label">Insured</span>
+                    </div>
+                </div>
+                <div class="stat-bar-item">
+                    <div class="stat-bar-icon">⭐</div>
+                    <div class="stat-bar-content">
+                        <span class="stat-bar-value">4.8/5</span>
+                        <span class="stat-bar-label">Rating</span>
+                    </div>
+                </div>
+                <div class="stat-bar-item">
+                    <div class="stat-bar-icon">🚀</div>
+                    <div class="stat-bar-content">
+                        <span class="stat-bar-value">24/7</span>
+                        <span class="stat-bar-label">Trading</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-by">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">TRUSTED BY</span>
+                <h2>Leading Financial Institutions</h2>
+                <p>Partnering with Germany's most trusted financial companies</p>
+            </div>
+            
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <div class="partner-logo">🏦</div>
+                    <span>Deutsche Bank</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo">🏢</div>
+                    <span>Commerzbank</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo">💼</div>
+                    <span>Allianz</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo">📊</div>
+                    <span>Börse Frankfurt</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo">🏛️</div>
+                    <span>BaFin</span>
+                </div>
+                <div class="partner-item">
+                    <div class="partner-logo">💳</div>
+                    <span>Visa</span>
                 </div>
             </div>
         </div>
@@ -133,237 +234,439 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Powerful Features</h2>
-                <p class="section-subtitle">Everything you need for smart trading in one app</p>
+                <span class="section-badge">KEY FEATURES</span>
+                <h2>Everything You Need to Build Wealth</h2>
+                <p>Professional investment tools with German security and regulatory standards</p>
             </div>
+            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Expert Recommendations</h3>
-                    <p class="feature-description">Follow top traders and receive personalized trade recommendations based on your risk profile</p>
-                    <div class="feature-highlight">AI-Powered</div>
+                    <h3>BaFin Regulated Security</h3>
+                    <p>German-regulated platform with bank-level security, two-factor authentication, and deposit insurance protection up to €100,000.</p>
+                    <div class="feature-tags">
+                        <span class="tag">BaFin Licensed</span>
+                        <span class="tag">2FA Security</span>
+                        <span class="tag">Insured</span>
+                    </div>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3,13H5V11H3V13M3,17H5V15H3V17M3,9H5V7H3V9M7,13H21V11H7V13M7,17H21V15H7V17M7,7V9H21V7H7Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="15" cy="15" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 12L15 9" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Portfolio Management</h3>
-                    <p class="feature-description">Track your investments, monitor performance, and manage multiple trading accounts seamlessly</p>
-                    <div class="feature-highlight">Real-time</div>
+                    <h3>Star Trader Copy Trading</h3>
+                    <p>Follow verified professional traders and automatically copy their trades in real-time with our innovative auto-follow function.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Real-time Copy</span>
+                        <span class="tag">Auto-follow</span>
+                        <span class="tag">Transparent</span>
+                    </div>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 10H21" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 15H10" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Risk Assessment</h3>
-                    <p class="feature-description">Intelligent risk profiling and automated stop-loss features to protect your investments</p>
-                    <div class="feature-highlight">Secure</div>
+                    <h3>Multi-Asset Trading</h3>
+                    <p>Trade stocks, ETFs, certificates, warrants, and cryptocurrencies all from one unified platform with competitive pricing.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Stocks</span>
+                        <span class="tag">ETFs</span>
+                        <span class="tag">Crypto</span>
+                    </div>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Social Trading</h3>
-                    <p class="feature-description">Connect with traders, share insights, and learn from the community's collective wisdom</p>
-                    <div class="feature-highlight">Community</div>
+                    <h3>Fund Recommendations</h3>
+                    <p>Get personalized fund recommendations from different categories based on your risk profile and investment goals.</p>
+                    <div class="feature-tags">
+                        <span class="tag">AI-Powered</span>
+                        <span class="tag">Risk-Adjusted</span>
+                        <span class="tag">Diversified</span>
+                    </div>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12,8A3,3 0 0,0 9,11A3,3 0 0,0 12,14A3,3 0 0,0 15,11A3,3 0 0,0 12,8M12,16A5,5 0 0,1 7,11A5,5 0 0,1 12,6A5,5 0 0,1 17,11A5,5 0 0,1 12,16M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Market Insights</h3>
-                    <p class="feature-description">Stay informed with real-time news, analysis, and market trends from trusted sources</p>
-                    <div class="feature-highlight">24/7 Updates</div>
+                    <h3>Real-Time Portfolio Tracking</h3>
+                    <p>Monitor your complete asset allocation across all investment classes with real-time updates and performance analytics.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Live Updates</span>
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Reporting</span>
+                    </div>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z"/>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6V12L9 15" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Bank Integration</h3>
-                    <p class="feature-description">Secure connection with major banks for seamless deposits, withdrawals, and transactions</p>
-                    <div class="feature-highlight">PSD2 Compliant</div>
+                    <h3>Automatic Trading</h3>
+                    <p>Never miss profitable trades with automatic buy/sell execution following your selected Star Traders' strategies.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Auto-Execute</span>
+                        <span class="tag">24/7 Active</span>
+                        <span class="tag">Risk Control</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technology Stack -->
-    <section id="technology" class="tech-stack">
+    <!-- Trading Section -->
+    <section id="trading" class="trading-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Built with Modern Tech</h2>
-                <p class="section-subtitle">Robust Android architecture for performance and reliability</p>
+                <span class="section-badge">STAR TRADING</span>
+                <h2>Follow Professional Traders</h2>
+                <p>Copy trades from verified experts with proven track records</p>
             </div>
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+            
+            <div class="traders-showcase">
+                <div class="trader-card featured">
+                    <div class="trader-header">
+                        <div class="trader-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23673AB7'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dy='.3em'%3ETB%3C/text%3E%3C/svg%3E" alt="Trading Brothers">
+                        </div>
+                        <div class="trader-info">
+                            <h4>Trading Brothers (Falk Elsner)</h4>
+                            <p>Systematic Stock Trading • 20 Years Experience</p>
+                        </div>
                     </div>
-                    <span class="tech-name">Kotlin</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                    <div class="trader-stats">
+                        <div class="stat">
+                            <span class="stat-label">Success Rate</span>
+                            <span class="stat-value positive">76.19%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Performance</span>
+                            <span class="stat-value positive">+20.02%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Followers</span>
+                            <span class="stat-value">2,347</span>
+                        </div>
                     </div>
-                    <span class="tech-name">Android SDK</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#4285F4">
-                            <path d="M12,10.11A1.87,1.87 0 0,0 10.13,12A1.88,1.88 0 0,0 12,13.88A1.88,1.88 0 0,0 13.88,12A1.87,1.87 0 0,0 12,10.11M12,16.78A4.78,4.78 0 0,1 7.22,12A4.78,4.78 0 0,1 12,7.22A4.78,4.78 0 0,1 16.78,12A4.78,4.78 0 0,1 12,16.78M12,4.33A7.67,7.67 0 0,0 4.33,12A7.67,7.67 0 0,0 12,19.67A7.67,7.67 0 0,0 19.67,12A7.67,7.67 0 0,0 12,4.33M12,1A11,11 0 0,1 23,12A11,11 0 0,1 12,23A11,11 0 0,1 1,12A11,11 0 0,1 12,1Z"/>
+                    <div class="trader-markets">
+                        <span class="market-tag">Deutschland</span>
+                        <span class="market-tag">EU</span>
+                        <span class="market-tag">USA</span>
+                        <span class="market-tag">Global</span>
+                    </div>
+                    <button class="btn btn-follow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 4L20 8V14C20 18 16 20 12 21C8 20 4 18 4 14V8L12 4Z" stroke="currentColor" stroke-width="2"/>
                         </svg>
-                    </div>
-                    <span class="tech-name">Jetpack</span>
+                        Follow Trader
+                    </button>
                 </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#FF6F00">
-                            <path d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
-                        </svg>
-                    </div>
-                    <span class="tech-name">Firebase</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#00796B">
-                            <path d="M3,3H21V21H3V3M7.73,18.04C8.13,18.89 8.92,19.59 10.27,19.59C11.77,19.59 12.8,18.79 12.8,17.04V11.26H11.1V17C11.1,17.86 10.75,18.08 10.2,18.08C9.62,18.08 9.38,17.68 9.11,17.21L7.73,18.04M13.71,17.86C14.21,18.84 15.22,19.59 16.8,19.59C18.4,19.59 19.6,18.76 19.6,17.23C19.6,15.82 18.79,15.19 17.35,14.57L16.93,14.39C16.2,14.08 15.89,13.87 15.89,13.37C15.89,12.96 16.2,12.64 16.7,12.64C17.18,12.64 17.5,12.85 17.79,13.37L19.1,12.5C18.55,11.54 17.77,11.17 16.7,11.17C15.19,11.17 14.22,12.13 14.22,13.4C14.22,14.78 15.03,15.43 16.25,15.95L16.67,16.13C17.45,16.47 17.91,16.68 17.91,17.26C17.91,17.74 17.46,18.09 16.76,18.09C15.93,18.09 15.45,17.66 15.09,17.06L13.71,17.86Z"/>
-                        </svg>
-                    </div>
-                    <span class="tech-name">Retrofit</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#FF5722">
-                            <path d="M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/>
-                        </svg>
-                    </div>
-                    <span class="tech-name">Dagger/Hilt</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#9C27B0">
-                            <path d="M12,8L10.67,8.09C9.81,7.07 7.4,4.5 5,4.5C5,4.5 3.03,7.46 4.96,11.41C4.41,12.24 4.07,12.67 4,13.66L2.07,13.95L2.28,14.93L4.04,14.67L4.18,15.38L2.61,16.32L3.08,17.21L4.53,16.32C5.68,18.76 8.59,20 12,20C15.41,20 18.32,18.76 19.47,16.32L20.92,17.21L21.39,16.32L19.82,15.38L19.96,14.67L21.72,14.93L21.93,13.95L20,13.66C19.93,12.67 19.59,12.24 19.04,11.41C20.97,7.46 19,4.5 19,4.5C16.6,4.5 14.19,7.07 13.33,8.09L12,8M9,11A1,1 0 0,1 10,12A1,1 0 0,1 9,13A1,1 0 0,1 8,12A1,1 0 0,1 9,11M15,11A1,1 0 0,1 16,12A1,1 0 0,1 15,13A1,1 0 0,1 14,12A1,1 0 0,1 15,11M11,14H13L12.3,15.39C12.5,16.03 13.06,16.5 13.75,16.5A1.5,1.5 0 0,0 15.25,15H15.75A2,2 0 0,1 13.75,17C13,17 12.35,16.59 12,16V16H12C11.65,16.59 11,17 10.25,17A2,2 0 0,1 8.25,15H8.75A1.5,1.5 0 0,0 10.25,16.5C10.94,16.5 11.5,16.03 11.7,15.39L11,14Z"/>
-                        </svg>
-                    </div>
-                    <span class="tech-name">Coroutines</span>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-logo">
-                        <svg viewBox="0 0 24 24" fill="#00BCD4">
-                            <path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4A2,2 0 0,0 2,7V10.8H3.5C5,10.8 6.2,12 6.2,13.5C6.2,15 5,16.2 3.5,16.2H2V20A2,2 0 0,0 4,22H7.8V20.5C7.8,19 9,17.8 10.5,17.8C12,17.8 13.2,19 13.2,20.5V22H17A2,2 0 0,0 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11Z"/>
-                        </svg>
-                    </div>
-                    <span class="tech-name">Room DB</span>
+
+                <div class="trading-benefits">
+                    <h3>Why Choose Star Trading?</h3>
+                    <ul class="benefits-list">
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Verified traders with proven track records</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Real-time trade copying and execution</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Transparent performance history</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Risk management controls</span>
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Trade explanations and insights</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Screenshots Section -->
-    <section id="screenshots" class="screenshots">
+    <section class="screenshots">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">App Screenshots</h2>
-                <p class="section-subtitle">Experience the intuitive interface</p>
+                <span class="section-badge">APP SCREENS</span>
+                <h2>Experience Professional Trading</h2>
+                <p>Real screenshots from the FollowMyMoney platform</p>
             </div>
+            
             <div class="screenshots-carousel">
-                <div class="screenshot-item active">
-                    <div class="screenshot-mockup">
-                        <div class="screen-content">
-                            <div class="dashboard-screen">
-                                <div class="dashboard-header">Portfolio Overview</div>
-                                <div class="portfolio-value">€25,450.00</div>
-                                <div class="portfolio-change">+€1,234.50 (+5.1%)</div>
-                                <div class="mini-chart"></div>
-                                <div class="asset-list">
-                                    <div class="asset-item">
-                                        <span>AAPL</span>
-                                        <span class="positive">+2.4%</span>
-                                    </div>
-                                    <div class="asset-item">
-                                        <span>GOOGL</span>
-                                        <span class="positive">+1.8%</span>
-                                    </div>
-                                    <div class="asset-item">
-                                        <span>TSLA</span>
-                                        <span class="negative">-0.9%</span>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="screenshot-track">
+                    <div class="screenshot-item active">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (4).webp" alt="Fund Recommendations" class="screenshot-image">
                         </div>
+                        <div class="screenshot-label">Fund Recommendations</div>
                     </div>
-                    <p class="screenshot-caption">Dashboard</p>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (5).webp" alt="Asset Allocation" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Asset Allocation</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (6).webp" alt="Portfolio Overview" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Portfolio Overview</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (7).webp" alt="Trading Performance" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Trading Performance</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (8).webp" alt="Star Traders" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Star Traders</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (9).webp" alt="Wealth Strategies" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Wealth Strategies</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (10).webp" alt="Investment Tracking" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Investment Tracking</div>
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <div class="screenshot-phone">
+                            <img src="../assets/images/fels/unnamed (11).webp" alt="Market Analysis" class="screenshot-image">
+                        </div>
+                        <div class="screenshot-label">Market Analysis</div>
+                    </div>
                 </div>
-
-                <div class="screenshot-item">
-                    <div class="screenshot-mockup">
-                        <div class="screen-content">
-                            <div class="trader-screen">
-                                <div class="trader-header">Top Traders</div>
-                                <div class="trader-list">
-                                    <div class="trader-card">
-                                        <div class="trader-avatar"></div>
-                                        <div class="trader-info">
-                                            <div class="trader-name">Alex Schmidt</div>
-                                            <div class="trader-stats">+28.5% • 892 followers</div>
-                                        </div>
-                                    </div>
-                                    <div class="trader-card">
-                                        <div class="trader-avatar"></div>
-                                        <div class="trader-info">
-                                            <div class="trader-name">Maria Weber</div>
-                                            <div class="trader-stats">+22.3% • 654 followers</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="screenshot-caption">Social Trading</p>
-                </div>
-
-                <div class="screenshot-item">
-                    <div class="screenshot-mockup">
-                        <div class="screen-content">
-                            <div class="trade-screen">
-                                <div class="trade-header">Execute Trade</div>
-                                <div class="trade-form">
-                                    <input type="text" placeholder="Symbol" value="AAPL">
-                                    <input type="text" placeholder="Amount" value="10 shares">
-                                    <div class="trade-buttons">
-                                        <button class="buy-button">BUY</button>
-                                        <button class="sell-button">SELL</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="screenshot-caption">Trading Interface</p>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next" id="nextBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
+            
             <div class="carousel-dots">
-                <span class="dot active" onclick="changeScreenshot(0)"></span>
-                <span class="dot" onclick="changeScreenshot(1)"></span>
-                <span class="dot" onclick="changeScreenshot(2)"></span>
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+                <span class="dot" data-slide="5"></span>
+                <span class="dot" data-slide="6"></span>
+                <span class="dot" data-slide="7"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">TECHNOLOGY</span>
+                <h2>Built with Modern Tech Stack</h2>
+                <p>Enterprise-grade development with cutting-edge technologies</p>
+            </div>
+            
+            <div class="tech-categories">
+                <div class="tech-category">
+                    <h3>Mobile Development</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                            </div>
+                            <span>Android</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                            </div>
+                            <span>Kotlin</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                            </div>
+                            <span>Java</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+                            </div>
+                            <span>Swift</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h3>Backend & APIs</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                            </div>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                            </div>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                            </div>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+                            </div>
+                            <span>Redis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h3>Security & Compliance</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">🔐</div>
+                            <span>OAuth 2.0</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🛡️</div>
+                            <span>SSL/TLS</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🔒</div>
+                            <span>AES-256</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🏦</div>
+                            <span>BaFin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">TESTIMONIALS</span>
+                <h2>What Our Users Say</h2>
+                <p>Trusted by thousands of investors across Germany and Europe</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "FollowMyMoney hat meine Art zu investieren völlig verändert. Die Copy-Trading-Funktion mit den Star Tradern ist fantastisch!"
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Michael S.</strong>
+                        <span>Private Investor, Frankfurt</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "Die BaFin-Regulierung gibt mir Sicherheit. Endlich eine deutsche Plattform, der ich mein Vermögen anvertrauen kann."
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Sarah K.</strong>
+                        <span>Business Owner, Munich</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "76% Erfolgsquote spricht für sich. Die automatischen Trades funktionieren einwandfrei und ich spare viel Zeit."
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Thomas H.</strong>
+                        <span>IT Professional, Berlin</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -372,51 +675,162 @@
     <section id="metrics" class="metrics">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Performance Metrics</h2>
-                <p class="section-subtitle">Built for speed, reliability, and scale</p>
+                <span class="section-badge">PLATFORM METRICS</span>
+                <h2>Trusted by Thousands of Investors</h2>
+                <p>Real numbers from our growing community of successful investors</p>
             </div>
+            
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-icon">⚡</div>
-                    <div class="metric-value" data-target="99.9">0</div>
-                    <div class="metric-suffix">%</div>
-                    <div class="metric-label">Uptime</div>
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-value" data-value="918">€0M+</div>
+                    <div class="metric-label">Assets Under Management</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-icon">🚀</div>
-                    <div class="metric-value" data-target="0.8">0</div>
-                    <div class="metric-suffix">s</div>
-                    <div class="metric-label">Avg Response Time</div>
+                    <div class="metric-icon">👥</div>
+                    <div class="metric-value" data-value="10000">0+</div>
+                    <div class="metric-label">Active Investors</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-icon">📊</div>
-                    <div class="metric-value" data-target="10">0</div>
-                    <div class="metric-suffix">K+</div>
-                    <div class="metric-label">Daily Transactions</div>
+                    <div class="metric-icon">📈</div>
+                    <div class="metric-value" data-value="76.19">0%</div>
+                    <div class="metric-label">Average Success Rate</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-icon">🔒</div>
-                    <div class="metric-value" data-target="256">0</div>
-                    <div class="metric-suffix">bit</div>
-                    <div class="metric-label">Encryption</div>
+                    <div class="metric-icon">⭐</div>
+                    <div class="metric-value" data-value="20">0+</div>
+                    <div class="metric-label">Verified Star Traders</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security">
+        <div class="container">
+            <div class="security-content">
+                <div class="security-text">
+                    <span class="section-badge">GERMAN SECURITY</span>
+                    <h2>Your Money is Safe With Us</h2>
+                    <p>We operate under strict German financial regulations and use bank-level security to protect your investments.</p>
+                    
+                    <div class="security-features">
+                        <div class="security-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" fill="#00C853"/>
+                            </svg>
+                            <div>
+                                <h4>BaFin Regulated</h4>
+                                <p>Licensed and supervised by German Federal Financial Authority</p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="11" width="18" height="11" rx="2" fill="#2196F3"/>
+                                <path d="M7 11V7C7 4.24 9.24 2 12 2C14.76 2 17 4.24 17 7V11" stroke="#2196F3" stroke-width="2"/>
+                            </svg>
+                            <div>
+                                <h4>Bank-Level Encryption</h4>
+                                <p>256-bit SSL encryption for all data transmissions</p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="#FFC107"/>
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="white">€</text>
+                            </svg>
+                            <div>
+                                <h4>Deposit Insurance</h4>
+                                <p>Up to €100,000 protected by German deposit guarantee scheme</p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#9C27B0"/>
+                                <path d="M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="white"/>
+                            </svg>
+                            <div>
+                                <h4>Two-Factor Authentication</h4>
+                                <p>Extra layer of security for your account access</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-visual">
+                    <div class="security-shield">
+                        <svg viewBox="0 0 200 200">
+                            <path d="M100 20L30 50V100C30 140 60 170 100 180C140 170 170 140 170 100V50L100 20Z" fill="url(#shield-gradient)" stroke="#00C853" stroke-width="2"/>
+                            <path d="M80 100L95 115L120 85" stroke="white" stroke-width="4" fill="none"/>
+                            <defs>
+                                <linearGradient id="shield-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00C853;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0.8" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section id="download" class="cta">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Ready to Start Trading?</h2>
-                <p class="cta-description">Join thousands of smart investors using Fels Trader</p>
-                <div class="cta-buttons">
-                    <a href="https://play.google.com/store/apps/details?id=de.felsgroup.trader" class="btn btn-primary btn-large">
-                        Download for Android
+                <h2>Start Building Your Wealth Today</h2>
+                <p>Join thousands of successful investors on Germany's most trusted investment platform</p>
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=de.followmytrader" target="_blank" class="download-btn google-play">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5Z" fill="currentColor"/>
+                            <path d="M13.69 12L20.12 5.57C20.36 5.77 20.5 6.07 20.5 6.41V17.59C20.5 17.93 20.36 18.23 20.12 18.43L13.69 12Z" fill="currentColor"/>
+                            <path d="M13.69 12L3.84 2.15C3.89 2.14 3.93 2.13 3.98 2.13C4.16 2.13 4.34 2.19 4.49 2.3L20.12 12L13.69 12Z" fill="currentColor"/>
+                        </svg>
+                        <div class="btn-text">
+                            <span class="small-text">GET IT ON</span>
+                            <span class="main-text">Google Play</span>
+                        </div>
                     </a>
-                    <a href="https://github.com/felsgroup/fels-trader" class="btn btn-secondary btn-large">
-                        View Source Code
+                    <a href="#" class="download-btn app-store coming-soon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        <div class="btn-text">
+                            <span class="small-text">COMING TO</span>
+                            <span class="main-text">App Store</span>
+                        </div>
                     </a>
+                </div>
+                <div class="cta-features">
+                    <span>✓ Free to download</span>
+                    <span>✓ No hidden fees</span>
+                    <span>✓ Start with any amount</span>
+                    <span>✓ BaFin regulated</span>
+                </div>
+                
+                <div class="achievements">
+                    <div class="achievement">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-text">
+                            <h4>Best FinTech App 2024</h4>
+                            <p>German Finance Awards</p>
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-icon">⭐</div>
+                        <div class="achievement-text">
+                            <h4>4.8/5 Rating</h4>
+                            <p>Google Play Store</p>
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-icon">🔒</div>
+                        <div class="achievement-text">
+                            <h4>BaFin Licensed</h4>
+                            <p>German Federal Authority</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -426,57 +840,36 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Fels Trader</h3>
-                    <p>Professional trading platform for Android</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="GitHub">
-                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="LinkedIn">
-                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="Twitter">
-                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                            </svg>
-                        </a>
+                <div class="footer-brand">
+                    <h3>FollowMyMoney</h3>
+                    <p>Geldanlage. Neu gedacht.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">Star Traders</a>
+                        <a href="#">Security</a>
+                        <a href="#">Pricing</a>
                     </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#technology">Technology</a></li>
-                        <li><a href="#screenshots">Screenshots</a></li>
-                        <li><a href="#metrics">Performance</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Fels Group</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Press</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Risk Disclosure</a>
+                        <a href="#">BaFin License</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Fels Group. All rights reserved.</p>
+                <p>&copy; 2024 FollowMyMoney GmbH. All rights reserved. | Made in Germany 🇩🇪</p>
             </div>
         </div>
     </footer>

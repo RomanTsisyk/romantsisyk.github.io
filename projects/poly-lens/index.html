@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poly Lens - AI-Powered Image Recognition | Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Complete Poly Lens Styles with Animations -->
+    <style>
+        /* ========== POLY LENS - COMPLETE STYLES WITH ANIMATIONS ========== */
+        :root {
+            --primary: #00ACC1;
+            --secondary: #FF5722;
+            --accent-purple: #9C27B0;
+            --accent-green: #4CAF50;
+            --dark-bg: #0A0A0A;
+            --dark-surface: #1A1A1A;
+            --dark-card: #242424;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --gradient-primary: linear-gradient(135deg, #00ACC1, #00E5FF);
+            --gradient-secondary: linear-gradient(135deg, #FF5722, #FF8A65);
+            --gradient-purple: linear-gradient(135deg, #9C27B0, #E1BEE7);
+            --gradient-mesh: linear-gradient(135deg, #00ACC1 0%, #9C27B0 50%, #FF5722 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--primary);
+            border-right: 4px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: morph 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--gradient-primary);
+            top: -150px;
+            left: -150px;
+            animation-duration: 25s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--gradient-purple);
+            bottom: -100px;
+            right: -100px;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-secondary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            animation-delay: 10s;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                border-radius: 40% 60% 60% 40% / 70% 30% 40% 60%;
+                transform: rotate(180deg) scale(0.9);
+            }
+            75% {
+                border-radius: 70% 30% 30% 70% / 30% 70% 70% 30%;
+                transform: rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-mesh);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            to { background-position: 200% center; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gradient-title {
+            background: var(--gradient-mesh);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease 0.1s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: slideUp 0.8s ease 0.2s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 172, 193, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 172, 193, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        /* Phone Visual */
+        .hero-visual {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-container {
+            width: 320px;
+            height: 640px;
+            background: linear-gradient(145deg, #1f1f1f, #0a0a0a);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00ACC1, #00E5FF);
+            border-radius: 28px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .camera-view {
+            width: 90%;
+            height: 90%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .detection-box {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #00E5FF;
+            border-radius: 12px;
+            position: relative;
+            animation: pulse-border 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+        }
+
+        .detection-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #00E5FF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 2rem;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, #0F0F0F 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 172, 193, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech {
+            padding: 100px 2rem;
+            background: var(--dark-surface);
+        }
+
+        .tech-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-item {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px) rotate(2deg);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 172, 193, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Metrics */
+        .metrics {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, rgba(0, 172, 193, 0.05), rgba(156, 39, 176, 0.05));
+        }
+
+        .metrics-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 100px 2rem;
+            text-align: center;
+            background: var(--dark-bg);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(0, 172, 193, 0.1), rgba(255, 87, 34, 0.1));
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-container {
+                width: 280px;
+                height: 560px;
+                margin: 2rem auto 0;
+            }
+
+            .features-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Poly Lens</div>
+            <a href="../../index.html" class="btn btn-secondary">← Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span class="gradient-title">Poly Lens</span><br>
+                    AI-Powered Vision
+                </h1>
+                <p>
+                    Advanced image recognition and object detection app with real-time analysis. 
+                    Identify thousands of objects, translate text, scan barcodes, and more with the power of machine learning.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>📱</span> View on Play Store
+                    </a>
+                    <a href="https://github.com/yourusername/poly-lens" class="btn btn-secondary">
+                        <span>💻</span> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-container">
+                    <div class="phone-screen">
+                        <div class="camera-view">
+                            <div class="scan-line"></div>
+                            <div class="detection-box">
+                                <div class="detection-label">Object Detected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Powerful Features</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Advanced computer vision for everyday use</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Object Detection</h3>
+                <p>Identify thousands of objects in real-time using advanced ML models with 95% accuracy</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Text Recognition</h3>
+                <p>Extract and translate text from images instantly in over 50 languages</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📷</div>
+                <h3>Barcode Scanner</h3>
+                <p>Scan QR codes and barcodes with instant product information lookup</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Plant Identification</h3>
+                <p>Identify plants and get detailed care instructions with botanical database</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <h3>Landmark Recognition</h3>
+                <p>Recognize famous landmarks and get historical information instantly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✈️</div>
+                <h3>Offline Mode</h3>
+                <p>Core features work without internet connection using on-device ML</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech">
+        <div class="section-header">
+            <h2>Technology Stack</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Built with cutting-edge Android technologies</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-icon">🎯</div>
+                <div>Kotlin</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">📸</div>
+                <div>CameraX</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🤖</div>
+                <div>ML Kit</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🧠</div>
+                <div>TensorFlow Lite</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🎨</div>
+                <div>Jetpack Compose</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">💾</div>
+                <div>Room DB</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="section-header">
+            <h2>Impact & Performance</h2>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">100K+</div>
+                <div class="metric-label">Downloads</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">95%</div>
+                <div class="metric-label">Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">50+</div>
+                <div class="metric-label">Languages</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value"><100ms</div>
+                <div class="metric-label">Response Time</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Experience AI Vision</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Transform your camera into an intelligent assistant</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#" class="btn btn-primary">Download App</a>
+                <a href="../../index.html#projects" class="btn btn-secondary">More Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hide loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hide');
+            }, 500);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Animate on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
