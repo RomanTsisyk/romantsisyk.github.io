@@ -56,7 +56,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -86,29 +86,38 @@
                                     <div class="app-subtitle">Choose a service to start</div>
                                 </div>
                                 
-                                <!-- Animated Services Grid -->
+                                <!-- Main Menu Screen based on real screenshots -->
                                 <div class="services-grid">
-                                    <div class="service-card card-blue">
-                                        <span>⚡</span>
-                                        <span>Speed Test</span>
+                                    <div class="service-card card-orange" style="background: linear-gradient(135deg, #FE6D33, #FF8A50);">
+                                        <span class="service-emoji">📊</span>
+                                        <span style="font-size: 11px;">Speed test</span>
                                     </div>
-                                    <div class="service-card card-purple">
-                                        <span>🔧</span>
-                                        <span>iPerf3 Client</span>
+                                    <div class="service-card card-green" style="background: linear-gradient(135deg, #00C896, #00E5A0);">
+                                        <span class="service-emoji">📍</span>
+                                        <span style="font-size: 11px;">Ping</span>
                                     </div>
-                                    <div class="service-card card-green">
-                                        <span>📡</span>
-                                        <span>Ping</span>
+                                    <div class="service-card card-blue" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+                                        <span class="service-emoji">ℹ️</span>
+                                        <span style="font-size: 11px;">Network<br>information</span>
                                     </div>
-                                    <div class="service-card card-orange">
-                                        <span>🗺️</span>
-                                        <span>Trace Route</span>
+                                    <div class="service-card card-yellow" style="background: linear-gradient(135deg, #FFC107, #FFD54F);">
+                                        <span class="service-emoji">🗺️</span>
+                                        <span style="font-size: 11px;">Trace route</span>
+                                    </div>
+                                    <div class="service-card card-purple" style="background: linear-gradient(135deg, #9C27B0, #BA68C8);">
+                                        <span class="service-emoji">↔️</span>
+                                        <span style="font-size: 11px;">Data<br>transfer rate</span>
+                                    </div>
+                                    <div class="service-card card-pink" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+                                        <span class="service-emoji">👥</span>
+                                        <span style="font-size: 11px;">Local<br>network</span>
                                     </div>
                                 </div>
 
                                 <div class="active-services-bar">
                                     <span class="active-dot"></span>
-                                    <span>2 Active Services</span>
+                                    <span>Last active: 0/5</span>
+                                    <small style="margin-left: auto; color: #8E8E93;">No services running</small>
                                 </div>
                             </div>
                         </div>
@@ -212,77 +221,249 @@
                 <p>Dark theme with vibrant accents and smooth animations</p>
             </div>
             <div class="screenshot-carousel">
+                <!-- Main Menu Screen -->
                 <div class="screenshot">
                     <div class="screenshot-content screen-home">
-                        <h4>Home Screen</h4>
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 📋 🔋</span>
+                        </div>
+                        <h3 style="text-align: center; margin: 20px 0; font-size: 28px;">Netti</h3>
+                        <p style="text-align: center; color: #8E8E93; margin-bottom: 30px;">Choose a service to start</p>
                         <div class="mini-grid">
-                            <div class="mini-card">Speed Test</div>
-                            <div class="mini-card">iPerf3</div>
-                            <div class="mini-card">Ping</div>
-                            <div class="mini-card">Trace Route</div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #FE6D33, #FF8A50);">
+                                <span style="font-size: 24px;">📊</span>
+                                <span>Speed test</span>
+                            </div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #00C896, #00E5A0);">
+                                <span style="font-size: 24px;">📍</span>
+                                <span>Ping</span>
+                            </div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+                                <span style="font-size: 24px;">ℹ️</span>
+                                <span>Network information</span>
+                            </div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #FFC107, #FFD54F);">
+                                <span style="font-size: 24px;">🗺️</span>
+                                <span>Trace route</span>
+                            </div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #9C27B0, #BA68C8);">
+                                <span style="font-size: 24px;">↔️</span>
+                                <span>Data transfer rate</span>
+                            </div>
+                            <div class="mini-card" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+                                <span style="font-size: 24px;">👥</span>
+                                <span>Local network</span>
+                            </div>
+                        </div>
+                        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
+                            <span style="color: #8E8E93;">Last active: 0/5</span>
                         </div>
                     </div>
                     <div class="screenshot-label">Main Dashboard</div>
                 </div>
+                <!-- Speed Test Screen -->
                 <div class="screenshot">
                     <div class="screenshot-content screen-speed">
-                        <div class="speed-gauge">
-                            <div class="speed-value">456</div>
-                            <div class="speed-unit">Mbps</div>
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 📋 🔋</span>
                         </div>
-                        <div class="speed-details">
-                            <div>
-                                <span>Upload</span>
-                                <strong>123 Mbps</strong>
+                        <h4 style="text-align: center; margin: 20px 0;">Speed test</h4>
+                        <div style="background: #2C2C2E; border-radius: 15px; padding: 20px; margin: 20px 0;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div style="text-align: center;">
+                                    <div style="color: #FE6D33; font-size: 12px;">Download</div>
+                                    <div style="font-size: 32px; font-weight: bold;">300.98</div>
+                                    <div style="color: #8E8E93; font-size: 14px;">Mbps</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="color: #8B5CF6; font-size: 12px;">Upload</div>
+                                    <div style="font-size: 32px; font-weight: bold;">156.8</div>
+                                    <div style="color: #8E8E93; font-size: 14px;">Mbps</div>
+                                </div>
                             </div>
-                            <div>
-                                <span>Ping</span>
-                                <strong>12 ms</strong>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; text-align: center;">
+                                <span style="color: #8E8E93;">Loss</span>
+                                <strong style="display: block; font-size: 20px;">10%</strong>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; text-align: center;">
+                                <span style="color: #8E8E93;">Resent</span>
+                                <strong style="display: block; font-size: 20px;">5%</strong>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div style="color: #8E8E93; font-size: 12px;">Server: iPod user name | 5201</div>
+                            <div style="color: #8E8E93; font-size: 12px; margin-top: 5px;">Transmit Mode: Alternate</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Speed Test Results</div>
+                </div>
+                <!-- Ping Screen -->
+                <div class="screenshot">
+                    <div class="screenshot-content screen-ping">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 📋 🔋</span>
+                        </div>
+                        <h4 style="text-align: center; margin: 20px 0;">Ping</h4>
+                        <div style="text-align: center; margin: 30px 0;">
+                            <div style="font-size: 48px; font-weight: bold;">10.05</div>
+                            <div style="color: #8E8E93; font-size: 18px;">ms</div>
+                        </div>
+                        <svg viewBox="0 0 300 100" style="width: 100%; height: 100px; margin: 20px 0;">
+                            <path d="M 0 50 Q 50 20 100 40 T 200 50 T 300 30" stroke="#FE6D33" stroke-width="3" fill="none"/>
+                        </svg>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 30px;">
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="color: #8E8E93; font-size: 12px;">Min</div>
+                                <div style="font-size: 20px; font-weight: bold;">9 ms</div>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="color: #8E8E93; font-size: 12px;">Avg</div>
+                                <div style="font-size: 20px; font-weight: bold;">11 ms</div>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; text-align: center;">
+                                <div style="color: #8E8E93; font-size: 12px;">Max</div>
+                                <div style="font-size: 20px; font-weight: bold;">15 ms</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div style="color: #8E8E93; font-size: 12px;">IP Address: 217.24.165.183</div>
+                            <div style="color: #8E8E93; font-size: 12px; margin-top: 5px;">Test duration: 10s</div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Ping Monitor</div>
+                </div>
+                <!-- Trace Route Screen -->
+                <div class="screenshot">
+                    <div class="screenshot-content screen-trace">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 📋 🔋</span>
+                        </div>
+                        <h4 style="text-align: center; margin: 20px 0;">Trace Route</h4>
+                        <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="color: #8E8E93; font-size: 12px;">Tracing route to</div>
+                            <div style="font-size: 16px; margin-top: 5px;">217.24.165.183</div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #2C2C2E; border-radius: 10px;">
+                                <div style="width: 12px; height: 12px; background: #007AFF; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">KPI-Telecom</div>
+                                    <div style="color: #8E8E93; font-size: 12px;">Kyiv • 4 km</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #2C2C2E; border-radius: 10px;">
+                                <div style="width: 12px; height: 12px; background: #00C896; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">UARNet</div>
+                                    <div style="color: #8E8E93; font-size: 12px;">Lviv • 816 km</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #2C2C2E; border-radius: 10px;">
+                                <div style="width: 12px; height: 12px; background: #FE6D33; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">belNET</div>
+                                    <div style="color: #8E8E93; font-size: 12px;">Snina • 948 km</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #2C2C2E; border-radius: 10px;">
+                                <div style="width: 12px; height: 12px; background: #9C27B0; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">Nordic Telecom</div>
+                                    <div style="color: #8E8E93; font-size: 12px;">Prague • 1505 km</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #2C2C2E; border-radius: 10px;">
+                                <div style="width: 12px; height: 12px; background: #FFC107; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">CITUX GmbH</div>
+                                    <div style="color: #8E8E93; font-size: 12px;">Dresden • 1505 km</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="screenshot-label">Speed Test</div>
+                    <div class="screenshot-label">Trace Route</div>
                 </div>
+                <!-- Data Transfer Screen -->
                 <div class="screenshot">
-                    <div class="screenshot-content screen-iperf">
-                        <h4>iPerf3 Client</h4>
-                        <div class="config-item">
-                            <span>Server</span>
-                            <strong>Frankfurt, Germany</strong>
+                    <div class="screenshot-content screen-transfer">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 📋 🔋</span>
                         </div>
-                        <div class="config-item">
-                            <span>Protocol</span>
-                            <strong>TCP</strong>
+                        <h4 style="text-align: center; margin: 20px 0;">Data Transfer Rate</h4>
+                        <div style="position: relative; width: 200px; height: 200px; margin: 30px auto;">
+                            <div style="position: absolute; inset: 0; border: 8px solid #2C2C2E; border-radius: 50%;"></div>
+                            <div style="position: absolute; inset: 0; border: 8px solid transparent; border-top-color: #007AFF; border-right-color: #007AFF; border-radius: 50%; transform: rotate(45deg);"></div>
+                            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div style="font-size: 36px; font-weight: bold;">11</div>
+                                <div style="color: #8E8E93;">Gbit</div>
+                            </div>
                         </div>
-                        <div class="config-item">
-                            <span>Duration</span>
-                            <strong>30 seconds</strong>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;">
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px;">
+                                <div style="color: #FE6D33; font-size: 12px;">Download</div>
+                                <div style="font-size: 20px; font-weight: bold; margin-top: 5px;">300.98 Mbps</div>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px;">
+                                <div style="color: #8B5CF6; font-size: 12px;">Upload</div>
+                                <div style="font-size: 20px; font-weight: bold; margin-top: 5px;">0 Mbps</div>
+                            </div>
                         </div>
-                        <button class="start-button">Start Test</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px;">
+                                <div style="color: #8E8E93; font-size: 12px;">Loss</div>
+                                <div style="font-size: 20px; font-weight: bold; margin-top: 5px;">10%</div>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px;">
+                                <div style="color: #8E8E93; font-size: 12px;">Resent</div>
+                                <div style="font-size: 20px; font-weight: bold; margin-top: 5px;">5%</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div style="color: #8E8E93; font-size: 12px;">Device: iPhone 13</div>
+                            <div style="color: #8E8E93; font-size: 12px; margin-top: 5px;">iOS 15.0.2</div>
+                        </div>
                     </div>
-                    <div class="screenshot-label">iPerf3 Configuration</div>
+                    <div class="screenshot-label">Data Transfer Rate</div>
                 </div>
+                <!-- Settings Screen -->
                 <div class="screenshot">
-                    <div class="screenshot-content screen-network">
-                        <h4>Network Info</h4>
-                        <div class="info-item">
-                            <span>Type</span>
-                            <strong>Wi-Fi 6</strong>
+                    <div class="screenshot-content screen-settings">
+                        <h4 style="text-align: center; margin: 20px 0;">Speed Test Config</h4>
+                        <div style="width: 200px; height: 200px; margin: 30px auto; border: 10px solid transparent; border-radius: 50%; background: conic-gradient(from 0deg, #007AFF, #00f2fe, #FE6D33, #9C27B0, #007AFF); padding: 5px;">
+                            <div style="width: 100%; height: 100%; background: #1C1C1E; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 24px; font-weight: bold;">START</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <span>SSID</span>
-                            <strong>HomeNetwork</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>IP Address</span>
-                            <strong>192.168.1.100</strong>
-                        </div>
-                        <div class="info-item">
-                            <span>Signal</span>
-                            <strong>-45 dBm</strong>
+                        <div style="margin-top: 30px;">
+                            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                                <button style="flex: 1; padding: 12px; background: #007AFF; border: none; border-radius: 10px; color: white; font-weight: 500;">Client</button>
+                                <button style="flex: 1; padding: 12px; background: #2C2C2E; border: none; border-radius: 10px; color: #8E8E93;">Host</button>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Server</span>
+                                    <span style="color: #8E8E93;">PeopleNet ›</span>
+                                </div>
+                            </div>
+                            <div style="background: #2C2C2E; padding: 15px; border-radius: 10px;">
+                                <div style="color: #8E8E93; font-size: 12px; margin-bottom: 10px;">Transmit Mode</div>
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;">
+                                    <button style="padding: 10px; background: #1C1C1E; border: none; border-radius: 8px; color: #8E8E93; font-size: 12px;">↓</button>
+                                    <button style="padding: 10px; background: #1C1C1E; border: none; border-radius: 8px; color: #8E8E93; font-size: 12px;">↑</button>
+                                    <button style="padding: 10px; background: #1C1C1E; border: none; border-radius: 8px; color: #8E8E93; font-size: 12px;">↕</button>
+                                    <button style="padding: 10px; background: #007AFF; border: none; border-radius: 8px; color: white; font-size: 12px;">↑↓</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="screenshot-label">Network Information</div>
+                    <div class="screenshot-label">Configuration</div>
                 </div>
             </div>
         </div>
@@ -703,12 +884,33 @@
             gap: 8px;
             font-size: 0.9rem;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card-blue { background: rgba(0, 122, 255, 0.2); }
-        .card-purple { background: rgba(140, 158, 255, 0.2); }
-        .card-green { background: rgba(49, 147, 117, 0.2); }
-        .card-orange { background: rgba(236, 171, 75, 0.2); }
+        .service-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .card-orange { 
+            background: linear-gradient(135deg, #FE6D33, #FF8A50);
+        }
+        .card-green { 
+            background: linear-gradient(135deg, #00C896, #00E5A0);
+        }
+        .card-blue { 
+            background: linear-gradient(135deg, #3B82F6, #60A5FA);
+        }
+        .card-yellow { 
+            background: linear-gradient(135deg, #FFC107, #FFD54F);
+        }
+        .card-purple { 
+            background: linear-gradient(135deg, #9C27B0, #BA68C8);
+        }
+        .card-pink { 
+            background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+        }
 
         .service-card:hover {
             transform: scale(1.05);
@@ -718,18 +920,18 @@
         .active-services-bar {
             margin-top: 20px;
             padding: 15px;
-            background: rgba(0, 122, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
+            font-size: 0.9rem;
         }
 
         .active-dot {
             width: 8px;
             height: 8px;
-            background: #00FF00;
+            background: #8E8E93;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -1048,6 +1250,215 @@
             transform: translateY(0);
         }
 
+        /* Float button navigation between projects (Poly Lens Style) */
+        .project-nav-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .project-nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 122, 255, 0.6);
+        }
+
+        .project-nav-button.active {
+            transform: rotate(45deg);
+        }
+
+        .project-nav-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            min-width: 320px;
+            background: rgba(28, 28, 30, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .project-nav-panel.hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 122, 255, 0.2);
+        }
+
+        .panel-title {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .panel-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .project-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .project-nav-item:hover {
+            background: rgba(0, 122, 255, 0.2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-nav-item.home {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(0, 242, 254, 0.2) 100%);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .project-nav-item.current {
+            background: rgba(0, 122, 255, 0.15);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            pointer-events: none;
+        }
+
+        .project-nav-item .icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .project-nav-item .text {
+            flex: 1;
+        }
+
+        .project-nav-item .text .name {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .project-nav-item .text .desc {
+            display: block;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .current-indicator {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-nav-divider {
+            height: 1px;
+            background: rgba(0, 122, 255, 0.2);
+            margin: 12px 0;
+        }
+
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(0, 122, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            }
+        }
+
+        .project-nav-button {
+            animation: pulse 3s infinite;
+        }
+
+        .project-nav-button:hover {
+            animation: none;
+        }
+
+        /* Small tooltip */
+        .nav-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            background: rgba(28, 28, 30, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-nav-button:hover + .nav-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-content {
@@ -1071,6 +1482,21 @@
             .hero-text h1 {
                 font-size: 2.5rem;
             }
+            
+            .project-nav-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .project-nav-button {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .project-nav-panel {
+                min-width: 280px;
+                right: -20px;
+            }
         }
 
         /* Screenshot mockup styles */
@@ -1087,6 +1513,18 @@
             padding: 20px 10px;
             text-align: center;
             font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .speed-gauge {
@@ -1155,12 +1593,158 @@
         }
     </style>
 
+    <!-- Float Navigation Button (Poly Lens Style) -->
+    <div class="project-nav-float">
+        <button class="project-nav-button" id="navFloatButton" onclick="toggleProjectNav()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+        </button>
+        <span class="nav-tooltip">Switch Projects</span>
+        
+        <div class="project-nav-panel" id="projectNavPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Quick Navigation
+                </div>
+                <button class="panel-close" onclick="toggleProjectNav()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <a href="../index.html" class="project-nav-item home">
+                <span class="icon">🏠</span>
+                <span class="text">
+                    <span class="name">Main Portfolio</span>
+                    <span class="desc">Back to homepage</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-divider"></div>
+            
+            <div class="project-nav-item current">
+                <span class="icon">📱</span>
+                <span class="text">
+                    <span class="name">Netti</span>
+                    <span class="desc">Network Testing Suite</span>
+                </span>
+                <span class="current-indicator">CURRENT</span>
+            </div>
+            
+            <a href="../poly lens portfolio/index.html" class="project-nav-item">
+                <span class="icon">🎧</span>
+                <span class="text">
+                    <span class="name">HP Poly Lens</span>
+                    <span class="desc">Enterprise Headset Management</span>
+                </span>
+            </a>
+            
+            <a href="../portfolio kasa stefczyka/index.html" class="project-nav-item">
+                <span class="icon">💳</span>
+                <span class="text">
+                    <span class="name">Kasa Stefczyka</span>
+                    <span class="desc">Banking Application</span>
+                </span>
+            </a>
+            
+            <a href="../earnly portfolio/index.html" class="project-nav-item">
+                <span class="icon">💰</span>
+                <span class="text">
+                    <span class="name">Earnly</span>
+                    <span class="desc">Financial Management</span>
+                </span>
+            </a>
+            
+            <a href="../followmymoney-portfolio/index.html" class="project-nav-item">
+                <span class="icon">📊</span>
+                <span class="text">
+                    <span class="name">FollowMyMoney</span>
+                    <span class="desc">Expense Tracking</span>
+                </span>
+            </a>
+            
+            <a href="../portfolio adapter/index.html" class="project-nav-item">
+                <span class="icon">🔌</span>
+                <span class="text">
+                    <span class="name">Adapter</span>
+                    <span class="desc">Integration Platform</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
     <!-- Navigation Scripts -->
     <script src="../assets/js/global.js"></script>
     <script src="../assets/js/navigation.js"></script>
     
     <!-- Original Netti Scripts -->
     <script>
+        // Float Navigation Panel - Start open by default
+        let isNavPanelOpen = true;
+        
+        function toggleProjectNav() {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            isNavPanelOpen = !isNavPanelOpen;
+            
+            if (isNavPanelOpen) {
+                panel.classList.remove('hidden');
+                button.classList.remove('active');
+            } else {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('navPanelOpen', isNavPanelOpen);
+        }
+        
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has a saved preference
+            const savedState = localStorage.getItem('navPanelOpen');
+            if (savedState !== null) {
+                isNavPanelOpen = savedState === 'true';
+            } else {
+                // First visit - keep panel open
+                isNavPanelOpen = true;
+            }
+            
+            // Apply initial state
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (!isNavPanelOpen) {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Press 'N' to toggle navigation panel
+            if (e.key === 'n' || e.key === 'N') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    toggleProjectNav();
+                }
+            }
+            
+            // Press 'Escape' to close panel
+            if (e.key === 'Escape' && isNavPanelOpen) {
+                toggleProjectNav();
+            }
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
