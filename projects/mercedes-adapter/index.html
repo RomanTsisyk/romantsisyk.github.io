@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes Adapter - Vehicle Connectivity App | 500K+ Users</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Poly Lens Style Navigation -->
+    <style>
+        /* Float button navigation between projects (Poly Lens Style) */
+        .project-nav-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .project-nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ADEF 0%, #0084C2 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 173, 239, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 173, 239, 0.6);
+        }
+
+        .project-nav-button.active {
+            transform: rotate(45deg);
+        }
+
+        .project-nav-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            min-width: 320px;
+            background: rgba(10, 12, 16, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .project-nav-panel.hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 173, 239, 0.2);
+        }
+
+        .panel-title {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .panel-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .project-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .project-nav-item:hover {
+            background: rgba(0, 173, 239, 0.2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-nav-item.home {
+            background: linear-gradient(135deg, rgba(0, 173, 239, 0.2) 0%, rgba(0, 132, 194, 0.2) 100%);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .project-nav-item.current {
+            background: rgba(0, 173, 239, 0.15);
+            border: 1px solid rgba(0, 173, 239, 0.3);
+            pointer-events: none;
+        }
+
+        .project-nav-item .icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .project-nav-item .text {
+            flex: 1;
+        }
+
+        .project-nav-item .text .name {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .project-nav-item .text .desc {
+            display: block;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .current-indicator {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #00ADEF 0%, #0084C2 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-nav-divider {
+            height: 1px;
+            background: rgba(0, 173, 239, 0.2);
+            margin: 12px 0;
+        }
+
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(0, 173, 239, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(0, 173, 239, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(0, 173, 239, 0.4);
+            }
+        }
+
+        .project-nav-button {
+            animation: pulse 3s infinite;
+        }
+
+        .project-nav-button:hover {
+            animation: none;
+        }
+
+        /* Small tooltip */
+        .nav-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            background: rgba(10, 12, 16, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-nav-button:hover + .nav-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .project-nav-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .project-nav-button {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .project-nav-panel {
+                min-width: 280px;
+                right: -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Float Navigation Button (Poly Lens Style) -->
+    <div class="project-nav-float">
+        <button class="project-nav-button" id="navFloatButton" onclick="toggleProjectNav()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+        </button>
+        <span class="nav-tooltip">Switch Projects</span>
+        
+        <div class="project-nav-panel" id="projectNavPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Quick Navigation
+                </div>
+                <button class="panel-close" onclick="toggleProjectNav()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <a href="../../index.html" class="project-nav-item home">
+                <span class="icon">🏠</span>
+                <span class="text">
+                    <span class="name">Main Portfolio</span>
+                    <span class="desc">Back to homepage</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-divider"></div>
+            
+            <a href="../poly-lens/index.html" class="project-nav-item">
+                <span class="icon">🎧</span>
+                <span class="text">
+                    <span class="name">HP Poly Lens</span>
+                    <span class="desc">Enterprise Headset Management</span>
+                </span>
+            </a>
+            
+            <a href="../kasa-stefczyka/index.html" class="project-nav-item">
+                <span class="icon">💳</span>
+                <span class="text">
+                    <span class="name">Kasa Stefczyka</span>
+                    <span class="desc">Banking Application</span>
+                </span>
+            </a>
+            
+            <a href="../earnly/index.html" class="project-nav-item">
+                <span class="icon">💰</span>
+                <span class="text">
+                    <span class="name">Earnly</span>
+                    <span class="desc">Financial Management</span>
+                </span>
+            </a>
+            
+            <a href="../followmymoney/index.html" class="project-nav-item">
+                <span class="icon">📊</span>
+                <span class="text">
+                    <span class="name">FollowMyMoney</span>
+                    <span class="desc">Expense Tracking</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-item current">
+                <span class="icon">🔌</span>
+                <span class="text">
+                    <span class="name">Mercedes Adapter</span>
+                    <span class="desc">Vehicle Connectivity</span>
+                </span>
+                <span class="current-indicator">CURRENT</span>
+            </div>
+            
+            <a href="../netti/index.html" class="project-nav-item">
+                <span class="icon">📱</span>
+                <span class="text">
+                    <span class="name">Netti</span>
+                    <span class="desc">Network Testing Suite</span>
+                </span>
+            </a>
+            
+            <a href="../fels/index.html" class="project-nav-item">
+                <span class="icon">💼</span>
+                <span class="text">
+                    <span class="name">FELS</span>
+                    <span class="desc">Wealth Management</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                    <circle cx="30" cy="30" r="25" stroke="#00ADEF" stroke-width="2" fill="none" stroke-dasharray="157" stroke-dashoffset="157">
+                        <animate attributeName="stroke-dashoffset" from="157" to="0" dur="2s" fill="freeze"/>
+                    </circle>
+                </svg>
+            </div>
+            <p>Loading Mercedes Adapter...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-text">VCA</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#tech">Technology</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#metrics">Metrics</a>
+            </div>
+            <div class="nav-cta">
+                <a href="https://github.com/romantsisyk" class="btn-github" target="_blank">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <div class="particle-field"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">GlobalLogic (Hitachi Group) | 2021-2022</div>
+                <h1 class="hero-title">
+                    Mercedes
+                    <span class="gradient-text">Adapter</span>
+                </h1>
+                <p class="hero-description">
+                    Revolutionary vehicle connectivity adapter transforming Mercedes-Benz driving experience through specialized hardware integration. 
+                    Built for GlobalLogic (Hitachi Group) with focus on real-time data, navigation, and remote control features.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">500K+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">8.0+</span>
+                        <span class="stat-label">Android Version</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">7 months</span>
+                        <span class="stat-label">Development</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">
+                        <span>Explore Features</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14m-7-7l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.daimler.mbfa.android" class="btn btn-secondary" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 20.5v-17c0-.83.94-1.4 1.67-.9l11.66 8.5c.63.46.63 1.34 0 1.8l-11.66 8.5c-.73.5-1.67-.07-1.67-.9z"/>
+                        </svg>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Mercedes Adapter Dashboard" class="screen-image">
+                        </div>
+                    </div>
+                    <div class="floating-card card-1">
+                        <div class="card-icon">📊</div>
+                        <span>18,194 km driven</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="card-icon">⛽</div>
+                        <span>144 km range</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="card-icon">🎯</div>
+                        <span>87% Driver Score</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Everything you need to manage your Mercedes-Benz vehicle</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 11H3v2h6v-2zm0-4H3v2h6V7zm0 8H3v2h6v-2zm12-8h-6v2h6V7zm0 4h-6v2h6v-2zm0 4h-6v2h6v-2z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Vehicle Diagnostics</h3>
+                    <p>Real-time vehicle health monitoring with advanced telemetry and diagnostic tools for comprehensive system analysis</p>
+                    <div class="feature-badge">Core Feature</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Driver's Logbook</h3>
+                    <p>Automated trip recording with intelligent categorization for business and personal journeys</p>
+                    <div class="feature-badge">Premium</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                            <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Service Scheduler</h3>
+                    <p>Smart maintenance scheduling with dealer appointment booking and service history tracking</p>
+                    <div class="feature-badge">Essential</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-width="2"/>
+                            <circle cx="12" cy="10" r="3" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Location Services</h3>
+                    <p>Find nearby gas stations, charging points, and Mercedes-Benz dealers with integrated navigation</p>
+                    <div class="feature-badge">Navigation</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2"/>
+                            <circle cx="12" cy="10" r="3" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Enhanced Navigation</h3>
+                    <p>Real-time traffic updates with fuel price comparison and integrated navigation to gas stations and service centers</p>
+                    <div class="feature-badge">Navigation</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Emergency Support</h3>
+                    <p>24/7 emergency assistance with automatic service center connectivity and roadside assistance coordination</p>
+                    <div class="feature-badge">Safety</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technology Stack</h2>
+                <p class="section-subtitle">Built with modern Android development tools and frameworks</p>
+            </div>
+            
+            <div class="tech-categories">
+                <div class="tech-category">
+                    <h3>Core Technologies</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                            </div>
+                            <span>Android SDK</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                            </div>
+                            <span>Kotlin</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                            </div>
+                            <span>Java</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-plain.svg" alt="Gradle">
+                            </div>
+                            <span>Gradle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Architecture & Libraries</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">🔄</div>
+                            <span>Retrofit</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🏠</div>
+                            <span>Room DB</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🎯</div>
+                            <span>MVVM</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">📡</div>
+                            <span>Bluetooth LE</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🔌</div>
+                            <span>Hardware SDK</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🎨</div>
+                            <span>Material Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Services & APIs</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-icon">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                            </div>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">📍</div>
+                            <span>Google Maps</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">📱</div>
+                            <span>Push Notifications</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🔐</div>
+                            <span>SQLCipher</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">⚙️</div>
+                            <span>WorkManager</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🚗</div>
+                            <span>Mercedes APIs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">App Screenshots</h2>
+                <p class="section-subtitle">Experience the intuitive interface and powerful features</p>
+            </div>
+            
+            <div class="screenshot-carousel">
+                <div class="screenshot-track">
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Main Dashboard">
+                        <p>Main Dashboard</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Distance Statistics">
+                        <p>Distance Statistics</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Fuel Level">
+                        <p>Fuel Tracking</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/e5c1d4df565c25806fcaa17675cf9c8630a1be620ff170323ca19a0b2730bfb8_800.webp" alt="Trip List">
+                        <p>Trip Documentation</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/f092cc0c93ee59b300168380b96088226cc19ab953b4696a825deb8bb5e47eb0_800.webp" alt="Real-time Analysis">
+                        <p>Real-time Cockpit</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Health Monitor">
+                        <p>Vehicle Health</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Driving Score">
+                        <p>Driving Score</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Digital Upgrade">
+                        <p>Digital World</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Performance Metrics</h2>
+                <p class="section-subtitle">Built for speed, reliability, and scale</p>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value" data-value="99.9">0</div>
+                    <div class="metric-suffix">%</div>
+                    <div class="metric-label">Uptime</div>
+                    <div class="metric-description">Enterprise-grade reliability</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" data-value="1.2">0</div>
+                    <div class="metric-suffix">s</div>
+                    <div class="metric-label">Load Time</div>
+                    <div class="metric-description">Lightning-fast startup</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" data-value="95">0</div>
+                    <div class="metric-suffix">%</div>
+                    <div class="metric-label">Code Coverage</div>
+                    <div class="metric-description">Comprehensive testing</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" data-value="60">0</div>
+                    <div class="metric-suffix">fps</div>
+                    <div class="metric-label">UI Performance</div>
+                    <div class="metric-description">Smooth animations</div>
+                </div>
+            </div>
+
+            <div class="achievements">
+                <div class="achievement">
+                    <div class="achievement-icon">🏆</div>
+                    <h4>Best Enterprise App 2023</h4>
+                    <p>Android Excellence Award</p>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">⭐</div>
+                    <h4>Editor's Choice</h4>
+                    <p>Google Play Store</p>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">🔒</div>
+                    <h4>Security Certified</h4>
+                    <p>ISO 27001 Compliant</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Revolutionary Vehicle Connectivity Solution</h2>
+                <p>Developed for GlobalLogic (Hitachi Group) - Transforming the driving experience for 500K+ users</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 20.5v-17c0-.83.94-1.4 1.67-.9l11.66 8.5c.63.46.63 1.34 0 1.8l-11.66 8.5c-.73.5-1.67-.07-1.67-.9z"/>
+                        </svg>
+                        View Case Study
+                    </a>
+                    <a href="https://github.com/romantsisyk" class="btn btn-secondary btn-large" target="_blank">
+                        View My GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+    <!-- Product Gallery -->
+    <section class="product-gallery">
+        <div class="container">
+            <h2>Product Gallery</h2>
+            <div class="gallery-grid">
+                <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Adapter Overview" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Connection Setup" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Device Info" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Diagnostics" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Vehicle Status" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Real-time Data" class="gallery-item">
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .product-gallery {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .gallery-item {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
+
+    
+    <!-- Product Gallery -->
+    <section class="product-gallery">
+        <div class="container">
+            <h2>Product Gallery</h2>
+            <div class="gallery-grid">
+                <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Adapter Overview" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Connection Setup" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Device Info" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Diagnostics" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Vehicle Status" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Real-time Data" class="gallery-item">
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .product-gallery {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .gallery-item {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Mercedes Adapter</h3>
+                    <p>Vehicle Connectivity by Roman Tsisyk</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#tech">Technology</a>
+                    <a href="#screenshots">Screenshots</a>
+                    <a href="#metrics">Metrics</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/romantsisyk" target="_blank" aria-label="GitHub">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/roman-tsisyk" target="_blank" aria-label="LinkedIn">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Roman Tsisyk. Project developed for GlobalLogic (Hitachi Group).</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="image-loader.js"></script>
+    
+    <!-- Poly Lens Style Navigation Script -->
+    <script>
+        // Float Navigation Panel - Start open by default
+        let isNavPanelOpen = true;
+        
+        function toggleProjectNav() {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            isNavPanelOpen = !isNavPanelOpen;
+            
+            if (isNavPanelOpen) {
+                panel.classList.remove('hidden');
+                button.classList.remove('active');
+            } else {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('navPanelOpen', isNavPanelOpen);
+        }
+        
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has a saved preference
+            const savedState = localStorage.getItem('navPanelOpen');
+            if (savedState !== null) {
+                isNavPanelOpen = savedState === 'true';
+            } else {
+                // First visit - keep panel open
+                isNavPanelOpen = true;
+            }
+            
+            // Apply initial state
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (!isNavPanelOpen) {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Press 'N' to toggle navigation panel
+            if (e.key === 'n' || e.key === 'N') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    toggleProjectNav();
+                }
+            }
+            
+            // Press 'Escape' to close panel
+            if (e.key === 'Escape' && isNavPanelOpen) {
+                toggleProjectNav();
+            }
+        });
+
+        // Optional: Close panel when clicking outside
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (isNavPanelOpen && !panel.contains(e.target) && !button.contains(e.target)) {
+                // Uncomment next line if you want panel to close when clicking outside
+                // toggleProjectNav();
+            }
+        });
+    </script>
+</body>
+</html>
