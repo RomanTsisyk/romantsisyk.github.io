@@ -3,431 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earnly - Smart Tax Management for UK Businesses | Portfolio</title>
-    
-    <!-- Fonts -->
+    <title>Earnly - Smart Tax Management for Everyone</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Styles - Use original rich styles with all animations -->
+    <!-- Float Navigation Styles -->
     <style>
-        /* ========== COMPLETE EARNLY STYLES WITH ANIMATIONS ========== */
-        :root {
-            --primary-blue: #004AAD;
-            --primary-blue-dark: #003A8C;
-            --secondary-green: #00BF63;
-            --secondary-orange: #FF954D;
-            --dark-bg: #0A0E27;
-            --dark-card: #1A1F3A;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B8BCC8;
-            --gradient-primary: linear-gradient(135deg, #004AAD, #0066FF);
-            --gradient-secondary: linear-gradient(135deg, #00BF63, #00E574);
-            --gradient-accent: linear-gradient(135deg, #FF954D, #FFB366);
-            --gradient-dark: linear-gradient(180deg, #0A0E27 0%, #151933 100%);
-            --font-primary: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Loading Screen */
-        #loader {
+        /* Float button navigation between projects */
+        .project-nav-float {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            bottom: 30px;
+            right: 30px;
             z-index: 10000;
-            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        #loader.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-content {
-            text-align: center;
-        }
-
-        .loader-logo {
-            font-size: 60px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-text {
-            font-family: var(--font-heading);
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Hero Section with Animated Background */
-        .hero {
-            min-height: 100vh;
-            padding: 120px 0 80px;
-            position: relative;
-            overflow: hidden;
-            background: var(--gradient-dark);
-        }
-
-        .gradient-orbs {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--gradient-primary);
-            top: -200px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--gradient-secondary);
-            top: 50%;
-            right: -150px;
-            animation-delay: 5s;
-        }
-
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--gradient-accent);
-            bottom: -100px;
-            left: 30%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-            50% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-            75% {
-                transform: translate(-30px, -20px) scale(1.05);
-            }
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-family: var(--font-heading);
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .gradient-text {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Phone Mockup with Floating Animation */
-        .phone-mockup {
-            position: relative;
-            width: 320px;
-            height: 640px;
-            margin: 0 auto;
-        }
-
-        .phone-frame {
-            width: 100%;
-            height: 100%;
-            background: #1a1a1a;
-            border-radius: 40px;
-            padding: 10px;
-            box-shadow: 
-                0 50px 100px rgba(0, 0, 0, 0.5),
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
-            transform: perspective(1000px) rotateY(-15deg);
-            animation: phoneFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes phoneFloat {
-            0%, 100% { transform: perspective(1000px) rotateY(-15deg) translateY(0); }
-            50% { transform: perspective(1000px) rotateY(-15deg) translateY(-20px); }
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #004AAD 0%, #0066FF 100%);
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Features with Hover Effects */
-        .features {
-            padding: 100px 0;
-            background: var(--dark-bg);
-            position: relative;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 74, 173, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 74, 173, 0.2);
-        }
-
-        /* Tech Stack with Icons */
-        .tech-stack {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--dark-bg) 0%, #0F1428 100%);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .tech-item {
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .tech-icon {
+        .project-nav-button {
             width: 60px;
             height: 60px;
-            margin: 0 auto 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover .tech-icon {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-
-        /* Metrics with Animated Counters */
-        .metrics {
-            padding: 100px 0;
-            background: linear-gradient(180deg, #0F1428 0%, var(--dark-bg) 100%);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .metric-card {
-            background: var(--dark-card);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            overflow: hidden;
         }
 
-        .metric-value {
-            font-size: 48px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+        .project-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(147, 51, 234, 0.6);
         }
 
-        /* Buttons */
-        .btn {
-            display: inline-flex;
+        .project-nav-button.active {
+            transform: rotate(45deg);
+        }
+
+        .project-nav-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            min-width: 320px;
+            background: rgba(10, 14, 39, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .project-nav-panel.hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(147, 51, 234, 0.2);
+        }
+
+        .panel-title {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        }
+
+        .panel-close {
+            background: none;
             border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
         }
 
-        .btn-primary {
-            background: var(--gradient-primary);
+        .panel-close:hover {
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            box-shadow: 0 4px 20px rgba(0, 74, 173, 0.3);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 74, 173, 0.4);
+        .project-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 4px;
         }
 
-        /* Responsive */
+        .project-nav-item:hover {
+            background: rgba(147, 51, 234, 0.2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-nav-item.home {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .project-nav-item.current {
+            background: rgba(147, 51, 234, 0.15);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            pointer-events: none;
+        }
+
+        .project-nav-item .icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .project-nav-item .text {
+            flex: 1;
+        }
+
+        .project-nav-item .text .name {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .project-nav-item .text .desc {
+            display: block;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .current-indicator {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-nav-divider {
+            height: 1px;
+            background: rgba(147, 51, 234, 0.2);
+            margin: 12px 0;
+        }
+
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(147, 51, 234, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            }
+        }
+
+        .project-nav-button {
+            animation: pulse 3s infinite;
+        }
+
+        .project-nav-button:hover {
+            animation: none;
+        }
+
+        /* Mobile adjustments */
         @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .project-nav-float {
+                bottom: 20px;
+                right: 20px;
             }
             
-            .phone-mockup {
-                transform: scale(0.8);
+            .project-nav-button {
+                width: 56px;
+                height: 56px;
             }
             
-            .features-grid {
-                grid-template-columns: 1fr;
+            .project-nav-panel {
+                min-width: 280px;
+                right: -20px;
             }
+        }
+
+        /* Small tooltip */
+        .nav-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            background: rgba(10, 14, 39, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-nav-button:hover + .nav-tooltip {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Float Navigation Button -->
+    <div class="project-nav-float">
+        <button class="project-nav-button" id="navFloatButton" onclick="toggleProjectNav()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+        </button>
+        <span class="nav-tooltip">Switch Projects</span>
+        
+        <div class="project-nav-panel" id="projectNavPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Quick Navigation
+                </div>
+                <button class="panel-close" onclick="toggleProjectNav()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <a href="../../index.html" class="project-nav-item home">
+                <span class="icon">🏠</span>
+                <span class="text">
+                    <span class="name">Main Portfolio</span>
+                    <span class="desc">Back to homepage</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-divider"></div>
+            
+            <a href="../poly-lens/index.html" class="project-nav-item">
+                <span class="icon">🎧</span>
+                <span class="text">
+                    <span class="name">HP Poly Lens</span>
+                    <span class="desc">Enterprise Headset Management</span>
+                </span>
+            </a>
+            
+            <a href="../kasa-stefczyka/index.html" class="project-nav-item">
+                <span class="icon">💳</span>
+                <span class="text">
+                    <span class="name">Kasa Stefczyka</span>
+                    <span class="desc">Banking Application</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-item current">
+                <span class="icon">💰</span>
+                <span class="text">
+                    <span class="name">Earnly</span>
+                    <span class="desc">Financial Management</span>
+                </span>
+                <span class="current-indicator">CURRENT</span>
+            </div>
+            
+            <a href="../followmymoney/index.html" class="project-nav-item">
+                <span class="icon">📊</span>
+                <span class="text">
+                    <span class="name">FollowMyMoney</span>
+                    <span class="desc">Expense Tracking</span>
+                </span>
+            </a>
+            
+            <a href="../mercedes-adapter/index.html" class="project-nav-item">
+                <span class="icon">🔌</span>
+                <span class="text">
+                    <span class="name">Mercedes Adapter</span>
+                    <span class="desc">Vehicle Connectivity</span>
+                </span>
+            </a>
+            
+            <a href="../netti/index.html" class="project-nav-item">
+                <span class="icon">📱</span>
+                <span class="text">
+                    <span class="name">Netti</span>
+                    <span class="desc">Network Testing Suite</span>
+                </span>
+            </a>
+            
+            <a href="../fels/index.html" class="project-nav-item">
+                <span class="icon">💼</span>
+                <span class="text">
+                    <span class="name">FELS</span>
+                    <span class="desc">Wealth Management</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
     <!-- Loading Screen -->
     <div id="loader">
         <div class="loader-content">
             <div class="loader-logo">£</div>
+            <div class="loader-bar"></div>
         </div>
     </div>
 
@@ -436,52 +347,125 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <span class="logo-text">Earnly</span>
+                <span class="logo-tag">v2.0</span>
             </div>
             <div class="nav-links">
-                <a href="../../index.html">← Back to Portfolio</a>
+                <a href="#features">Features</a>
+                <a href="#tech">Technology</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#metrics">Impact</a>
+                <a href="https://github.com/yourusername/earnly" class="nav-cta">View Code</a>
+            </div>
+            <div class="nav-mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Animated Background -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="gradient-orbs">
             <div class="orb orb-1"></div>
             <div class="orb orb-2"></div>
             <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
         </div>
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">🚀 Now Available on Android</div>
                 <h1 class="hero-title">
                     <span class="gradient-text">Easy-peasy</span> tax reporting,<br>
-                    at your fingertips
+                    at your <span class="highlight">fingertips</span>
                 </h1>
-                <p style="font-size: 18px; color: #B8BCC8; margin-bottom: 32px;">
+                <p class="hero-description">
                     Earnly transforms complex UK tax calculations into simple, actionable insights. 
                     Track your self-assessment, corporation tax, and integrate seamlessly with 
                     your favorite accounting software.
                 </p>
-                <div style="display: flex; gap: 16px;">
-                    <a href="#" class="btn btn-primary">View on GitHub</a>
+                <div class="hero-actions">
+                    <a href="#" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        Download APK
+                    </a>
+                    <a href="#demo" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        Watch Demo
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">50K+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">£2M+</span>
+                        <span class="stat-label">Tax Calculated</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">4.8★</span>
+                        <span class="stat-label">User Rating</span>
+                    </div>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="phone-mockup">
                     <div class="phone-frame">
-                        <div class="phone-screen" style="display: flex; align-items: center; justify-content: center;">
-                            <div style="text-align: center; padding: 20px;">
-                                <div style="font-size: 60px; font-weight: 800; margin-bottom: 20px;">£</div>
-                                <h3 style="font-size: 24px; margin-bottom: 20px;">Your Tax Summary</h3>
-                                <div style="background: white; border-radius: 16px; padding: 20px;">
-                                    <div style="color: #333; margin-bottom: 16px;">
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <span>Self Assessment</span>
-                                            <span style="font-size: 20px; font-weight: 700; color: #004AAD;">£3,450</span>
-                                        </div>
+                        <div class="phone-screen">
+                            <div class="app-header">
+                                <span class="app-time">9:41</span>
+                                <div class="app-status">
+                                    <span>●●●</span>
+                                    <span>📶</span>
+                                    <span>🔋</span>
+                                </div>
+                            </div>
+                            <div class="app-content">
+                                <div class="app-logo">£</div>
+                                <h3>Your Tax Summary</h3>
+                                <div class="tax-card">
+                                    <div class="tax-item">
+                                        <span>Self Assessment</span>
+                                        <span class="tax-amount">£3,450</span>
                                     </div>
+                                    <div class="tax-item">
+                                        <span>Corporation Tax</span>
+                                        <span class="tax-amount">£12,890</span>
+                                    </div>
+                                    <div class="tax-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 75%"></div>
+                                        </div>
+                                        <span>75% of tax year complete</span>
+                                    </div>
+                                </div>
+                                <div class="app-nav">
+                                    <span class="nav-icon active">🏠</span>
+                                    <span class="nav-icon">📊</span>
+                                    <span class="nav-icon">💰</span>
+                                    <span class="nav-icon">⚙️</span>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="floating-cards">
+                    <div class="float-card float-1">
+                        <span class="card-icon">✓</span>
+                        <span>HMRC Connected</span>
+                    </div>
+                    <div class="float-card float-2">
+                        <span class="card-icon">📈</span>
+                        <span>Real-time Updates</span>
+                    </div>
+                    <div class="float-card float-3">
+                        <span class="card-icon">🔒</span>
+                        <span>Bank-level Security</span>
                     </div>
                 </div>
             </div>
@@ -489,165 +473,358 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section id="features" class="features">
         <div class="container">
-            <h2 style="text-align: center; font-size: 48px; margin-bottom: 60px;">
-                Everything you need for <span class="gradient-text">smart tax management</span>
-            </h2>
+            <div class="section-header">
+                <span class="section-badge">FEATURES</span>
+                <h2 class="section-title">Everything you need for <span class="gradient-text">smart tax management</span></h2>
+                <p class="section-description">Powerful features designed to simplify your UK tax obligations</p>
+            </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #004AAD, #0066FF); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        📊
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #004AAD, #0066FF);">
+                        <span>📊</span>
                     </div>
                     <h3>Self-Assessment Calculator</h3>
-                    <p style="color: #B8BCC8;">Intelligent algorithms calculate your exact self-assessment tax liability with HMRC-approved rates</p>
+                    <p>Intelligent algorithms calculate your exact self-assessment tax liability with HMRC-approved rates and allowances</p>
+                    <div class="feature-tags">
+                        <span class="tag">AI-Powered</span>
+                        <span class="tag">Real-time</span>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #00BF63, #00E574); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        🏢
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #00BF63, #00E574);">
+                        <span>🏢</span>
                     </div>
                     <h3>Corporation Tax Tracking</h3>
-                    <p style="color: #B8BCC8;">Monitor your company's tax position throughout the year with automatic calculations</p>
+                    <p>Monitor your company's tax position throughout the year with automatic calculations and forecasting</p>
+                    <div class="feature-tags">
+                        <span class="tag">Multi-company</span>
+                        <span class="tag">Forecasting</span>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #FF954D, #FFB366); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        🔗
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #FF954D, #FFB366);">
+                        <span>🔗</span>
                     </div>
                     <h3>HMRC Integration</h3>
-                    <p style="color: #B8BCC8;">Direct connection to HMRC systems for automatic data sync and submission</p>
+                    <p>Direct connection to HMRC systems for automatic data sync and submission of tax returns</p>
+                    <div class="feature-tags">
+                        <span class="tag">Official API</span>
+                        <span class="tag">Secure</span>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #9B59B6, #B967E1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        💼
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #9B59B6, #B967E1);">
+                        <span>💼</span>
                     </div>
                     <h3>Accounting Software Sync</h3>
-                    <p style="color: #B8BCC8;">Seamless integration with QuickBooks, Xero, and Sage for automatic data import</p>
+                    <p>Seamless integration with QuickBooks, Xero, and Sage for automatic financial data import</p>
+                    <div class="feature-tags">
+                        <span class="tag">3+ Platforms</span>
+                        <span class="tag">Auto-sync</span>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #E74C3C, #FF6B6B); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        📈
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #E74C3C, #FF6B6B);">
+                        <span>📈</span>
                     </div>
                     <h3>Financial Dashboard</h3>
-                    <p style="color: #B8BCC8;">Comprehensive overview of your financial position with interactive charts</p>
+                    <p>Comprehensive overview of your financial position with interactive charts and insights</p>
+                    <div class="feature-tags">
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Insights</span>
+                    </div>
                 </div>
                 <div class="feature-card">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3498DB, #5DADE2); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;">
-                        💳
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #3498DB, #5DADE2);">
+                        <span>💳</span>
                     </div>
                     <h3>Transaction Management</h3>
-                    <p style="color: #B8BCC8;">Categorize and track all business transactions with smart categorization</p>
+                    <p>Categorize and track all business transactions with smart categorization and receipt scanning</p>
+                    <div class="feature-tags">
+                        <span class="tag">OCR</span>
+                        <span class="tag">Auto-categorize</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack -->
-    <section class="tech-stack">
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech-stack">
         <div class="container">
-            <h2 style="text-align: center; font-size: 48px; margin-bottom: 60px;">
-                Built with <span class="gradient-text">modern Android stack</span>
-            </h2>
+            <div class="section-header">
+                <span class="section-badge">TECHNOLOGY</span>
+                <h2 class="section-title">Built with <span class="gradient-text">modern Android stack</span></h2>
+                <p class="section-description">Leveraging cutting-edge technologies for performance and reliability</p>
+            </div>
             <div class="tech-grid">
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">🤖</span>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
                     </div>
                     <span>Android</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">📱</span>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
                     </div>
                     <span>Kotlin</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">🎨</span>
+                        <svg viewBox="0 0 24 24" fill="#4285F4">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
                     </div>
                     <span>Jetpack Compose</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">🔥</span>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
                     </div>
                     <span>Firebase</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">💾</span>
+                        <svg viewBox="0 0 24 24" fill="#00C853">
+                            <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
+                        </svg>
                     </div>
                     <span>Room DB</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">💉</span>
+                        <svg viewBox="0 0 24 24" fill="#FF6F00">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
                     </div>
                     <span>Hilt</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">🌐</span>
+                        <svg viewBox="0 0 24 24" fill="#9C27B0">
+                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+                        </svg>
                     </div>
                     <span>Retrofit</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-icon">
-                        <span style="font-size: 36px;">⚡</span>
+                        <svg viewBox="0 0 24 24" fill="#2196F3">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
                     </div>
                     <span>Coroutines</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Metrics -->
-    <section class="metrics">
-        <div class="container">
-            <h2 style="text-align: center; font-size: 48px; margin-bottom: 60px;">
-                Making a <span class="gradient-text">real difference</span>
-            </h2>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">99.8</div>
-                    <span style="font-size: 24px; color: #B8BCC8;">%</span>
-                    <p style="margin-top: 12px; color: #B8BCC8;">Calculation Accuracy</p>
+            <div class="tech-details">
+                <div class="tech-detail-card">
+                    <h4>Architecture</h4>
+                    <p>Clean Architecture with MVVM pattern, ensuring maintainable and testable code</p>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">1.2</div>
-                    <span style="font-size: 24px; color: #B8BCC8;">sec</span>
-                    <p style="margin-top: 12px; color: #B8BCC8;">Average Load Time</p>
+                <div class="tech-detail-card">
+                    <h4>Security</h4>
+                    <p>End-to-end encryption, biometric authentication, and secure API communications</p>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">85</div>
-                    <span style="font-size: 24px; color: #B8BCC8;">%</span>
-                    <p style="margin-top: 12px; color: #B8BCC8;">Time Saved</p>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">4</div>
-                    <span style="font-size: 24px; color: #B8BCC8;">apps</span>
-                    <p style="margin-top: 12px; color: #B8BCC8;">Integration Partners</p>
+                <div class="tech-detail-card">
+                    <h4>Performance</h4>
+                    <p>Optimized for 60fps animations, minimal memory footprint, and instant load times</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">SCREENSHOTS</span>
+                <h2 class="section-title">Experience <span class="gradient-text">Earnly in action</span></h2>
+                <p class="section-description">Beautiful, intuitive interfaces designed for efficiency</p>
+            </div>
+            <div class="screenshots-carousel">
+                <div class="screenshot-container">
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/004AAD/FFFFFF?text=Dashboard" alt="Dashboard">
+                        <div class="screenshot-caption">Financial Dashboard</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/00BF63/FFFFFF?text=Tax+Calculator" alt="Tax Calculator">
+                        <div class="screenshot-caption">Tax Calculator</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/FF954D/FFFFFF?text=Transactions" alt="Transactions">
+                        <div class="screenshot-caption">Transaction History</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/9B59B6/FFFFFF?text=Reports" alt="Reports">
+                        <div class="screenshot-caption">Financial Reports</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/300x600/3498DB/FFFFFF?text=Settings" alt="Settings">
+                        <div class="screenshot-caption">Settings & Integration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">IMPACT</span>
+                <h2 class="section-title">Making a <span class="gradient-text">real difference</span></h2>
+                <p class="section-description">Measurable results that matter to our users</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value" data-value="99.8">0</div>
+                    <span class="metric-unit">%</span>
+                    <p class="metric-label">Calculation Accuracy</p>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: 99.8%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" data-value="1.2">0</div>
+                    <span class="metric-unit">sec</span>
+                    <p class="metric-label">Average Load Time</p>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" data-value="85">0</div>
+                    <span class="metric-unit">%</span>
+                    <p class="metric-label">Time Saved</p>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" data-value="4">0</div>
+                    <span class="metric-unit">apps</span>
+                    <p class="metric-label">Integration Partners</p>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to simplify your taxes?</h2>
+                <p>Join thousands of UK businesses and individuals managing their taxes with confidence</p>
+                <div class="cta-actions">
+                    <a href="#" class="btn btn-primary btn-large">
+                        Download Earnly Now
+                    </a>
+                    <a href="https://github.com/yourusername/earnly" class="btn btn-outline btn-large">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Earnly</h3>
+                    <p>Easy-peasy tax reporting, at your fingertips</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Project</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">API Reference</a>
+                    <a href="#">Contributing</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Email</a>
+                </div>
+                <div class="footer-tech">
+                    <h4>Built With</h4>
+                    <p>Kotlin • Jetpack Compose • Firebase • Material Design 3</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Earnly. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Float Navigation Script -->
     <script>
-        // Hide loader after page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-            }, 500);
+        // Float Navigation Panel - Start open by default
+        let isNavPanelOpen = true;
+        
+        function toggleProjectNav() {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            isNavPanelOpen = !isNavPanelOpen;
+            
+            if (isNavPanelOpen) {
+                panel.classList.remove('hidden');
+                button.classList.remove('active');
+            } else {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('navPanelOpen', isNavPanelOpen);
+        }
+        
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has a saved preference
+            const savedState = localStorage.getItem('navPanelOpen');
+            if (savedState !== null) {
+                isNavPanelOpen = savedState === 'true';
+            } else {
+                // First visit - keep panel open
+                isNavPanelOpen = true;
+            }
+            
+            // Apply initial state
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (!isNavPanelOpen) {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Press 'N' to toggle navigation panel
+            if (e.key === 'n' || e.key === 'N') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    toggleProjectNav();
                 }
-            });
+            }
+            
+            // Press 'Escape' to close panel
+            if (e.key === 'Escape' && isNavPanelOpen) {
+                toggleProjectNav();
+            }
         });
     </script>
 </body>

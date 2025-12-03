@@ -3,703 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Recruiter - Modern Recruitment Platform | Portfolio</title>
+    <title>Job Recruiter - Smart Recruitment Platform | Roman Tsisyk</title>
+    <meta name="description" content="Modern recruitment platform connecting job seekers with employers through intelligent matching. Built with Kotlin, MVVM, Retrofit, and Room DB.">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Complete Job Recruiter Styles with Animations -->
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../shared/css/project-base.css">
+    
+    <!-- Custom Styles for Job Recruiter -->
     <style>
-        /* ========== JOB RECRUITER - COMPLETE STYLES WITH ANIMATIONS ========== */
         :root {
-            --primary: #6366F1;
-            --secondary: #10B981;
-            --accent: #F59E0B;
-            --danger: #EF4444;
-            --dark-bg: #0F172A;
-            --dark-surface: #1E293B;
-            --dark-card: #334155;
-            --text-primary: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --gradient-primary: linear-gradient(135deg, #6366F1, #8B5CF6);
-            --gradient-secondary: linear-gradient(135deg, #10B981, #34D399);
-            --gradient-accent: linear-gradient(135deg, #F59E0B, #FCD34D);
-            --gradient-mesh: linear-gradient(135deg, #6366F1 0%, #10B981 50%, #F59E0B 100%);
+            --primary: #4CAF50;
+            --secondary: #2196F3;
+            --accent: #FFC107;
+            --dark: #0A0E27;
+            --darker: #050714;
+            --light: #ffffff;
+            --gray: #8892b0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Override gradient colors for this project */
+        .gradient-orb.orb-1 {
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
         }
 
-        html {
-            scroll-behavior: smooth;
+        .gradient-orb.orb-2 {
+            background: linear-gradient(135deg, #2196F3, #FFC107);
         }
 
-        body {
-            font-family: 'Poppins', -apple-system, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
+        .gradient-orb.orb-3 {
+            background: linear-gradient(135deg, #4CAF50, #FFC107);
         }
 
-        /* Loading Screen */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s;
+        .hero-badge {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
-        .loader.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader-dots {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            animation: bounce 1.4s ease-in-out infinite;
-        }
-
-        .dot:nth-child(2) {
-            animation-delay: 0.2s;
-            background: var(--gradient-secondary);
-        }
-
-        .dot:nth-child(3) {
-            animation-delay: 0.4s;
-            background: var(--gradient-accent);
-        }
-
-        @keyframes bounce {
-            0%, 80%, 100% {
-                transform: scale(0);
-            }
-            40% {
-                transform: scale(1);
-            }
-        }
-
-        /* Animated Background */
-        .bg-pattern {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-            opacity: 0.5;
-        }
-
-        .pattern-line {
-            position: absolute;
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, var(--primary), transparent);
-            animation: move-line 10s linear infinite;
-        }
-
-        .pattern-line:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .pattern-line:nth-child(2) { left: 30%; animation-delay: 2s; }
-        .pattern-line:nth-child(3) { left: 50%; animation-delay: 4s; }
-        .pattern-line:nth-child(4) { left: 70%; animation-delay: 6s; }
-        .pattern-line:nth-child(5) { left: 90%; animation-delay: 8s; }
-
-        @keyframes move-line {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1.5rem 2rem;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 2rem 80px;
-            position: relative;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            animation: fadeInLeft 0.8s ease;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .gradient-text {
-            background: var(--gradient-mesh);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: gradient-flow 3s ease infinite;
-        }
-
-        @keyframes gradient-flow {
-            to { background-position: 200% center; }
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            animation: fadeInLeft 0.8s ease 0.1s both;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-
-        /* Dashboard Visual */
-        .hero-visual {
-            position: relative;
-            animation: fadeInRight 0.8s ease;
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .dashboard-mockup {
-            background: var(--dark-surface);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .status-badge {
-            padding: 0.5rem 1rem;
-            background: var(--gradient-secondary);
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .candidate-cards {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .candidate-card {
-            background: var(--dark-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: grid;
-            grid-template-columns: 60px 1fr auto;
-            gap: 1rem;
-            align-items: center;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .candidate-card:nth-child(2) { animation-delay: 0.1s; }
-        .candidate-card:nth-child(3) { animation-delay: 0.2s; }
-
-        .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .candidate-info h4 {
-            margin-bottom: 0.25rem;
-        }
-
-        .candidate-info p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .match-score {
-            padding: 0.5rem 1rem;
-            background: rgba(16, 185, 129, 0.2);
-            color: #10B981;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 2rem;
-            background: var(--dark-surface);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-card:hover::after {
-            opacity: 1;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        .section-badge {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Tech Stack */
-        .tech {
-            padding: 100px 2rem;
-        }
-
-        .tech-grid {
-            max-width: 1200px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-        }
-
-        .tech-item {
-            background: var(--dark-surface);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .tech-item:hover {
-            transform: translateY(-5px) scale(1.05);
+            background: rgba(76, 175, 80, 0.1);
             border-color: var(--primary);
         }
 
-        /* Metrics */
-        .metrics {
-            padding: 100px 2rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(16, 185, 129, 0.05));
-        }
-
-        .metrics-grid {
-            max-width: 1200px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .metric-card {
-            background: var(--dark-surface);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-primary);
-        }
-
-        .metric-value {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
+        .metric-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .dashboard-mockup {
-                margin-top: 2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
+    <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="loader-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div class="loader-bar"></div>
         </div>
     </div>
 
-    <!-- Animated Background -->
-    <div class="bg-pattern">
-        <div class="pattern-line"></div>
-        <div class="pattern-line"></div>
-        <div class="pattern-line"></div>
-        <div class="pattern-line"></div>
-        <div class="pattern-line"></div>
-    </div>
-
     <!-- Navigation -->
-    <nav>
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">Job Recruiter</div>
-            <a href="../../index.html" class="btn btn-primary">← Back to Portfolio</a>
+            <a href="../../index.html" class="nav-logo">
+                <span class="logo-icon">←</span>
+                <span class="logo-text">Back to Portfolio</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link">Overview</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#tech" class="nav-link">Tech Stack</a></li>
+                <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
+    <section class="hero" id="overview">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+
+        <div class="container">
             <div class="hero-content">
-                <h1>
-                    <span class="gradient-text">Smart Recruitment</span><br>
-                    Made Simple
-                </h1>
-                <p>
-                    Modern recruitment platform connecting job seekers with employers efficiently. 
-                    AI-powered matching, video interviews, and complete ATS system.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <span>🚀</span> View on Play Store
-                    </a>
-                    <a href="https://github.com/yourusername/job-recruiter" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
-                        <span>💻</span> GitHub
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="dashboard-mockup">
-                    <div class="dashboard-header">
-                        <div class="dashboard-title">Top Candidates</div>
-                        <div class="status-badge">3 New Today</div>
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span>💼 HR Tech Platform</span>
                     </div>
-                    <div class="candidate-cards">
-                        <div class="candidate-card">
-                            <div class="avatar">JD</div>
-                            <div class="candidate-info">
-                                <h4>John Doe</h4>
-                                <p>Senior Developer • 5 years exp</p>
-                            </div>
-                            <div class="match-score">95% Match</div>
+                    <h1 class="hero-title">
+                        Job <span class="gradient-text">Recruiter</span>
+                    </h1>
+                    <p class="hero-description">
+                        Modern recruitment platform that revolutionizes the hiring process with intelligent job matching, 
+                        real-time notifications, and seamless communication between job seekers and employers. 
+                        Built with Android best practices and modern architecture patterns.
+                    </p>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span>Smart Matching</span>
                         </div>
-                        <div class="candidate-card">
-                            <div class="avatar" style="background: var(--gradient-secondary);">AS</div>
-                            <div class="candidate-info">
-                                <h4>Anna Smith</h4>
-                                <p>Product Manager • 3 years exp</p>
-                            </div>
-                            <div class="match-score">88% Match</div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📱</span>
+                            <span>Native Android</span>
                         </div>
-                        <div class="candidate-card">
-                            <div class="avatar" style="background: var(--gradient-accent);">MB</div>
-                            <div class="candidate-info">
-                                <h4>Mike Brown</h4>
-                                <p>UI/UX Designer • 4 years exp</p>
-                            </div>
-                            <div class="match-score">92% Match</div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔔</span>
+                            <span>Real-time Updates</span>
                         </div>
                     </div>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/RomanTsisyk/job-recruiter" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>View on GitHub</span>
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <span>Explore Features</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-screenshot">
+                                <div class="app-header">
+                                    <h3>Job Listings</h3>
+                                    <span class="filter-badge">Filter</span>
+                                </div>
+                                <div class="job-list">
+                                    <div class="job-card">
+                                        <div class="company-logo">🏢</div>
+                                        <div class="job-info">
+                                            <h4>Senior Android Developer</h4>
+                                            <p>Tech Company • Remote</p>
+                                            <div class="job-tags">
+                                                <span>Kotlin</span>
+                                                <span>MVVM</span>
+                                                <span>$120k-150k</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="job-card">
+                                        <div class="company-logo">🚀</div>
+                                        <div class="job-info">
+                                            <h4>Mobile Engineer</h4>
+                                            <p>Startup • Warsaw</p>
+                                            <div class="job-tags">
+                                                <span>Android</span>
+                                                <span>Compose</span>
+                                                <span>$80k-100k</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="job-card">
+                                        <div class="company-logo">💼</div>
+                                        <div class="job-info">
+                                            <h4>Product Manager</h4>
+                                            <p>Enterprise • Hybrid</p>
+                                            <div class="job-tags">
+                                                <span>Leadership</span>
+                                                <span>Agile</span>
+                                                <span>$100k-130k</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="section-header">
-            <h2>Powerful Features</h2>
-            <p style="color: var(--text-secondary); font-size: 1.2rem;">Everything you need for modern recruitment</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>Smart Matching</h3>
-                <p>AI-powered algorithm matches candidates with suitable positions based on skills and preferences</p>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">KEY FEATURES</span>
+                <h2 class="section-title">Powerful <span class="gradient-text">Recruitment Tools</span></h2>
+                <p class="section-description">Everything you need for efficient hiring and job searching</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📹</div>
-                <h3>Video Interviews</h3>
-                <p>Built-in video interviewing platform with scheduling and recording capabilities</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📄</div>
-                <h3>Resume Parser</h3>
-                <p>Automatic resume parsing and skill extraction for quick candidate evaluation</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Application Tracking</h3>
-                <p>Complete ATS system for managing the entire recruitment pipeline</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📈</div>
-                <h3>Analytics Dashboard</h3>
-                <p>Comprehensive analytics for recruitment metrics and performance tracking</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Instant Messaging</h3>
-                <p>Real-time chat between recruiters and candidates</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Job Matching</h3>
+                    <p>AI-powered algorithm matches candidates with relevant positions based on skills, experience, and preferences</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Profile Management</h3>
+                    <p>Complete user profiles with resume uploads, skill assessments, and portfolio showcases</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Advanced Search</h3>
+                    <p>Filter jobs by location, salary, experience level, company size, and work type with instant results</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Real-time Notifications</h3>
+                    <p>Push notifications for new job matches, application updates, and interview invitations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>In-app Messaging</h3>
+                    <p>Direct communication between recruiters and candidates with chat history and file sharing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Application Tracking</h3>
+                    <p>Track application status, interview schedules, and get insights on your job search progress</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack -->
-    <section class="tech">
-        <div class="section-header">
-            <h2>Technology Stack</h2>
-        </div>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
-                <div>Kotlin</div>
+    <!-- Tech Stack Section -->
+    <section class="tech-stack" id="tech">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">TECHNOLOGY</span>
+                <h2 class="section-title">Built with <span class="gradient-text">Modern Stack</span></h2>
+                <p class="section-description">Leveraging latest Android technologies for optimal performance</p>
             </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏗️</div>
-                <div>MVVM</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
-                <div>Retrofit</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💉</div>
-                <div>Dagger Hilt</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔥</div>
-                <div>Firebase</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
-                <div>Material Design</div>
+
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3>Core Development</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-icon">🎯</span>
+                            <div>
+                                <h4>Kotlin</h4>
+                                <p>Primary language with coroutines</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🏗️</span>
+                            <div>
+                                <h4>MVVM Architecture</h4>
+                                <p>Clean separation of concerns</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">💉</span>
+                            <div>
+                                <h4>Hilt/Dagger</h4>
+                                <p>Dependency injection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Data & Network</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-icon">🌐</span>
+                            <div>
+                                <h4>Retrofit</h4>
+                                <p>RESTful API communication</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">💾</span>
+                            <div>
+                                <h4>Room Database</h4>
+                                <p>Local data persistence</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🔄</span>
+                            <div>
+                                <h4>WorkManager</h4>
+                                <p>Background task scheduling</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3>UI & UX</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-icon">🎨</span>
+                            <div>
+                                <h4>Material Design 3</h4>
+                                <p>Modern UI components</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">📱</span>
+                            <div>
+                                <h4>Jetpack Compose</h4>
+                                <p>Declarative UI toolkit</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🎭</span>
+                            <div>
+                                <h4>Lottie Animations</h4>
+                                <p>Smooth micro-interactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Metrics -->
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">SCREENSHOTS</span>
+                <h2 class="section-title">App <span class="gradient-text">Interface</span></h2>
+                <p class="section-description">Clean and intuitive design for seamless user experience</p>
+            </div>
+
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screen-content">
+                            <h4>Job Listings</h4>
+                            <p>Browse through curated job opportunities</p>
+                        </div>
+                    </div>
+                    <h3>Main Dashboard</h3>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screen-content">
+                            <h4>Job Details</h4>
+                            <p>Complete job description and requirements</p>
+                        </div>
+                    </div>
+                    <h3>Job Information</h3>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screen-content">
+                            <h4>User Profile</h4>
+                            <p>Manage your professional profile</p>
+                        </div>
+                    </div>
+                    <h3>Profile Management</h3>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <div class="screen-content">
+                            <h4>Applications</h4>
+                            <p>Track your job applications</p>
+                        </div>
+                    </div>
+                    <h3>Application Tracking</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
     <section class="metrics">
-        <div class="section-header">
-            <h2>Impact & Results</h2>
-        </div>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">70%</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Faster Hiring</div>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">PERFORMANCE</span>
+                <h2 class="section-title">Project <span class="gradient-text">Metrics</span></h2>
+                <p class="section-description">Key performance indicators and achievements</p>
             </div>
-            <div class="metric-card">
-                <div class="metric-value">85%</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Satisfaction Rate</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">10K+</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Placements</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">500+</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Companies</div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-icon">⚡</span>
+                    <span class="metric-number">95%</span>
+                    <span class="metric-label">Code Coverage</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">🎯</span>
+                    <span class="metric-number">98%</span>
+                    <span class="metric-label">Crash-free Rate</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">⏱️</span>
+                    <span class="metric-number"><2s</span>
+                    <span class="metric-label">App Launch Time</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">📦</span>
+                    <span class="metric-number">8MB</span>
+                    <span class="metric-label">APK Size</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <script>
-        // Hide loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-            }, 500);
-        });
+    <!-- Implementation Details -->
+    <section class="implementation">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">IMPLEMENTATION</span>
+                <h2 class="section-title">Technical <span class="gradient-text">Highlights</span></h2>
+                <p class="section-description">Key architectural decisions and implementations</p>
+            </div>
 
-        // Animate on scroll
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
+            <div class="implementation-grid">
+                <div class="implementation-card">
+                    <h3>🏗️ Clean Architecture</h3>
+                    <ul>
+                        <li>Separation of concerns with presentation, domain, and data layers</li>
+                        <li>Use cases for business logic encapsulation</li>
+                        <li>Repository pattern for data abstraction</li>
+                        <li>Dependency injection with Hilt</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <h3>🔄 State Management</h3>
+                    <ul>
+                        <li>ViewModel with LiveData/StateFlow</li>
+                        <li>Coroutines for asynchronous operations</li>
+                        <li>Reactive programming with Flow</li>
+                        <li>Proper lifecycle handling</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <h3>💾 Data Persistence</h3>
+                    <ul>
+                        <li>Room database for local storage</li>
+                        <li>Encrypted SharedPreferences for sensitive data</li>
+                        <li>Offline-first architecture</li>
+                        <li>Data synchronization with backend</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <h3>🧪 Testing Strategy</h3>
+                    <ul>
+                        <li>Unit tests with JUnit and Mockito</li>
+                        <li>UI tests with Espresso</li>
+                        <li>Integration tests for critical flows</li>
+                        <li>Continuous integration with GitHub Actions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in This Project?</h2>
+                <p>Check out the source code on GitHub or get in touch to discuss similar solutions</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/RomanTsisyk/job-recruiter" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>View on GitHub</span>
+                    </a>
+                    <a href="../../index.html#contact" class="btn btn-secondary">
+                        <span>Contact Me</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Roman Tsisyk. All rights reserved.</p>
+            <p>Built with passion for great Android experiences</p>
+        </div>
+    </footer>
+
+    <script src="../shared/js/project.js"></script>
 </body>
 </html>

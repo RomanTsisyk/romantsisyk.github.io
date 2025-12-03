@@ -1,739 +1,494 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasa Stefczyka - Mobile Banking Application | Portfolio</title>
+    <title>Kasa Stefczyka - Mobile Banking Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Complete Kasa Stefczyka Styles with Animations -->
+    <!-- Float Navigation Styles -->
     <style>
-        /* ========== KASA STEFCZYKA - COMPLETE STYLES WITH ANIMATIONS ========== */
-        :root {
-            --primary: #005A9C;
-            --secondary: #00A651;
-            --accent: #FFC107;
-            --danger: #DC3545;
-            --dark-bg: #0A0E1A;
-            --dark-surface: #141825;
-            --dark-card: #1E2333;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A8B2C7;
-            --gradient-primary: linear-gradient(135deg, #005A9C, #0074C7);
-            --gradient-secondary: linear-gradient(135deg, #00A651, #00D463);
-            --gradient-accent: linear-gradient(135deg, #FFC107, #FFD54F);
-            --gradient-banking: linear-gradient(135deg, #005A9C 0%, #00A651 50%, #FFC107 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Montserrat', -apple-system, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Loading */
-        .loader {
+        /* Float button navigation between projects */
+        .project-nav-float {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .project-nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s;
+            position: relative;
         }
 
-        .loader.hide {
+        .project-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(147, 51, 234, 0.6);
+        }
+
+        .project-nav-button.active {
+            transform: rotate(45deg);
+        }
+
+        .project-nav-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            min-width: 320px;
+            background: rgba(10, 14, 39, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .project-nav-panel.hidden {
             opacity: 0;
+            transform: translateY(20px) scale(0.95);
             pointer-events: none;
         }
 
-        .loader-logo {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-banking);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .floating-cards {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .card-float {
-            position: absolute;
-            width: 60px;
-            height: 40px;
-            background: linear-gradient(135deg, #005A9C, #00A651);
-            border-radius: 8px;
-            opacity: 0.1;
-            animation: float-up linear infinite;
-        }
-
-        @keyframes float-up {
-            to {
-                transform: translateY(-100vh) rotate(180deg);
-            }
-        }
-
-        .card-float:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; }
-        .card-float:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: 2s; }
-        .card-float:nth-child(3) { left: 40%; animation-duration: 20s; animation-delay: 1s; }
-        .card-float:nth-child(4) { left: 60%; animation-duration: 16s; animation-delay: 3s; }
-        .card-float:nth-child(5) { left: 75%; animation-duration: 19s; animation-delay: 4s; }
-        .card-float:nth-child(6) { left: 90%; animation-duration: 17s; animation-delay: 2.5s; }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
-        }
-
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #005A9C, transparent);
-            top: -200px;
-            left: -200px;
-            animation: drift 25s ease-in-out infinite;
-        }
-
-        .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #00A651, transparent);
-            bottom: -150px;
-            right: -150px;
-            animation: drift 30s ease-in-out infinite reverse;
-        }
-
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #FFC107, transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse-glow 8s ease-in-out infinite;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(50px, -30px); }
-            50% { transform: translate(-30px, 50px); }
-            75% { transform: translate(30px, 30px); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 14, 26, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
+        .panel-header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Project Switcher */
-        .project-switcher {
-            position: relative;
-        }
-
-        .switcher-button {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .switcher-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--primary);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 0.5rem);
-            left: 0;
-            background: var(--dark-surface);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 0.5rem;
-            min-width: 250px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-
-        .project-switcher.open .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .project-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .project-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        .project-item.active {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 2rem 80px;
-            position: relative;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .gradient-text {
-            background: var(--gradient-banking);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: gradient-flow 3s ease infinite;
-        }
-
-        @keyframes gradient-flow {
-            to { background-position: 200% center; }
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 90, 156, 0.5);
-        }
-
-        /* Phone Mockup */
-        .hero-visual {
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .phone-mockup {
-            width: 320px;
-            height: 640px;
-            background: var(--dark-surface);
-            border-radius: 40px;
-            padding: 12px;
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #005A9C, #0074C7);
-            border-radius: 28px;
-            overflow: hidden;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .banking-header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .account-balance {
-            color: #1A1A1A;
-            font-size: 0.9rem;
+            padding: 8px 12px;
             margin-bottom: 8px;
+            border-bottom: 1px solid rgba(147, 51, 234, 0.2);
         }
 
-        .balance-amount {
-            color: #005A9C;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .action-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .action-card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 1);
-        }
-
-        .action-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .action-label {
-            color: #333;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .transaction-list {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .transaction-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #E0E0E0;
-        }
-
-        .transaction-name {
-            color: #333;
-            font-weight: 500;
-        }
-
-        .transaction-amount {
+        .panel-title {
+            color: white;
             font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .amount-positive {
-            color: #00A651;
-        }
-
-        .amount-negative {
-            color: #DC3545;
-        }
-
-        /* Features */
-        .features {
-            padding: 100px 2rem;
-            background: var(--dark-surface);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-banking);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 90, 156, 0.2);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 16px;
+        .panel-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
         }
 
-        /* Tech Stack */
-        .tech {
-            padding: 100px 2rem;
+        .panel-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
-        .tech-grid {
-            max-width: 1200px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
+        .project-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 4px;
         }
 
-        .tech-item {
-            background: var(--dark-surface);
-            border-radius: 16px;
-            padding: 2rem;
+        .project-nav-item:hover {
+            background: rgba(147, 51, 234, 0.2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-nav-item.home {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .project-nav-item.current {
+            background: rgba(147, 51, 234, 0.15);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            pointer-events: none;
+        }
+
+        .project-nav-item .icon {
+            font-size: 20px;
+            width: 24px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-nav-item .text {
+            flex: 1;
+        }
+
+        .project-nav-item .text .name {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .project-nav-item .text .desc {
+            display: block;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .current-indicator {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-nav-divider {
+            height: 1px;
+            background: rgba(147, 51, 234, 0.2);
+            margin: 12px 0;
+        }
+
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(147, 51, 234, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+            }
+        }
+
+        .project-nav-button {
+            animation: pulse 3s infinite;
+        }
+
+        .project-nav-button:hover {
+            animation: none;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .project-nav-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .project-nav-button {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .project-nav-panel {
+                min-width: 280px;
+                right: -20px;
+            }
+        }
+
+        /* Small tooltip */
+        .nav-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            background: rgba(10, 14, 39, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
             transition: all 0.3s ease;
         }
 
-        .tech-item:hover {
-            transform: translateY(-5px) rotate(2deg);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 90, 156, 0.3);
-        }
-
-        /* Metrics */
-        .metrics {
-            padding: 100px 2rem;
-            background: linear-gradient(135deg, rgba(0, 90, 156, 0.05), rgba(0, 166, 81, 0.05));
-        }
-
-        .metrics-grid {
-            max-width: 1200px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .metric-card {
-            background: var(--dark-surface);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .metric-value {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .phone-mockup {
-                width: 280px;
-                height: 560px;
-                margin: 2rem auto 0;
-            }
-
-            .nav-left {
-                flex: 1;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+        .project-nav-button:hover + .nav-tooltip {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-logo">KS</div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div class="floating-cards">
-            <div class="card-float"></div>
-            <div class="card-float"></div>
-            <div class="card-float"></div>
-            <div class="card-float"></div>
-            <div class="card-float"></div>
-            <div class="card-float"></div>
-        </div>
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-    </div>
-
-    <!-- Navigation with Project Switcher -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-left">
-                <div class="logo">Kasa Stefczyka</div>
-                <div class="project-switcher" id="projectSwitcher">
-                    <button class="switcher-button" onclick="toggleDropdown()">
-                        <span>Switch Project</span>
-                        <span class="arrow-icon">▼</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="../earnly/index.html" class="project-item">
-                            <span>£</span>
-                            <span>Earnly - Tax Manager</span>
-                        </a>
-                        <a href="../netti/index.html" class="project-item">
-                            <span>🌐</span>
-                            <span>Netti - Network Testing</span>
-                        </a>
-                        <a href="../poly-lens/index.html" class="project-item">
-                            <span>📸</span>
-                            <span>Poly Lens - AI Vision</span>
-                        </a>
-                        <a href="../fels/index.html" class="project-item">
-                            <span>💰</span>
-                            <span>Fels - Finance Manager</span>
-                        </a>
-                        <a href="../job-recruiter/index.html" class="project-item">
-                            <span>💼</span>
-                            <span>Job Recruiter</span>
-                        </a>
-                        <a href="../portfolio-adapter/index.html" class="project-item">
-                            <span>🎨</span>
-                            <span>Portfolio Adapter</span>
-                        </a>
-                        <a href="../kasa-stefczyka/index.html" class="project-item active">
-                            <span>🏦</span>
-                            <span>Kasa Stefczyka</span>
-                        </a>
-                    </div>
+    <!-- Float Navigation Button -->
+    <div class="project-nav-float">
+        <button class="project-nav-button" id="navFloatButton" onclick="toggleProjectNav()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+        </button>
+        <span class="nav-tooltip">Switch Projects</span>
+        
+        <div class="project-nav-panel" id="projectNavPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Quick Navigation
                 </div>
+                <button class="panel-close" onclick="toggleProjectNav()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
-            <div class="nav-right" style="display: flex; gap: 1rem;">
-                <a href="../../index.html" style="padding: 0.75rem 1.25rem; color: #A8B2C7; text-decoration: none; transition: color 0.3s;">Home</a>
-                <a href="../../index.html#projects" style="padding: 0.75rem 1.25rem; color: #A8B2C7; text-decoration: none; transition: color 0.3s;">All Projects</a>
+            
+            <a href="../../index.html" class="project-nav-item home">
+                <span class="icon">🏠</span>
+                <span class="text">
+                    <span class="name">Main Portfolio</span>
+                    <span class="desc">Back to homepage</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-divider"></div>
+            
+            <a href="../poly-lens/index.html" class="project-nav-item">
+                <span class="icon">🎧</span>
+                <span class="text">
+                    <span class="name">HP Poly Lens</span>
+                    <span class="desc">Enterprise Headset Management</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-item current">
+                <span class="icon">💳</span>
+                <span class="text">
+                    <span class="name">Kasa Stefczyka</span>
+                    <span class="desc">Banking Application</span>
+                </span>
+                <span class="current-indicator">CURRENT</span>
             </div>
+            
+            <a href="../earnly/index.html" class="project-nav-item">
+                <span class="icon">💰</span>
+                <span class="text">
+                    <span class="name">Earnly</span>
+                    <span class="desc">Financial Management</span>
+                </span>
+            </a>
+            
+            <a href="../followmymoney/index.html" class="project-nav-item">
+                <span class="icon">📊</span>
+                <span class="text">
+                    <span class="name">FollowMyMoney</span>
+                    <span class="desc">Expense Tracking</span>
+                </span>
+            </a>
+            
+            <a href="../mercedes-adapter/index.html" class="project-nav-item">
+                <span class="icon">🔌</span>
+                <span class="text">
+                    <span class="name">Mercedes Adapter</span>
+                    <span class="desc">Vehicle Connectivity</span>
+                </span>
+            </a>
+            
+            <a href="../netti/index.html" class="project-nav-item">
+                <span class="icon">📱</span>
+                <span class="text">
+                    <span class="name">Netti</span>
+                    <span class="desc">Network Testing Suite</span>
+                </span>
+            </a>
+            
+            <a href="../fels/index.html" class="project-nav-item">
+                <span class="icon">💼</span>
+                <span class="text">
+                    <span class="name">FELS</span>
+                    <span class="desc">Wealth Management</span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">Kasa Stefczyka</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🏦</span>
+                Kasa Stefczyka
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#tech">Technology</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#download">Download</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>
-                    <span class="gradient-text">Kasa Stefczyka</span><br>
-                    Mobile Banking
+        <div class="gradient-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">💚 Mobile Banking SKOK</div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Kasa Stefczyka</span>
                 </h1>
-                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
-                    Secure and modern banking application for Polish credit union members. 
-                    Full-featured mobile banking with biometric authentication and real-time transactions.
+                <p class="hero-subtitle">
+                    Complete control over your finances in your pocket. Manage your account, transfers, and payments from your mobile device.
                 </p>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <span class="feature-icon">🔐</span>
+                        <span>Secure Authentication</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="feature-icon">⚡</span>
+                        <span>Fast Transfers</span>
+                    </div>
+                    <div class="hero-feature">
+                        <span class="feature-icon">📱</span>
+                        <span>Google Pay</span>
+                    </div>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <span>📱</span> View on Play Store
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M13 2L3 14h7l-2 8 10-12h-7l2-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Get Started
                     </a>
-                    <a href="https://github.com/yourusername/kasa-stefczyka" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.2);">
-                        <span>💻</span> GitHub
+                    <a href="https://play.google.com/store/apps/details?id=pl.online.kasastefczyka" class="btn btn-secondary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        View on Store
                     </a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="phone-mockup">
+            
+            <div class="hero-mockup">
+                <div class="phone-frame">
                     <div class="phone-screen">
-                        <div class="banking-header">
-                            <div class="account-balance">Saldo konta</div>
-                            <div class="balance-amount">12 450,00 zł</div>
+                            <img src="../../assets/images/skok/unnamed.webp" alt="kasa-stefczyka Main Interface" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
                         </div>
-                        <div class="quick-actions">
-                            <div class="action-card">
-                                <div class="action-icon">💸</div>
-                                <div class="action-label">Przelew</div>
+                                <div class="app-status">
+                                    <span>📧</span>
+                                    <span>⚙️</span>
+                                </div>
                             </div>
-                            <div class="action-card">
-                                <div class="action-icon">📱</div>
-                                <div class="action-label">BLIK</div>
+                            <div class="app-content">
+                                <div class="balance-card-green">
+                                    <div class="account-info">
+                                        <span class="account-type">IKS Classic</span>
+                                        <span class="account-number">66 7065 0002 0650 6666 6604 0001</span>
+                                    </div>
+                                    <div class="balance-info">
+                                        <span class="balance-label">Available funds</span>
+                                        <span class="balance-amount">4 806,09 PLN</span>
+                                    </div>
+                                    <div class="balance-actions">
+                                        <button class="btn-green">NEW TRANSFER</button>
+                                        <button class="btn-outline">HISTORY</button>
+                                    </div>
+                                </div>
+                                <div class="payment-grid">
+                                    <div class="payment-option">
+                                        <span class="payment-icon">💵</span>
+                                        <span>One-time<br/>transfer</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">🔄</span>
+                                        <span>Own<br/>transfer</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">🏛️</span>
+                                        <span>Tax<br/>transfer</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">👥</span>
+                                        <span>Saved<br/>recipients</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">📅</span>
+                                        <span>Standing<br/>orders</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">G</span>
+                                        <span>Google<br/>Pay</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">📷</span>
+                                        <span>Scan<br/>& pay</span>
+                                    </div>
+                                    <div class="payment-option">
+                                        <span class="payment-icon">💸</span>
+                                        <span>Request<br/>payment</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="action-card">
-                                <div class="action-icon">💳</div>
-                                <div class="action-label">Karty</div>
-                            </div>
-                            <div class="action-card">
-                                <div class="action-icon">📊</div>
-                                <div class="action-label">Lokaty</div>
-                            </div>
-                        </div>
-                        <div class="transaction-list">
-                            <h4 style="color: #333; margin-bottom: 12px;">Ostatnie transakcje</h4>
-                            <div class="transaction-item">
-                                <span class="transaction-name">Wynagrodzenie</span>
-                                <span class="transaction-amount amount-positive">+5 200 zł</span>
-                            </div>
-                            <div class="transaction-item">
-                                <span class="transaction-name">Biedronka</span>
-                                <span class="transaction-amount amount-negative">-123 zł</span>
-                            </div>
-                            <div class="transaction-item">
-                                <span class="transaction-name">Orange</span>
-                                <span class="transaction-amount amount-negative">-79 zł</span>
+                            <div class="app-navigation">
+                                <div class="nav-item active">
+                                    <span>🏠</span>
+                                    <span>HOME</span>
+                                </div>
+                                <div class="nav-item">
+                                    <span>💳</span>
+                                    <span>PAYMENTS</span>
+                                </div>
+                                <div class="nav-item">
+                                    <span>💰</span>
+                                    <span>FINANCE</span>
+                                </div>
+                                <div class="nav-item">
+                                    <span>➡️</span>
+                                    <span>MORE</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -742,147 +497,362 @@
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="section-header">
-            <h2>Funkcje Aplikacji</h2>
-            <p style="color: var(--text-secondary); font-size: 1.2rem;">Kompleksowa bankowość mobilna w Twoim telefonie</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🔐</div>
-                <h3>Bezpieczne Logowanie</h3>
-                <p style="color: var(--text-secondary);">Biometryczne uwierzytelnianie i wielopoziomowe zabezpieczenia</p>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Complete Mobile Banking Features</h2>
+                <p class="section-subtitle">Everything you need to manage your finances in one place</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="background: var(--gradient-secondary);">💸</div>
-                <h3>Szybkie Przelewy</h3>
-                <p style="color: var(--text-secondary);">Natychmiastowe przelewy krajowe i międzynarodowe SEPA</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="background: var(--gradient-accent);">📱</div>
-                <h3>BLIK</h3>
-                <p style="color: var(--text-secondary);">Płatności mobilne i wypłaty z bankomatów bez karty</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #DC3545, #F87171);">💳</div>
-                <h3>Zarządzanie Kartami</h3>
-                <p style="color: var(--text-secondary);">Blokowanie, odblokowywanie i zarządzanie limitami kart</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #6C757D, #ADB5BD);">📊</div>
-                <h3>Lokaty i Kredyty</h3>
-                <p style="color: var(--text-secondary);">Zakładanie lokat i wnioski kredytowe online</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #17A2B8, #5DADE2);">📈</div>
-                <h3>Analiza Wydatków</h3>
-                <p style="color: var(--text-secondary);">Szczegółowe raporty i kategoryzacja transakcji</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>💸</span>
+                    </div>
+                    <h3>One-time Transfers</h3>
+                    <p>Execute domestic and international transfers with the ability to save recipients for future transactions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🔄</span>
+                    </div>
+                    <h3>Own Account Transfers</h3>
+                    <p>Instant transfers between your own accounts without limits or fees</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🏛️</span>
+                    </div>
+                    <h3>Tax Office Transfers</h3>
+                    <p>Convenient tax payments with automatic form filling for tax office transfers</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>📷</span>
+                    </div>
+                    <h3>Scan & Pay</h3>
+                    <p>Scan QR codes and pay instantly without entering recipient data</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>G</span>
+                    </div>
+                    <h3>Google Pay</h3>
+                    <p>Pay with your phone wherever contactless payments are accepted</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>📅</span>
+                    </div>
+                    <h3>Standing Orders</h3>
+                    <p>Automatic recurring payments for regular obligations</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>📊</span>
+                    </div>
+                    <h3>Transaction History</h3>
+                    <p>Full access to transaction history with advanced filters and search</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>🔐</span>
+                    </div>
+                    <h3>Security</h3>
+                    <p>Biometric authorization, PIN code, and notifications for every operation</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span>⚙️</span>
+                    </div>
+                    <h3>Transfer Limits</h3>
+                    <p>Manage daily and monthly limits for maximum security</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack -->
-    <section class="tech">
-        <div class="section-header">
-            <h2>Technologie</h2>
-        </div>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
-                <div>Kotlin</div>
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Modern Technology Stack</h2>
+                <p class="section-subtitle">Built on solid technological foundations</p>
             </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
-                <div>Jetpack Compose</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
-                <div>Biometric API</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
-                <div>SQLCipher</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌐</div>
-                <div>Retrofit</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💉</div>
-                <div>Hilt</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏗️</div>
-                <div>Clean Architecture</div>
-            </div>
-            <div class="tech-item">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧪</div>
-                <div>JUnit & Espresso</div>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                    </div>
+                    <span>Android Native</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                    </div>
+                    <span>Kotlin</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+                    </div>
+                    <span>Swift</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <svg viewBox="0 0 128 128" fill="#4285F4">
+                            <path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0zm0 48c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16z"/>
+                        </svg>
+                    </div>
+                    <span>Google Pay API</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <svg viewBox="0 0 128 128" fill="#00ACC1">
+                            <path d="M64 20c24.3 0 44 19.7 44 44s-19.7 44-44 44-44-19.7-44-44 19.7-44 44-44m0-20C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0z"/>
+                        </svg>
+                    </div>
+                    <span>REST API</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-logo">
+                        <svg viewBox="0 0 128 128" fill="#FF6F00">
+                            <path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64 64-28.7 64-64S99.3 0 64 0zm22.1 84.7l-29.5 17c-1.6.9-3.6-.3-3.6-2.1V46.4c0-1.8 2-3 3.6-2.1l29.5 17c1.6.9 1.6 3.4 0 4.3z"/>
+                        </svg>
+                    </div>
+                    <span>SSL/TLS</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Metrics -->
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">App Screenshots</h2>
+                <p class="section-subtitle">See Kasa Stefczyka app in action</p>
+            </div>
+            
+            <div class="screenshots-carousel">
+                <div class="screenshot-track">
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed.webp" alt="Payments">
+                        <p>Payment Panel</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (1).webp" alt="Dashboard">
+                        <p>Main Dashboard</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (2).webp" alt="History">
+                        <p>Account History</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (3).webp" alt="Transfer">
+                        <p>New Transfer</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (4).webp" alt="Tax">
+                        <p>Tax Transfer</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (5).webp" alt="Limits">
+                        <p>Transfer Limits</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (6).webp" alt="Messages">
+                        <p>Message Center</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="../../assets/images/skok/unnamed (7).webp" alt="More">
+                        <p>Additional Options</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
     <section class="metrics">
-        <div class="section-header">
-            <h2>Wyniki i Statystyki</h2>
-        </div>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">100K+</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Aktywnych Użytkowników</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">4.7★</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Ocena w Sklepie</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">99.9%</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Dostępność</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">256-bit</div>
-                <div style="color: var(--text-secondary); margin-top: 0.5rem;">Szyfrowanie</div>
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="metric-value" data-value="99.9">0</span>
+                    <span class="metric-suffix">%</span>
+                    <span class="metric-label">Uptime</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="150">0</span>
+                    <span class="metric-suffix">K+</span>
+                    <span class="metric-label">Active Users</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="4.2">0</span>
+                    <span class="metric-suffix">★</span>
+                    <span class="metric-label">App Rating</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" data-value="256">0</span>
+                    <span class="metric-suffix">bit</span>
+                    <span class="metric-label">Encryption</span>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Ready for Modern Banking?</h2>
+                <p class="download-subtitle">Join thousands of satisfied users of the Kasa Stefczyka app</p>
+                
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=pl.online.kasastefczyka" class="store-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                    </a>
+                    <a href="#" class="store-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+                    </a>
+                </div>
+                
+                <div class="download-features">
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>Free to download</span>
+                    </div>
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>No hidden fees</span>
+                    </div>
+                    <div class="download-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Kasa Stefczyka</h3>
+                    <p>Your mobile banking SKOK</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://kasastefczyka.pl" aria-label="Website">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kasa Stefczyka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Float Navigation Script -->
     <script>
-        // Hide loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-            }, 500);
-        });
-
-        // Project switcher
-        function toggleDropdown() {
-            document.getElementById('projectSwitcher').classList.toggle('open');
+        // Float Navigation Panel - Start open by default
+        let isNavPanelOpen = true;
+        
+        function toggleProjectNav() {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            isNavPanelOpen = !isNavPanelOpen;
+            
+            if (isNavPanelOpen) {
+                panel.classList.remove('hidden');
+                button.classList.remove('active');
+            } else {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('navPanelOpen', isNavPanelOpen);
         }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.project-switcher')) {
-                document.getElementById('projectSwitcher').classList.remove('open');
+        
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has a saved preference
+            const savedState = localStorage.getItem('navPanelOpen');
+            if (savedState !== null) {
+                isNavPanelOpen = savedState === 'true';
+            } else {
+                // First visit - keep panel open
+                isNavPanelOpen = true;
+            }
+            
+            // Apply initial state
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (!isNavPanelOpen) {
+                panel.classList.add('hidden');
+                button.classList.add('active');
             }
         });
 
-        // Animate on scroll
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Press 'N' to toggle navigation panel
+            if (e.key === 'n' || e.key === 'N') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    toggleProjectNav();
                 }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.feature-card, .tech-item, .metric-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
+            }
+            
+            // Press 'Escape' to close panel
+            if (e.key === 'Escape' && isNavPanelOpen) {
+                toggleProjectNav();
+            }
         });
     </script>
 </body>

@@ -11,66 +11,362 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Complete Netti Styles with Animations -->
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    
+    <!-- Original Netti Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Project Color Override -->
     <style>
-        /* ========== NETTI PORTFOLIO - COMPLETE STYLES ========== */
         :root {
-            /* Brand Colors from Figma Design */
-            --primary-blue: #007AFF;
-            --accent-orange: #FE6D33;
-            --accent-green: #319375;
-            --accent-purple: #8C9EFF;
-            --accent-yellow: #ECAB4B;
-            --accent-pink: #C659A1;
-            
-            /* Dark Theme Colors */
-            --dark-bg: #0E0E0E;
-            --dark-surface: #1C1C1E;
-            --dark-card: #2C2C2E;
-            --dark-elevated: #3C3C3E;
-            
-            /* Text Colors */
-            --text-primary: #FFFFFF;
-            --text-secondary: #8E8E93;
-            --text-tertiary: #636366;
-            
-            /* Gradients */
-            --gradient-blue: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
-            --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-pink: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-green: linear-gradient(135deg, #319375 0%, #10D876 100%);
-            --gradient-orange: linear-gradient(135deg, #FE6D33 0%, #FF8A65 100%);
-            --gradient-mesh: linear-gradient(135deg, #007AFF 0%, #00f2fe 50%, #FE6D33 100%);
-            
-            /* Typography */
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --project-current: netti;
+            --project-color: #007AFF;
         }
+    </style>
+</head>
+<body>
+    <!-- Navigation injected by JS -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loader">
+        <div class="loading-spinner"></div>
+    </div>
 
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo gradient-text">Netti</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#tech">Tech Stack</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="gradient-text">Netti</span><br>
+                        Professional Network Testing Suite
+                    </h1>
+                    <p>
+                        A comprehensive Android application for network testing and monitoring. 
+                        Built with cutting-edge Android technologies and modern Material Design 3 principles.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/RomanTsisyk/netti" class="btn btn-primary">
+                            <span>🚀</span> View on GitHub
+                        </a>
+                        <a href="https://www.figma.com/design/BKeIsQSIBP6Q4hgfUvcZOi/Netti-UX-UI-Final" class="btn btn-secondary">
+                            <span>🎨</span> Figma Design
+                        </a>
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <img src="../../assets/images/netti/Home Screen.png" alt="netti Main Interface" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
+                        </div>
+                                </div>
+                                
+                                <!-- Main Menu Screen based on real screenshots -->
+                                <div class="services-grid">
+                                    <div class="service-card card-orange" style="background: linear-gradient(135deg, #FE6D33, #FF8A50);">
+                                        <span class="service-emoji">📊</span>
+                                        <span style="font-size: 11px;">Speed test</span>
+                                    </div>
+                                    <div class="service-card card-green" style="background: linear-gradient(135deg, #00C896, #00E5A0);">
+                                        <span class="service-emoji">📍</span>
+                                        <span style="font-size: 11px;">Ping</span>
+                                    </div>
+                                    <div class="service-card card-blue" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+                                        <span class="service-emoji">ℹ️</span>
+                                        <span style="font-size: 11px;">Network<br>information</span>
+                                    </div>
+                                    <div class="service-card card-yellow" style="background: linear-gradient(135deg, #FFC107, #FFD54F);">
+                                        <span class="service-emoji">🗺️</span>
+                                        <span style="font-size: 11px;">Trace route</span>
+                                    </div>
+                                    <div class="service-card card-purple" style="background: linear-gradient(135deg, #9C27B0, #BA68C8);">
+                                        <span class="service-emoji">↔️</span>
+                                        <span style="font-size: 11px;">Data<br>transfer rate</span>
+                                    </div>
+                                    <div class="service-card card-pink" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+                                        <span class="service-emoji">👥</span>
+                                        <span style="font-size: 11px;">Local<br>network</span>
+                                    </div>
+                                </div>
+
+                                <div class="active-services-bar">
+                                    <span class="active-dot"></span>
+                                    <span>Last active: 0/5</span>
+                                    <small style="margin-left: auto; color: #8E8E93;">No services running</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>All the tools you need for professional network testing in one app</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-speed">⚡</div>
+                    <h3>Speed Test</h3>
+                    <p>Measure download and upload speeds with detailed statistics. Features a circular speedometer with real-time animations and graphs.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-iperf-client">🔧</div>
+                    <h3>iPerf3 Client & Server</h3>
+                    <p>Professional bandwidth testing tool. Supports TCP/UDP protocols with customizable test parameters and comprehensive results.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-ping">📡</div>
+                    <h3>Ping Tool</h3>
+                    <p>Network latency diagnostics with visual results. Track packet loss, jitter, and round-trip time statistics.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-trace">🗺️</div>
+                    <h3>Trace Route</h3>
+                    <p>Trace packet paths through the network with hop-by-hop visualization and detailed information for each node.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-network">🌐</div>
+                    <h3>Network Information</h3>
+                    <p>Detailed connection info for Wi-Fi, Cellular, and Ethernet. Shows IP addresses, DNS servers, signal strength, and more.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="service-icon icon-transfer">📊</div>
+                    <h3>Data Transfer Rate</h3>
+                    <p>Real-time monitoring of data transfer speeds with graphs and historical data tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technology Stack</h2>
+                <p>Built with modern Android development tools and best practices</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Kotlin</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Jetpack Compose</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">💉</div>
+                    <div class="tech-name">Hilt DI</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🏗️</div>
+                    <div class="tech-name">Clean Architecture</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🔄</div>
+                    <div class="tech-name">Coroutines & Flow</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Material 3</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🗂️</div>
+                    <div class="tech-name">Room Database</div>
+                </div>
+                <div class="tech-item animate-on-scroll">
+                    <div class="tech-icon">🧭</div>
+                    <div class="tech-name">Navigation Compose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    
+    <!-- Screenshots Gallery with Real Images -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>App Interface</h2>
+                <p>Dark theme with vibrant accents and smooth animations</p>
+            </div>
+            <div class="screenshot-carousel">
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Home Screen.png" alt="Main Dashboard" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Main Dashboard</div>
+                </div>
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Speed test - Client (Results).png" alt="Speed Test Results" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Speed Test Results</div>
+                </div>
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Speed test - Client (More)@2x.png" alt="Speed Test Config" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Speed Test Config</div>
+                </div>
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Ping (Process).png" alt="Ping Monitor" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Ping Monitor</div>
+                </div>
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Trace Route (Logs).png" alt="Trace Route" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Trace Route</div>
+                </div>
+                <div class="screenshot">
+                    <img src="../../assets/images/netti/Data Transfer Rate (Speedometer).png" alt="Data Transfer Rate" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <div class="screenshot-label">Data Transfer Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design System -->
+    <section class="design-system">
+        <div class="container">
+            <div class="section-header">
+                <h2>Design System</h2>
+                <p>Dark theme with vibrant accents for optimal readability</p>
+            </div>
+            <div class="color-palette">
+                <div class="color-chip" style="background: #007AFF;">
+                    <span class="color-label">Primary</span>
+                    <span class="color-hex">#007AFF</span>
+                </div>
+                <div class="color-chip" style="background: #FE6D33;">
+                    <span class="color-label">Orange</span>
+                    <span class="color-hex">#FE6D33</span>
+                </div>
+                <div class="color-chip" style="background: #319375;">
+                    <span class="color-label">Green</span>
+                    <span class="color-hex">#319375</span>
+                </div>
+                <div class="color-chip" style="background: #8C9EFF;">
+                    <span class="color-label">Purple</span>
+                    <span class="color-hex">#8C9EFF</span>
+                </div>
+                <div class="color-chip" style="background: #ECAB4B;">
+                    <span class="color-label">Yellow</span>
+                    <span class="color-hex">#ECAB4B</span>
+                </div>
+                <div class="color-chip" style="background: #C659A1;">
+                    <span class="color-label">Pink</span>
+                    <span class="color-hex">#C659A1</span>
+                </div>
+                <div class="color-chip" style="background: #1C1C1E;">
+                    <span class="color-label">Surface</span>
+                    <span class="color-hex">#1C1C1E</span>
+                </div>
+                <div class="color-chip" style="background: #2C2C2E;">
+                    <span class="color-label">Card</span>
+                    <span class="color-hex">#2C2C2E</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Project Metrics</h2>
+                <p>Development statistics and capabilities</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">6+</div>
+                    <div class="metric-label">Core Features</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Kotlin Code</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">Material 3</div>
+                    <div class="metric-label">Design System</div>
+                </div>
+                <div class="metric-card animate-on-scroll">
+                    <div class="metric-value">60fps</div>
+                    <div class="metric-label">Smooth Animations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in This Project?</h2>
+                <p>Check out the source code on GitHub or explore the design in Figma</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/RomanTsisyk/netti" class="btn btn-primary">
+                        View Source Code
+                    </a>
+                    <a href="mailto:roman.tsisyk@gmail.com" class="btn btn-secondary">
+                        Contact Developer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>© 2025 Netti - Professional Network Testing Suite</div>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/RomanTsisyk">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/roman-tsisyk">LinkedIn</a></li>
+                    <li><a href="mailto:roman.tsisyk@gmail.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Inline critical styles for immediate rendering */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font-main);
-            background: var(--dark-bg);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0E0E0E;
+            color: #FFFFFF;
             overflow-x: hidden;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
         }
 
         /* Loading Screen */
@@ -80,32 +376,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-bg);
+            background: #0E0E0E;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s, visibility 0.5s;
+            z-index: 1000;
+            animation: fadeOut 0.5s forwards 1.5s;
         }
 
-        .loading-screen.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(0, 122, 255, 0.1);
-            border-top-color: var(--primary-blue);
-            border-right-color: var(--accent-orange);
-            border-radius: 50%;
-            animation: rotate 1s linear infinite;
-            box-shadow: 0 0 40px rgba(0, 122, 255, 0.3);
-        }
-
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
         }
 
         /* Animated Background */
@@ -175,6 +458,12 @@
             padding: 1rem 0;
         }
 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -238,18 +527,6 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero-text p {
@@ -257,14 +534,12 @@
             color: #8E8E93;
             margin-bottom: 2rem;
             line-height: 1.8;
-            animation: fadeInUp 0.8s ease 0.1s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.2s both;
         }
 
         .btn {
@@ -277,13 +552,13 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-primary {
             background: #007AFF;
             color: white;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary::before {
@@ -299,11 +574,6 @@
 
         .btn-primary:hover::before {
             left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
         }
 
         .btn-secondary {
@@ -394,13 +664,33 @@
             gap: 8px;
             font-size: 0.9rem;
             transition: all 0.3s;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card-blue { background: rgba(0, 122, 255, 0.2); }
-        .card-purple { background: rgba(140, 158, 255, 0.2); }
-        .card-green { background: rgba(49, 147, 117, 0.2); }
-        .card-orange { background: rgba(236, 171, 75, 0.2); }
+        .service-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .card-orange { 
+            background: linear-gradient(135deg, #FE6D33, #FF8A50);
+        }
+        .card-green { 
+            background: linear-gradient(135deg, #00C896, #00E5A0);
+        }
+        .card-blue { 
+            background: linear-gradient(135deg, #3B82F6, #60A5FA);
+        }
+        .card-yellow { 
+            background: linear-gradient(135deg, #FFC107, #FFD54F);
+        }
+        .card-purple { 
+            background: linear-gradient(135deg, #9C27B0, #BA68C8);
+        }
+        .card-pink { 
+            background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+        }
 
         .service-card:hover {
             transform: scale(1.05);
@@ -410,18 +700,18 @@
         .active-services-bar {
             margin-top: 20px;
             padding: 15px;
-            background: rgba(0, 122, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
+            font-size: 0.9rem;
         }
 
         .active-dot {
             width: 8px;
             height: 8px;
-            background: #00FF00;
+            background: #8E8E93;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -491,30 +781,6 @@
             transform: scaleX(1);
         }
 
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .icon-speed { background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%); }
-        .icon-iperf-client { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .icon-ping { background: linear-gradient(135deg, #319375 0%, #10D876 100%); }
-        .icon-trace { background: linear-gradient(135deg, #ECAB4B, #FFA726); }
-        .icon-network { background: linear-gradient(135deg, #007AFF, #0051D5); }
-        .icon-transfer { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-
         /* Tech Stack */
         .tech-stack {
             padding: 6rem 0;
@@ -539,7 +805,6 @@
         .tech-item:hover {
             transform: translateY(-5px);
             border-color: #007AFF;
-            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.2);
         }
 
         .tech-icon {
@@ -566,6 +831,20 @@
             scroll-snap-type: x mandatory;
         }
 
+        .screenshot-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .screenshot-carousel::-webkit-scrollbar-thumb {
+            background: #007AFF;
+            border-radius: 4px;
+        }
+
         .screenshot {
             flex: 0 0 280px;
             height: 560px;
@@ -587,6 +866,17 @@
             background: #1C1C1E;
             padding: 20px;
             color: white;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1rem 1rem;
+            color: white;
+            font-weight: 600;
         }
 
         /* Design System */
@@ -616,6 +906,17 @@
 
         .color-chip:hover {
             transform: translateY(-5px) scale(1.05);
+        }
+
+        .color-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Metrics */
@@ -667,11 +968,275 @@
             backdrop-filter: blur(10px);
         }
 
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: #8E8E93;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         /* Footer */
         footer {
             padding: 3rem 0;
             background: #1C1C1E;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #8E8E93;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #007AFF;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Float button navigation between projects (Poly Lens Style) */
+        .project-nav-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .project-nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 122, 255, 0.6);
+        }
+
+        .project-nav-button.active {
+            transform: rotate(45deg);
+        }
+
+        .project-nav-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            min-width: 320px;
+            background: rgba(28, 28, 30, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: bottom right;
+        }
+
+        .project-nav-panel.hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 122, 255, 0.2);
+        }
+
+        .panel-title {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .panel-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .project-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .project-nav-item:hover {
+            background: rgba(0, 122, 255, 0.2);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-nav-item.home {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(0, 242, 254, 0.2) 100%);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .project-nav-item.current {
+            background: rgba(0, 122, 255, 0.15);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            pointer-events: none;
+        }
+
+        .project-nav-item .icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .project-nav-item .text {
+            flex: 1;
+        }
+
+        .project-nav-item .text .name {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .project-nav-item .text .desc {
+            display: block;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        .current-indicator {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #007AFF 0%, #00f2fe 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-nav-divider {
+            height: 1px;
+            background: rgba(0, 122, 255, 0.2);
+            margin: 12px 0;
+        }
+
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(0, 122, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4);
+            }
+        }
+
+        .project-nav-button {
+            animation: pulse 3s infinite;
+        }
+
+        .project-nav-button:hover {
+            animation: none;
+        }
+
+        /* Small tooltip */
+        .nav-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            background: rgba(28, 28, 30, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .project-nav-button:hover + .nav-tooltip {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive */
@@ -693,280 +1258,271 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-nav-float {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .project-nav-button {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .project-nav-panel {
+                min-width: 280px;
+                right: -20px;
+            }
+        }
+
+        /* Screenshot mockup styles */
+        .mini-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .speed-gauge {
+            width: 180px;
+            height: 180px;
+            border: 8px solid #007AFF;
+            border-radius: 50%;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .speed-value {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .speed-unit {
+            color: #8E8E93;
+            font-size: 0.9rem;
+        }
+
+        .speed-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .speed-details div {
+            text-align: center;
+        }
+
+        .speed-details span {
+            display: block;
+            color: #8E8E93;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .config-item, .info-item {
+            background: #2C2C2E;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .config-item span, .info-item span {
+            color: #8E8E93;
+        }
+
+        .start-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            background: #007AFF;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
         }
     </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loader">
-        <div class="loading-spinner"></div>
+
+    <!-- Float Navigation Button (Poly Lens Style) -->
+    <div class="project-nav-float">
+        <button class="project-nav-button" id="navFloatButton" onclick="toggleProjectNav()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+        </button>
+        <span class="nav-tooltip">Switch Projects</span>
+        
+        <div class="project-nav-panel" id="projectNavPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Quick Navigation
+                </div>
+                <button class="panel-close" onclick="toggleProjectNav()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <a href="../index.html" class="project-nav-item home">
+                <span class="icon">🏠</span>
+                <span class="text">
+                    <span class="name">Main Portfolio</span>
+                    <span class="desc">Back to homepage</span>
+                </span>
+            </a>
+            
+            <div class="project-nav-divider"></div>
+            
+            <div class="project-nav-item current">
+                <span class="icon">📱</span>
+                <span class="text">
+                    <span class="name">Netti</span>
+                    <span class="desc">Network Testing Suite</span>
+                </span>
+                <span class="current-indicator">CURRENT</span>
+            </div>
+            
+            <a href="../poly-lens/index.html" class="project-nav-item">
+                <span class="icon">🎧</span>
+                <span class="text">
+                    <span class="name">HP Poly Lens</span>
+                    <span class="desc">Enterprise Headset Management</span>
+                </span>
+            </a>
+            
+            <a href="../kasa-stefczyka/index.html" class="project-nav-item">
+                <span class="icon">💳</span>
+                <span class="text">
+                    <span class="name">Kasa Stefczyka</span>
+                    <span class="desc">Banking Application</span>
+                </span>
+            </a>
+            
+            <a href="../earnly/index.html" class="project-nav-item">
+                <span class="icon">💰</span>
+                <span class="text">
+                    <span class="name">Earnly</span>
+                    <span class="desc">Financial Management</span>
+                </span>
+            </a>
+            
+            <a href="../followmymoney/index.html" class="project-nav-item">
+                <span class="icon">📊</span>
+                <span class="text">
+                    <span class="name">FollowMyMoney</span>
+                    <span class="desc">Expense Tracking</span>
+                </span>
+            </a>
+            
+            <a href="../mercedes-adapter/index.html" class="project-nav-item">
+                <span class="icon">🔌</span>
+                <span class="text">
+                    <span class="name">Mercedes Adapter</span>
+                    <span class="desc">Vehicle Connectivity</span>
+                </span>
+            </a>
+        </div>
     </div>
 
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo gradient-text">Netti</div>
-                <ul class="nav-links">
-                    <li><a href="../../index.html">← Back to Portfolio</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>
-                        <span class="gradient-text">Netti</span><br>
-                        Professional Network Testing Suite
-                    </h1>
-                    <p>
-                        A comprehensive Android application for network testing and monitoring. 
-                        Built with cutting-edge Android technologies and modern Material Design 3 principles.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="https://github.com/yourusername/netti" class="btn btn-primary">
-                            <span>🚀</span> View on GitHub
-                        </a>
-                        <a href="https://www.figma.com/design/BKeIsQSIBP6Q4hgfUvcZOi/Netti-UX-UI-Final" class="btn btn-secondary">
-                            <span>🎨</span> Figma Design
-                        </a>
-                    </div>
-                </div>
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="mock-app-screen">
-                                <div class="app-header">
-                                    <div class="app-logo gradient-text">Netti</div>
-                                    <div class="app-subtitle">Choose a service to start</div>
-                                </div>
-                                
-                                <!-- Animated Services Grid -->
-                                <div class="services-grid">
-                                    <div class="service-card card-blue">
-                                        <span>⚡</span>
-                                        <span>Speed Test</span>
-                                    </div>
-                                    <div class="service-card card-purple">
-                                        <span>🔧</span>
-                                        <span>iPerf3 Client</span>
-                                    </div>
-                                    <div class="service-card card-green">
-                                        <span>📡</span>
-                                        <span>Ping</span>
-                                    </div>
-                                    <div class="service-card card-orange">
-                                        <span>🗺️</span>
-                                        <span>Trace Route</span>
-                                    </div>
-                                </div>
-
-                                <div class="active-services-bar">
-                                    <span class="active-dot"></span>
-                                    <span>2 Active Services</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Key Features</h2>
-                <p>All the tools you need for professional network testing in one app</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="service-icon icon-speed">⚡</div>
-                    <h3>Speed Test</h3>
-                    <p>Measure download and upload speeds with detailed statistics. Features a circular speedometer with real-time animations and graphs.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="service-icon icon-iperf-client">🔧</div>
-                    <h3>iPerf3 Client & Server</h3>
-                    <p>Professional bandwidth testing tool. Supports TCP/UDP protocols with customizable test parameters and comprehensive results.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="service-icon icon-ping">📡</div>
-                    <h3>Ping Tool</h3>
-                    <p>Network latency diagnostics with visual results. Track packet loss, jitter, and round-trip time statistics.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="service-icon icon-trace">🗺️</div>
-                    <h3>Trace Route</h3>
-                    <p>Trace packet paths through the network with hop-by-hop visualization and detailed information for each node.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="service-icon icon-network">🌐</div>
-                    <h3>Network Information</h3>
-                    <p>Detailed connection info for Wi-Fi, Cellular, and Ethernet. Shows IP addresses, DNS servers, signal strength, and more.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="service-icon icon-transfer">📊</div>
-                    <h3>Data Transfer Rate</h3>
-                    <p>Real-time monitoring of data transfer speeds with graphs and historical data tracking.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack -->
-    <section id="tech" class="tech-stack">
-        <div class="container">
-            <div class="section-header">
-                <h2>Technology Stack</h2>
-                <p>Built with modern Android development tools and best practices</p>
-            </div>
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <div class="tech-icon">🎯</div>
-                    <div class="tech-name">Kotlin</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">🎨</div>
-                    <div class="tech-name">Jetpack Compose</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">💉</div>
-                    <div class="tech-name">Hilt DI</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">🏗️</div>
-                    <div class="tech-name">Clean Architecture</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">🔄</div>
-                    <div class="tech-name">Coroutines & Flow</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">📱</div>
-                    <div class="tech-name">Material 3</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">🗂️</div>
-                    <div class="tech-name">Room Database</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-icon">🧭</div>
-                    <div class="tech-name">Navigation Compose</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Design System -->
-    <section class="design-system">
-        <div class="container">
-            <div class="section-header">
-                <h2>Design System</h2>
-                <p>Dark theme with vibrant accents for optimal readability</p>
-            </div>
-            <div class="color-palette">
-                <div class="color-chip" style="background: #007AFF;">
-                    <span>Primary</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#007AFF</span>
-                </div>
-                <div class="color-chip" style="background: #FE6D33;">
-                    <span>Orange</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#FE6D33</span>
-                </div>
-                <div class="color-chip" style="background: #319375;">
-                    <span>Green</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#319375</span>
-                </div>
-                <div class="color-chip" style="background: #8C9EFF;">
-                    <span>Purple</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#8C9EFF</span>
-                </div>
-                <div class="color-chip" style="background: #ECAB4B;">
-                    <span>Yellow</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#ECAB4B</span>
-                </div>
-                <div class="color-chip" style="background: #C659A1;">
-                    <span>Pink</span>
-                    <span style="font-size: 0.8rem; opacity: 0.8;">#C659A1</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Metrics -->
-    <section class="metrics">
-        <div class="container">
-            <div class="section-header">
-                <h2>Project Metrics</h2>
-                <p>Development statistics and capabilities</p>
-            </div>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">6+</div>
-                    <div class="metric-label">Core Features</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">100%</div>
-                    <div class="metric-label">Kotlin Code</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">Material 3</div>
-                    <div class="metric-label">Design System</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">60fps</div>
-                    <div class="metric-label">Smooth Animations</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Interested in This Project?</h2>
-                <p>Check out the source code on GitHub or explore the design in Figma</p>
-                <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                    <a href="https://github.com/yourusername/netti" class="btn btn-primary">
-                        View Source Code
-                    </a>
-                    <a href="mailto:your.email@example.com" class="btn btn-secondary">
-                        Contact Developer
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div style="text-align: center; color: #8E8E93;">
-                <div>© 2025 Netti - Professional Network Testing Suite</div>
-            </div>
-        </div>
-    </footer>
-
+    <!-- Navigation Scripts -->
+    <script src="../assets/js/global.js"></script>
+    <script src="../assets/js/navigation.js"></script>
+    
+    <!-- Original Netti Scripts -->
     <script>
-        // Hide loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-            }, 500);
+        // Float Navigation Panel - Start open by default
+        let isNavPanelOpen = true;
+        
+        function toggleProjectNav() {
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            isNavPanelOpen = !isNavPanelOpen;
+            
+            if (isNavPanelOpen) {
+                panel.classList.remove('hidden');
+                button.classList.remove('active');
+            } else {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('navPanelOpen', isNavPanelOpen);
+        }
+        
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has a saved preference
+            const savedState = localStorage.getItem('navPanelOpen');
+            if (savedState !== null) {
+                isNavPanelOpen = savedState === 'true';
+            } else {
+                // First visit - keep panel open
+                isNavPanelOpen = true;
+            }
+            
+            // Apply initial state
+            const panel = document.getElementById('projectNavPanel');
+            const button = document.getElementById('navFloatButton');
+            
+            if (!isNavPanelOpen) {
+                panel.classList.add('hidden');
+                button.classList.add('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Press 'N' to toggle navigation panel
+            if (e.key === 'n' || e.key === 'N') {
+                if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+                    e.preventDefault();
+                    toggleProjectNav();
+                }
+            }
+            
+            // Press 'Escape' to close panel
+            if (e.key === 'Escape' && isNavPanelOpen) {
+                toggleProjectNav();
+            }
         });
 
         // Smooth scrolling
@@ -975,12 +1531,14 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
 
-        // Scroll animations
+        // Add animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -989,168 +1547,15 @@
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe all feature cards
-        document.querySelectorAll('.feature-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // 3D Tilt Effect Implementation
-        class TiltEffect {
-            constructor(element, options = {}) {
-                this.element = element;
-                this.settings = {
-                    max: options.max || 25,
-                    perspective: options.perspective || 1000,
-                    scale: options.scale || 1.05,
-                    speed: options.speed || 400,
-                    glare: options.glare !== undefined ? options.glare : true,
-                    maxGlare: options.maxGlare || 0.3,
-                    ...options
-                };
-
-                this.init();
-            }
-
-            init() {
-                this.element.style.transformStyle = 'preserve-3d';
-                this.element.style.transition = `transform ${this.settings.speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
-                
-                if (this.settings.glare) {
-                    this.createGlare();
-                }
-
-                this.bindEvents();
-            }
-
-            createGlare() {
-                const glareElement = document.createElement('div');
-                glareElement.classList.add('tilt-glare');
-                glareElement.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    pointer-events: none;
-                    border-radius: inherit;
-                `;
-                
-                const glareInner = document.createElement('div');
-                glareInner.classList.add('tilt-glare-inner');
-                glareInner.style.cssText = `
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 200%;
-                    height: 200%;
-                    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
-                    transform: rotate(180deg) translate(-50%, -50%);
-                    transform-origin: 0 0;
-                    opacity: 0;
-                    transition: opacity ${this.settings.speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
-                `;
-                
-                glareElement.appendChild(glareInner);
-                this.element.appendChild(glareElement);
-                this.glareElement = glareInner;
-            }
-
-            bindEvents() {
-                this.element.addEventListener('mouseenter', this.onMouseEnter.bind(this));
-                this.element.addEventListener('mousemove', this.onMouseMove.bind(this));
-                this.element.addEventListener('mouseleave', this.onMouseLeave.bind(this));
-            }
-
-            onMouseEnter(e) {
-                this.element.style.willChange = 'transform';
-                this.element.style.transform = `perspective(${this.settings.perspective}px) rotateX(0deg) rotateY(0deg) scale3d(${this.settings.scale}, ${this.settings.scale}, ${this.settings.scale})`;
-            }
-
-            onMouseMove(e) {
-                const rect = this.element.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const xPercent = (x / rect.width - 0.5) * 2;
-                const yPercent = (y / rect.height - 0.5) * 2;
-                
-                const tiltX = yPercent * this.settings.max;
-                const tiltY = xPercent * this.settings.max * -1;
-                
-                this.element.style.transform = `
-                    perspective(${this.settings.perspective}px)
-                    rotateX(${tiltX}deg)
-                    rotateY(${tiltY}deg)
-                    scale3d(${this.settings.scale}, ${this.settings.scale}, ${this.settings.scale})
-                `;
-                
-                if (this.settings.glare && this.glareElement) {
-                    const glareAngle = Math.atan2(xPercent, yPercent) * (180 / Math.PI);
-                    const glareOpacity = Math.sqrt(xPercent * xPercent + yPercent * yPercent) * this.settings.maxGlare;
-                    
-                    this.glareElement.style.transform = `rotate(${glareAngle}deg) translate(-50%, -50%)`;
-                    this.glareElement.style.opacity = `${glareOpacity}`;
-                }
-            }
-
-            onMouseLeave(e) {
-                this.element.style.transform = `perspective(${this.settings.perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                
-                if (this.settings.glare && this.glareElement) {
-                    this.glareElement.style.opacity = '0';
-                }
-                
-                setTimeout(() => {
-                    this.element.style.willChange = 'auto';
-                }, this.settings.speed);
-            }
-        }
-
-        // Initialize 3D tilt on phone mockup
+        // Observe all elements with animate-on-scroll class
         document.addEventListener('DOMContentLoaded', () => {
-            const phoneMockup = document.querySelector('.phone-mockup');
-            if (phoneMockup) {
-                new TiltEffect(phoneMockup, {
-                    max: 20,
-                    perspective: 1500,
-                    scale: 1.03,
-                    speed: 400,
-                    glare: true,
-                    maxGlare: 0.2
-                });
-            }
-
-            // Add tilt to feature cards
-            document.querySelectorAll('.feature-card').forEach(card => {
-                new TiltEffect(card, {
-                    max: 10,
-                    perspective: 1000,
-                    scale: 1.02,
-                    speed: 300,
-                    glare: true,
-                    maxGlare: 0.1
-                });
-            });
-
-            // Add tilt to tech items
-            document.querySelectorAll('.tech-item').forEach(item => {
-                new TiltEffect(item, {
-                    max: 8,
-                    perspective: 800,
-                    scale: 1.01,
-                    speed: 300,
-                    glare: false
-                });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
