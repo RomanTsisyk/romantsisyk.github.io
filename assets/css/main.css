@@ -1199,6 +1199,155 @@ button {
 }
 
 /* ============================================
+   CERTIFICATIONS SECTION
+   ============================================ */
+
+.certifications {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-xl);
+}
+
+.cert-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.cert-card:hover::before {
+    transform: scaleX(1);
+}
+
+.cert-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.cert-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.cert-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.cert-year {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(0, 122, 255, 0.1);
+    color: var(--primary);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ============================================
+   OPEN SOURCE SECTION
+   ============================================ */
+
+.opensource {
+    padding: 6rem 0;
+}
+
+.opensource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-xl);
+}
+
+.opensource-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-base);
+}
+
+.opensource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.os-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.os-icon {
+    font-size: 2rem;
+}
+
+.os-link {
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.os-link:hover {
+    text-decoration: underline;
+}
+
+.opensource-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+
+.opensource-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
+.os-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.os-tags span {
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--bg-card);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
    BACK TO TOP
    ============================================ */
 
