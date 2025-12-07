@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Keep Active Extension</title>
+    <meta name="description" content="Privacy Policy for Keep Active Chrome Extension">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4285F4;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --success: #34A853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--success);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+        }
+
+        .language-selector select {
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(52, 168, 83, 0.1);
+            color: var(--success);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .effective-date {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 168, 83, 0.1), rgba(66, 133, 244, 0.1));
+            border: 1px solid rgba(52, 168, 83, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .highlight-icon {
+            font-size: 2rem;
+        }
+
+        .highlight-text {
+            color: var(--text-secondary);
+        }
+
+        .content-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .highlight-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="keep-active-promo.html" class="logo">
+                <span>⚡</span>
+                <span>Keep Active</span>
+            </a>
+            <a href="keep-active-promo.html" class="back-link">← Back to Extension</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="language-selector">
+            <select id="language-selector" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+
+        <div class="page-header">
+            <span class="page-badge">PRIVACY</span>
+            <h1 class="page-title" id="title">Privacy Policy</h1>
+            <p class="effective-date" id="effectiveDate">Effective Date: March 1, 2024</p>
+        </div>
+
+        <div class="highlight-box">
+            <span class="highlight-icon">🛡️</span>
+            <p class="highlight-text"><strong>Your Data is Safe</strong> — We collect zero personal data. Everything runs locally in your browser.</p>
+        </div>
+
+        <div class="content-card">
+            <div class="section">
+                <h2 class="section-title" id="permissionsTitle">🔑 Permissions Required</h2>
+                <p id="tabsPermission"><strong>'Tabs':</strong> Required to manage browser tabs. This includes actions like opening a new tab or refreshing an existing one to keep the session active.</p>
+                <p id="alarmsPermission"><strong>'Alarms':</strong> Used to schedule code to run periodically. This is necessary for the extension to trigger actions, like refreshing a page, at set intervals.</p>
+                <p id="storagePermission"><strong>'Storage':</strong> Allows the extension to save settings and preferences locally on your device. This ensures your settings persist across browser sessions.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" id="noDataCollectedTitle">🚫 Information We Do Not Collect</h2>
+                <p id="noDataCollectedContent">We do not collect, use, store, or share any personal information from users of our Extension. Our Extension operates completely locally on your device, and no data is transmitted off your device in relation to the services provided by the Extension.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" id="noUsageTitle">📊 Information Usage</h2>
+                <p id="noUsageContent">Since our Extension does not collect any personal data, there is no usage of user data to describe.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" id="noSharingTitle">🔒 Data Sharing and Selling</h2>
+                <p id="noSharingContent">We do not share or sell any personal information because we do not collect any. The Extension does not transmit any information to us or third parties.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" id="securityTitle">🛡️ Security</h2>
+                <p id="securityContent">As no data is collected, there is no risk of breach of your personal information with respect to the use of our Extension.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title" id="changesTitle">📝 Changes to This Policy</h2>
+                <p id="changesContent">We may update this Privacy Policy from time to time in response to changing legal, technical, or business developments. When we update our Privacy Policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p id="agreement">By using the Keep Active Extension, you agree to the terms of this Privacy Policy.</p>
+        <p style="margin-top: 1rem;">© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Privacy Policy",
+                effectiveDate: "Effective Date: March 1, 2024",
+                permissionsTitle: "🔑 Permissions Required",
+                tabsPermission: "<strong>'Tabs':</strong> Required to manage browser tabs. This includes actions like opening a new tab or refreshing an existing one to keep the session active.",
+                alarmsPermission: "<strong>'Alarms':</strong> Used to schedule code to run periodically. This is necessary for the extension to trigger actions, like refreshing a page, at set intervals.",
+                storagePermission: "<strong>'Storage':</strong> Allows the extension to save settings and preferences locally on your device. This ensures your settings persist across browser sessions.",
+                noDataCollectedTitle: "🚫 Information We Do Not Collect",
+                noDataCollectedContent: "We do not collect, use, store, or share any personal information from users of our Extension. Our Extension operates completely locally on your device, and no data is transmitted off your device in relation to the services provided by the Extension.",
+                noUsageTitle: "📊 Information Usage",
+                noUsageContent: "Since our Extension does not collect any personal data, there is no usage of user data to describe.",
+                noSharingTitle: "🔒 Data Sharing and Selling",
+                noSharingContent: "We do not share or sell any personal information because we do not collect any. The Extension does not transmit any information to us or third parties.",
+                securityTitle: "🛡️ Security",
+                securityContent: "As no data is collected, there is no risk of breach of your personal information with respect to the use of our Extension.",
+                changesTitle: "📝 Changes to This Policy",
+                changesContent: "We may update this Privacy Policy from time to time in response to changing legal, technical, or business developments. When we update our Privacy Policy, we will take appropriate measures to inform you, consistent with the significance of the changes we make.",
+                agreement: "By using the Keep Active Extension, you agree to the terms of this Privacy Policy."
+            },
+            fr: {
+                title: "Politique de Confidentialité",
+                effectiveDate: "Date d'effet: 1 Mars 2024",
+                permissionsTitle: "🔑 Autorisations Requises",
+                tabsPermission: "<strong>'Onglets':</strong> Requis pour gérer les onglets du navigateur, notamment ouvrir ou actualiser un onglet pour maintenir la session active.",
+                alarmsPermission: "<strong>'Alarmes':</strong> Utilisé pour planifier l'exécution périodique du code, nécessaire pour déclencher des actions à intervalles définis.",
+                storagePermission: "<strong>'Stockage':</strong> Permet de sauvegarder les paramètres localement sur votre appareil pour qu'ils persistent entre les sessions.",
+                noDataCollectedTitle: "🚫 Informations Non Collectées",
+                noDataCollectedContent: "Nous ne collectons, utilisons, stockons ou partageons aucune information personnelle. L'extension fonctionne entièrement localement sur votre appareil.",
+                noUsageTitle: "📊 Utilisation des Informations",
+                noUsageContent: "Notre extension ne collectant aucune donnée personnelle, il n'y a pas d'utilisation de données à décrire.",
+                noSharingTitle: "🔒 Partage des Données",
+                noSharingContent: "Nous ne partageons ni ne vendons aucune information personnelle car nous n'en collectons pas.",
+                securityTitle: "🛡️ Sécurité",
+                securityContent: "Aucune donnée n'étant collectée, il n'y a aucun risque de violation de vos informations personnelles.",
+                changesTitle: "📝 Modifications",
+                changesContent: "Nous pouvons mettre à jour cette politique de confidentialité. Nous vous informerons des changements importants.",
+                agreement: "En utilisant l'extension Keep Active, vous acceptez les termes de cette politique de confidentialité."
+            },
+            es: {
+                title: "Política de Privacidad",
+                effectiveDate: "Fecha de vigencia: 1 de Marzo de 2024",
+                permissionsTitle: "🔑 Permisos Requeridos",
+                tabsPermission: "<strong>'Pestañas':</strong> Requerido para gestionar las pestañas del navegador, incluyendo abrir o actualizar pestañas para mantener la sesión activa.",
+                alarmsPermission: "<strong>'Alarmas':</strong> Usado para programar la ejecución periódica del código, necesario para activar acciones a intervalos establecidos.",
+                storagePermission: "<strong>'Almacenamiento':</strong> Permite guardar configuraciones localmente en su dispositivo para que persistan entre sesiones.",
+                noDataCollectedTitle: "🚫 Información No Recopilada",
+                noDataCollectedContent: "No recopilamos, usamos, almacenamos ni compartimos ninguna información personal. La extensión opera completamente de forma local en su dispositivo.",
+                noUsageTitle: "📊 Uso de Información",
+                noUsageContent: "Dado que nuestra extensión no recopila datos personales, no hay uso de datos de usuario que describir.",
+                noSharingTitle: "🔒 Compartir Datos",
+                noSharingContent: "No compartimos ni vendemos ninguna información personal porque no recopilamos ninguna.",
+                securityTitle: "🛡️ Seguridad",
+                securityContent: "Al no recopilarse datos, no existe riesgo de violación de su información personal.",
+                changesTitle: "📝 Cambios",
+                changesContent: "Podemos actualizar esta política de privacidad. Le informaremos de los cambios significativos.",
+                agreement: "Al usar la extensión Keep Active, acepta los términos de esta política de privacidad."
+            },
+            de: {
+                title: "Datenschutzrichtlinie",
+                effectiveDate: "Gültigkeitsdatum: 1. März 2024",
+                permissionsTitle: "🔑 Erforderliche Berechtigungen",
+                tabsPermission: "<strong>'Tabs':</strong> Erforderlich zur Verwaltung von Browser-Tabs, einschließlich Öffnen oder Aktualisieren von Tabs, um die Sitzung aktiv zu halten.",
+                alarmsPermission: "<strong>'Alarme':</strong> Wird verwendet, um Code periodisch auszuführen, notwendig um Aktionen in festgelegten Intervallen auszulösen.",
+                storagePermission: "<strong>'Speicher':</strong> Ermöglicht das lokale Speichern von Einstellungen auf Ihrem Gerät, damit diese zwischen Sitzungen bestehen bleiben.",
+                noDataCollectedTitle: "🚫 Nicht Gesammelte Informationen",
+                noDataCollectedContent: "Wir sammeln, verwenden, speichern oder teilen keine persönlichen Informationen. Die Erweiterung arbeitet vollständig lokal auf Ihrem Gerät.",
+                noUsageTitle: "📊 Informationsnutzung",
+                noUsageContent: "Da unsere Erweiterung keine persönlichen Daten sammelt, gibt es keine Nutzung von Benutzerdaten zu beschreiben.",
+                noSharingTitle: "🔒 Datenweitergabe",
+                noSharingContent: "Wir geben keine persönlichen Informationen weiter oder verkaufen sie, da wir keine sammeln.",
+                securityTitle: "🛡️ Sicherheit",
+                securityContent: "Da keine Daten gesammelt werden, besteht kein Risiko eines Verstoßes gegen Ihre persönlichen Informationen.",
+                changesTitle: "📝 Änderungen",
+                changesContent: "Wir können diese Datenschutzrichtlinie aktualisieren. Wir werden Sie über wichtige Änderungen informieren.",
+                agreement: "Durch die Nutzung der Keep Active-Erweiterung stimmen Sie den Bedingungen dieser Datenschutzrichtlinie zu."
+            }
+        };
+
+        function changeLanguage(language) {
+            const content = translations[language];
+            document.getElementById("title").textContent = content.title;
+            document.getElementById("effectiveDate").textContent = content.effectiveDate;
+            document.getElementById("permissionsTitle").innerHTML = content.permissionsTitle;
+            document.getElementById("tabsPermission").innerHTML = content.tabsPermission;
+            document.getElementById("alarmsPermission").innerHTML = content.alarmsPermission;
+            document.getElementById("storagePermission").innerHTML = content.storagePermission;
+            document.getElementById("noDataCollectedTitle").innerHTML = content.noDataCollectedTitle;
+            document.getElementById("noDataCollectedContent").textContent = content.noDataCollectedContent;
+            document.getElementById("noUsageTitle").innerHTML = content.noUsageTitle;
+            document.getElementById("noUsageContent").textContent = content.noUsageContent;
+            document.getElementById("noSharingTitle").innerHTML = content.noSharingTitle;
+            document.getElementById("noSharingContent").textContent = content.noSharingContent;
+            document.getElementById("securityTitle").innerHTML = content.securityTitle;
+            document.getElementById("securityContent").textContent = content.securityContent;
+            document.getElementById("changesTitle").innerHTML = content.changesTitle;
+            document.getElementById("changesContent").textContent = content.changesContent;
+            document.getElementById("agreement").textContent = content.agreement;
+        }
+    </script>
+</body>
+</html>

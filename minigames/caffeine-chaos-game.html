@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine & Chaos: Super Barista Rescue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Bangers', cursive;
+            background-color: #f5e9dc;
+            transition: transform 0.3s ease-out;
+        }
+
+        #game-world {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #barista {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            left: 20vw;
+            bottom: 20vh;
+            background-color: #8B4513;
+            border-radius: 10px;
+            z-index: 3;
+            transform-origin: center bottom;
+        }
+
+        .barista-face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            left: 10px;
+            background-color: #f5d7b5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .coffee-cup {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            right: -20px;
+            top: 30px;
+            background-color: #8d6e63;
+            border-radius: 5px 5px 20px 20px;
+            cursor: pointer;
+            z-index: 4;
+            transition: transform 0.1s;
+        }
+
+        .coffee-cup::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 30px;
+            height: 10px;
+            background-color: #795548;
+            border-radius: 5px;
+        }
+
+        .coffee-cup::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 30px;
+            height: 15px;
+            background-color: #6d4c41;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .steam {
+            position: absolute;
+            width: 6px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            left: 20px;
+            top: -10px;
+            opacity: 0;
+        }
+
+        .animated-wobble {
+            animation: wobble 0.6s ease-in-out infinite;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .obstacle {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .mansplainer {
+            width: 100px;
+            height: 80px;
+            background-color: #546e7a;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .mansplainer::before {
+            content: '👔';
+            font-size: 24px;
+        }
+
+        .meeting-zombie {
+            width: 80px;
+            height: 100px;
+            background-color: #78909c;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .meeting-zombie::before {
+            content: '📊';
+            font-size: 24px;
+        }
+
+        .target {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #a5d6a7;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            z-index: 2;
+        }
+
+        .programmer::before {
+            content: '💻';
+        }
+
+        .ceo::before {
+            content: '📈';
+        }
+
+        .mom::before {
+            content: '👶';
+        }
+
+        .powerup {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #ffcc80;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 2;
+        }
+
+        .espresso::before {
+            content: '☕';
+        }
+
+        .cat::before {
+            content: '🐱';
+        }
+
+        .wifi::before {
+            content: '📶';
+        }
+
+        #ui {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .temperature-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .temperature-fill {
+            height: 100%;
+            background-color: #e53935;
+            width: 100%;
+            transition: width 0.3s;
+        }
+
+        .score-display {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .sleep-bubble {
+            position: absolute;
+            top: -30px;
+            right: -20px;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .collision-flash {
+            animation: flash 0.5s;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        #game-over, #victory-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 100;
+            display: none;
+        }
+
+        #game-over h1, #victory-screen h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        #restart-btn {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Bangers', cursive;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            top: -30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-world">
+        <div id="barista" class="animated-wobble">
+            <div class="barista-face">😊</div>
+            <div class="coffee-cup">
+                <div class="steam"></div>
+                <div class="steam" style="left: 15px; top: -15px;"></div>
+                <div class="steam" style="left: 25px; top: -12px;"></div>
+            </div>
+            <div class="sleep-bubble">💤</div>
+            <div class="speech-bubble"></div>
+        </div>
+    </div>
+
+    <div id="ui">
+        <div class="temperature-bar">
+            <div class="temperature-fill"></div>
+        </div>
+        <div class="score-display">Score: 0</div>
+    </div>
+
+    <div id="game-over">
+        <h1>Game Over!</h1>
+        <p id="game-over-reason"></p>
+        <p>Score: <span id="final-score">0</span></p>
+        <button id="restart-btn">Play Again</button>
+    </div>
+
+    <div id="victory-screen">
+        <h1>You Did It!</h1>
+        <p>You saved the day with your coffee skills!</p>
+        <p>Score: <span id="victory-score">0</span></p>
+        <div id="victory-meme"></div>
+        <button id="restart-btn-victory">Play Again</button>
+    </div>
+
+    <script>
+        // Game configuration
+        const GAME_CONFIG = {
+            difficulty: {
+                gravity: 1.5,
+                tempLoss: 1
+            },
+            barista: {
+                riseVelocity: 2,
+                fallVelocity: 1.5,
+                baseSpeed: 3,
+                minAltitude: 20,
+                maxAltitude: 80
+            },
+            obstacles: {
+                mansplainerFrequency: [4000, 6000], // min, max ms
+                meetingZombieSpeed: 1.2
+            }
+        };
+
+        // Game state
+        const gameState = {
+            score: 0,
+            temperature: 100,
+            powerUps: [],
+            deliveries: 0,
+            collisions: 0,
+            pouring: false,
+            lastActivity: Date.now(),
+            sleeping: false,
+            gameOver: false,
+            progress: 0
+        };
+
+        // DOM elements
+        const barista = document.getElementById('barista');
+        const coffeeCup = barista.querySelector('.coffee-cup');
+        const steamElements = barista.querySelectorAll('.steam');
+        const sleepBubble = barista.querySelector('.sleep-bubble');
+        const baristaFace = barista.querySelector('.barista-face');
+        const temperatureFill = document.querySelector('.temperature-fill');
+        const scoreDisplay = document.querySelector('.score-display');
+        const gameOverScreen = document.getElementById('game-over');
+        const gameOverReason = document.getElementById('game-over-reason');
+        const finalScore = document.getElementById('final-score');
+        const victoryScreen = document.getElementById('victory-screen');
+        const victoryScore = document.getElementById('victory-score');
+        const gameWorld = document.getElementById('game-world');
+        const speechBubble = barista.querySelector('.speech-bubble');
+
+        // Position tracking
+        let baristaPosition = {
+            x: parseInt(window.getComputedStyle(barista).left),
+            y: parseInt(window.getComputedStyle(barista).bottom),
+            vy: 0
+        };
+
+        // Initialize the game
+        function initGame() {
+            // Reset game state
+            gameState.score = 0;
+            gameState.temperature = 100;
+            gameState.powerUps = [];
+            gameState.deliveries = 0;
+            gameState.collisions = 0;
+            gameState.pouring = false;
+            gameState.lastActivity = Date.now();
+            gameState.sleeping = false;
+            gameState.gameOver = false;
+            gameState.progress = 0;
+
+            // Reset barista position
+            baristaPosition = {
+                x: parseInt(window.getComputedStyle(barista).left),
+                y: parseInt(window.getComputedStyle(barista).bottom),
+                vy: 0
+            };
+            barista.style.bottom = `${baristaPosition.y}px`;
+
+            // Clear obstacles and targets
+            document.querySelectorAll('.obstacle, .target, .powerup').forEach(el => el.remove());
+
+            // Reset UI
+            updateTemperature();
+            updateScore();
+            document.body.style.transform = 'rotate(0deg)';
+            baristaFace.innerHTML = '😊';
+
+            // Hide game over and victory screens
+            gameOverScreen.style.display = 'none';
+            victoryScreen.style.display = 'none';
+
+            // Start spawning obstacles and targets
+            scheduleObstacleSpawn();
+            scheduleTargetSpawn();
+
+            // Start game loop
+            if (!gameState.gameLoop) {
+                gameState.gameLoop = requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (gameState.gameOver) return;
+
+            updateBarista();
+            updateObstacles();
+            checkCollisions();
+            updatePowerUps();
+            updateTemperature();
+            checkGameOver();
+
+            gameState.gameLoop = requestAnimationFrame(gameLoop);
+        }
+
+        // Update barista position
+        function updateBarista() {
+            // Check if sleeping
+            const now = Date.now();
+            if (now - gameState.lastActivity > 1000 && !gameState.sleeping) {
+                gameState.sleeping = true;
+                sleepBubble.style.opacity = '1';
+                baristaFace.innerHTML = '😴';
+                // Play snore sound here
+            } else if (gameState.sleeping && now - gameState.lastActivity <= 1000) {
+                gameState.sleeping = false;
+                sleepBubble.style.opacity = '0';
+                baristaFace.innerHTML = '😊';
+            }
+
+            // Apply gravity if not pouring
+            if (!gameState.pouring) {
+                baristaPosition.vy -= GAME_CONFIG.difficulty.gravity * 0.1;
+            } else {
+                baristaPosition.vy = GAME_CONFIG.barista.riseVelocity;
+                
+                // Animate steam
+                steamElements.forEach(steam => {
+                    steam.style.opacity = '0.7';
+                    steam.animate([
+                        { transform: 'translateY(0) scale(1)', opacity: 0.7 },
+                        { transform: 'translateY(-20px) scale(1.5)', opacity: 0 }
+                    ], {
+                        duration: 1000,
+                        iterations: Infinity
+                    });
+                });
+            }
+
+            // Update vertical position
+            baristaPosition.y += baristaPosition.vy;
+
+            // Clamp to min/max altitude
+            const minY = window.innerHeight * (GAME_CONFIG.barista.minAltitude / 100);
+            const maxY = window.innerHeight * (GAME_CONFIG.barista.maxAltitude / 100);
+            
+            if (baristaPosition.y < minY) {
+                baristaPosition.y = minY;
+                baristaPosition.vy = 0;
+            } else if (baristaPosition.y > maxY) {
+                baristaPosition.y = maxY;
+                baristaPosition.vy = 0;
+            }
+
+            // Update horizontal position (auto-scroll)
+            baristaPosition.x += GAME_CONFIG.barista.baseSpeed;
+            gameState.progress = baristaPosition.x / (window.innerWidth * 3); // Assume game is 3 screens wide
+
+            // Update DOM
+            barista.style.bottom = `${baristaPosition.y}px`;
+            barista.style.left = `${baristaPosition.x}px`;
+
+            // Spawn meeting zombies at checkpoints
+            if (gameState.progress >= 0.25 && !gameState.checkpoint1) {
+                gameState.checkpoint1 = true;
+                spawnMeetingZombie();
+            }
+            if (gameState.progress >= 0.5 && !gameState.checkpoint2) {
+                gameState.checkpoint2 = true;
+                spawnMeetingZombie();
+            }
+            if (gameState.progress >= 0.75 && !gameState.checkpoint3) {
+                gameState.checkpoint3 = true;
+                spawnMeetingZombie();
+            }
+
+            // Check for victory
+            if (gameState.progress >= 1) {
+                victory();
+            }
+        }
+
+        // Schedule obstacle spawn
+        function scheduleObstacleSpawn() {
+            if (gameState.gameOver) return;
+            
+            const delay = Math.random() * 
+                (GAME_CONFIG.obstacles.mansplainerFrequency[1] - GAME_CONFIG.obstacles.mansplainerFrequency[0]) + 
+                GAME_CONFIG.obstacles.mansplainerFrequency[0];
+            
+            setTimeout(() => {
+                spawnMansplainer();
+                scheduleObstacleSpawn();
+            }, delay);
+        }
+
+        // Spawn mansplainer obstacle
+        function spawnMansplainer() {
+            if (gameState.gameOver) return;
+            
+            const mansplainer = document.createElement('div');
+            mansplainer.className = 'obstacle mansplainer';
+            
+            // Random Y position
+            const y = Math.random() * (window.innerHeight * 0.6) + (window.innerHeight * 0.2);
+            
+            mansplainer.style.left = `${window.innerWidth}px`;
+            mansplainer.style.top = `${y}px`;
+            
+            gameWorld.appendChild(mansplainer);
+            
+            // Add speech bubble
+            const speech = document.createElement('div');
+            speech.className = 'speech-bubble';
+            speech.textContent = 'Actually...';
+            mansplainer.appendChild(speech);
+        }
+
+        // Spawn meeting zombie
+        function spawnMeetingZombie() {
+            if (gameState.gameOver) return;
+            
+            const zombie = document.createElement('div');
+            zombie.className = 'obstacle meeting-zombie';
+            
+            // Start from bottom right
+            zombie.style.left = `${window.innerWidth}px`;
+            zombie.style.bottom = '10vh';
+            
+            gameWorld.appendChild(zombie);
+            
+            // Add speech bubble
+            const speech = document.createElement('div');
+            speech.className = 'speech-bubble';
+            speech.textContent = 'Quick meeting?';
+            zombie.appendChild(speech);
+        }
+
+        // Schedule target spawn
+        function scheduleTargetSpawn() {
+            if (gameState.gameOver) return;
+            
+            setTimeout(() => {
+                spawnTarget();
+                scheduleTargetSpawn();
+            }, 5000 + Math.random() * 3000);
+        }
+
+        // Spawn coffee target
+        function spawnTarget() {
+            if (gameState.gameOver) return;
+            
+            const targetTypes = ['programmer', 'ceo', 'mom'];
+            const type = targetTypes[Math.floor(Math.random() * targetTypes.length)];
+            
+            const target = document.createElement('div');
+            target.className = `target ${type}`;
+            
+            // Random position ahead of player
+            const x = baristaPosition.x + window.innerWidth * 0.7;
+            const y = Math.random() * (window.innerHeight * 0.6) + (window.innerHeight * 0.2);
+            
+            target.style.left = `${x}px`;
+            target.style.top = `${y}px`;
+            
+            gameWorld.appendChild(target);
+            
+            // Self-destruct after a while if not delivered to
+            setTimeout(() => {
+                if (target.parentNode) {
+                    const speech = document.createElement('div');
+                    speech.className = 'speech-bubble';
+                    speech.textContent = 'Need caffeine!';
+                    speech.style.opacity = '1';
+                    target.appendChild(speech);
+                    
+                    target.style.backgroundColor = '#e57373';
+                    target.animate([
+                        { transform: 'scale(1)' },
+                        { transform: 'scale(1.2)' },
+                        { transform: 'scale(1)' }
+                    ], {
+                        duration: 500
+                    });
+                    
+                    setTimeout(() => {
+                        if (target.parentNode) {
+                            target.remove();
+                        }
+                    }, 2000);
+                }
+            }, 8000);
+        }
+
+        // Update obstacles
+        function updateObstacles() {
+            // Move mansplainers
+            document.querySelectorAll('.mansplainer').forEach(mansplainer => {
+                const x = parseInt(mansplainer.style.left) - 2;
+                const y = parseInt(mansplainer.style.top);
+                
+                // Sine wave movement
+                const offset = Math.sin(x * 0.01) * 50;
+                
+                mansplainer.style.left = `${x}px`;
+                mansplainer.style.top = `${y + offset * 0.1}px`;
+                
+                // Remove if off screen
+                if (x < -100) {
+                    mansplainer.remove();
+                }
+            });
+            
+            // Move meeting zombies
+            document.querySelectorAll('.meeting-zombie').forEach(zombie => {
+                // Simple pathfinding toward barista
+                const zombieX = parseInt(zombie.style.left);
+                const zombieY = zombie.style.top ? parseInt(zombie.style.top) : window.innerHeight - parseInt(zombie.style.bottom);
+                
+                const dx = baristaPosition.x - zombieX;
+                const dy = (window.innerHeight - baristaPosition.y) - zombieY;
+                
+                const angle = Math.atan2(dy, dx);
+                const speed = GAME_CONFIG.obstacles.meetingZombieSpeed;
+                
+                const newX = zombieX + Math.cos(angle) * speed;
+                const newY = zombieY + Math.sin(angle) * speed;
+                
+                zombie.style.left = `${newX}px`;
+                zombie.style.top = `${newY}px`;
+                
+                // Show speech bubble occasionally
+                if (Math.random() < 0.005) {
+                    const speech = zombie.querySelector('.speech-bubble');
+                    speech.style.opacity = '1';
+                    setTimeout(() => {
+                        speech.style.opacity = '0';
+                    }, 2000);
+                }
+            });
+        }
+
+        // Check collisions
+        function checkCollisions() {
+            const baristaRect = barista.getBoundingClientRect();
+            
+            // Check mansplainer collisions
+            document.querySelectorAll('.mansplainer').forEach(mansplainer => {
+                const mansplainerRect = mansplainer.getBoundingClientRect();
+                
+                if (rectCollision(baristaRect, mansplainerRect)) {
+                    handleMansplainerCollision(mansplainer);
+                }
+            });
+            
+            // Check meeting zombie collisions
+            document.querySelectorAll('.meeting-zombie').forEach(zombie => {
+                const zombieRect = zombie.getBoundingClientRect();
+                
+                if (rectCollision(baristaRect, zombieRect)) {
+                    handleZombieCollision(zombie);
+                }
+            });
+            
+            // Check target proximity for delivery
+            document.querySelectorAll('.target').forEach(target => {
+                const targetRect = target.getBoundingClientRect();
+                
+                // If close enough, player can deliver coffee
+                if (Math.abs(baristaRect.left - targetRect.left) < 100 && 
+                    Math.abs(baristaRect.top - targetRect.top) < 100) {
+                    target.classList.add('ready-for-delivery');
+                } else {
+                    target.classList.remove('ready-for-delivery');
+                }
+            });
+            
+            // Check powerup collisions
+            document.querySelectorAll('.powerup').forEach(powerup => {
+                const powerupRect = powerup.getBoundingClientRect();
+                
+                if (rectCollision(baristaRect, powerupRect)) {
+                    handlePowerupCollection(powerup);
+                }
+            });
+        }
+
+        // Collision detection helper
+        function rectCollision(rect1, rect2) {
+            return !(rect1.right < rect2.left || 
+                    rect1.left > rect2.right || 
+                    rect1.bottom < rect2.top || 
+                    rect1.top > rect2.bottom);
+        }
+
+        // Handle mansplainer collision
+        function handleMansplainerCollision(mansplainer) {
+            if (mansplainer.hit) return; // Prevent multiple hits
+            
+            mansplainer.hit = true;
+            gameState.collisions++;
+            
+            // Apply screen tilt
+            document.body.style.transform = `rotate(-10deg)`;
+            setTimeout(() => {
+                document.body.style.transform = 'rotate(0deg)';
+            }, 1000);
+            
+            // Show speech bubble
+            const speech = mansplainer.querySelector('.speech-bubble');
+            speech.style.opacity = '1';
+            
+            // Update score
+            gameState.score -= 50;
+            updateScore();
+            
+            // Flash barista
+            barista.classList.add('collision-flash');
+            setTimeout(() => {
+                barista.classList.remove('collision-flash');
+            }, 500);
+            
+            // Update barista face
+            baristaFace.innerHTML = '😤';
+            setTimeout(() => {
+                baristaFace.innerHTML = '😊';
+            }, 1000);
+        }
+
+        // Handle zombie collision
+        function handleZombieCollision(zombie) {
+            endGame('The meeting zombies caught you!');
+        }
+
+        // Handle powerup collection
+        function handlePowerupCollection(powerup) {
+            const type = powerup.classList.contains('espresso') ? 'espresso' : 
+                         powerup.classList.contains('cat') ? 'cat' : 'wifi';
+            
+            activatePowerup(type);
+            powerup.remove();
+        }
+
+        // Activate powerup
+        function activatePowerup(type) {
+            const powerUp = {
+                type,
+                duration: type === 'espresso' ? 8000 : type === 'cat' ? 5000 : 10000,
+                startTime: Date.now()
+            };
+            
+            gameState.powerUps.push(powerUp);
+            
+            // Apply effect
+            document.body.classList.add(`powerup-${type}`);
+            
+            // Specific effects
+            switch(type) {
+                case 'espresso':
+                    // Screen shake
+                    let shakeInterval = setInterval(() => {
+                        barista.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px) rotate(${Math.random() * 4 - 2}deg)`;
+                    }, 50);
+                    
+                    setTimeout(() => {
+                        clearInterval(shakeInterval);
+                        barista.style.transform = '';
+                    }, powerUp.duration);
+                    break;
+                
+                case 'cat':
+                    // Change cursor
+                    document.body.style.cursor = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'><text y=\'30\' font-size=\'30\'>🐾</text></svg>"), auto';
+                    
+                    // Make enemies flee
+                    document.querySelectorAll('.obstacle').forEach(obstacle => {
+                        obstacle.style.transition = 'transform 1s';
+                        obstacle.style.transform = 'translateX(-200px)';
+                    });
+                    
+                    setTimeout(() => {
+                        document.body.style.cursor = '';
+                    }, powerUp.duration);
+                    break;
+                
+                case 'wifi':
+                    // Glitch effect with clip-path
+                    let glitchInterval = setInterval(() => {
+                        const glitchVal = Math.random() * 10;
+                        document.body.style.clipPath = `inset(0 0 ${glitchVal}px 0)`;
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        clearInterval(glitchInterval);
+                        document.body.style.clipPath = '';
+                    }, powerUp.duration);
+                    break;
+            }
+            
+            // Remove after duration
+            setTimeout(() => {
+                const index = gameState.powerUps.findIndex(p => p === powerUp);
+                if (index !== -1) {
+                    gameState.powerUps.splice(index, 1);
+                }
+                document.body.classList.remove(`powerup-${type}`);
+            }, powerUp.duration);
+        }
+
+        // Update powerups
+        function updatePowerUps() {
+            // No implementation needed yet as we handle this with setTimeout
+        }
+
+        // Update temperature
+        function updateTemperature() {
+            gameState.temperature -= GAME_CONFIG.difficulty.tempLoss * 0.01;
+            
+            if (gameState.temperature < 0) {
+                gameState.temperature = 0;
+            }
+            
+            // Replenish temperature when pouring
+            if (gameState.pouring) {
+                gameState.temperature += 0.05;
+                if (gameState.temperature > 100) {
+                    gameState.temperature = 100;
+                }
+            }
+            
+            temperatureFill.style.width = `${gameState.temperature}%`;
+        }
+
+        // Update score
+        function updateScore() {
+            scoreDisplay.textContent = `Score: ${gameState.score}`;
+        }
+
+        // Check game over conditions
+        function checkGameOver() {
+            if (gameState.gameOver) return;
+            
+            if (gameState.temperature <= 0) {
+                endGame('Your coffee got cold!');
+            } else if (gameState.collisions >= 3) {
+                endGame('Too many mansplainer collisions!');
+            }
+        }
+
+        // End game
+        function endGame(reason) {
+            gameState.gameOver = true;
+            cancelAnimationFrame(gameState.gameLoop);
+            gameState.gameLoop = null;
+            
+            gameOverReason.textContent = reason;
+            finalScore.textContent = gameState.score;
+            gameOverScreen.style.display = 'flex';
+        }
+
+        // Victory
+        function victory() {
+            gameState.gameOver = true;
+            cancelAnimationFrame(gameState.gameLoop);
+            gameState.gameLoop = null;
+            
+            victoryScore.textContent = gameState.score;
+            victoryScreen.style.display = 'flex';
+            
+            // Generate meme
+            const memes = [
+                { template: "distracted-boyfriend", text: "Me vs My Productivity" },
+                { template: "drake-hotline-bling", text: "No Coffee vs Espresso" }
+            ];
+            
+            const randomMeme = memes[Math.floor(Math.random() * memes.length)];
+            const memeEl = document.getElementById('victory-meme');
+            memeEl.textContent = randomMeme.text;
+        }
+
+        // Event listeners
+        coffeeCup.addEventListener('mousedown', (e) => {
+            gameState.pouring = true;
+            gameState.lastActivity = Date.now();
+            coffeeCup.style.transform = 'scale(1.1)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            gameState.pouring = false;
+            coffeeCup.style.transform = 'scale(1)';
+            
+            // Stop steam animation
+            steamElements.forEach(steam => {
+                steam.style.opacity = '0';
+                steam.getAnimations().forEach(anim => anim.cancel());
+            });
+        });
+
+        document.addEventListener('mousemove', () => {
+            gameState.lastActivity = Date.now();
+        });
+
+        // Coffee delivery via click on targets
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.target.ready-for-delivery');
+            if (target) {
+                deliverCoffee(target);
+            }
+        });
+
+        // Deliver coffee to target
+        function deliverCoffee(target) {
+            // Success animation
+            target.style.backgroundColor = '#81c784';
+            
+            const speech = document.createElement('div');
+            speech.className = 'speech-bubble';
+            speech.textContent = 'You slay!';
+            speech.style.opacity = '1';
+            target.appendChild(speech);
+            
+            target.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.2)' },
+                { transform: 'scale(1)' }
+            ], {
+                duration: 500
+            });
+            
+            // Update game state
+            gameState.deliveries++;
+            gameState.score += 100;
+            updateScore();
+            
+            // Maybe spawn a powerup
+            if (Math.random() < 0.3) {
+                spawnPowerup(target);
+            }
+            
+            // Remove target after animation
+            setTimeout(() => {
+                target.remove();
+            }, 2000);
+        }
+
+        // Spawn powerup
+        function spawnPowerup(nearElement) {
+            const types = ['espresso', 'cat', 'wifi'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            const powerup = document.createElement('div');
+            powerup.className = `powerup ${type}`;
+            
+            // Position near the element
+            const rect = nearElement.getBoundingClientRect();
+            powerup.style.left = `${rect.left + rect.width + 20}px`;
+            powerup.style.top = `${rect.top}px`;
+            
+            gameWorld.appendChild(powerup);
+            
+            // Self-destruct after a while
+            setTimeout(() => {
+                if (powerup.parentNode) {
+                    powerup.remove();
+                }
+            }, 5000);
+        }
+
+        // Restart button event listeners
+        document.getElementById('restart-btn').addEventListener('click', initGame);
+        document.getElementById('restart-btn-victory').addEventListener('click', initGame);
+
+        // Initialize the game
+        initGame();
+    </script>
+</body>
+</html>

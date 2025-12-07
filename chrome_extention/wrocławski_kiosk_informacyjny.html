@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrocławski Kiosk Wiadomości - Twoje okno na Wrocław</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --wroclaw-red: #C8102E;
+            --wroclaw-gold: #FFB81C;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, #C8102E, #FFB81C);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+        }
+
+        .orb-1 { width: 600px; height: 600px; background: var(--wroclaw-red); top: -200px; right: -100px; }
+        .orb-2 { width: 500px; height: 500px; background: var(--wroclaw-gold); bottom: 20%; left: -150px; }
+
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--wroclaw-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(200, 16, 46, 0.15);
+            border: 1px solid rgba(200, 16, 46, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--wroclaw-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(200, 16, 46, 0.4);
+        }
+
+        .hero-image {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            margin-top: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(200, 16, 46, 0.1);
+            color: var(--wroclaw-red);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--wroclaw-red);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+        }
+
+        /* Audience */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .audience-card {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.1), rgba(255, 184, 28, 0.1));
+            border: 1px solid rgba(200, 16, 46, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .audience-card:hover {
+            border-color: var(--wroclaw-red);
+        }
+
+        .audience-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--wroclaw-gold);
+        }
+
+        .audience-card p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA */
+        .cta {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.2), rgba(255, 184, 28, 0.2));
+            border: 1px solid rgba(200, 16, 46, 0.3);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .extension-id {
+            display: inline-block;
+            background: var(--bg-card);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-family: monospace;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--wroclaw-gold);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-title { font-size: 2.5rem; }
+            .steps { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .cta-card { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🏙️</div>
+                <span>Wrocławski Kiosk</span>
+            </a>
+            <a href="../index.html" class="nav-link">← Portfolio</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span>🇵🇱</span>
+            <span>Darmowe rozszerzenie Chrome</span>
+        </div>
+        <h1 class="hero-title">Wrocławski Kiosk Wiadomości</h1>
+        <p class="hero-subtitle">Twoje okno na Wrocław - zawsze aktualne informacje z Twojego ulubionego miasta. Bądź na bieżąco z wydarzeniami, kulturą i życiem miasta.</p>
+        <a href="#download" class="btn btn-primary">
+            <span>📥</span>
+            <span>Pobierz rozszerzenie</span>
+        </a>
+        <img src="https://lh3.googleusercontent.com/3Nim291K_0bqgcUKnF88zHjfbEGStbIH_j_oYmCOam4uv2gNWGuFKjzjh76K4fxhN51vBKMTmbLgiwXJNXbi4g7etg=s1280-w1280-h800" alt="Wrocławski Kiosk Wiadomości" class="hero-image">
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="section-badge">FUNKCJE</span>
+            <h2 class="section-title">Dlaczego warto?</h2>
+            <p class="section-subtitle">Wszystko czego potrzebujesz, aby być na bieżąco z Wrocławiem</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📰</div>
+                <h3>Łatwy Dostęp</h3>
+                <p>Kultura, sport, biznes, wydarzenia społeczne - aktualne informacje z wiarygodnych źródeł w jednym miejscu.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🖱️</div>
+                <h3>Intuicyjna Obsługa</h3>
+                <p>Minimalistyczny interfejs sprawia, że nawigacja i czytanie wiadomości stają się przyjemnością.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Personalizacja</h3>
+                <p>Wybierz kategorie tematyczne i otrzymuj tylko te informacje, które są dla Ciebie najważniejsze.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Zawsze Aktualne</h3>
+                <p>Automatyczne aktualizacje RSS gwarantują, że żadna ważna wiadomość Cię nie ominie.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <h3>Całkowicie Darmowe</h3>
+                <p>Ciesz się najnowszymi informacjami bez żadnych dodatkowych opłat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏙️</div>
+                <h3>Blisko Wrocławia</h3>
+                <p>Pozostań w kontakcie z sercem miasta, gdziekolwiek jesteś.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="section-badge">JAK TO DZIAŁA</span>
+            <h2 class="section-title">3 proste kroki</h2>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Instalacja</h3>
+                <p>Zainstaluj rozszerzenie ze sklepu Chrome jednym kliknięciem.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Konfiguracja</h3>
+                <p>Wybierz interesujące Cię kategorie wiadomości i tematy.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Korzystaj!</h3>
+                <p>Otwórz nową kartę i ciesz się aktualnymi wiadomościami z Wrocławia.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="section-badge">DLA KOGO</span>
+            <h2 class="section-title">Idealne rozwiązanie dla</h2>
+        </div>
+
+        <div class="audience-grid">
+            <div class="audience-card">
+                <h3>🏠 Mieszkańców Wrocławia</h3>
+                <p>Śledzenie lokalnych wiadomości nigdy nie było prostsze. Bądź na bieżąco z tym, co dzieje się w Twojej okolicy.</p>
+            </div>
+            <div class="audience-card">
+                <h3>📺 Profesjonalistów</h3>
+                <p>Dla osób pracujących w mediach i komunikacji, które potrzebują stałego dostępu do aktualnych wiadomości.</p>
+            </div>
+            <div class="audience-card">
+                <h3>❤️ Miłośników Wrocławia</h3>
+                <p>Niezależnie od tego, gdzie jesteś - pozostań w kontakcie z miastem, które kochasz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="download">
+        <div class="cta-card">
+            <h2 class="cta-title">Pobierz teraz</h2>
+            <p class="cta-subtitle">Twój osobisty przewodnik po najważniejszych wydarzeniach i aktualnościach z miasta spotkań.</p>
+            <a href="#" class="btn btn-primary">
+                <span>🌐</span>
+                <span>Dodaj do Chrome</span>
+            </a>
+            <div class="extension-id">ID: phppjbjchpklccfjejjekaoeeakcacfk</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3>Wrocławski Kiosk Wiadomości</h3>
+        <div class="footer-links">
+            <a href="privacy_policy_wrocławski_kiosk_informacyjny.html">Polityka prywatności</a>
+            <a href="chrome_extetion_support-page.html">Wsparcie</a>
+            <a href="../index.html">Portfolio</a>
+        </div>
+        <p class="copyright">© 2025 Roman Tsisyk. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>

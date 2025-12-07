@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Feed Cleaner - Remove Sponsored & Suggested Posts</title>
+    <meta name="description" content="Clean up your LinkedIn feed by removing sponsored and suggested posts. Free Chrome extension.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --linkedin: #0A66C2;
+            --linkedin-dark: #004182;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-linkedin: linear-gradient(135deg, #0A66C2, #00a0dc);
+            --success: #00C853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--linkedin);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #00a0dc;
+            bottom: 20%;
+            left: -150px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-linkedin);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--linkedin);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(10, 102, 194, 0.15);
+            border: 1px solid rgba(10, 102, 194, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--linkedin);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-linkedin);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--gradient-linkedin);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(10, 102, 194, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Features */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(10, 102, 194, 0.1);
+            color: var(--linkedin);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--linkedin);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-linkedin);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-linkedin);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--linkedin);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+        }
+
+        /* CTA */
+        .cta {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(10, 102, 194, 0.2), rgba(0, 160, 220, 0.2));
+            border: 1px solid rgba(10, 102, 194, 0.3);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--linkedin);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .cta-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">💼</div>
+                <span>LinkedIn Feed Cleaner</span>
+            </a>
+            <a href="../index.html" class="nav-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span>🚀</span>
+            <span>Free Chrome Extension</span>
+        </div>
+        <h1 class="hero-title">Take Back Control of Your LinkedIn Feed</h1>
+        <p class="hero-subtitle">Tired of scrolling through endless sponsored content and suggested posts? Our extension automatically removes them, giving you a cleaner, more focused LinkedIn experience.</p>
+        <div class="hero-buttons">
+            <a href="https://chrome.google.com/webstore/detail/linkedin-feed-cleaner/cokbklbbdheophojpfnaninfgonogilf" class="btn btn-primary" target="_blank">
+                <span>🌐</span>
+                <span>Add to Chrome - It's Free</span>
+            </a>
+            <a href="#features" class="btn btn-secondary">
+                <span>Learn More</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <span class="section-badge">FEATURES</span>
+            <h2 class="section-title">Why Choose LinkedIn Feed Cleaner?</h2>
+            <p class="section-subtitle">Lightweight extension designed with simplicity and effectiveness in mind</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Multi-Language Support</h3>
+                <p>Automatically detects and blocks sponsored content in multiple languages, so you can enjoy a clean feed no matter where you're from.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Lightweight implementation that doesn't slow down your browsing experience or consume excessive resources.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy Focused</h3>
+                <p>Operates entirely within your browser. No data collection, no tracking, no external servers. Your data stays with you.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Auto-Updating</h3>
+                <p>Continually updated to stay effective as LinkedIn changes their sponsored content formats and identifiers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Customizable</h3>
+                <p>Tailor the extension to your preferences and control exactly what types of content are filtered from your feed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3>Focus on What Matters</h3>
+                <p>See more content from your actual connections and less promotional material, improving your networking effectiveness.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <span class="section-badge">HOW IT WORKS</span>
+            <h2 class="section-title">Simple to Install, Easier to Use</h2>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Install the Extension</h3>
+                <p>Click "Add to Chrome" and follow the simple installation process. No configuration needed.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Browse LinkedIn</h3>
+                <p>Continue using LinkedIn as you normally would. Our extension works automatically in the background.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Enjoy Clean Feed</h3>
+                <p>Notice how sponsored posts and suggested content are automatically hidden from your feed.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Customize (Optional)</h3>
+                <p>Access settings if you want to fine-tune what gets filtered from your feed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header">
+            <span class="section-badge">TESTIMONIALS</span>
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Join thousands of professionals who've improved their LinkedIn experience</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"This extension has transformed my LinkedIn experience. I can finally focus on updates from my network without being bombarded by ads. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Marketing Director</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Clean, simple, and effective. It does exactly what it promises without any bloat. My LinkedIn feed is actually useful again!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Software Engineer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I was considering quitting LinkedIn due to the amount of sponsored content. This extension saved me from that decision."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Emma Rodriguez</h4>
+                        <p>HR Specialist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="section-header">
+            <span class="section-badge">FAQ</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item">
+                <p class="faq-question">Will LinkedIn know I'm using this extension?</p>
+                <p class="faq-answer">No. The extension works entirely on your side by modifying how content is displayed in your browser. LinkedIn cannot detect that you're using it.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">Does this extension collect my data?</p>
+                <p class="faq-answer">Absolutely not. Your privacy is our priority. The extension works entirely locally within your browser and doesn't send any data to external servers.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">Will this extension slow down my browser?</p>
+                <p class="faq-answer">No. We've designed the extension to be extremely lightweight and efficient, using minimal resources to keep your browsing experience smooth.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-question">What languages are supported?</p>
+                <p class="faq-answer">The extension automatically detects and blocks sponsored content in multiple languages, including English, Spanish, French, German, Portuguese, Italian, and many others.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-card">
+            <h2 class="cta-title">Ready for a Better LinkedIn Experience?</h2>
+            <p class="cta-subtitle">Join thousands of professionals who've already enhanced their LinkedIn feed</p>
+            <a href="https://chrome.google.com/webstore/detail/linkedin-feed-cleaner/cokbklbbdheophojpfnaninfgonogilf" class="btn btn-primary" target="_blank">
+                <span>🌐</span>
+                <span>Add to Chrome - It's Free</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3>LinkedIn Feed Cleaner</h3>
+        <div class="footer-links">
+            <a href="Privacy_Policy_-_Hide_Suggested_and_Sponsored_Posts_for_LinkedIn.html">Privacy Policy</a>
+            <a href="chrome_extetion_support-page.html">Support</a>
+            <a href="../index.html">Portfolio</a>
+        </div>
+        <p class="copyright">© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+</body>
+</html>

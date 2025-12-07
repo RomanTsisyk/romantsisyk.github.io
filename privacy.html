@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Roman Tsisyk</title>
+    <meta name="description" content="Privacy Policy for apps developed by Roman Tsisyk">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-dark: #0056b3;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-primary: linear-gradient(135deg, #007AFF, #00f2fe);
+            --success: #00C853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* Background Animation */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--success);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00C853, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1), rgba(0, 122, 255, 0.1));
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+        }
+
+        .highlight-text h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.25rem;
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Data List */
+        .data-list {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .data-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .data-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Links List */
+        .links-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .links-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .links-list li a:hover {
+            background: var(--bg-primary);
+            transform: translateX(5px);
+        }
+
+        .links-list li a::before {
+            content: '🔗';
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-box a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .effective-date {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .main {
+                padding: 2rem 1rem;
+            }
+
+            .highlight-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👨‍💻</span>
+                <span>Roman Tsisyk</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <span>←</span>
+                <span>Back to Portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="page-header">
+            <span class="page-badge">PRIVACY</span>
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="page-subtitle">Your privacy is important to us</p>
+        </div>
+
+        <div class="highlight-box">
+            <span class="highlight-icon">🛡️</span>
+            <div class="highlight-text">
+                <h3>Your Data is Safe</h3>
+                <p>We collect minimal data and never sell your personal information to third parties.</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📋</span>
+                    Overview
+                </h2>
+                <p>Roman Tsisyk built these apps as Free apps. This SERVICE is provided at no cost and is intended for use as is.</p>
+                <p>This page informs visitors regarding policies with the collection, use, and disclosure of Personal Information if anyone decided to use the Service.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Information Collection
+                </h2>
+                <p>For a better experience, while using our Service, we may require you to provide certain personally identifiable information. The information that is requested will be retained on your device and is not collected by us in any way.</p>
+                <ul class="data-list">
+                    <li>Data is stored locally on your device</li>
+                    <li>No personal information is transmitted to our servers</li>
+                    <li>Third-party services may collect anonymous usage data</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔗</span>
+                    Third Party Services
+                </h2>
+                <p>The app uses third party services that may collect information used to identify you:</p>
+                <ul class="links-list">
+                    <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Play Services</a></li>
+                    <li><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank" rel="noopener noreferrer">AdMob</a></li>
+                    <li><a href="https://firebase.google.com/policies/analytics" target="_blank" rel="noopener noreferrer">Google Analytics for Firebase</a></li>
+                    <li><a href="https://firebase.google.com/support/privacy/" target="_blank" rel="noopener noreferrer">Firebase Crashlytics</a></li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📝</span>
+                    Log Data
+                </h2>
+                <p>Whenever you use the Service, in case of an error in the app, we collect data and information (through third party products) called Log Data. This Log Data may include:</p>
+                <ul class="data-list">
+                    <li>Device Internet Protocol ("IP") address</li>
+                    <li>Device name and operating system version</li>
+                    <li>App configuration when utilizing the Service</li>
+                    <li>Time and date of your use of the Service</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🍪</span>
+                    Cookies
+                </h2>
+                <p>This Service does not use "cookies" explicitly. However, the app may use third party code and libraries that use "cookies" to collect information and improve their services.</p>
+                <p>You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔒</span>
+                    Security
+                </h2>
+                <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it.</p>
+                <p>But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">👶</span>
+                    Children's Privacy
+                </h2>
+                <p>These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13 years of age.</p>
+                <p>If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to take necessary actions.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📧</span>
+                    Contact Us
+                </h2>
+                <p>If you have any questions or suggestions about this Privacy Policy, do not hesitate to contact us.</p>
+                <div class="contact-box">
+                    <p><strong>Email:</strong> <a href="mailto:roman.tsisyk.1@gmail.com">roman.tsisyk.1@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="effective-date">
+            📅 Effective as of October 23, 2021
+        </div>
+        <p>&copy; 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+</body>
+</html>

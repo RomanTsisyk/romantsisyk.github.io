@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Hide Suggested & Sponsored Posts for LinkedIn</title>
+    <meta name="description" content="Privacy Policy for LinkedIn Feed Cleaner Chrome Extension">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --linkedin: #0A66C2;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --success: #00C853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--linkedin);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--success);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--linkedin);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #0A66C2, #00a0dc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1), rgba(10, 102, 194, 0.1));
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: var(--text-primary);
+        }
+
+        .content-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--linkedin);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .permissions-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .permissions-list li {
+            background: var(--bg-card);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--linkedin);
+        }
+
+        .permissions-list li strong {
+            color: var(--linkedin);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .permissions-list li span {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="linkedin-ad-blocker-promo.html" class="logo">
+                <span>💼</span>
+                <span>LinkedIn Feed Cleaner</span>
+            </a>
+            <a href="linkedin-ad-blocker-promo.html" class="back-link">← Back to Extension</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="page-header">
+            <span class="page-badge">PRIVACY</span>
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="last-updated"><strong>Last Updated:</strong> February 5, 2025</p>
+        </div>
+
+        <div class="highlight-box">
+            <p>🛡️ <strong>Your Privacy Matters</strong> — This Extension does <strong>not collect, store, or transmit</strong> any personal data. All processing happens locally in your browser.</p>
+        </div>
+
+        <div class="content-card">
+            <div class="section">
+                <h2 class="section-title">🚫 Data Collection</h2>
+                <p><strong>No Data Collection:</strong> This Extension does not collect, store, or transmit any personal or usage data. All processing is performed locally on your device within your browser.</p>
+                <p><strong>Local Processing:</strong> The Extension operates entirely on your local device. All modifications to the LinkedIn feed (DOM manipulations, filtering, etc.) occur locally, ensuring that your data remains private.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🔑 Permissions & Usage</h2>
+                <p>The Extension requests the following permissions solely for its proper functioning:</p>
+                <ul class="permissions-list">
+                    <li>
+                        <strong>scripting</strong>
+                        <span>Used to inject and execute code on web pages. This enables dynamic modifications of the LinkedIn feed's DOM to hide unwanted posts. No data is collected through this process.</span>
+                    </li>
+                    <li>
+                        <strong>activeTab</strong>
+                        <span>Grants temporary access to the currently active tab when you interact with the Extension. This ensures actions are performed only on the active LinkedIn feed page without collecting or storing any data.</span>
+                    </li>
+                    <li>
+                        <strong>Host Permissions</strong>
+                        <span>Restricted to LinkedIn feed pages (URLs containing "/feed/"). This allows the Extension to operate exclusively on LinkedIn, ensuring it does not access or modify content on other websites.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🔒 Security</h2>
+                <p>Since no personal data is transmitted or stored, there is minimal risk to your privacy. All operations are executed within your browser, and the Extension does not communicate with any external servers.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📝 Policy Changes</h2>
+                <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and the "Last Updated" date will be revised accordingly. We encourage you to review this policy periodically for any updates.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Ukraine News RSS Reader</title>
+    <meta name="description" content="Privacy Policy for Ukraine News RSS Reader Chrome Extension">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ukraine-blue: #0057B8;
+            --ukraine-yellow: #FFD700;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .orb-1 { width: 500px; height: 500px; background: var(--ukraine-blue); top: -200px; right: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: var(--ukraine-yellow); bottom: -150px; left: -100px; }
+
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .lang-switcher { display: flex; gap: 0.5rem; }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--ukraine-blue);
+            border-color: var(--ukraine-blue);
+        }
+
+        .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+        .page-header { text-align: center; margin-bottom: 2rem; }
+
+        .page-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(0, 87, 184, 0.1);
+            color: var(--ukraine-blue);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #0057B8, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 87, 184, 0.1), rgba(255, 215, 0, 0.1));
+            border: 1px solid rgba(0, 87, 184, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .highlight-box p { color: var(--text-secondary); margin: 0; }
+
+        .content-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section { margin-bottom: 2rem; }
+        .section:last-child { margin-bottom: 0; }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--ukraine-blue);
+        }
+
+        .section p { color: var(--text-secondary); margin-bottom: 1rem; }
+
+        .section ul { list-style: none; margin-top: 1rem; }
+
+        .section ul li {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .section ul li strong { color: var(--ukraine-blue); }
+
+        .section a { color: var(--ukraine-blue); }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 1.75rem; }
+            .content-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <span>🇺🇦</span>
+                <span>Ukraine News RSS</span>
+            </a>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="toggleLanguage('en')">English</button>
+                <button class="lang-btn" onclick="toggleLanguage('ua')">Українська</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- English Content -->
+        <div class="lang-content active" id="lang-en">
+            <div class="page-header">
+                <span class="page-badge">PRIVACY</span>
+                <h1 class="page-title">Privacy Policy</h1>
+            </div>
+
+            <div class="highlight-box">
+                <p>🛡️ <strong>Your Privacy Matters</strong> — This Extension does not collect any personal data or browsing history.</p>
+            </div>
+
+            <div class="content-card">
+                <div class="section">
+                    <h2 class="section-title">📊 Data Collection and Use</h2>
+                    <p>The extension does not collect any personal data or browsing history. It operates solely by providing users with direct links to news articles and information hosted on external websites, specifically related to Ukrainian news sources.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🔑 User Permissions</h2>
+                    <p>To function properly, the extension requires the following permissions:</p>
+                    <ul>
+                        <li><strong>Host permissions for Ukrainian news sources:</strong> Necessary for the extension to access and display the news feeds.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🔒 Data Sharing</h2>
+                    <p>The extension does not share any user data with third parties. All data displayed within the extension is derived from publicly accessible web feeds.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📝 Updates to This Policy</h2>
+                    <p>We may update this Privacy Policy from time to time. Users will be notified of any significant changes.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📧 Contact</h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:roman.tsisyk.1@gmail.com">roman.tsisyk.1@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ukrainian Content -->
+        <div class="lang-content" id="lang-ua">
+            <div class="page-header">
+                <span class="page-badge">КОНФІДЕНЦІЙНІСТЬ</span>
+                <h1 class="page-title">Політика Конфіденційності</h1>
+            </div>
+
+            <div class="highlight-box">
+                <p>🛡️ <strong>Ваша конфіденційність важлива</strong> — Це розширення не збирає жодних особистих даних або історії перегляду.</p>
+            </div>
+
+            <div class="content-card">
+                <div class="section">
+                    <h2 class="section-title">📊 Збір та використання даних</h2>
+                    <p>Розширення не збирає жодних особистих даних або історії перегляду. Його робота заснована виключно на наданні користувачам прямих посилань на новинні статті та інформацію, розміщену на зовнішніх сайтах, зокрема на українських новинних ресурсах.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🔑 Дозволи користувачів</h2>
+                    <p>Для належної роботи розширення вимагає наступних дозволів:</p>
+                    <ul>
+                        <li><strong>Дозволи хоста для українських новинних джерел:</strong> Необхідні для доступу розширення до новинних стрічок та їх відображення.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🔒 Поділ даних</h2>
+                    <p>Розширення не передає жодних даних користувачів третім особам. Всі дані, що відображаються в розширенні, походять з відкритих веб-стрічок.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📝 Оновлення політики</h2>
+                    <p>Ми можемо час від часу оновлювати цю Політику Конфіденційності. Користувачі будуть повідомлені про будь-які значні зміни.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">📧 Контакти</h2>
+                    <p>Якщо у вас є питання щодо цієї Політики Конфіденційності, зв'яжіться з нами: <a href="mailto:roman.tsisyk.1@gmail.com">roman.tsisyk.1@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleLanguage(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

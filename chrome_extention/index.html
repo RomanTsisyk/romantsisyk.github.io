@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Extensions by Roman Tsisyk</title>
+    <meta name="description" content="Collection of useful Chrome extensions for productivity, news, and browsing enhancement">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4285F4;
+            --chrome-green: #34A853;
+            --chrome-yellow: #FBBC05;
+            --chrome-red: #EA4335;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 { width: 600px; height: 600px; background: var(--primary); top: -200px; right: -100px; }
+        .orb-2 { width: 500px; height: 500px; background: var(--chrome-green); bottom: 20%; left: -150px; animation-delay: -5s; }
+        .orb-3 { width: 400px; height: 400px; background: var(--chrome-yellow); top: 50%; right: 20%; animation-delay: -10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--chrome-red), var(--chrome-yellow), var(--chrome-green), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(66, 133, 244, 0.15);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--chrome-red), var(--chrome-yellow), var(--chrome-green), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--chrome-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Extensions Grid */
+        .extensions {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(66, 133, 244, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .extensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .extension-card {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .extension-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(66, 133, 244, 0.15);
+        }
+
+        .extension-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .extension-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .extension-info {
+            flex: 1;
+        }
+
+        .extension-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .extension-category {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .extension-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .extension-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(66, 133, 244, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+        }
+
+        .extension-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #5a9cf5);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Category Colors */
+        .icon-productivity { background: linear-gradient(135deg, #5465FF, #00C853); }
+        .icon-news { background: linear-gradient(135deg, #0057B8, #FFD700); }
+        .icon-social { background: linear-gradient(135deg, #0A66C2, #00a0dc); }
+        .icon-utility { background: linear-gradient(135deg, #4285F4, #34A853); }
+        .icon-education { background: linear-gradient(135deg, #3498db, #2ecc71); }
+        .icon-local { background: linear-gradient(135deg, #C8102E, #FFB81C); }
+
+        /* Support Section */
+        .support {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 5rem;
+        }
+
+        .support-card {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
+            border: 1px solid rgba(66, 133, 244, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .support-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .support-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .support-email {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .extensions-grid { grid-template-columns: 1fr; }
+            .stats { gap: 2rem; }
+            .stat-value { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+                    </svg>
+                </div>
+                <span>Chrome Extensions</span>
+            </a>
+            <a href="../index.html" class="nav-link">
+                <span>←</span>
+                <span>Back to Portfolio</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span>🚀</span>
+            <span>Free & Open Source</span>
+        </div>
+        <h1 class="hero-title">Chrome Extensions Collection</h1>
+        <p class="hero-subtitle">A collection of useful browser extensions for productivity, news aggregation, and enhanced browsing experience. All free to use.</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">6+</div>
+                <div class="stat-label">Extensions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Free</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">🔒</div>
+                <div class="stat-label">Privacy First</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="extensions">
+        <div class="section-header">
+            <span class="section-badge">EXTENSIONS</span>
+            <h2 class="section-title">Browse All Extensions</h2>
+        </div>
+
+        <div class="extensions-grid">
+            <!-- LinkedIn Feed Cleaner -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-social">💼</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">LinkedIn Feed Cleaner</h3>
+                        <span class="extension-category">Social Media</span>
+                    </div>
+                </div>
+                <p class="extension-description">Remove sponsored and suggested posts from your LinkedIn feed. Enjoy a cleaner, more focused professional networking experience.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">Ad Blocker</span>
+                    <span class="feature-tag">Multi-Language</span>
+                    <span class="feature-tag">Privacy</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="https://chrome.google.com/webstore/detail/linkedin-feed-cleaner/cokbklbbdheophojpfnaninfgonogilf" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="linkedin-ad-blocker-promo.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Keep Active -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-productivity">⏱️</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">Keep Active</h3>
+                        <span class="extension-category">Productivity</span>
+                    </div>
+                </div>
+                <p class="extension-description">Prevent session timeouts and maintain your online presence. Perfect for remote work, webinars, and research sessions.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">Auto Refresh</span>
+                    <span class="feature-tag">Custom Intervals</span>
+                    <span class="feature-tag">Lightweight</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="https://chrome.google.com/webstore/detail/keep-active/bagdilciglnlpjijndcidnjbengefgnk" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="keep-active-promo.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Ukraine News RSS -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-news">🇺🇦</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">Ukraine News RSS</h3>
+                        <span class="extension-category">News</span>
+                    </div>
+                </div>
+                <p class="extension-description">Stay updated with the latest news from Ukraine. Aggregates RSS feeds from trusted Ukrainian news sources in one place.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">RSS Reader</span>
+                    <span class="feature-tag">Ukrainian Sources</span>
+                    <span class="feature-tag">Real-time</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="#" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="privacy_policy_ukrainian_rss.html" class="btn btn-secondary">Privacy</a>
+                </div>
+            </div>
+
+            <!-- Wrocławski Kiosk -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-local">🏙️</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">Wrocławski Kiosk</h3>
+                        <span class="extension-category">Local News</span>
+                    </div>
+                </div>
+                <p class="extension-description">Your window to Wrocław - always up-to-date news from your favorite city. Culture, events, and local updates.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">Local News</span>
+                    <span class="feature-tag">Polish</span>
+                    <span class="feature-tag">Categories</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="#" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="wrocławski_kiosk_informacyjny.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- EnglishWebHub -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-education">📚</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">EnglishWebHub</h3>
+                        <span class="extension-category">Education</span>
+                    </div>
+                </div>
+                <p class="extension-description">Access a world of English learning resources right from your browser. Interactive exercises and exam prep materials.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">Learning</span>
+                    <span class="feature-tag">Resources</span>
+                    <span class="feature-tag">All Levels</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="#" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="english_web_hub_landing_page.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Productivity Booster -->
+            <div class="extension-card">
+                <div class="extension-header">
+                    <div class="extension-icon icon-productivity">🎯</div>
+                    <div class="extension-info">
+                        <h3 class="extension-name">Productivity Booster</h3>
+                        <span class="extension-category">Productivity</span>
+                    </div>
+                </div>
+                <p class="extension-description">Master your time with the Pomodoro Technique. Block distractions, track progress, and boost your productivity.</p>
+                <div class="extension-features">
+                    <span class="feature-tag">Pomodoro</span>
+                    <span class="feature-tag">Site Blocker</span>
+                    <span class="feature-tag">Statistics</span>
+                </div>
+                <div class="extension-actions">
+                    <a href="#" class="btn btn-primary" target="_blank">
+                        <span>Add to Chrome</span>
+                    </a>
+                    <a href="productivity_booster_landing_page.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support">
+        <div class="support-card">
+            <h2 class="support-title">Need Help?</h2>
+            <p class="support-text">Have questions, bug reports, or feature requests? I'd love to hear from you!</p>
+            <a href="chrome_extetion_support-page.html" class="btn btn-primary">
+                <span>📧</span>
+                <span>Contact Support</span>
+            </a>
+            <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                or email directly: <a href="mailto:roman.tsisyk.1@gmail.com" class="support-email">roman.tsisyk.1@gmail.com</a>
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="chrome_extetion_support-page.html">Support</a>
+            <a href="../privacy.html">Privacy Policy</a>
+            <a href="../terms.html">Terms of Service</a>
+            <a href="../index.html">Portfolio</a>
+        </div>
+        <p class="copyright">© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+</body>
+</html>

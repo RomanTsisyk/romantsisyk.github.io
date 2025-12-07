@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keep Active - Prevent Session Timeouts | Chrome Extension</title>
+    <meta name="description" content="Prevent session timeouts and maintain your online presence with Keep Active Chrome extension.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4285F4;
+            --secondary: #34A853;
+            --accent: #FBBC05;
+            --bg-primary: #0E0E0E;
+            --bg-secondary: #1C1C1E;
+            --bg-card: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-primary: linear-gradient(135deg, #4285F4, #34A853);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--primary);
+            top: -200px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--secondary);
+            bottom: 20%;
+            left: -150px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(66, 133, 244, 0.15);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+            width: fit-content;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            width: fit-content;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.4);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(66, 133, 244, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+        }
+
+        /* Benefits */
+        .benefits {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateX(5px);
+            background: var(--bg-card);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Privacy Box */
+        .privacy-box {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(52, 168, 83, 0.1), rgba(66, 133, 244, 0.1));
+            border: 1px solid rgba(52, 168, 83, 0.3);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .privacy-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-box h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .privacy-box p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem 2rem;
+            background: rgba(251, 188, 5, 0.1);
+            border: 1px solid rgba(251, 188, 5, 0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .disclaimer h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .disclaimer p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CTA */
+        .cta {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.2), rgba(52, 168, 83, 0.2));
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            border-radius: 24px;
+            padding: 4rem;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .extension-id {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                align-items: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cta-card {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://github.com/RomanTsisyk/romantsisyk.github.io/blob/main/images/logo_keep_active.jpeg?raw=true" alt="Keep Active Logo" class="logo-img">
+                <span>Keep Active</span>
+            </a>
+            <a href="../index.html" class="nav-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>⚡</span>
+                <span>Chrome Extension</span>
+            </div>
+            <h1 class="hero-title">Keep Active</h1>
+            <p class="hero-subtitle">Prevent session timeouts and maintain your online presence with minimal effort. Perfect for remote work, webinars, and research sessions.</p>
+            <a href="https://chrome.google.com/webstore/detail/keep-active/bagdilciglnlpjijndcidnjbengefgnk" class="btn btn-primary" target="_blank">
+                <span>🌐</span>
+                <span>Add to Chrome</span>
+            </a>
+        </div>
+        <div class="hero-visual">
+            <img src="https://github.com/RomanTsisyk/romantsisyk.github.io/blob/main/images/logo_keep_active.jpeg?raw=true" alt="Keep Active Extension" class="hero-image">
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-header">
+            <span class="section-badge">FEATURES</span>
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">Everything you need to stay connected</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3>Custom Refresh Intervals</h3>
+                <p>Set how often the extension refreshes your chosen page, tailored precisely to your needs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Choose Any URL</h3>
+                <p>Keep any website or dashboard active based on your specific requirements.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👌</div>
+                <h3>Simple Interface</h3>
+                <p>Easy-to-use design for quick setup and use, with minimal learning curve.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Privacy First</h3>
+                <p>Your data stays private—no collection or sharing with third parties.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <span class="section-badge">HOW IT WORKS</span>
+            <h2 class="section-title">Get Started in 3 Steps</h2>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Install</h3>
+                <p>Add Keep Active from the Chrome Web Store with just one click.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Configure</h3>
+                <p>Enter a URL and customize your refresh interval to your specific needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Stay Active</h3>
+                <p>Start or stop the extension with a single click and focus on what matters.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="section-header">
+            <span class="section-badge">BENEFITS</span>
+            <h2 class="section-title">Why Use Keep Active?</h2>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>🚫 Prevent Timeouts</h3>
+                <p>Eliminates automatic logouts due to inactivity, ensuring continuous access to important platforms.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>🏠 Remote Work Essential</h3>
+                <p>Ideal for remote work, webinars, and research sessions requiring continuous connection.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>📈 Enhanced Productivity</h3>
+                <p>Reduces disruptions to your workflow by maintaining persistent connections to vital resources.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="privacy-box">
+        <div class="privacy-icon">🔒</div>
+        <h2>Privacy Focused</h2>
+        <p>Keep Active runs locally in your browser and does not store or transmit personal data. Your information never leaves your device, ensuring complete confidentiality while you work.</p>
+    </div>
+
+    <div class="disclaimer">
+        <h3>⚠️ Disclaimer</h3>
+        <p>Keep Active is meant for legitimate use only and should not be used to bypass website security policies.</p>
+    </div>
+
+    <section class="cta">
+        <div class="cta-card">
+            <h2 class="cta-title">Stay Connected, Stay Productive</h2>
+            <p class="cta-subtitle">Download Keep Active and never worry about session timeouts again</p>
+            <a href="https://chrome.google.com/webstore/detail/keep-active/bagdilciglnlpjijndcidnjbengefgnk" class="btn btn-primary" target="_blank">
+                <span>🌐</span>
+                <span>Install Keep Active Now</span>
+            </a>
+            <p class="extension-id">Chrome Web Store ID: bagdilciglnlpjijndcidnjbengefgnk</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 Roman Tsisyk. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Runner Game</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            width: 900px;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #a1d0ff 0%, #c7e4ff 50%, #e8f3ff 100%);
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .score-container {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: rgba(61, 220, 132, 0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            z-index: 15;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(to bottom, #d4d4d4, #e0e0e0);
+            border-top: 1px solid #bbb;
+        }
+        
+        .ground::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 4px;
+            background: repeating-linear-gradient(90deg, #ccc, #ccc 50px, transparent 50px, transparent 80px);
+        }
+
+        .android {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            bottom: 12px;
+            left: 150px; /* Adjusted for smaller game container */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%233DDC84" d="M50,10 C38,10 28,20 28,32 v36 c0,6 5,12 12,12 h20 c7,0 12,-6 12,-12 V32 C72,20 62,10 50,10 z M40,25 c0,-1.1 0.9,-2 2,-2 s2,0.9 2,2 s-0.9,2 -2,2 S40,26.1 40,25 z M60,25 c0,-1.1 0.9,-2 2,-2 s2,0.9 2,2 s-0.9,2 -2,2 S60,26.1 60,25 z M50,16 L42,6 L58,6 L50,16 z" /><rect fill="%233DDC84" x="22" y="30" width="6" height="25" rx="3" /><rect fill="%233DDC84" x="72" y="30" width="6" height="25" rx="3" /><rect fill="%233DDC84" x="40" y="80" width="6" height="15" rx="2" /><rect fill="%233DDC84" x="54" y="80" width="6" height="15" rx="2" /></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: 10;
+            filter: drop-shadow(0px 3px 5px rgba(0,0,0,0.3));
+            animation: float 1.5s ease-in-out infinite alternate;
+            transition: height 0.2s ease, background-image 0.2s ease;
+        }
+        
+        .crouch {
+            height: 50px !important;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70"><path fill="%233DDC84" d="M50,10 C38,10 28,15 28,25 v26 c0,6 5,9 12,9 h20 c7,0 12,-3 12,-9 V25 C72,15 62,10 50,10 z M40,22 c0,-1.1 0.9,-2 2,-2 s2,0.9 2,2 s-0.9,2 -2,2 S40,23.1 40,22 z M60,22 c0,-1.1 0.9,-2 2,-2 s2,0.9 2,2 s-0.9,2 -2,2 S60,23.1 60,22 z M50,15 L42,5 L58,5 L50,15 z" /><rect fill="%233DDC84" x="30" y="25" width="6" height="20" rx="3" /><rect fill="%233DDC84" x="64" y="25" width="6" height="20" rx="3" /><rect fill="%233DDC84" x="40" y="60" width="6" height="10" rx="2" /><rect fill="%233DDC84" x="54" y="60" width="6" height="10" rx="2" /></svg>') !important;
+        }
+        
+        @keyframes float {
+            from { transform: translateY(0px); }
+            to { transform: translateY(3px); }
+        }
+
+        .ios-logo {
+            position: absolute;
+            width: 25px;
+            height: 30px;
+            bottom: 10px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170"><path fill="%23A2AAAD" d="M150.37,130.25c-2.45,5.66-5.35,10.87-8.71,15.66c-4.58,6.53-8.33,11.05-11.22,13.56 c-4.48,4.12-9.28,6.23-14.42,6.35c-3.69,0-8.14-1.05-13.32-3.18c-5.19-2.12-9.96-3.17-14.34-3.17c-4.58,0-9.492,1.05-14.746,3.17 c-5.262,2.13-9.501,3.24-12.742,3.35c-4.929,0.21-9.842-1.96-14.746-6.52c-3.13-2.73-7.045-7.41-11.735-14.04 c-5.032-7.08-9.169-15.29-12.41-24.65c-3.471-10.11-5.211-19.9-5.211-29.378c0-10.857,2.346-20.221,7.045-28.068 c3.693-6.303,8.606-11.275,14.755-14.925s12.793-5.51,19.948-5.629c3.915,0,9.049,1.211,15.429,3.591 c6.362,2.388,10.447,3.599,12.238,3.599c1.339,0,5.877-1.416,13.57-4.239c7.275-2.618,13.415-3.702,18.445-3.275 c13.63,1.1,23.87,6.473,30.68,16.153c-12.19,7.386-18.22,17.731-18.1,31.002c0.11,10.337,3.86,18.939,11.23,25.769 c3.34,3.17,7.07,5.62,11.22,7.36C153.07,125.06,151.8,127.72,150.37,130.25z M119.11,7.24c0,8.102-2.96,15.667-8.86,22.669 c-7.12,8.324-15.732,13.134-25.071,12.375c-0.119-0.972-0.188-1.995-0.188-3.07c0-7.778,3.386-16.102,9.399-22.908 c3.002-3.446,6.82-6.311,11.45-8.597c4.62-2.252,8.99-3.504,13.1-3.71C119.027,5.02,119.11,6.13,119.11,7.24z"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: 5;
+            filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.3));
+        }
+
+        .jump {
+            animation: jump 0.5s linear;
+        }
+
+        @keyframes jump {
+            0% { 
+                bottom: 12px; 
+                transform: rotate(0deg);
+            }
+            25% { 
+                bottom: 100px; 
+                transform: rotate(-5deg);
+            }
+            50% { 
+                bottom: 130px; 
+                transform: rotate(0deg);
+            }
+            75% { 
+                bottom: 100px; 
+                transform: rotate(5deg);
+            }
+            100% { 
+                bottom: 12px; 
+                transform: rotate(0deg);
+            }
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            color: #ea4335;
+            display: none;
+            text-align: center;
+            z-index: 20;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .game-over button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #3ddc84;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .game-over button:hover {
+            background-color: #32b76c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(161, 208, 255, 0.9) 0%, rgba(199, 228, 255, 0.9) 50%, rgba(232, 243, 255, 0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+        }
+
+        .start-screen h1 {
+            color: #3ddc84;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .start-screen button {
+            padding: 10px 30px;
+            background-color: #3ddc84;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .start-screen button:hover {
+            background-color: #32b76c;
+        }
+
+        .clouds {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><path fill="%23f0f0f0" d="M15,20 Q20,10 30,15 Q35,5 45,10 Q55,5 65,15 Q75,5 85,15 Q90,10 95,20 L95,25 L15,25 Z" /></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: 1;
+            opacity: 0.7;
+            filter: blur(1px);
+        }
+        
+        .mountain {
+            position: absolute;
+            bottom: 12px;
+            width: 150px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80"><path fill="%23bcbcbc" d="M0,80 L40,30 L70,60 L120,10 L180,70 L200,50 L200,80 Z" /></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: 0;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="score-container">Score: <span id="score">0</span></div>
+        <div class="ground"></div>
+        <div class="android" id="android"></div>
+        <div class="game-over" id="gameOver">
+            Game Over!
+            <div>Your score: <span id="finalScore">0</span></div>
+            <button id="restartButton">Play Again</button>
+        </div>
+                        <div class="start-screen" id="startScreen">
+            <h1>Android vs iOS</h1>
+            <p>Help the Android dodge the iOS logos!<br>Press SPACE or UP to jump, DOWN to crouch.</p>
+            <button id="startButton">Start Game</button>
+            <div style="margin-top: 30px; display: flex; align-items: center; justify-content: center; gap: 40px;">
+                <div class="android" style="position: relative; left: 0; width: 60px; height: 60px;"></div>
+                <div style="font-size: 24px; font-weight: bold;">VS</div>
+                <div class="ios-logo" style="position: relative; bottom: 0; width: 20px; height: 25px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game elements
+        const android = document.getElementById('android');
+        const gameContainer = document.querySelector('.game-container');
+        const scoreElement = document.getElementById('score');
+        const finalScoreElement = document.getElementById('finalScore');
+        const gameOverElement = document.getElementById('gameOver');
+        const restartButton = document.getElementById('restartButton');
+        const startScreen = document.getElementById('startScreen');
+        const startButton = document.getElementById('startButton');
+        
+        // Add background elements
+        function createBackgroundElements() {
+            // Add mountains in the background
+            for (let i = 0; i < 5; i++) {
+                const mountain = document.createElement('div');
+                mountain.classList.add('mountain');
+                mountain.style.left = `${i * 200}px`;
+                mountain.style.zIndex = '0';
+                gameContainer.appendChild(mountain);
+            }
+        }
+
+        // Game variables
+        let isJumping = false;
+        let isGameOver = false;
+        let score = 0;
+        let gameSpeed = 5;
+        let tankGenerationInterval = 2000; // milliseconds
+        let tankGeneration;
+        let cloudGenerationInterval = 3000; // milliseconds
+        let cloudGeneration;
+        let scoreInterval;
+        let tanks = [];
+        let clouds = [];
+
+        // Event listeners
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        gameContainer.addEventListener('click', jump);
+        gameContainer.addEventListener('touchstart', jump);
+        restartButton.addEventListener('click', restartGame);
+        startButton.addEventListener('click', startGame);
+        
+        // Handle key down events
+        function handleKeyDown(event) {
+            if (isGameOver) return;
+            
+            // Space or Up arrow for jumping
+            if ((event.code === 'Space' || event.code === 'ArrowUp') && !isJumping) {
+                jump();
+            }
+            
+            // Down arrow for crouching
+            if (event.code === 'ArrowDown' || event.code === 'KeyS') {
+                crouch();
+            }
+        }
+        
+        // Handle key up events
+        function handleKeyUp(event) {
+            if (isGameOver) return;
+            
+            // Release crouch on key up
+            if (event.code === 'ArrowDown' || event.code === 'KeyS') {
+                standUp();
+            }
+        }
+        
+        // Crouch function
+        function crouch() {
+            if (isJumping || isGameOver) return;
+            
+            android.classList.add('crouch');
+        }
+        
+        // Stand up function
+        function standUp() {
+            android.classList.remove('crouch');
+        }
+
+        // Start the game
+        function startGame() {
+            startScreen.style.display = 'none';
+            isGameOver = false;
+            score = 0;
+            scoreElement.textContent = '0';
+            gameSpeed = 7.5; // Speed reduced by half from 15
+            tankGenerationInterval = 1500; // Generate obstacles less frequently
+            
+            // Clear any existing obstacles and clouds
+            tanks.forEach(tank => {
+                if (tank.element) {
+                    tank.element.remove();
+                }
+            });
+            tanks = [];
+            
+            clouds.forEach(cloud => {
+                if (cloud.element) {
+                    cloud.element.remove();
+                }
+            });
+            clouds = [];
+            
+            // Create background elements
+            createBackgroundElements();
+            
+            // Start game intervals
+            tankGeneration = setInterval(generateTank, getRandomInterval(1200, 2000));
+            cloudGeneration = setInterval(generateCloud, getRandomInterval(1800, 3500));
+            scoreInterval = setInterval(() => {
+                score++;
+                scoreElement.textContent = score;
+                
+                // Increase game speed over time
+                if (score % 100 === 0) {
+                    gameSpeed += 0.75; // Slower acceleration
+                }
+                
+                // Decrease obstacle generation interval over time
+                if (score % 150 === 0 && tankGenerationInterval > 700) {
+                    tankGenerationInterval -= 100;
+                    clearInterval(tankGeneration);
+                    tankGeneration = setInterval(generateTank, getRandomInterval(tankGenerationInterval * 0.7, tankGenerationInterval * 1.2));
+                }
+            }, 100);
+
+            // Generate initial obstacles
+            generateTank();
+            generateCloud();
+            
+            // Start game loop
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (isGameOver) return;
+            
+            moveTanks();
+            moveClouds();
+            moveMountains(); // Added mountain movement
+            checkCollisions();
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Jump function
+        function jump(event) {
+            // Don't jump if crouching, already jumping, or game over
+            if (android.classList.contains('crouch') || isJumping || isGameOver) return;
+            
+            isJumping = true;
+            android.classList.add('jump');
+            
+            setTimeout(() => {
+                android.classList.remove('jump');
+                isJumping = false;
+            }, 700); // Longer jump duration
+        }
+
+        // Generate iOS logo obstacle
+        function generateTank() {
+            if (isGameOver) return;
+            
+            const iosLogo = document.createElement('div');
+            iosLogo.classList.add('ios-logo');
+            iosLogo.style.left = `${gameContainer.offsetWidth}px`;
+            
+            // Randomly decide if obstacle will be high or low
+            // High obstacles need to be jumped over
+            // Low obstacles need to be crouched under
+            const isHighObstacle = Math.random() > 0.4;
+            
+            if (isHighObstacle) {
+                // Place on ground - needs to be jumped over
+                iosLogo.dataset.type = 'high';
+            } else {
+                // Place higher - needs to be crouched under
+                iosLogo.style.bottom = `${getRandomInterval(50, 90)}px`;
+                iosLogo.dataset.type = 'low';
+            }
+            
+            gameContainer.appendChild(iosLogo);
+            
+            tanks.push({
+                element: iosLogo,
+                position: gameContainer.offsetWidth,
+                type: isHighObstacle ? 'high' : 'low'
+            });
+        }
+
+        // Generate cloud background
+        function generateCloud() {
+            if (isGameOver) return;
+            
+            const cloud = document.createElement('div');
+            cloud.classList.add('clouds');
+            cloud.style.left = `${gameContainer.offsetWidth}px`;
+            cloud.style.top = `${getRandomInterval(20, 100)}px`;
+            gameContainer.appendChild(cloud);
+            
+            clouds.push({
+                element: cloud,
+                position: gameContainer.offsetWidth,
+                speed: gameSpeed * 0.6 // Clouds move faster now but still slower than obstacles
+            });
+        }
+
+        // Move tanks
+        function moveTanks() {
+            tanks.forEach((tank, index) => {
+                tank.position -= gameSpeed;
+                tank.element.style.left = `${tank.position}px`;
+                
+                // Remove tank when it goes off screen
+                if (tank.position < -60) {
+                    tank.element.remove();
+                    tanks.splice(index, 1);
+                }
+            });
+        }
+
+        // Move clouds
+        function moveClouds() {
+            clouds.forEach((cloud, index) => {
+                cloud.position -= cloud.speed;
+                cloud.element.style.left = `${cloud.position}px`;
+                
+                // Remove cloud when it goes off screen
+                if (cloud.position < -100) {
+                    cloud.element.remove();
+                    clouds.splice(index, 1);
+                }
+            });
+        }
+        
+        // Move mountains (background)
+        function moveMountains() {
+            const mountains = document.querySelectorAll('.mountain');
+            mountains.forEach((mountain) => {
+                const currentLeft = parseInt(mountain.style.left) || 0;
+                mountain.style.left = `${currentLeft - gameSpeed * 0.1}px`;
+                
+                // Reset mountain position when it goes off screen
+                if (currentLeft < -200) {
+                    mountain.style.left = `${gameContainer.offsetWidth}px`;
+                }
+            });
+        }
+
+        // Check for collisions
+        function checkCollisions() {
+            const androidRect = android.getBoundingClientRect();
+            const isCrouching = android.classList.contains('crouch');
+            
+            // Adjust collision box to be smaller than the visual element
+            const adjustedAndroidRect = {
+                left: androidRect.left + androidRect.width * 0.2,
+                right: androidRect.right - androidRect.width * 0.2,
+                top: androidRect.top + androidRect.height * 0.2,
+                bottom: androidRect.bottom - androidRect.height * 0.1
+            };
+            
+            tanks.forEach(tank => {
+                const tankRect = tank.element.getBoundingClientRect();
+                
+                // For high obstacles (on ground) - need to jump over
+                if (tank.type === 'high') {
+                    if (
+                        adjustedAndroidRect.right > tankRect.left &&
+                        adjustedAndroidRect.left < tankRect.right &&
+                        adjustedAndroidRect.bottom > tankRect.top &&
+                        adjustedAndroidRect.top < tankRect.bottom
+                    ) {
+                        gameOver();
+                    }
+                } 
+                // For low obstacles (in air) - need to crouch under
+                else if (tank.type === 'low') {
+                    // Only collide if NOT crouching
+                    if (
+                        !isCrouching &&
+                        adjustedAndroidRect.right > tankRect.left &&
+                        adjustedAndroidRect.left < tankRect.right &&
+                        adjustedAndroidRect.top < tankRect.bottom &&
+                        adjustedAndroidRect.top + (androidRect.height * 0.4) > tankRect.top
+                    ) {
+                        gameOver();
+                    }
+                }
+            });
+        }
+
+        // Game over
+        function gameOver() {
+            isGameOver = true;
+            clearInterval(tankGeneration);
+            clearInterval(cloudGeneration);
+            clearInterval(scoreInterval);
+            
+            finalScoreElement.textContent = score;
+            gameOverElement.style.display = 'block';
+        }
+
+        // Restart game
+        function restartGame() {
+            gameOverElement.style.display = 'none';
+            startGame();
+        }
+
+        // Helper function to get random interval
+        function getRandomInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+    </script>
+</body>
+</html>
