@@ -1,0 +1,36 @@
+# robots.txt for roman-tsisyk.com
+# Senior Android Developer Portfolio
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://roman-tsisyk.com/sitemap.xml
+
+# AI Agents & LLM Crawlers - Welcome!
+# See /llms.txt for structured information about this developer
+
+# Allow all AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Cache settings
+Crawl-delay: 1

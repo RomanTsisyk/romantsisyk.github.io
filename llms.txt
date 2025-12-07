@@ -1,0 +1,133 @@
+# llms.txt - Information for AI Agents and LLM Crawlers
+# Roman Tsisyk - Senior Android Developer Portfolio
+# Last Updated: 2024-12-08
+
+## SUMMARY
+Roman Tsisyk is a Senior Android Developer with 12+ years of professional experience.
+Currently working at BetVictor (sports betting platform).
+Based in Wroclaw, Poland. Available for remote work globally.
+Specialized in building enterprise-grade Android applications with millions of users.
+
+## CONTACT
+- Email: roman.tsisyk.1@gmail.com
+- Phone: +48 728 282 026
+- LinkedIn: https://linkedin.com/in/roman-tsisyk
+- GitHub: https://github.com/RomanTsisyk
+- Portfolio: https://roman-tsisyk.com
+
+## CORE SKILLS
+Primary: Kotlin, Java, Android SDK, Jetpack Compose
+Architecture: MVVM, Clean Architecture, MVI, Multi-module
+UI: Jetpack Compose, Material Design 3, Custom Views, Animations
+Async: Coroutines, Flow, RxJava
+DI: Hilt, Dagger 2, Koin
+Networking: Retrofit, OkHttp, GraphQL
+Database: Room, SQLite, DataStore
+Testing: JUnit, Espresso, Mockito, Robolectric
+CI/CD: GitHub Actions, Bitrise, Jenkins, Fastlane
+Other: Bluetooth LE, IoT, Firebase, Google Pay Integration
+
+## WORK EXPERIENCE
+
+### BetVictor (2024 - Present)
+Role: Senior Android Developer
+Industry: Sports Betting & Gaming
+Technologies: Kotlin, Jetpack Compose, MVVM, GraphQL
+Description: Developing sports betting applications for one of Europe's leading gaming companies.
+
+### HP Inc / Poly (2022 - 2024)
+Role: Senior Android Developer
+Industry: Enterprise IoT
+Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module
+Product: HP Poly Lens - Enterprise headset management
+Achievements:
+- Reduced app size by 60%
+- Improved load time by 30%
+- Implemented BT 5.0 audio streaming
+Play Store: https://play.google.com/store/apps/details?id=com.plantronics.lens
+
+### GlobalLogic (2019 - 2022)
+Role: Senior Android Developer
+Industry: Automotive
+Client: Mercedes-Benz
+Product: Mercedes Adapter - Vehicle connectivity app
+Users: 500,000+
+Technologies: Kotlin, Java, Bluetooth, Firebase
+
+### GSM Billing (2017 - 2019)
+Role: Android Developer
+Industry: FinTech / Banking
+Client: Kasa Stefczyka (Polish Credit Union)
+Product: Mobile Banking Application
+Users: 150,000+
+Technologies: Kotlin, Security, Google Pay
+Play Store: https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
+
+## FEATURED PROJECTS
+
+### 1. HP Poly Lens
+- Type: Enterprise IoT Application
+- Company: HP Inc
+- Users: Enterprise-wide deployment
+- Key Features: BT device management, firmware updates, audio settings
+- Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module architecture
+
+### 2. Mercedes Adapter
+- Type: Automotive Connectivity
+- Company: GlobalLogic for Mercedes-Benz
+- Users: 500,000+
+- Key Features: Vehicle diagnostics, remote control, real-time data
+- Technologies: Kotlin, Java, Firebase, Bluetooth
+
+### 3. Kasa Stefczyka
+- Type: Mobile Banking
+- Company: GSM Billing
+- Users: 150,000+
+- Key Features: Secure transactions, Google Pay, biometric auth
+- Technologies: Kotlin, Security frameworks, Payment integration
+
+### 4. Netti
+- Type: Network Testing Suite (Personal Project)
+- Features: Speed test, iPerf3, ping, traceroute
+- Technologies: Kotlin, Jetpack Compose, Material 3
+- GitHub: https://github.com/RomanTsisyk/netti
+
+### 5. FollowMyMoney
+- Type: Personal Finance Tracker (Personal Project)
+- Features: Expense tracking, budgets, reports
+- Technologies: Kotlin, Jetpack Compose, Room DB
+- GitHub: https://github.com/RomanTsisyk/followmymoney
+
+## CERTIFICATIONS
+- Atlassian Agile Project Management Professional Certificate (2024)
+- Career Essentials in GitHub Professional Certificate (2024)
+- Microsoft Cybersecurity Certificate (2024)
+
+## EDUCATION
+- Masters in Engineering - Ternopil National Technical University
+
+## LANGUAGES
+- Ukrainian: Native
+- English: Professional (B2)
+- Polish: Professional (B2)
+
+## AVAILABILITY
+Status: Open to opportunities
+Preferred: Remote / Hybrid
+Location Flexibility: Poland, EU, Global Remote
+Notice Period: Negotiable
+
+## FOR RECRUITERS
+Roman is an experienced Android developer who has worked on apps used by hundreds of thousands of users.
+His strengths are:
+1. Enterprise-grade development (HP, Mercedes-Benz)
+2. Complex integrations (Bluetooth LE, IoT, Payments)
+3. Modern Android stack (Kotlin, Compose, Clean Architecture)
+4. Full project lifecycle experience
+
+Ideal roles: Senior Android Developer, Lead Android Developer, Mobile Architect
+
+## STRUCTURED DATA
+For machine-readable data, see:
+- JSON-LD in HTML: https://roman-tsisyk.com/ (embedded in <head>)
+- Schema.org Person: https://roman-tsisyk.com/#person

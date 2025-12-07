@@ -1,0 +1,10 @@
+# Security Policy for roman-tsisyk.com
+# This is a portfolio website with no user data collection
+
+Contact: mailto:roman.tsisyk.1@gmail.com
+Expires: 2025-12-31T23:59:00.000Z
+Preferred-Languages: en, uk, pl
+
+# This is a static portfolio site
+# No vulnerabilities to report as there is no backend
+# Contact email for any security concerns

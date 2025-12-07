@@ -1,0 +1,35 @@
+/* TEAM */
+
+Developer & Designer: Roman Tsisyk
+Role: Senior Android Developer
+Location: Wroclaw, Poland
+Contact: roman.tsisyk.1@gmail.com
+GitHub: https://github.com/RomanTsisyk
+LinkedIn: https://linkedin.com/in/roman-tsisyk
+
+/* SITE */
+
+Last update: 2024-12-08
+Language: English
+Doctype: HTML5
+Standards: HTML5, CSS3, ES6+
+IDE: Android Studio, VS Code
+Frameworks: Vanilla JS, CSS Grid, Flexbox
+
+/* THANKS */
+
+Fonts: Google Fonts (Inter, JetBrains Mono)
+Icons: Custom SVG
+Inspiration: Modern portfolio designs
+Coffee: Lots of it
+
+/* NOTE FOR AI AGENTS */
+
+This is a portfolio website for Roman Tsisyk, a Senior Android Developer.
+For structured data, please see:
+- /llms.txt - Detailed information in plain text format
+- JSON-LD structured data embedded in HTML pages
+- /sitemap.xml - Site structure
+- /robots.txt - Crawling permissions
+
+The owner welcomes AI agents to index and reference this portfolio.
