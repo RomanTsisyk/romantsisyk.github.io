@@ -160,16 +160,22 @@
        resolve correctly when loading only variables.css + global.css.
        ============================================ */
 
-    /* Background aliases */
+    /* Background aliases (match main.css values) */
     --bg-primary: #0E0E0E;          /* = --bg-dark */
     --bg-secondary: #1C1C1E;        /* = --bg-card */
-    --bg-hover: #2C2C2E;            /* = --bg-card-hover */
+    --bg-hover: #3C3C3E;            /* main.css hover state */
 
     /* Gradient aliases */
     --gradient-primary: linear-gradient(135deg, #007AFF, #00f2fe);
     --gradient-secondary: linear-gradient(135deg, #FE6D33, #FF9A5A);
     --gradient-success: linear-gradient(135deg, #00C853, #64DD17);
     --gradient-text: linear-gradient(135deg, #007AFF 0%, #00f2fe 50%, #FE6D33 100%);
+
+    /* Text aliases */
+    --text-muted: #636366;            /* = --text-tertiary */
+
+    /* Status aliases */
+    --danger: #FF3B30;                /* = --error */
 
     /* Border aliases */
     --border-primary: rgba(255, 255, 255, 0.1);  /* = --border-color */
@@ -251,6 +257,7 @@
     --bg-secondary: #F5F5F7;
     --bg-hover: #E5E5E7;
     --border-primary: rgba(0, 0, 0, 0.1);
+    --text-muted: #A1A1A6;
 
     color-scheme: light;
 }

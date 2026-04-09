@@ -180,11 +180,11 @@ class TiltEffect {
     }
 }
 
-// Auto-initialize on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
+// Auto-initialize after all resources are loaded (non-critical path)
+function init3DTilt() {
     // Initialize tilt effect on all phone mockups
     const phoneElements = document.querySelectorAll('.phone-mockup, .phone-container, .app-mockup, .dashboard-mockup');
-    
+
     phoneElements.forEach(element => {
         new TiltEffect(element, {
             max: 20,
@@ -195,10 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
             maxGlare: 0.2
         });
     });
-    
+
     // Initialize tilt effect on feature cards with subtler settings
     const featureCards = document.querySelectorAll('.feature-card, .project-card');
-    
+
     featureCards.forEach(card => {
         new TiltEffect(card, {
             max: 10,
@@ -209,10 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
             maxGlare: 0.1
         });
     });
-    
+
     // Initialize on metric cards
     const metricCards = document.querySelectorAll('.metric-card');
-    
+
     metricCards.forEach(card => {
         new TiltEffect(card, {
             max: 8,
@@ -222,7 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
             glare: false
         });
     });
-});
+}
+
+// Defer to window load so tilt doesn't compete with critical rendering
+if (document.readyState === 'complete') {
+    init3DTilt();
+} else {
+    window.addEventListener('load', init3DTilt);
+}
 
 // Export for manual initialization
 window.TiltEffect = TiltEffect;

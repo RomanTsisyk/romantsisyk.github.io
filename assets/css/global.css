@@ -16,8 +16,13 @@
 }
 
 html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
@@ -144,6 +149,19 @@ button {
 }
 
 /* ============================================
+   CONTENT VISIBILITY — Off-Screen Sections
+   Defers rendering of below-the-fold sections
+   until they're near the viewport, improving LCP.
+   ============================================ */
+
+#projects,
+#certifications,
+#contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
+/* ============================================
    LOADING SCREEN
    ============================================ */
 
@@ -159,6 +177,7 @@ button {
     justify-content: center;
     z-index: var(--z-max);
     transition: opacity var(--transition-slow);
+    contain: strict;
 }
 
 .loader.hidden {
@@ -174,6 +193,7 @@ button {
     font-size: 3rem;
     color: var(--primary);
     animation: pulse 1.5s ease-in-out infinite;
+    will-change: transform, opacity;
 }
 
 @keyframes pulse {
@@ -197,6 +217,7 @@ button {
     height: 100%;
     background: var(--gradient-primary);
     animation: loading 1.5s ease-in-out infinite;
+    will-change: transform;
 }
 
 @keyframes loading {
@@ -386,6 +407,17 @@ button {
     animation-delay: 10s;
 }
 
+/* GPU layer promotion for animated orbs */
+.gradient-orb,
+.orb-1,
+.orb-2,
+.orb-3 {
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
     25% { transform: translate(100px, -100px) scale(1.1); }
@@ -425,6 +457,7 @@ button {
     font-size: 0.9rem;
     margin-bottom: var(--space-xl);
     animation: fadeInUp 0.8s ease;
+    will-change: opacity, transform;
 }
 
 .hero-title {
@@ -689,6 +722,7 @@ button {
     overflow: hidden;
     transition: all var(--transition-base);
     border: 1px solid var(--border-primary);
+    contain: layout style paint;
 }
 
 .project-card:hover {
@@ -892,6 +926,7 @@ button {
     background: var(--gradient-primary);
     border-radius: var(--radius-sm);
     animation: fillBar 1.5s ease-out;
+    will-change: width;
 }
 
 @keyframes fillBar {
@@ -1098,9 +1133,8 @@ button {
     transition: all var(--transition-base);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
     border-color: var(--primary);
     background: var(--bg-card);
 }

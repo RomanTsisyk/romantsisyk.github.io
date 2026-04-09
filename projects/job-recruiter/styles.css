@@ -677,3 +677,11 @@ section {
         gap: 15px;
     }
 }
+
+/* Screen label replacing h4 in screenshot placeholders */
+.screen-content .screen-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
+}

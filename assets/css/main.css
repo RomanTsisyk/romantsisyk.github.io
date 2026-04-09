@@ -92,8 +92,13 @@
 }
 
 html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
@@ -174,6 +179,7 @@ button {
     background-clip: text;
     background-size: 200% auto;
     animation: shimmer 3s linear infinite;
+    will-change: background-position;
 }
 
 @keyframes shimmer {
@@ -196,6 +202,7 @@ button {
     justify-content: center;
     z-index: 1000;
     transition: opacity var(--transition-slow);
+    contain: strict;
 }
 
 .loader.hidden {
@@ -270,7 +277,7 @@ button {
     align-items: center;
     gap: var(--space-sm);
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: var(--font-extrabold);
     color: var(--text-primary);
 }
 
@@ -286,7 +293,7 @@ button {
 
 .nav-link {
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: var(--font-medium);
     position: relative;
     transition: color var(--transition-base);
 }
@@ -456,7 +463,7 @@ button {
 
 .hero-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
+    font-weight: var(--font-black);
     line-height: 1.1;
     margin-bottom: var(--space-md);
     animation: fadeInUp 0.8s ease 0.1s both;
@@ -464,7 +471,7 @@ button {
 
 .hero-subtitle {
     font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
+    font-weight: var(--font-semibold);
     color: var(--text-secondary);
     margin-bottom: var(--space-lg);
     animation: fadeInUp 0.8s ease 0.2s both;
@@ -491,7 +498,7 @@ button {
 .btn {
     padding: var(--space-md) var(--space-xl);
     border-radius: var(--radius-lg);
-    font-weight: 600;
+    font-weight: var(--font-semibold);
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
@@ -566,7 +573,7 @@ button {
 .stat-value {
     display: block;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: var(--font-extrabold);
     color: var(--primary);
 }
 
@@ -653,13 +660,13 @@ button {
     color: var(--primary);
     border-radius: var(--radius-full);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: var(--font-semibold);
     margin-bottom: var(--space-md);
 }
 
 .section-title {
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
+    font-weight: var(--font-extrabold);
     margin-bottom: var(--space-md);
 }
 
@@ -681,7 +688,7 @@ button {
     background: var(--bg-card);
     border-radius: var(--radius-full);
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: var(--font-medium);
     transition: all var(--transition-base);
 }
 
@@ -753,7 +760,7 @@ button {
 
 .project-link {
     color: white;
-    font-weight: 600;
+    font-weight: var(--font-semibold);
     padding: var(--space-sm) var(--space-lg);
     background: var(--gradient-primary);
     border-radius: var(--radius-full);
@@ -778,7 +785,7 @@ button {
 
 .project-header h3 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: var(--font-bold);
 }
 
 .project-badge {
@@ -787,7 +794,7 @@ button {
     color: var(--primary);
     border-radius: 6px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: var(--font-semibold);
 }
 
 .badge-new {
@@ -823,7 +830,7 @@ button {
 
 .project-links a {
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: var(--font-medium);
     color: var(--primary);
 }
 
@@ -862,7 +869,7 @@ button {
     align-items: center;
     gap: var(--space-md);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: var(--font-bold);
     margin-bottom: var(--space-xl);
 }
 
@@ -890,7 +897,7 @@ button {
 }
 
 .skill-name {
-    font-weight: 600;
+    font-weight: var(--font-semibold);
 }
 
 .skill-level {
@@ -924,7 +931,7 @@ button {
     padding: var(--space-sm) var(--space-lg);
     background: var(--bg-card);
     border-radius: var(--radius-full);
-    font-weight: 500;
+    font-weight: var(--font-medium);
     transition: all var(--transition-base);
 }
 
@@ -1114,9 +1121,8 @@ button {
     transition: all var(--transition-base);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
     border-color: var(--primary);
     background: var(--bg-card);
 }
@@ -1229,7 +1235,7 @@ button {
 
 .cert-card h4 {
     font-size: 1.125rem;
-    font-weight: 700;
+    font-weight: var(--font-bold);
     margin-bottom: var(--space-sm);
     color: var(--text-primary);
 }
@@ -1247,7 +1253,7 @@ button {
     color: var(--primary);
     border-radius: 6px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: var(--font-semibold);
 }
 
 /* ============================================
@@ -1292,7 +1298,7 @@ button {
 .os-link {
     font-size: 0.9rem;
     color: var(--primary);
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 .os-link:hover {
@@ -1301,7 +1307,7 @@ button {
 
 .opensource-card h4 {
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: var(--font-bold);
     margin-bottom: var(--space-md);
 }
 

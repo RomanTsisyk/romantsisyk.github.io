@@ -1,9 +1,12 @@
+// Set global axios defaults
+axios.defaults.timeout = 10000; // 10 seconds
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('GitHub Traffic Dashboard Web App Initialized');
-    
+
     // Initialize UI elements
     initializeUI();
-    
+
     // Check if user is already logged in (token in localStorage)
     checkLoginState();
 });
@@ -195,11 +198,14 @@ async function fetchUserData(token) {
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
-        
+
         console.log('User data fetched successfully');
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
+        if (error.response?.status === 403 && error.response?.headers?.['x-ratelimit-remaining'] === '0') {
+            throw new Error('GitHub API rate limit exceeded. Please wait before trying again.');
+        }
         throw new Error(error.response?.data?.message || 'Failed to fetch user data');
     }
 }
@@ -213,6 +219,13 @@ async function fetchRepositoryData(token, username) {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json'
         };
+
+        // Helper to check for rate limit on any response error
+        function checkRateLimit(error) {
+            if (error.response?.status === 403 && error.response?.headers?.['x-ratelimit-remaining'] === '0') {
+                throw new Error('GitHub API rate limit exceeded. Please wait before trying again.');
+            }
+        }
 
         let page = 1;
         let allRepos = [];
@@ -282,7 +295,11 @@ async function fetchRepositoryData(token, username) {
     } catch (error) {
         console.error('Error fetching repository data:', error);
         hideLoading();
-        showError(`Failed to fetch repository data: ${error.message}`);
+        if (error.response?.status === 403 && error.response?.headers?.['x-ratelimit-remaining'] === '0') {
+            showError('GitHub API rate limit exceeded. Please wait before trying again.');
+        } else {
+            showError(`Failed to fetch repository data: ${error.message}`);
+        }
     }
 }
 

@@ -2,7 +2,9 @@
 // GLOBAL JAVASCRIPT - Main Portfolio
 // ============================================
 
-// Wait for DOM to load
+const DEBUG = false;
+
+// Critical initialization on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initNavigation();
@@ -10,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollEffects();
     initProjectFilters();
     initContactForm();
+    initLazyImages();
+});
+
+// Non-critical initialization after all resources are loaded
+window.addEventListener('load', () => {
     initParticles();
     initAnimations();
 });
@@ -39,7 +46,8 @@ function initNavigation() {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+    const sections = document.querySelectorAll('section[id]');
+
     // Mobile menu toggle
     if (navToggle) {
         navToggle.addEventListener('click', () => {
@@ -56,31 +64,27 @@ function initNavigation() {
         });
     }
 
-    // Navbar scroll effect
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-
-            if (currentScroll > 100) {
+    // Named scroll handler for navbar
+    function handleNavScroll() {
+        if (navbar) {
+            if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
+        }
     }
-    
-    // Active link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    
-    function highlightNav() {
+
+    // Named scroll handler for active link highlighting
+    function handleHighlightNav() {
         const scrollY = window.scrollY;
-        
+
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
             const sectionTop = section.offsetTop - 100;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            
+
             if (navLink) {
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                     navLink.classList.add('active');
@@ -90,9 +94,14 @@ function initNavigation() {
             }
         });
     }
-    
-    window.addEventListener('scroll', highlightNav);
-    highlightNav();
+
+    // Expose handlers so the unified scroll listener can call them
+    window._handleNavScroll = handleNavScroll;
+    window._handleHighlightNav = handleHighlightNav;
+
+    // Run once on init
+    handleNavScroll();
+    handleHighlightNav();
 }
 
 // ============================================
@@ -102,25 +111,25 @@ function initNavigation() {
 function initTheme() {
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle?.querySelector('.theme-icon');
-    
+
     // Check for saved theme preference
     const currentTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    
+
     if (themeIcon) {
         updateThemeIcon(currentTheme);
     }
-    
+
     // Theme toggle
     themeToggle?.addEventListener('click', () => {
         const theme = document.documentElement.getAttribute('data-theme');
         const newTheme = theme === 'dark' ? 'light' : 'dark';
-        
+
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
     });
-    
+
     function updateThemeIcon(theme) {
         if (themeIcon) {
             themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
@@ -135,16 +144,17 @@ function initTheme() {
 function initScrollEffects() {
     // Back to top button
     const backToTop = document.getElementById('backToTop');
-    
+
     if (backToTop) {
-        window.addEventListener('scroll', () => {
+        // Expose handler for unified scroll listener
+        window._handleBackToTop = function() {
             if (window.scrollY > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
             }
-        });
-        
+        };
+
         backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -152,10 +162,10 @@ function initScrollEffects() {
             });
         });
     }
-    
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -169,25 +179,48 @@ function initScrollEffects() {
 }
 
 // ============================================
+// UNIFIED SCROLL LISTENER
+// Merges all scroll handlers into one rAF-throttled listener
+// ============================================
+
+(function setupUnifiedScrollListener() {
+    let scrollTicking = false;
+
+    function onScroll() {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                if (window._handleNavScroll) window._handleNavScroll();
+                if (window._handleHighlightNav) window._handleHighlightNav();
+                if (window._handleBackToTop) window._handleBackToTop();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+}());
+
+// ============================================
 // PROJECT FILTERS
 // ============================================
 
 function initProjectFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             // Filter projects
             const filter = btn.getAttribute('data-filter');
-            
+
             projectCards.forEach(card => {
                 const categories = card.getAttribute('data-category').split(' ');
-                
+
                 if (filter === 'all' || categories.includes(filter)) {
                     card.style.display = 'block';
                     setTimeout(() => {
@@ -204,12 +237,11 @@ function initProjectFilters() {
             });
         });
     });
-    
+
     // Load more projects
     const loadMoreBtn = document.getElementById('loadMore');
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
-            // Simulate loading more projects
             loadMoreBtn.textContent = 'Loading...';
             setTimeout(() => {
                 loadMoreBtn.textContent = 'No more projects';
@@ -225,24 +257,22 @@ function initProjectFilters() {
 
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Simulate form submission
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            
+
             submitBtn.innerHTML = '<span>Sending...</span>';
             submitBtn.disabled = true;
-            
+
             setTimeout(() => {
-                // Reset form
                 contactForm.reset();
                 submitBtn.innerHTML = '<span>Message Sent!</span>';
                 submitBtn.style.background = 'var(--gradient-success)';
-                
+
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
@@ -260,21 +290,23 @@ function initContactForm() {
 function initParticles() {
     const canvas = document.getElementById('particleCanvas');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     let particles = [];
     let mouseX = 0;
     let mouseY = 0;
-    
+    let animFrameId;
+    let canvasVisible = true;
+
     // Set canvas size
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    
+
     // Particle class
     class Particle {
         constructor() {
@@ -285,29 +317,29 @@ function initParticles() {
             this.speedY = Math.random() * 0.5 - 0.25;
             this.opacity = Math.random() * 0.5 + 0.2;
         }
-        
+
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-            
+
             // Mouse interaction
             const dx = mouseX - this.x;
             const dy = mouseY - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (distance < 100) {
                 const force = (100 - distance) / 100;
                 this.x -= dx * force * 0.02;
                 this.y -= dy * force * 0.02;
             }
-            
+
             // Wrap around edges
             if (this.x > canvas.width) this.x = 0;
             if (this.x < 0) this.x = canvas.width;
             if (this.y > canvas.height) this.y = 0;
             if (this.y < 0) this.y = canvas.height;
         }
-        
+
         draw() {
             ctx.fillStyle = `rgba(0, 122, 255, ${this.opacity})`;
             ctx.beginPath();
@@ -315,20 +347,19 @@ function initParticles() {
             ctx.fill();
         }
     }
-    
+
     // Create particles
     for (let i = 0; i < 50; i++) {
         particles.push(new Particle());
     }
-    
-    // Track mouse
+
+    // Track mouse — passive since we never call preventDefault
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-    });
-    
+    }, { passive: true });
+
     // Animation loop
-    let animFrameId;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -358,7 +389,34 @@ function initParticles() {
         animFrameId = requestAnimationFrame(animate);
     }
 
-    animate();
+    // Pause animation when tab is hidden, resume when visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            cancelAnimationFrame(animFrameId);
+        } else if (canvasVisible) {
+            animFrameId = requestAnimationFrame(animate);
+        }
+    });
+
+    // Skip animation when canvas is off-screen
+    const canvasObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            canvasVisible = entry.isIntersecting;
+            if (canvasVisible && !document.hidden) {
+                animFrameId = requestAnimationFrame(animate);
+            } else {
+                cancelAnimationFrame(animFrameId);
+            }
+        });
+    }, { threshold: 0 });
+
+    canvasObserver.observe(canvas);
+
+    // Start animation initially (observer fires asynchronously, start it now too)
+    if (!document.hidden) {
+        animFrameId = requestAnimationFrame(animate);
+    }
+
     window.addEventListener('beforeunload', () => cancelAnimationFrame(animFrameId));
 }
 
@@ -367,17 +425,17 @@ function initParticles() {
 // ============================================
 
 function initAnimations() {
-    // Intersection Observer for animations
+    // Single IntersectionObserver for all animated elements
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
-                
+
                 // Animate skill bars
                 if (entry.target.classList.contains('skill-item')) {
                     const progressBar = entry.target.querySelector('.skill-progress');
@@ -389,7 +447,7 @@ function initAnimations() {
                         }, 100);
                     }
                 }
-                
+
                 // Animate counter numbers
                 if (entry.target.classList.contains('metric-card')) {
                     const counter = entry.target.querySelector('.metric-value');
@@ -397,23 +455,25 @@ function initAnimations() {
                         animateCounter(counter);
                     }
                 }
+
+                // Unobserve once animated — no need to watch further
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
-    
-    // Observe elements
+
+    // Observe all animated elements
     document.querySelectorAll('.project-card, .skill-item, .metric-card, .feature-card').forEach(el => {
         observer.observe(el);
     });
-    
+
     // Counter animation
     function animateCounter(counter) {
         const target = parseFloat(counter.getAttribute('data-value') || counter.textContent);
         const duration = 2000;
-        const start = 0;
         const increment = target / (duration / 16);
-        let current = start;
-        
+        let current = 0;
+
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -424,16 +484,15 @@ function initAnimations() {
             }
         }, 16);
     }
-    
-    // Typing effect for hero title (disabled for performance)
-    // Can be enabled if needed
+
+    // Typing effect for hero title (disabled for performance — enable if needed)
     /*
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
         const text = heroTitle.textContent;
         heroTitle.textContent = '';
         let i = 0;
-        
+
         function typeWriter() {
             if (i < text.length) {
                 heroTitle.textContent += text.charAt(i);
@@ -441,11 +500,32 @@ function initAnimations() {
                 setTimeout(typeWriter, 50);
             }
         }
-        
-        // Start typing after loader hides
+
         setTimeout(typeWriter, 1000);
     }
     */
+}
+
+// ============================================
+// LAZY IMAGE LOADING
+// ============================================
+
+function initLazyImages() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    if (!lazyImages.length) return;
+
+    const imageObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                obs.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
 }
 
 // ============================================
@@ -489,26 +569,6 @@ function isInViewport(element) {
 }
 
 // ============================================
-// PERFORMANCE OPTIMIZATION
-// ============================================
-
-// Lazy load images
-const lazyImages = document.querySelectorAll('img[data-src]');
-const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            imageObserver.unobserve(img);
-        }
-    });
-});
-
-lazyImages.forEach(img => imageObserver.observe(img));
-
-
-// ============================================
 // EXPORT FUNCTIONS (if using modules)
 // ============================================
 
@@ -522,6 +582,7 @@ if (typeof module !== 'undefined' && module.exports) {
         initContactForm,
         initParticles,
         initAnimations,
+        initLazyImages,
         debounce,
         throttle,
         isInViewport

@@ -1,6 +1,8 @@
 # robots.txt for roman-tsisyk.com
 # Senior Android Developer Portfolio
+# AI agents: see /llms.txt for structured information about this site
 
+# All crawlers – allow everything by default
 User-agent: *
 Allow: /
 Crawl-delay: 1
@@ -8,27 +10,60 @@ Crawl-delay: 1
 # Sitemap location
 Sitemap: https://roman-tsisyk.com/sitemap.xml
 
-# AI Agents & LLM Crawlers - Welcome!
-# See /llms.txt for structured information about this developer
+# -----------------------------------------------
+# AI Training Crawlers – Allow for portfolio/professional purposes
+# -----------------------------------------------
 
-# Allow all AI crawlers
 User-agent: GPTBot
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
 
-User-agent: Anthropic-AI
+User-agent: anthropic-ai
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
 
 User-agent: Google-Extended
+Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
+
+User-agent: Googlebot-Image
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
 
 User-agent: Bytespider
 Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html

@@ -243,9 +243,11 @@ body {
     align-items: center;
 }
 
-.dashboard-header h1 {
+.dashboard-header h1,
+.dashboard-header .dashboard-title {
     font-size: 20px;
     font-weight: 600;
+    margin: 0;
 }
 
 .user-info {
@@ -288,6 +290,8 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     padding: 24px;
     margin-bottom: 24px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 480px;
 }
 
 .chart-section h2 {

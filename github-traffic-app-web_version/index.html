@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GitHub Traffic Dashboard – view repository traffic, views, and clones for your GitHub account.">
-    <title>GitHub Traffic Dashboard</title>
+    <meta name="description" content="GitHub Traffic Dashboard – visualize repository views, clones, and unique visitors for your GitHub account. Free tool by Roman Tsisyk.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Roman Tsisyk">
+    <meta name="theme-color" content="#007AFF">
+    <title>GitHub Traffic Dashboard – Visualize Repo Views & Clones | Roman Tsisyk</title>
+    <link rel="canonical" href="https://roman-tsisyk.com/github-traffic-app-web_version/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roman-tsisyk.com/github-traffic-app-web_version/">
+    <meta property="og:title" content="GitHub Traffic Dashboard – Visualize Repo Views & Clones">
+    <meta property="og:description" content="GitHub Traffic Dashboard – visualize repository views, clones, and unique visitors for your GitHub account. Free tool by Roman Tsisyk.">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Roman Tsisyk Portfolio">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GitHub Traffic Dashboard – Visualize Repo Views & Clones">
+    <meta name="twitter:description" content="Visualize repository views, clones, and unique visitors for your GitHub account. Free tool by Roman Tsisyk.">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+
+    <link rel="preconnect" href="https://api.github.com">
+    <link rel="dns-prefetch" href="https://api.github.com">
     <link rel="stylesheet" href="styles.css">
     <!-- Add Chart.js and plugins -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1" defer></script>
     <!-- Add axios for API calls -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 </head>
 <body>
     <!-- Login Screen -->
@@ -27,7 +51,7 @@
                 <p class="login-desc">Enter your GitHub Personal Access Token to view your repository traffic data</p>
                 
                 <div class="app-features">
-                    <h3>Track Your Repository Performance</h3>
+                    <h2>Track Your Repository Performance</h2>
                     <ul>
                         <li><span class="feature-icon">📊</span> View traffic stats for all your repositories</li>
                         <li><span class="feature-icon">👁️</span> Monitor daily views and unique visitors</li>
@@ -70,7 +94,7 @@
     <!-- Dashboard Screen -->
     <div id="dashboardScreen" class="screen dashboard-body hidden">
         <header class="dashboard-header">
-            <h1>GitHub Traffic Dashboard</h1>
+            <p class="dashboard-title">GitHub Traffic Dashboard</p>
             <div class="user-info">
                 <span>User: </span>
                 <span id="username" class="username"></span>

@@ -1,133 +1,274 @@
-# llms.txt - Information for AI Agents and LLM Crawlers
-# Roman Tsisyk - Senior Android Developer Portfolio
-# Last Updated: 2025-12-08
+# Roman Tsisyk – Senior Android Developer Portfolio
 
-## SUMMARY
-Roman Tsisyk is a Senior Android Developer with 12+ years of professional experience.
-Currently working at BetVictor (sports betting platform).
-Based in Wroclaw, Poland. Available for remote work globally.
-Specialized in building enterprise-grade Android applications with millions of users.
+> Roman Tsisyk is a Senior Android Developer with 12+ years of professional software development experience and 6+ years focused on Android. He is currently employed at BetVictor, one of Europe's leading sports betting companies, and is based in Wroclaw, Poland. Roman specializes in building scalable, enterprise-grade Android applications serving 500K to 1.5M+ users, using modern Kotlin-first architectures. He has delivered impactful products for Fortune 500 companies including HP Inc and GlobalLogic (Mercedes-Benz), as well as FinTech clients in the Polish banking sector.
 
-## CONTACT
-- Email: roman.tsisyk.1@gmail.com
-- Phone: +48 728 282 026
-- LinkedIn: https://linkedin.com/in/roman-tsisyk
-- GitHub: https://github.com/RomanTsisyk
-- Portfolio: https://roman-tsisyk.com
+## About
 
-## CORE SKILLS
-Primary: Kotlin, Java, Android SDK, Jetpack Compose
-Architecture: MVVM, Clean Architecture, MVI, Multi-module
-UI: Jetpack Compose, Material Design 3, Custom Views, Animations
-Async: Coroutines, Flow, RxJava
-DI: Hilt, Dagger 2, Koin
-Networking: Retrofit, OkHttp, GraphQL
-Database: Room, SQLite, DataStore
-Testing: JUnit, Espresso, Mockito, Robolectric
-CI/CD: GitHub Actions, Bitrise, Jenkins, Fastlane
-Other: Bluetooth LE, IoT, Firebase, Google Pay Integration
+Roman Tsisyk is a passionate Android developer with a track record of transforming complex technical requirements into elegant, high-performance mobile applications. His 12+ years of development experience spans enterprise IoT, automotive, FinTech, sports betting, and open-source tooling. He holds a Master's degree in Engineering from Ternopil National Technical University and supplements his formal education with continuous professional certifications. Roman is known for measurable performance wins — reducing app size by 60%, improving load times by 30%, and achieving 0.2% improvement in crash-free session rates. He works effectively in distributed, cross-functional teams across Poland, the UK, and beyond, and is open to senior and lead Android roles globally (remote or hybrid).
 
-## WORK EXPERIENCE
+## Skills & Expertise
 
-### BetVictor (2024 - Present)
-Role: Senior Android Developer
-Industry: Sports Betting & Gaming
-Technologies: Kotlin, Jetpack Compose, MVVM, GraphQL
-Description: Developing sports betting applications for one of Europe's leading gaming companies.
+**Primary Languages**
+- Kotlin (Expert, 95%)
+- Java (Expert, 95%)
+- Dart (Advanced, 78%)
 
-### HP Inc / Poly (2022 - 2024)
-Role: Senior Android Developer
-Industry: Enterprise IoT
-Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module
-Product: HP Poly Lens - Enterprise headset management
-Achievements:
-- Reduced app size by 60%
-- Improved load time by 30%
-- Implemented BT 5.0 audio streaming
-Play Store: https://play.google.com/store/apps/details?id=com.poly.lens
+**Android Core**
+- Android SDK (Expert, 95%)
+- Jetpack Compose (Advanced, 90%)
+- Material Design 3 (Advanced, 88%)
+- Android Jetpack (ViewModel, LiveData, Navigation, WorkManager)
+- Wear OS
 
-### GlobalLogic (2019 - 2022)
-Role: Senior Android Developer
-Industry: Automotive
-Client: Mercedes-Benz
-Product: Mercedes Adapter - Vehicle connectivity app
-Users: 500,000+
-Technologies: Kotlin, Java, Bluetooth, Firebase
+**Architecture & Patterns**
+- MVVM (Expert, 92%)
+- Clean Architecture (Advanced, 85%)
+- MVI
+- Multi-module architecture
+- Dependency Injection: Hilt, Dagger 2, Koin (Advanced, 88%)
 
-### GSM Billing (2017 - 2019)
-Role: Android Developer
-Industry: FinTech / Banking
-Client: Kasa Stefczyka (Polish Credit Union)
-Product: Mobile Banking Application
-Users: 150,000+
-Technologies: Kotlin, Security, Google Pay
-Play Store: https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
+**Asynchronous Programming**
+- Kotlin Coroutines (Advanced, 90%)
+- Kotlin Flow (Advanced, 90%)
+- RxJava
 
-## FEATURED PROJECTS
+**Networking & APIs**
+- Retrofit + OkHttp (Advanced, 90%)
+- GraphQL
+- REST APIs
+- WebSockets
 
-### 1. HP Poly Lens
+**Database & Storage**
+- Room Database (Expert, 93%)
+- SQLite (Advanced, 85%)
+- DataStore
+- Firebase Realtime Database / Firestore
+
+**Hardware & IoT**
+- Bluetooth Low Energy (BLE) / Bluetooth 5.0
+- IoT device management
+- NFC
+
+**Security & Payments**
+- Cryptography (AES, RSA)
+- Google Pay integration
+- Biometric authentication
+- Certificate pinning
+
+**Testing**
+- JUnit, Mockito, MockK
+- Espresso, UIAutomator, Appium, Robolectric
+- Firebase Test Lab
+- 80%+ test coverage on key projects
+
+**CI/CD & DevOps**
+- GitHub Actions
+- Azure DevOps / CI/CD Pipelines
+- Bitrise, Jenkins, Fastlane
+- Gradle
+
+**Tools**
+- Android Studio, Git, Jira, Confluence
+- LeakCanary (memory profiling)
+- Agile/Scrum
+
+**Cross-Platform**
+- Flutter (Advanced, 80%)
+- BLoC architecture (Intermediate, 75%)
+
+**Web / Browser Extensions**
+- JavaScript, Chrome Extension API, HTML/CSS, RSS
+
+## Featured Projects
+
+### 1. BetVictor Apps (2024 – Present)
+- Type: Sports Betting & Gaming (Enterprise)
+- Company: BetVictor
+- Description: Developing Android sports betting and gaming applications for one of Europe's leading online gaming companies. NDA-protected codebase.
+- Technologies: Kotlin, Jetpack Compose, MVVM, GraphQL
+- Status: Active development; details NDA-protected
+- Play Store: Not publicly linked
+
+### 2. HP Poly Lens (2022 – 2024)
 - Type: Enterprise IoT Application
-- Company: HP Inc
-- Users: Enterprise-wide deployment
-- Key Features: BT device management, firmware updates, audio settings
-- Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module architecture
+- Company: HP Inc / Poly
+- Description: Headset and conferencing device management application for enterprise deployments. Enables IT administrators to remotely configure, update firmware, and monitor Poly audio/video devices via Bluetooth LE.
+- Key Achievements: Reduced app size by 60%, improved load time by 30%, implemented BT 5.0 audio streaming
+- Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module architecture, Firebase
+- Play Store: https://play.google.com/store/apps/details?id=com.poly.lens
+- Project Page: https://roman-tsisyk.com/projects/poly-lens/
 
-### 2. Mercedes Adapter
+### 3. Mercedes Adapter (2019 – 2022)
 - Type: Automotive Connectivity
 - Company: GlobalLogic for Mercedes-Benz
 - Users: 500,000+
-- Key Features: Vehicle diagnostics, remote control, real-time data
+- Description: Vehicle connectivity adapter enabling real-time vehicle diagnostics, remote control features, and live data streaming. One of the highest-reach projects in Roman's career.
 - Technologies: Kotlin, Java, Firebase, Bluetooth
+- Rating: 4.5 stars (2,847+ ratings)
+- Project Page: https://roman-tsisyk.com/projects/mercedes-adapter/
 
-### 3. Kasa Stefczyka
-- Type: Mobile Banking
-- Company: GSM Billing
+### 4. Kasa Stefczyka (2017 – 2019)
+- Type: Mobile Banking / FinTech
+- Company: GSM Billing for Kasa Stefczyka (Polish Credit Union)
 - Users: 150,000+
-- Key Features: Secure transactions, Google Pay, biometric auth
-- Technologies: Kotlin, Security frameworks, Payment integration
+- Description: Secure mobile banking application for one of Poland's major credit unions. Features include secure transactions, Google Pay integration, and biometric authentication.
+- Technologies: Kotlin, Android Security, Google Pay, Biometrics
+- Play Store: https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
+- Project Page: https://roman-tsisyk.com/projects/kasa-stefczyka/
 
-### 4. Netti
-- Type: Network Testing Suite (Personal Project)
-- Features: Speed test, iPerf3, ping, traceroute
-- Technologies: Kotlin, Jetpack Compose, Material 3
+### 5. Netti (Personal Project)
+- Type: Network Testing Suite
+- Description: Professional-grade Android network diagnostics app with speed test, iPerf3, ping, and traceroute tools. Built for developers and network engineers.
+- Technologies: Kotlin, Jetpack Compose, Material Design 3
 - GitHub: https://github.com/RomanTsisyk/netti
+- Project Page: https://roman-tsisyk.com/projects/netti/
 
-### 5. FollowMyMoney
-- Type: Personal Finance Tracker (Personal Project)
-- Features: Expense tracking, budgets, reports
-- Technologies: Kotlin, Jetpack Compose, Room DB
+### 6. FollowMyMoney (Personal Project)
+- Type: Personal Finance / Wealth Management
+- Description: Android app for tracking investments, expenses, and financial goals. Provides budget tracking, reports, and financial goal management.
+- Technologies: Kotlin, Jetpack Compose, Room Database
 - GitHub: https://github.com/RomanTsisyk/followmymoney
+- Project Page: https://roman-tsisyk.com/projects/followmymoney/
 
-## CERTIFICATIONS
-- Atlassian Agile Project Management Professional Certificate (2024)
-- Career Essentials in GitHub Professional Certificate (2024)
-- Microsoft Cybersecurity Certificate (2024)
+### 7. Earnly (In Development)
+- Type: Tax Reporting Platform (UK)
+- Description: UK tax reporting platform with integrations for QuickBooks, Sage, and Xero. Features real-time tax liability tracking for freelancers and businesses.
+- Technologies: Kotlin, Jetpack Compose, MVVM
+- Website: https://www.earnly.co.uk/
+- Project Page: https://roman-tsisyk.com/projects/earnly/
 
-## EDUCATION
-- Masters in Engineering - Ternopil National Technical University
+### 8. Job Recruiter (Personal Project)
+- Type: HR Tech / Recruitment
+- Description: Modern Android recruitment platform connecting job seekers with employers through intelligent matching.
+- Technologies: Kotlin, MVVM, Retrofit, Room Database
+- GitHub: https://github.com/RomanTsisyk/job-recruiter
+- Project Page: https://roman-tsisyk.com/projects/job-recruiter/
 
-## LANGUAGES
+### 9. SMS HUB (Enterprise / GSM Billing)
+- Type: SMS Management & Competitions
+- Description: SMS management and competition applications with A/B testing. Achieved 80% test coverage using Firebase Test Lab.
+- Technologies: Android, Firebase Test Lab, A/B Testing
+- Status: Private / NDA-protected
+
+### 10. CryptoKit (Open Source Library)
+- Type: Android Security Library
+- Description: Streamlined cryptographic operations for secure Android development. Provides AES/RSA encryption, decryption, and hashing utilities.
+- Technologies: Kotlin, Android Keystore, Cryptography
+- GitHub: https://github.com/RomanTsisyk/CryptoKit
+
+### 11. bleX (Open Source Library)
+- Type: Bluetooth LE Android Library
+- Description: Advanced coroutine-based Bluetooth Low Energy library for Android. Simplifies complex BLE scan, connect, read, write, and notify operations using Kotlin Coroutines.
+- Technologies: Kotlin, Coroutines, Bluetooth LE
+- GitHub: https://github.com/RomanTsisyk/bleX
+
+### 12. Sunrise-Sunset-SDK (Open Source)
+- Type: Android/Wear OS SDK
+- Description: Modular SDK for calculating sunrise and sunset times globally, with demo apps for Android and Wear OS.
+- Technologies: Kotlin, SDK, Wear OS, Location API
+- GitHub: https://github.com/RomanTsisyk/Sunrise-Sunset-SDK
+
+### 13. Chrome Extensions Collection (6+ Extensions)
+- Type: Browser Extensions (JavaScript)
+- Description: Collection of free, privacy-first Chrome extensions. See full descriptions in llms-full.txt.
+- Extensions page: https://roman-tsisyk.com/chrome_extention/
+
+## Work Experience
+
+### BetVictor (2024 – Present)
+- Role: Senior Android Developer
+- Industry: Sports Betting & Gaming
+- Technologies: Kotlin, Jetpack Compose, MVVM, GraphQL
+
+### HP Inc / Poly (2022 – 2024)
+- Role: Senior Android Developer
+- Industry: Enterprise IoT / UC&C (Unified Communications)
+- Product: HP Poly Lens – enterprise headset management platform
+- Technologies: Kotlin, Jetpack Compose, Bluetooth LE, Multi-module, Firebase
+- Key Metrics: 60% app size reduction, 30% faster load time, BT 5.0 audio streaming
+
+### GlobalLogic (2019 – 2022)
+- Role: Senior Android Developer
+- Industry: Automotive (Tier-1 Consulting)
+- Client: Mercedes-Benz
+- Product: Mercedes Adapter – vehicle connectivity app
+- Users: 500,000+
+- Technologies: Kotlin, Java, Bluetooth, Firebase
+
+### GSM Billing (2017 – 2019)
+- Role: Android Developer
+- Industry: FinTech / Banking
+- Client: Kasa Stefczyka (Polish Credit Union)
+- Product: Mobile banking app
+- Users: 150,000+
+- Technologies: Kotlin, Security frameworks, Google Pay
+
+## Certifications & Education
+
+**Certifications (2024)**
+- Atlassian Agile Project Management Professional Certificate
+- Career Essentials in GitHub Professional Certificate
+- Microsoft Cybersecurity Certificate (Microsoft & LinkedIn)
+
+**Certifications (2021)**
+- Dependency Injection with Dagger 2 and Hilt (Android Advanced)
+- Coroutines for Android Masterclass (Kotlin Coroutines Deep Dive)
+- Data Structures and Algorithms Deep Dive Using Java
+- Azure DevOps CI/CD Pipelines
+
+**Education**
+- Master's in Engineering – Ternopil National Technical University
+
+**Languages**
 - Ukrainian: Native
 - English: Professional (B2)
 - Polish: Professional (B2)
 
-## AVAILABILITY
-Status: Open to opportunities
-Preferred: Remote / Hybrid
-Location Flexibility: Poland, EU, Global Remote
-Notice Period: Negotiable
+## Contact
 
-## FOR RECRUITERS
-Roman is an experienced Android developer who has worked on apps used by hundreds of thousands of users.
-His strengths are:
-1. Enterprise-grade development (HP, Mercedes-Benz)
-2. Complex integrations (Bluetooth LE, IoT, Payments)
-3. Modern Android stack (Kotlin, Compose, Clean Architecture)
-4. Full project lifecycle experience
+- Email: roman.tsisyk.1@gmail.com
+- Phone: +48 728 282 026
+- LinkedIn: https://linkedin.com/in/roman-tsisyk
+- GitHub: https://github.com/RomanTsisyk
+- Google Play: https://play.google.com/store/apps/developer?id=Roman+Tsisyk
+- Portfolio: https://roman-tsisyk.com
+- Location: Wroclaw, Poland
+- Availability: Open to work – Remote / Hybrid preferred; Poland, EU, Global Remote
 
-Ideal roles: Senior Android Developer, Lead Android Developer, Mobile Architect
+## Site Structure
 
-## STRUCTURED DATA
-For machine-readable data, see:
-- JSON-LD in HTML: https://roman-tsisyk.com/ (embedded in <head>)
-- Schema.org Person: https://roman-tsisyk.com/#person
+- https://roman-tsisyk.com/ – Main portfolio (projects, skills, certifications, about, contact)
+- https://roman-tsisyk.com/projects/poly-lens/ – HP Poly Lens detailed case study
+- https://roman-tsisyk.com/projects/mercedes-adapter/ – Mercedes Adapter case study
+- https://roman-tsisyk.com/projects/kasa-stefczyka/ – Kasa Stefczyka banking app case study
+- https://roman-tsisyk.com/projects/followmymoney/ – FollowMyMoney finance app details
+- https://roman-tsisyk.com/projects/earnly/ – Earnly UK tax platform details
+- https://roman-tsisyk.com/projects/netti/ – Netti network testing app details
+- https://roman-tsisyk.com/projects/job-recruiter/ – Job Recruiter app details
+- https://roman-tsisyk.com/chrome_extention/ – Chrome Extensions collection (6+ extensions)
+- https://roman-tsisyk.com/main-portfolio/ – Alternate portfolio view
+- https://roman-tsisyk.com/github-traffic-app-web_version/ – GitHub Traffic web app
+- https://roman-tsisyk.com/llms.txt – This file (structured summary for AI agents)
+- https://roman-tsisyk.com/llms-full.txt – Extended version with full project descriptions
+- https://roman-tsisyk.com/sitemap.xml – XML sitemap for crawlers
+- https://roman-tsisyk.com/privacy.html – Privacy policy
+- https://roman-tsisyk.com/terms.html – Terms of service
+
+## Optional
+
+- GitHub profile: https://github.com/RomanTsisyk
+- LinkedIn: https://linkedin.com/in/roman-tsisyk
+- Google Play Developer: https://play.google.com/store/apps/developer?id=Roman+Tsisyk
+- HP Poly Lens (Play Store): https://play.google.com/store/apps/details?id=com.poly.lens
+- Kasa Stefczyka (Play Store): https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
+- CryptoKit (GitHub): https://github.com/RomanTsisyk/CryptoKit
+- bleX (GitHub): https://github.com/RomanTsisyk/bleX
+- Netti (GitHub): https://github.com/RomanTsisyk/netti
+- FollowMyMoney (GitHub): https://github.com/RomanTsisyk/followmymoney
+- Sunrise-Sunset-SDK (GitHub): https://github.com/RomanTsisyk/Sunrise-Sunset-SDK
+- Job Recruiter (GitHub): https://github.com/RomanTsisyk/job-recruiter
+
+---
+Last Updated: 2026-04-10
+For AI agent use: This file follows the llmstxt.org standard.
+JSON-LD structured data is embedded in https://roman-tsisyk.com/ <head> (Schema.org Person, WebSite, ItemList, FAQPage).
