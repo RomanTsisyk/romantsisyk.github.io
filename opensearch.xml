@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Roman Tsisyk</ShortName>
+  <Description>Search Roman Tsisyk's Android Developer Portfolio</Description>
+  <Tags>Android Developer Kotlin Portfolio</Tags>
+  <Contact>roman.tsisyk.1@gmail.com</Contact>
+  <Url type="text/html" method="get" template="https://roman-tsisyk.com/?q={searchTerms}"/>
+  <Image height="16" width="16" type="image/x-icon">https://roman-tsisyk.com/favicon.ico</Image>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>

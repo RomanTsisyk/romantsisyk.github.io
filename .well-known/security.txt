@@ -2,8 +2,9 @@
 # This is a portfolio website with no user data collection
 
 Contact: mailto:roman.tsisyk.1@gmail.com
-Expires: 2025-12-31T23:59:00.000Z
+Expires: 2026-12-31T23:59:00.000Z
 Preferred-Languages: en, uk, pl
+Canonical: https://roman-tsisyk.com/.well-known/security.txt
 
 # This is a static portfolio site
 # No vulnerabilities to report as there is no backend

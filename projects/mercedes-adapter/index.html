@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://roman-tsisyk.com/projects/mercedes-adapter/">
     <meta property="og:title" content="Mercedes Adapter – Vehicle Connectivity Android App | 500K+ Users">
     <meta property="og:description" content="Android app for Mercedes-Benz vehicle connectivity. Diagnostics, driver logbook, GPS tracking, and real-time data. Built by Roman Tsisyk for GlobalLogic. 500K+ downloads.">
-    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Roman Tsisyk Portfolio">
@@ -24,10 +24,16 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mercedes Adapter – Vehicle Connectivity Android App | 500K+ Users">
     <meta name="twitter:description" content="Android app for Mercedes-Benz vehicle connectivity with diagnostics, driver logbook, and GPS tracking. Built by Roman Tsisyk. 500K+ downloads.">
-    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
 
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <meta name="theme-color" content="#0A0E27">
 
     <!-- Poly Lens Style Navigation -->
     <style>
@@ -257,6 +263,12 @@
                 right: -20px;
             }
         }
+
+        /* Performance: content-visibility for off-screen sections */
+        .screenshots, .tech-stack, .metrics, .product-gallery {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
+        }
     </style>
 
     <!-- SEO meta tags moved to <head> -->
@@ -457,6 +469,21 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <div style="padding:8px 0;position:relative;z-index:10;">
+        <div class="container">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol style="display:flex;gap:8px;list-style:none;font-size:14px;opacity:0.7;margin:0;padding:0;align-items:center;">
+                    <li><a href="https://roman-tsisyk.com/" style="color:inherit;text-decoration:none;">Home</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li><a href="https://roman-tsisyk.com/#projects" style="color:inherit;text-decoration:none;">Projects</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li aria-current="page">Mercedes Adapter</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background">
@@ -511,7 +538,7 @@
                 <div class="phone-mockup">
                     <div class="phone-frame">
                         <div class="phone-screen">
-                            <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Mercedes Adapter app – main dashboard showing vehicle status and connectivity controls" class="screen-image">
+                            <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Mercedes Adapter app – main dashboard showing vehicle status and connectivity controls" class="screen-image" loading="eager">
                         </div>
                     </div>
                     <div class="floating-card card-1">
@@ -626,25 +653,25 @@
                     <div class="tech-grid">
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" loading="lazy">
                             </div>
                             <span>Android SDK</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" loading="lazy">
                             </div>
                             <span>Kotlin</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy">
                             </div>
                             <span>Java</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-plain.svg" alt="Gradle">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-plain.svg" alt="Gradle" loading="lazy">
                             </div>
                             <span>Gradle</span>
                         </div>
@@ -686,7 +713,7 @@
                     <div class="tech-grid">
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy">
                             </div>
                             <span>Firebase</span>
                         </div>
@@ -727,35 +754,35 @@
             <div class="screenshot-carousel">
                 <div class="screenshot-track">
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Mercedes Adapter – main dashboard with vehicle overview">
+                        <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Mercedes Adapter – main dashboard with vehicle overview" loading="lazy">
                         <p>Main Dashboard</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Mercedes Adapter – distance statistics and trip data screen">
+                        <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Mercedes Adapter – distance statistics and trip data screen" loading="lazy">
                         <p>Distance Statistics</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Mercedes Adapter – fuel level indicator screen">
+                        <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Mercedes Adapter – fuel level indicator screen" loading="lazy">
                         <p>Fuel Tracking</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/e5c1d4df565c25806fcaa17675cf9c8630a1be620ff170323ca19a0b2730bfb8_800.webp" alt="Mercedes Adapter – trip list with driver logbook entries">
+                        <img src="../../assets/images/mercedes-adapter/e5c1d4df565c25806fcaa17675cf9c8630a1be620ff170323ca19a0b2730bfb8_800.webp" alt="Mercedes Adapter – trip list with driver logbook entries" loading="lazy">
                         <p>Trip Documentation</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/f092cc0c93ee59b300168380b96088226cc19ab953b4696a825deb8bb5e47eb0_800.webp" alt="Mercedes Adapter – real-time vehicle data analysis screen">
+                        <img src="../../assets/images/mercedes-adapter/f092cc0c93ee59b300168380b96088226cc19ab953b4696a825deb8bb5e47eb0_800.webp" alt="Mercedes Adapter – real-time vehicle data analysis screen" loading="lazy">
                         <p>Real-time Cockpit</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Mercedes Adapter – vehicle health monitor with diagnostics status">
+                        <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Mercedes Adapter – vehicle health monitor with diagnostics status" loading="lazy">
                         <p>Vehicle Health</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Mercedes Adapter – driving score and performance analysis">
+                        <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Mercedes Adapter – driving score and performance analysis" loading="lazy">
                         <p>Driving Score</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Mercedes Adapter – digital upgrade features and OBD2 connectivity screen">
+                        <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Mercedes Adapter – digital upgrade features and OBD2 connectivity screen" loading="lazy">
                         <p>Digital World</p>
                     </div>
                 </div>
@@ -849,12 +876,12 @@
         <div class="container">
             <h2>Product Gallery</h2>
             <div class="gallery-grid">
-                <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Adapter Overview" class="gallery-item">
-                <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Connection Setup" class="gallery-item">
-                <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Device Info" class="gallery-item">
-                <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Diagnostics" class="gallery-item">
-                <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Vehicle Status" class="gallery-item">
-                <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Real-time Data" class="gallery-item">
+                <img src="../../assets/images/mercedes-adapter/bae9073ccf92efabdd8d60918a79cfd626c10bccab38c82fdc6c02ac80411aec_800.webp" alt="Adapter Overview" class="gallery-item" loading="lazy">
+                <img src="../../assets/images/mercedes-adapter/299d8d09cfc0e22cfabf5ca74efa9203379eed7a69d1d6e079c1370a2c3a8cf8_800.webp" alt="Connection Setup" class="gallery-item" loading="lazy">
+                <img src="../../assets/images/mercedes-adapter/391547bc66e4695950c1b2accb7b421adb0512936906caf442681e3c10c117fb_800.webp" alt="Device Info" class="gallery-item" loading="lazy">
+                <img src="../../assets/images/mercedes-adapter/6728bb0c404ff7215496360ccf369302b8551f6ec302969f6d6c375955a4509e_800.webp" alt="Diagnostics" class="gallery-item" loading="lazy">
+                <img src="../../assets/images/mercedes-adapter/b1ee5ab7f6fa5197d5e4335e85c168de7b35f2491cc884d7fc607c9326123428_800.webp" alt="Vehicle Status" class="gallery-item" loading="lazy">
+                <img src="../../assets/images/mercedes-adapter/da8517456a0bdee503e1dd9d1f0760608c55813708edf86beae3f146006ea908_800.webp" alt="Real-time Data" class="gallery-item" loading="lazy">
             </div>
         </div>
     </section>
@@ -889,11 +916,17 @@
                     <h3>Mercedes Adapter</h3>
                     <p>Vehicle Connectivity by Roman Tsisyk</p>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links" style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="https://roman-tsisyk.com/">← Back to Portfolio</a>
+                    <a href="https://roman-tsisyk.com/#projects">View All Projects</a>
                     <a href="#features">Features</a>
                     <a href="#tech">Technology</a>
                     <a href="#screenshots">Screenshots</a>
                     <a href="#metrics">Metrics</a>
+                    <strong style="margin-top:8px;opacity:0.8;">Related Projects</strong>
+                    <a href="../poly-lens/index.html">HP Poly Lens</a>
+                    <a href="../kasa-stefczyka/index.html">Kasa Stefczyka</a>
+                    <a href="../netti/index.html">Netti</a>
                 </div>
                 <div class="footer-social">
                     <a href="https://github.com/RomanTsisyk" target="_blank" aria-label="GitHub">
@@ -914,9 +947,9 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="image-loader.js"></script>
-    
+    <script src="script.js" defer></script>
+    <script src="image-loader.js" defer></script>
+
     <!-- Poly Lens Style Navigation Script -->
     <script>
         // Float Navigation Panel - Start open by default

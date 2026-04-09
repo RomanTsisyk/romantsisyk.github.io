@@ -11,7 +11,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+    <meta name="theme-color" content="#0A0E27">
     
     <!-- Global Styles -->
     <link rel="stylesheet" href="../../assets/css/variables.css">
@@ -26,6 +29,12 @@
             --project-current: netti;
             --project-color: #007AFF;
         }
+
+        /* Performance: content-visibility for off-screen sections */
+        .screenshots, .tech-stack, .design-system, .metrics {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
+        }
     </style>
 
     <!-- SEO: Canonical & Open Graph -->
@@ -34,7 +43,7 @@
     <meta property="og:url" content="https://roman-tsisyk.com/projects/netti/">
     <meta property="og:title" content="Netti - Professional Network Testing Suite | Roman Tsisyk">
     <meta property="og:description" content="Netti – Android network testing suite by Roman Tsisyk. Speed tests, iPerf3, ping, traceroute, and network monitoring. Built with Kotlin and Jetpack Compose.">
-    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Roman Tsisyk Portfolio">
@@ -42,7 +51,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Netti - Professional Network Testing Suite | Roman Tsisyk">
     <meta name="twitter:description" content="Netti – Android network testing suite. Speed tests, iPerf3, ping, traceroute and network monitoring. Built with Kotlin and Jetpack Compose.">
-    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -117,8 +126,9 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo gradient-text">Netti</div>
+                <a href="https://roman-tsisyk.com/" class="logo gradient-text" style="text-decoration:none;">Netti</a>
                 <ul class="nav-links">
+                    <li><a href="https://roman-tsisyk.com/" style="font-size:13px;opacity:0.8;">&#8592; Portfolio</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#screenshots">Screenshots</a></li>
                     <li><a href="#tech">Tech Stack</a></li>
@@ -127,6 +137,21 @@
             </nav>
         </div>
     </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div style="background:rgba(0,0,0,0.3);padding:8px 0;position:relative;z-index:10;">
+        <div class="container">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol style="display:flex;gap:8px;list-style:none;font-size:14px;opacity:0.7;margin:0;padding:0;align-items:center;">
+                    <li><a href="https://roman-tsisyk.com/" style="color:inherit;text-decoration:none;">Home</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li><a href="https://roman-tsisyk.com/#projects" style="color:inherit;text-decoration:none;">Projects</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li aria-current="page">Netti</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -295,27 +320,27 @@
             </div>
             <div class="screenshot-carousel">
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Home Screen.png" alt="Netti app – main dashboard with network overview" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Home Screen.png" alt="Netti app – main dashboard with network overview" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Main Dashboard</div>
                 </div>
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Speed test - Client (Results).png" alt="Speed Test Results" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Speed test - Client (Results).png" alt="Speed Test Results" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Speed Test Results</div>
                 </div>
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Speed test - Client (More)@2x.png" alt="Speed Test Config" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Speed test - Client (More)@2x.png" alt="Speed Test Config" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Speed Test Config</div>
                 </div>
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Ping (Process).png" alt="Ping Monitor" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Ping (Process).png" alt="Ping Monitor" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Ping Monitor</div>
                 </div>
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Trace Route (Logs).png" alt="Trace Route" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Trace Route (Logs).png" alt="Trace Route" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Trace Route</div>
                 </div>
                 <div class="screenshot">
-                    <img src="../../assets/images/netti/Data Transfer Rate (Speedometer).png" alt="Data Transfer Rate" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                    <img src="../../assets/images/netti/Data Transfer Rate (Speedometer).png" alt="Data Transfer Rate" loading="lazy" style="width: 280px; height: auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
                     <div class="screenshot-label">Data Transfer Rate</div>
                 </div>
             </div>
@@ -412,12 +437,35 @@
         </div>
     </section>
 
+    <!-- Related Projects -->
+    <section style="padding:48px 0;background:rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2 style="font-size:1.4rem;margin-bottom:24px;opacity:0.9;">Other Projects</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;">
+                <a href="../followmymoney/index.html" style="padding:12px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;color:inherit;display:block;">
+                    <strong>FollowMyMoney</strong><br><small style="opacity:0.7;">Investment &amp; Portfolio Tracker</small>
+                </a>
+                <a href="../earnly/index.html" style="padding:12px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;color:inherit;display:block;">
+                    <strong>Earnly</strong><br><small style="opacity:0.7;">UK Tax Management App</small>
+                </a>
+                <a href="../kasa-stefczyka/index.html" style="padding:12px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;color:inherit;display:block;">
+                    <strong>Kasa Stefczyka</strong><br><small style="opacity:0.7;">Mobile Banking SKOK</small>
+                </a>
+                <a href="https://roman-tsisyk.com/#projects" style="padding:12px 20px;border:1px solid rgba(0,122,255,0.5);border-radius:8px;text-decoration:none;color:inherit;display:block;background:rgba(0,122,255,0.1);">
+                    <strong>View All Projects</strong><br><small style="opacity:0.7;">roman-tsisyk.com</small>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div>© 2026 Netti - Professional Network Testing Suite</div>
                 <ul class="footer-links">
+                    <li><a href="https://roman-tsisyk.com/">← Back to Portfolio</a></li>
+                    <li><a href="https://roman-tsisyk.com/#projects">View All Projects</a></li>
                     <li><a href="https://github.com/RomanTsisyk">GitHub</a></li>
                     <li><a href="https://linkedin.com/in/roman-tsisyk">LinkedIn</a></li>
                     <li><a href="mailto:roman.tsisyk@gmail.com">Email</a></li>
@@ -1551,8 +1599,8 @@
     </div>
 
     <!-- Navigation Scripts -->
-    <script src="../../assets/js/global.js"></script>
-    <script src="../../assets/js/navigation.js"></script>
+    <script src="../../assets/js/global.js" defer></script>
+    <script src="../../assets/js/navigation.js" defer></script>
     
     <!-- Original Netti Scripts -->
     <script>

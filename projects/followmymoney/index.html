@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://roman-tsisyk.com/projects/followmymoney/">
     <meta property="og:title" content="FollowMyMoney – Wealth Management Android App | Roman Tsisyk">
     <meta property="og:description" content="BaFin-regulated Android wealth management app with copy trading, expert fund recommendations, and real-time portfolio tracking. Built by Roman Tsisyk.">
-    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Roman Tsisyk Portfolio">
@@ -24,10 +24,16 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FollowMyMoney – Wealth Management Android App | Roman Tsisyk">
     <meta name="twitter:description" content="BaFin-regulated Android app with copy trading, fund recommendations, and real-time portfolio tracking. Built by Roman Tsisyk.">
-    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
 
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <meta name="theme-color" content="#0A0E27">
 
     <!-- Float Navigation Styles -->
     <style>
@@ -257,6 +263,12 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Performance: content-visibility for off-screen sections */
+        .screenshots, .tech-stack, .trading-section, .testimonials, .metrics {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
+        }
     </style>
 
     <!-- SEO meta tags moved to <head> -->
@@ -450,6 +462,21 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <div style="padding:8px 0;position:relative;z-index:10;">
+        <div class="container">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol style="display:flex;gap:8px;list-style:none;font-size:14px;opacity:0.7;margin:0;padding:0;align-items:center;">
+                    <li><a href="https://roman-tsisyk.com/" style="color:inherit;text-decoration:none;">Home</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li><a href="https://roman-tsisyk.com/#projects" style="color:inherit;text-decoration:none;">Projects</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li aria-current="page">FollowMyMoney</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="floating-orbs">
@@ -508,7 +535,7 @@
             <div class="hero-visual">
                 <div class="phone-mockup">
                     <div class="phone-screen">
-                        <img src="../../assets/images/fels/unnamed (5).webp" alt="FollowMyMoney Asset Allocation" class="hero-screenshot">
+                        <img src="../../assets/images/fels/unnamed (5).webp" alt="FollowMyMoney Asset Allocation" loading="eager" class="hero-screenshot">
                     </div>
                 </div>
                 <div class="floating-cards">
@@ -520,7 +547,7 @@
                     </div>
                     <div class="float-card card-2">
                         <div class="trader-badge">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234CAF50'/%3E%3C/svg%3E" alt="Trader">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234CAF50'/%3E%3C/svg%3E" alt="Trader" loading="lazy">
                             <div>
                                 <span class="trader-name">Trading Brothers</span>
                                 <span class="trader-profit">+20.02%</span>
@@ -695,7 +722,7 @@
                 <div class="trader-card featured">
                     <div class="trader-header">
                         <div class="trader-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23673AB7'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dy='.3em'%3ETB%3C/text%3E%3C/svg%3E" alt="Trading Brothers">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23673AB7'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dy='.3em'%3ETB%3C/text%3E%3C/svg%3E" alt="Trading Brothers" loading="lazy">
                         </div>
                         <div class="trader-info">
                             <h4>Trading Brothers (Falk Elsner)</h4>
@@ -782,56 +809,56 @@
                 <div class="screenshot-track">
                     <div class="screenshot-item active">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (4).webp" alt="Fund Recommendations" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (4).webp" alt="Fund Recommendations" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Fund Recommendations</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (5).webp" alt="Asset Allocation" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (5).webp" alt="Asset Allocation" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Asset Allocation</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (6).webp" alt="Portfolio Overview" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (6).webp" alt="Portfolio Overview" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Portfolio Overview</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (7).webp" alt="Trading Performance" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (7).webp" alt="Trading Performance" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Trading Performance</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (8).webp" alt="Star Traders" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (8).webp" alt="Star Traders" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Star Traders</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (9).webp" alt="Wealth Strategies" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (9).webp" alt="Wealth Strategies" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Wealth Strategies</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (10).webp" alt="Investment Tracking" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (10).webp" alt="Investment Tracking" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Investment Tracking</div>
                     </div>
                     
                     <div class="screenshot-item">
                         <div class="screenshot-phone">
-                            <img src="../../assets/images/fels/unnamed (11).webp" alt="Market Analysis" class="screenshot-image">
+                            <img src="../../assets/images/fels/unnamed (11).webp" alt="Market Analysis" class="screenshot-image" loading="lazy">
                         </div>
                         <div class="screenshot-label">Market Analysis</div>
                     </div>
@@ -879,25 +906,25 @@
                     <div class="tech-grid">
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" loading="lazy">
                             </div>
                             <span>Android</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" loading="lazy">
                             </div>
                             <span>Kotlin</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy">
                             </div>
                             <span>Java</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift" loading="lazy">
                             </div>
                             <span>Swift</span>
                         </div>
@@ -909,25 +936,25 @@
                     <div class="tech-grid">
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
                             </div>
                             <span>Node.js</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" loading="lazy">
                             </div>
                             <span>Firebase</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy">
                             </div>
                             <span>PostgreSQL</span>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" loading="lazy">
                             </div>
                             <span>Redis</span>
                         </div>
@@ -1186,6 +1213,14 @@
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
+                        <h4>Portfolio</h4>
+                        <a href="https://roman-tsisyk.com/">← Back to Portfolio</a>
+                        <a href="https://roman-tsisyk.com/#projects">View All Projects</a>
+                        <a href="../netti/index.html">Netti</a>
+                        <a href="../earnly/index.html">Earnly</a>
+                        <a href="../kasa-stefczyka/index.html">Kasa Stefczyka</a>
+                    </div>
+                    <div class="footer-column">
                         <h4>Product</h4>
                         <a href="#">Features</a>
                         <a href="#">Star Traders</a>
@@ -1214,7 +1249,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     
     <!-- Float Navigation Script -->
     <script>

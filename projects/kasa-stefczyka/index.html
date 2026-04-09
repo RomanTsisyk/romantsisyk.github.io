@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://roman-tsisyk.com/projects/kasa-stefczyka/">
     <meta property="og:title" content="Kasa Stefczyka – Mobile Banking Android App | Roman Tsisyk">
     <meta property="og:description" content="Mobile banking Android app for Kasa Stefczyka SKOK – secure transfers, Google Pay, standing orders, and scan-to-pay. Built by Roman Tsisyk.">
-    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Roman Tsisyk Portfolio">
@@ -24,10 +24,16 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kasa Stefczyka – Mobile Banking Android App | Roman Tsisyk">
     <meta name="twitter:description" content="Mobile banking Android app – secure transfers, Google Pay, standing orders, and scan-to-pay for SKOK users. Built by Roman Tsisyk.">
-    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
 
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <meta name="theme-color" content="#0A0E27">
 
     <!-- Float Navigation Styles -->
     <style>
@@ -257,6 +263,12 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Performance: content-visibility for off-screen sections */
+        .screenshots, .tech-stack, .metrics, .download {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
+        }
     </style>
 
     <!-- SEO meta tags moved to <head> -->
@@ -451,6 +463,21 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <div style="padding:8px 0;position:relative;z-index:10;">
+        <div class="container">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol style="display:flex;gap:8px;list-style:none;font-size:14px;opacity:0.7;margin:0;padding:0;align-items:center;">
+                    <li><a href="https://roman-tsisyk.com/" style="color:inherit;text-decoration:none;">Home</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li><a href="https://roman-tsisyk.com/#projects" style="color:inherit;text-decoration:none;">Projects</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li aria-current="page">Kasa Stefczyka</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="gradient-orbs">
@@ -503,7 +530,7 @@
             <div class="hero-mockup">
                 <div class="phone-frame">
                     <div class="phone-screen">
-                            <img src="../../assets/images/skok/unnamed.webp" alt="Kasa Stefczyka app – main interface showing account balance and quick actions" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
+                            <img src="../../assets/images/skok/unnamed.webp" alt="Kasa Stefczyka app – main interface showing account balance and quick actions" loading="eager" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
                         </div>
                                 <div class="app-status">
                                     <span>📧</span>
@@ -680,19 +707,19 @@
             <div class="tech-grid">
                 <div class="tech-item">
                     <div class="tech-logo">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android" loading="lazy">
                     </div>
                     <span>Android Native</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-logo">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" loading="lazy">
                     </div>
                     <span>Kotlin</span>
                 </div>
                 <div class="tech-item">
                     <div class="tech-logo">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift" loading="lazy">
                     </div>
                     <span>Swift</span>
                 </div>
@@ -735,35 +762,35 @@
             <div class="screenshots-carousel">
                 <div class="screenshot-track">
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed.webp" alt="Kasa Stefczyka – payments panel with transfer options">
+                        <img src="../../assets/images/skok/unnamed.webp" alt="Kasa Stefczyka – payments panel with transfer options" loading="lazy">
                         <p>Payment Panel</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (1).webp" alt="Kasa Stefczyka – main dashboard showing account balance">
+                        <img src="../../assets/images/skok/unnamed (1).webp" alt="Kasa Stefczyka – main dashboard showing account balance" loading="lazy">
                         <p>Main Dashboard</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (2).webp" alt="Kasa Stefczyka – account transaction history list">
+                        <img src="../../assets/images/skok/unnamed (2).webp" alt="Kasa Stefczyka – account transaction history list" loading="lazy">
                         <p>Account History</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (3).webp" alt="Kasa Stefczyka – new transfer form screen">
+                        <img src="../../assets/images/skok/unnamed (3).webp" alt="Kasa Stefczyka – new transfer form screen" loading="lazy">
                         <p>New Transfer</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (4).webp" alt="Kasa Stefczyka – tax office transfer screen">
+                        <img src="../../assets/images/skok/unnamed (4).webp" alt="Kasa Stefczyka – tax office transfer screen" loading="lazy">
                         <p>Tax Transfer</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (5).webp" alt="Kasa Stefczyka – transfer limits management screen">
+                        <img src="../../assets/images/skok/unnamed (5).webp" alt="Kasa Stefczyka – transfer limits management screen" loading="lazy">
                         <p>Transfer Limits</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (6).webp" alt="Kasa Stefczyka – message center with notifications">
+                        <img src="../../assets/images/skok/unnamed (6).webp" alt="Kasa Stefczyka – message center with notifications" loading="lazy">
                         <p>Message Center</p>
                     </div>
                     <div class="screenshot">
-                        <img src="../../assets/images/skok/unnamed (7).webp" alt="Kasa Stefczyka – additional account options and settings">
+                        <img src="../../assets/images/skok/unnamed (7).webp" alt="Kasa Stefczyka – additional account options and settings" loading="lazy">
                         <p>Additional Options</p>
                     </div>
                 </div>
@@ -808,10 +835,10 @@
                 
                 <div class="download-buttons">
                     <a href="https://play.google.com/store/apps/details?id=pl.online.kasastefczyka" class="store-button">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" loading="lazy">
                     </a>
                     <a href="#" class="store-button">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" loading="lazy">
                     </a>
                 </div>
                 
@@ -850,11 +877,13 @@
                     <h3>Kasa Stefczyka</h3>
                     <p>Your mobile banking SKOK</p>
                 </div>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Support</a>
-                    <a href="#">Contact</a>
+                <div class="footer-links" style="display:flex;flex-direction:column;gap:6px;">
+                    <a href="https://roman-tsisyk.com/">← Back to Portfolio</a>
+                    <a href="https://roman-tsisyk.com/#projects">View All Projects</a>
+                    <strong style="margin-top:8px;opacity:0.8;">Related Projects</strong>
+                    <a href="../earnly/index.html">Earnly</a>
+                    <a href="../followmymoney/index.html">FollowMyMoney</a>
+                    <a href="../mercedes-adapter/index.html">Mercedes Adapter</a>
                 </div>
                 <div class="footer-social">
                     <a href="#" aria-label="Facebook">
@@ -881,7 +910,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     
     <!-- Float Navigation Script -->
     <script>

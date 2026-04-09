@@ -234,8 +234,14 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Performance: content-visibility for off-screen sections */
+        .screenshots, .tech-stack, .clients-section, .testimonials {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 400px;
+        }
     </style>
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="HP Poly Lens Android app by Roman Tsisyk – enterprise headset management with Bluetooth LE, real-time monitoring, and firmware updates for Fortune 500 companies.">
     <meta name="keywords" content="HP Poly Lens, Enterprise Communication, Bluetooth LE, HP Inc, Headset Management, Fortune 500, Business Solutions, Roman Tsisyk">
@@ -248,7 +254,7 @@
     <meta property="og:description" content="Enterprise Android app for HP Poly headset management. Bluetooth LE, real-time monitoring, firmware updates, and fleet control for Fortune 500 companies.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://roman-tsisyk.com/projects/poly-lens/">
-    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta property="og:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Roman Tsisyk Portfolio">
@@ -256,7 +262,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HP Poly Lens – Enterprise Headset Management Android App | Roman Tsisyk">
     <meta name="twitter:description" content="Enterprise Android app for HP Poly headset management with Bluetooth LE, real-time monitoring, and firmware updates for Fortune 500 companies.">
-    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.png">
+    <meta name="twitter:image" content="https://roman-tsisyk.com/assets/images/og-image.svg">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -317,7 +323,10 @@
     <!-- Preload fonts for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+    <meta name="theme-color" content="#0A0E27">
 </head>
 <body>
     <!-- Float Navigation Button -->
@@ -481,6 +490,21 @@
         <div class="floating-element element3"></div>
     </div>
 
+    <!-- Breadcrumb Navigation -->
+    <div style="padding:8px 0;position:relative;z-index:10;">
+        <div class="container">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <ol style="display:flex;gap:8px;list-style:none;font-size:14px;opacity:0.7;margin:0;padding:0;align-items:center;">
+                    <li><a href="https://roman-tsisyk.com/" style="color:inherit;text-decoration:none;">Home</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li><a href="https://roman-tsisyk.com/#projects" style="color:inherit;text-decoration:none;">Projects</a></li>
+                    <li style="opacity:0.5;">&#8250;</li>
+                    <li aria-current="page">HP Poly Lens</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
@@ -540,7 +564,7 @@
                 <div class="phone-mockup">
                     <div class="phone-frame">
                         <div class="phone-screen">
-                            <img src="../../assets/images/poly-lens/unnamed.webp" alt="HP Poly Lens app – main device management dashboard showing headset status and controls" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
+                            <img src="../../assets/images/poly-lens/unnamed.webp" alt="HP Poly Lens app – main device management dashboard showing headset status and controls" loading="eager" style="width: 100%; height: 100%; object-fit: cover; border-radius: 30px;">
                         </div>
                             </div>
                         </div>
@@ -598,9 +622,9 @@
                 <div class="preview-showcase">
                     <div class="showcase-phone">
                         <div class="showcase-frame">
-                            <img src="../../assets/images/poly-lens/unnamed (1).webp" alt="Poly Lens Quick Guide" class="showcase-img active">
-                            <img src="../../assets/images/poly-lens/unnamed (2).webp" alt="Poly Lens Map View" class="showcase-img">
-                            <img src="../../assets/images/poly-lens/unnamed (4).webp" alt="Poly Lens Settings" class="showcase-img">
+                            <img src="../../assets/images/poly-lens/unnamed (1).webp" alt="Poly Lens Quick Guide" class="showcase-img active" loading="lazy">
+                            <img src="../../assets/images/poly-lens/unnamed (2).webp" alt="Poly Lens Map View" class="showcase-img" loading="lazy">
+                            <img src="../../assets/images/poly-lens/unnamed (4).webp" alt="Poly Lens Settings" class="showcase-img" loading="lazy">
                         </div>
                         <div class="showcase-dots">
                             <span class="dot active" data-img="0"></span>
@@ -835,37 +859,37 @@
                     <div class="screenshot-track" id="screenshotTrack">
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed.webp" alt="Poly Voyager 60 Main Screen" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed.webp" alt="Poly Voyager 60 Main Screen" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Fleet Dashboard</p>
                             </div>
                         </div>
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed (1).webp" alt="Quick Guide" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed (1).webp" alt="Quick Guide" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Device Onboarding</p>
                             </div>
                         </div>
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed (2).webp" alt="Find My Device Map" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed (2).webp" alt="Find My Device Map" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Asset Tracking</p>
                             </div>
                         </div>
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed (3).webp" alt="Find Device Sound" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed (3).webp" alt="Find Device Sound" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Recovery Tools</p>
                             </div>
                         </div>
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed (4).webp" alt="Device Settings" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed (4).webp" alt="Device Settings" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Configuration Center</p>
                             </div>
                         </div>
                         <div class="screenshot-item">
                             <div class="screenshot-phone">
-                                <img src="../../assets/images/poly-lens/unnamed (5).webp" alt="Software Update" class="screenshot-img">
+                                <img src="../../assets/images/poly-lens/unnamed (5).webp" alt="Software Update" class="screenshot-img" loading="lazy">
                                 <p class="screenshot-caption">Update Management</p>
                             </div>
                         </div>
@@ -1103,6 +1127,14 @@
                     <p>Enterprise-grade headset management solution for HP Poly devices. Trusted by Fortune 500 companies worldwide.</p>
                 </div>
                 <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Portfolio</h4>
+                        <a href="https://roman-tsisyk.com/">← Back to Portfolio</a>
+                        <a href="https://roman-tsisyk.com/#projects">View All Projects</a>
+                        <a href="../mercedes-adapter/index.html">Mercedes Adapter</a>
+                        <a href="../earnly/index.html">Earnly</a>
+                        <a href="../netti/index.html">Netti</a>
+                    </div>
                     <div class="footer-column">
                         <h4>Product</h4>
                         <a href="#features">Features</a>
