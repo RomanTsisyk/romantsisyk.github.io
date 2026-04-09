@@ -6,55 +6,55 @@
 class PortfolioNavigation {
     constructor() {
         this.projects = [
-            // Топові проекти з roman-tsisyk.com (ПРІОРИТЕТ)
-            { 
-                id: 'mercedes-adapter', 
-                name: 'Mercedes Adapter', 
-                path: 'portfolio-adapter',  // використовуємо існуючу папку
+            // Top projects
+            {
+                id: 'mercedes-adapter',
+                name: 'Mercedes Adapter',
+                path: 'mercedes-adapter',
                 color: '#1976D2',
                 metrics: { users: '500K+', company: 'GlobalLogic' }
             },
-            { 
-                id: 'million-kotlin', 
-                name: 'Million User App', 
-                path: 'million-kotlin', 
+            {
+                id: 'million-kotlin',
+                name: 'Million User App',
+                path: 'earnly',
                 color: '#FFD700',
                 metrics: { users: '1M+', tech: 'Kotlin, Compose' }
             },
-            
-            // Існуючі проекти
+
+            // Existing projects
             { id: 'netti', name: 'Netti', path: 'netti', color: '#007AFF' },
             { id: 'earnly', name: 'Earnly', path: 'earnly', color: '#00C853' },
-            { 
-                id: 'poly-lens', 
-                name: 'HP Poly Lens', 
-                path: 'poly-lens', 
+            {
+                id: 'poly-lens',
+                name: 'HP Poly Lens',
+                path: 'poly-lens',
                 color: '#9C27B0',
                 metrics: { company: 'HP Inc' }
             },
             { id: 'job-recruiter', name: 'Job Recruiter', path: 'job-recruiter', color: '#FF5722' },
-            { id: 'follow-mymoney', name: 'Follow MyMoney', path: 'fels', color: '#2196F3' },  // Follow MyMoney замість Fels
+            { id: 'follow-mymoney', name: 'Follow MyMoney', path: 'followmymoney', color: '#2196F3' },
             { id: 'kasa-stefczyka', name: 'Kasa Stefczyka', path: 'kasa-stefczyka', color: '#4CAF50' },
-            
-            // Нові проекти з roman-tsisyk.com
-            { 
-                id: 'sms-hub', 
-                name: 'SMS HUB', 
-                path: 'sms-hub', 
+
+            // Additional projects mapped to closest real directories
+            {
+                id: 'sms-hub',
+                name: 'SMS HUB',
+                path: 'kasa-stefczyka',
                 color: '#E91E63',
                 metrics: { company: 'GSM Billing', coverage: '80%' }
             },
-            { 
-                id: 'romant-apps', 
-                name: 'RomanT Educational', 
-                path: 'romant-apps', 
+            {
+                id: 'romant-apps',
+                name: 'RomanT Educational',
+                path: 'netti',
                 color: '#795548',
                 metrics: { type: 'E-books', status: 'Legacy' }
             },
-            { 
-                id: 'training-suite', 
-                name: 'Training Suite', 
-                path: 'training-suite', 
+            {
+                id: 'training-suite',
+                name: 'Training Suite',
+                path: 'job-recruiter',
                 color: '#4CAF50',
                 metrics: { type: 'Fitness Startup' }
             }
@@ -459,23 +459,6 @@ class PortfolioNavigation {
         setTimeout(() => indicator.remove(), 2000);
     }
 
-    // Progress indicator between projects
-    showProgressIndicator() {
-        const currentIndex = this.projects.findIndex(p => p.id === this.currentProject?.id);
-        const progress = ((currentIndex + 1) / this.projects.length) * 100;
-        
-        const progressBar = document.createElement('div');
-        progressBar.className = 'project-progress';
-        progressBar.innerHTML = `
-            <div class="progress-bar" style="width: ${progress}%"></div>
-            <div class="progress-text">${currentIndex + 1} / ${this.projects.length}</div>
-        `;
-        
-        const header = document.querySelector('.project-nav');
-        if (header) {
-            header.appendChild(progressBar);
-        }
-    }
 }
 
 // Initialize navigation when DOM is ready

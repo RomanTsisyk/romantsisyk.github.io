@@ -201,6 +201,7 @@ button {
 .loader.hidden {
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .loader-content {
@@ -934,6 +935,7 @@ button {
 
 @keyframes fillBar {
     from { width: 0; }
+    to { width: 100%; }
 }
 
 .skills-tags {
@@ -1243,7 +1245,7 @@ button {
         background: var(--bg-secondary);
         width: 100%;
         text-align: center;
-        transition: var(--transition-base);
+        transition: left var(--transition-base);
         box-shadow: var(--shadow-lg);
         padding: var(--space-xl);
     }
@@ -1307,5 +1309,13 @@ button {
 
     .container {
         padding: 0 var(--space-md);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

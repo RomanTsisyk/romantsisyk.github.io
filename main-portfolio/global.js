@@ -25,6 +25,7 @@ function initLoader() {
     window.addEventListener('load', () => {
         setTimeout(() => {
             loader.classList.add('hidden');
+            loader.setAttribute('aria-hidden', 'true');
         }, 500);
     });
 }
@@ -54,17 +55,14 @@ function initNavigation() {
     });
     
     // Navbar scroll effect
-    let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        
+
         if (currentScroll > 100) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-        
-        lastScroll = currentScroll;
     });
     
     // Active link on scroll
@@ -220,10 +218,6 @@ function initContactForm() {
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
             
             // Simulate form submission
             const submitBtn = contactForm.querySelector('button[type="submit"]');

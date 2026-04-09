@@ -444,15 +444,19 @@
             
             switch (e.key) {
                 case 'ArrowUp':
+                    e.preventDefault();
                     movePlayer(0, -1);
                     break;
                 case 'ArrowDown':
+                    e.preventDefault();
                     movePlayer(0, 1);
                     break;
                 case 'ArrowLeft':
+                    e.preventDefault();
                     movePlayer(-1, 0);
                     break;
                 case 'ArrowRight':
+                    e.preventDefault();
                     movePlayer(1, 0);
                     break;
             }
@@ -522,6 +526,7 @@
             currentLevel++;
             loadLevel(currentLevel);
             isGameActive = true;
+            gameTime = 0;
             startTimer();
         }
 

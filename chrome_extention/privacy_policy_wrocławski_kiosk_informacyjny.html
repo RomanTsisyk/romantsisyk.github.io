@@ -192,8 +192,8 @@
                 <span>Wrocławski Kiosk</span>
             </a>
             <div class="lang-switcher">
-                <button class="lang-btn active" onclick="toggleLanguage('en')">English</button>
-                <button class="lang-btn" onclick="toggleLanguage('pl')">Polski</button>
+                <button class="lang-btn active" onclick="toggleLanguage('en', event)">English</button>
+                <button class="lang-btn" onclick="toggleLanguage('pl', event)">Polski</button>
             </div>
         </div>
     </header>
@@ -261,11 +261,11 @@
     </main>
 
     <footer class="footer">
-        <p>© 2025 Roman Tsisyk. All rights reserved.</p>
+        <p>© 2026 Roman Tsisyk. All rights reserved.</p>
     </footer>
 
     <script>
-        function toggleLanguage(lang) {
+        function toggleLanguage(lang, event) {
             document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
             document.getElementById('lang-' + lang).classList.add('active');

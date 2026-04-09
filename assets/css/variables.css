@@ -152,11 +152,6 @@
        BREAKPOINTS (for reference in JS)
        ============================================ */
     --breakpoint-xs: 480px;
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1200px;
-    --breakpoint-2xl: 1440px;
 }
 
 /* ============================================
@@ -190,66 +185,6 @@
     --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.15);
     
     color-scheme: light;
-}
-
-/* ============================================
-   PROJECT-SPECIFIC THEME OVERRIDES
-   ============================================ */
-
-/* Netti Project */
-[data-project="netti"] {
-    --project-primary: #007AFF;
-    --project-secondary: #FE6D33;
-    --project-primary-rgb: 0, 122, 255;
-    --project-secondary-rgb: 254, 109, 51;
-}
-
-/* Earnly Project */
-[data-project="earnly"] {
-    --project-primary: #00C853;
-    --project-secondary: #2196F3;
-    --project-primary-rgb: 0, 200, 83;
-    --project-secondary-rgb: 33, 150, 243;
-}
-
-/* Poly Lens Project */
-[data-project="poly-lens"] {
-    --project-primary: #9C27B0;
-    --project-secondary: #00BCD4;
-    --project-primary-rgb: 156, 39, 176;
-    --project-secondary-rgb: 0, 188, 212;
-}
-
-/* Job Recruiter Project */
-[data-project="job-recruiter"] {
-    --project-primary: #FF6B35;
-    --project-secondary: #4CAF50;
-    --project-primary-rgb: 255, 107, 53;
-    --project-secondary-rgb: 76, 175, 80;
-}
-
-/* Portfolio Adapter Project */
-[data-project="portfolio-adapter"] {
-    --project-primary: #2196F3;
-    --project-secondary: #FFC107;
-    --project-primary-rgb: 33, 150, 243;
-    --project-secondary-rgb: 255, 193, 7;
-}
-
-/* Fels Project */
-[data-project="fels"] {
-    --project-primary: #FFC107;
-    --project-secondary: #9C27B0;
-    --project-primary-rgb: 255, 193, 7;
-    --project-secondary-rgb: 156, 39, 176;
-}
-
-/* Kasa Stefczyka Project */
-[data-project="kasa-stefczyka"] {
-    --project-primary: #E91E63;
-    --project-secondary: #3F51B5;
-    --project-primary-rgb: 233, 30, 99;
-    --project-secondary-rgb: 63, 81, 181;
 }
 
 /* ============================================

@@ -377,6 +377,10 @@
         const gameWorld = document.getElementById('game-world');
         const speechBubble = barista.querySelector('.speech-bubble');
 
+        // Timeout IDs for recursive spawn chains
+        let obstacleTimeout = null;
+        let targetTimeout = null;
+
         // Position tracking
         let baristaPosition = {
             x: parseInt(window.getComputedStyle(barista).left),
@@ -397,8 +401,13 @@
             gameState.sleeping = false;
             gameState.gameOver = false;
             gameState.progress = 0;
+            gameState.checkpoint1 = false;
+            gameState.checkpoint2 = false;
+            gameState.checkpoint3 = false;
 
-            // Reset barista position
+            // Reset barista position to initial CSS values before reading computed style
+            barista.style.left = '20vw';
+            barista.style.bottom = '20vh';
             baristaPosition = {
                 x: parseInt(window.getComputedStyle(barista).left),
                 y: parseInt(window.getComputedStyle(barista).bottom),
@@ -418,6 +427,10 @@
             // Hide game over and victory screens
             gameOverScreen.style.display = 'none';
             victoryScreen.style.display = 'none';
+
+            // Cancel any orphaned recursive spawn chains from a previous run
+            clearTimeout(obstacleTimeout);
+            clearTimeout(targetTimeout);
 
             // Start spawning obstacles and targets
             scheduleObstacleSpawn();
@@ -523,12 +536,12 @@
         // Schedule obstacle spawn
         function scheduleObstacleSpawn() {
             if (gameState.gameOver) return;
-            
-            const delay = Math.random() * 
-                (GAME_CONFIG.obstacles.mansplainerFrequency[1] - GAME_CONFIG.obstacles.mansplainerFrequency[0]) + 
+
+            const delay = Math.random() *
+                (GAME_CONFIG.obstacles.mansplainerFrequency[1] - GAME_CONFIG.obstacles.mansplainerFrequency[0]) +
                 GAME_CONFIG.obstacles.mansplainerFrequency[0];
-            
-            setTimeout(() => {
+
+            obstacleTimeout = setTimeout(() => {
                 spawnMansplainer();
                 scheduleObstacleSpawn();
             }, delay);
@@ -579,8 +592,8 @@
         // Schedule target spawn
         function scheduleTargetSpawn() {
             if (gameState.gameOver) return;
-            
-            setTimeout(() => {
+
+            targetTimeout = setTimeout(() => {
                 spawnTarget();
                 scheduleTargetSpawn();
             }, 5000 + Math.random() * 3000);

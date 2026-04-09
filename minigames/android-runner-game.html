@@ -264,6 +264,8 @@
         
         // Add background elements
         function createBackgroundElements() {
+            // Remove any existing mountains before creating new ones
+            document.querySelectorAll('.mountain').forEach(m => m.remove());
             // Add mountains in the background
             for (let i = 0; i < 5; i++) {
                 const mountain = document.createElement('div');
@@ -291,7 +293,10 @@
         document.addEventListener('keydown', handleKeyDown);
         document.addEventListener('keyup', handleKeyUp);
         gameContainer.addEventListener('click', jump);
-        gameContainer.addEventListener('touchstart', jump);
+        gameContainer.addEventListener('touchstart', function(event) {
+            event.preventDefault();
+            jump(event);
+        }, { passive: false });
         restartButton.addEventListener('click', restartGame);
         startButton.addEventListener('click', startGame);
         
@@ -410,7 +415,7 @@
             setTimeout(() => {
                 android.classList.remove('jump');
                 isJumping = false;
-            }, 700); // Longer jump duration
+            }, 500); // Matches CSS @keyframes jump animation duration (0.5s)
         }
 
         // Generate iOS logo obstacle

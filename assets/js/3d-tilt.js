@@ -23,11 +23,19 @@ class TiltEffect {
         // Add perspective to parent
         this.element.style.transformStyle = 'preserve-3d';
         this.element.style.transition = `transform ${this.settings.speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
-        
+
         // Create glare element if enabled
         if (this.settings.glare) {
             this.createGlare();
         }
+
+        // Store bound references so addEventListener and removeEventListener use the same function
+        this._boundMouseEnter = this.onMouseEnter.bind(this);
+        this._boundMouseLeave = this.onMouseLeave.bind(this);
+        this._boundMouseMove = this.onMouseMove.bind(this);
+        this._boundTouchStart = this.onTouchStart.bind(this);
+        this._boundTouchMove = this.onTouchMove.bind(this);
+        this._boundTouchEnd = this.onTouchEnd.bind(this);
 
         // Bind events
         this.bindEvents();
@@ -73,14 +81,14 @@ class TiltEffect {
 
     bindEvents() {
         // Mouse events
-        this.element.addEventListener('mouseenter', this.onMouseEnter.bind(this));
-        this.element.addEventListener('mousemove', this.onMouseMove.bind(this));
-        this.element.addEventListener('mouseleave', this.onMouseLeave.bind(this));
-        
+        this.element.addEventListener('mouseenter', this._boundMouseEnter);
+        this.element.addEventListener('mousemove', this._boundMouseMove);
+        this.element.addEventListener('mouseleave', this._boundMouseLeave);
+
         // Touch events for mobile
-        this.element.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: true });
-        this.element.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: true });
-        this.element.addEventListener('touchend', this.onTouchEnd.bind(this), { passive: true });
+        this.element.addEventListener('touchstart', this._boundTouchStart, { passive: true });
+        this.element.addEventListener('touchmove', this._boundTouchMove, { passive: true });
+        this.element.addEventListener('touchend', this._boundTouchEnd, { passive: true });
     }
 
     onMouseEnter(e) {
@@ -150,13 +158,13 @@ class TiltEffect {
 
     // Destroy method to clean up
     destroy() {
-        this.element.removeEventListener('mouseenter', this.onMouseEnter);
-        this.element.removeEventListener('mousemove', this.onMouseMove);
-        this.element.removeEventListener('mouseleave', this.onMouseLeave);
-        this.element.removeEventListener('touchstart', this.onTouchStart);
-        this.element.removeEventListener('touchmove', this.onTouchMove);
-        this.element.removeEventListener('touchend', this.onTouchEnd);
-        
+        this.element.removeEventListener('mouseenter', this._boundMouseEnter);
+        this.element.removeEventListener('mousemove', this._boundMouseMove);
+        this.element.removeEventListener('mouseleave', this._boundMouseLeave);
+        this.element.removeEventListener('touchstart', this._boundTouchStart);
+        this.element.removeEventListener('touchmove', this._boundTouchMove);
+        this.element.removeEventListener('touchend', this._boundTouchEnd);
+
         if (this.glareElement && this.glareElement.parentElement) {
             this.glareElement.parentElement.remove();
         }

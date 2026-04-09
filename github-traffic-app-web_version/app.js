@@ -79,11 +79,7 @@ function initializeUI() {
     
     // Dashboard elements
     const logoutButton = document.getElementById('logoutButton');
-    
-    // Loading overlay
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const loadingText = document.getElementById('loadingText');
-    
+
     // Add event listeners
     loginButton.addEventListener('click', handleLogin);
     logoutButton.addEventListener('click', handleLogout);
@@ -105,7 +101,7 @@ function initializeUI() {
 
 // Check if the user is already logged in
 function checkLoginState() {
-    const token = localStorage.getItem('github_token');
+    const token = sessionStorage.getItem('github_token');
     const userData = localStorage.getItem('github_user');
     
     if (token && userData) {
@@ -141,7 +137,7 @@ async function handleLogin() {
         
         if (user) {
             // Store token and user data
-            localStorage.setItem('github_token', token);
+            sessionStorage.setItem('github_token', token);
             localStorage.setItem('github_user', JSON.stringify(user));
             
             // Update UI
@@ -165,7 +161,7 @@ async function handleLogin() {
 
 function handleLogout() {
     // Clear stored data
-    localStorage.removeItem('github_token');
+    sessionStorage.removeItem('github_token');
     localStorage.removeItem('github_user');
     
     // Clear any existing chart data
@@ -214,7 +210,7 @@ async function fetchRepositoryData(token, username) {
     
     try {
         // Fetch repositories
-        const reposResponse = await axios.get(`https://api.github.com/users/${username}/repos`, {
+        const reposResponse = await axios.get(`https://api.github.com/user/repos`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/vnd.github.v3+json'
@@ -300,31 +296,37 @@ function processRepositoryData(data) {
     
     // Process Views Data
     const viewsByRepo = {};
+    const viewsUniquesByRepo = {};
     const allViewDates = new Set();
-    
+
     repos.forEach(repo => {
         if (repo.views && repo.views.views) {
             viewsByRepo[repo.name] = {};
-            
+            viewsUniquesByRepo[repo.name] = {};
+
             repo.views.views.forEach(view => {
                 const date = view.timestamp.replace('T00:00:00Z', '');
                 viewsByRepo[repo.name][date] = view.count;
+                viewsUniquesByRepo[repo.name][date] = view.uniques;
                 allViewDates.add(date);
             });
         }
     });
-    
+
     // Process Clones Data
     const clonesByRepo = {};
+    const clonesUniquesByRepo = {};
     const allCloneDates = new Set();
-    
+
     repos.forEach(repo => {
         if (repo.clones && repo.clones.clones) {
             clonesByRepo[repo.name] = {};
-            
+            clonesUniquesByRepo[repo.name] = {};
+
             repo.clones.clones.forEach(clone => {
                 const date = clone.timestamp.replace('T00:00:00Z', '');
                 clonesByRepo[repo.name][date] = clone.count;
+                clonesUniquesByRepo[repo.name][date] = clone.uniques;
                 allCloneDates.add(date);
             });
         }
@@ -338,18 +340,22 @@ function processRepositoryData(data) {
     
     // Prepare chart data
     const viewsChartData = prepareChartData(viewsByRepo, sortedViewDates);
+    const viewsUniquesChartData = prepareChartData(viewsUniquesByRepo, sortedViewDates);
     const clonesChartData = prepareChartData(clonesByRepo, sortedCloneDates);
-    
+    const clonesUniquesChartData = prepareChartData(clonesUniquesByRepo, sortedCloneDates);
+
     // Calculate overall data
     const overallViews = calculateOverallData(viewsByRepo, sortedViewDates);
+    const overallViewsUniques = calculateOverallData(viewsUniquesByRepo, sortedViewDates);
     const overallClones = calculateOverallData(clonesByRepo, sortedCloneDates);
-    
+    const overallClonesUniques = calculateOverallData(clonesUniquesByRepo, sortedCloneDates);
+
     // Create the charts
     console.log('Creating charts...');
-    createViewsChart(sortedViewDates, viewsChartData);
-    createOverallViewsChart(sortedViewDates, overallViews);
-    createClonesChart(sortedCloneDates, clonesChartData);
-    createOverallClonesChart(sortedCloneDates, overallClones);
+    createViewsChart(sortedViewDates, viewsChartData, viewsUniquesChartData);
+    createOverallViewsChart(sortedViewDates, overallViews, overallViewsUniques);
+    createClonesChart(sortedCloneDates, clonesChartData, clonesUniquesChartData);
+    createOverallClonesChart(sortedCloneDates, overallClones, overallClonesUniques);
     console.log('Charts created');
 }
 
@@ -414,11 +420,11 @@ const zoomOptions = {
 
 
 // Create views chart
-function createViewsChart(labels, datasetsData) {
+function createViewsChart(labels, datasetsData, uniquesData) {
     try {
         const datasets = [];
         let colorIndex = 0;
-        
+
         for (const repo in datasetsData) {
             datasets.push({
                 label: repo,
@@ -427,12 +433,16 @@ function createViewsChart(labels, datasetsData) {
                 backgroundColor: chartColors[colorIndex % chartColors.length],
                 fill: false,
                 tension: 0.3,
-                pointRadius: 4
+                pointRadius: 4,
+                uniquesData: uniquesData[repo] || []
             });
             colorIndex++;
         }
-        
-        const ctx = document.getElementById('viewsChart').getContext('2d');
+
+        const canvasEl = document.getElementById('viewsChart');
+        const existingChart = Chart.getChart(canvasEl);
+        if (existingChart) existingChart.destroy();
+        const ctx = canvasEl.getContext('2d');
         window.viewsChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -449,7 +459,13 @@ function createViewsChart(labels, datasetsData) {
                     },
                     tooltip: {
                         mode: 'index',
-                        intersect: false
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                const uniques = context.dataset.uniquesData ? context.dataset.uniquesData[context.dataIndex] : 0;
+                                return `${context.dataset.label}: ${context.parsed.y} views (${uniques} unique)`;
+                            }
+                        }
                     },
                     legend: {
                         position: 'bottom',
@@ -484,9 +500,12 @@ function createViewsChart(labels, datasetsData) {
 }
 
 // Create overall views chart
-function createOverallViewsChart(labels, data) {
+function createOverallViewsChart(labels, data, uniquesData) {
     try {
-        const ctx = document.getElementById('overallViewsChart').getContext('2d');
+        const canvasEl = document.getElementById('overallViewsChart');
+        const existingChart = Chart.getChart(canvasEl);
+        if (existingChart) existingChart.destroy();
+        const ctx = canvasEl.getContext('2d');
         window.overallViewsChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -513,7 +532,8 @@ function createOverallViewsChart(labels, data) {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return context.parsed.y + ' views';
+                                const uniques = uniquesData ? uniquesData[context.dataIndex] : 0;
+                                return `${context.parsed.y} views (${uniques} unique)`;
                             }
                         }
                     },
@@ -546,11 +566,11 @@ function createOverallViewsChart(labels, data) {
 }
 
 // Create clones chart
-function createClonesChart(labels, datasetsData) {
+function createClonesChart(labels, datasetsData, uniquesData) {
     try {
         const datasets = [];
         let colorIndex = 0;
-        
+
         for (const repo in datasetsData) {
             datasets.push({
                 label: repo,
@@ -559,12 +579,16 @@ function createClonesChart(labels, datasetsData) {
                 backgroundColor: chartColors[colorIndex % chartColors.length],
                 fill: false,
                 tension: 0.3,
-                pointRadius: 4
+                pointRadius: 4,
+                uniquesData: uniquesData[repo] || []
             });
             colorIndex++;
         }
-        
-        const ctx = document.getElementById('clonesChart').getContext('2d');
+
+        const canvasEl = document.getElementById('clonesChart');
+        const existingChart = Chart.getChart(canvasEl);
+        if (existingChart) existingChart.destroy();
+        const ctx = canvasEl.getContext('2d');
         window.clonesChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -581,7 +605,13 @@ function createClonesChart(labels, datasetsData) {
                     },
                     tooltip: {
                         mode: 'index',
-                        intersect: false
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                const uniques = context.dataset.uniquesData ? context.dataset.uniquesData[context.dataIndex] : 0;
+                                return `${context.dataset.label}: ${context.parsed.y} clones (${uniques} unique)`;
+                            }
+                        }
                     },
                     legend: {
                         position: 'bottom',
@@ -616,9 +646,12 @@ function createClonesChart(labels, datasetsData) {
 }
 
 // Create overall clones chart
-function createOverallClonesChart(labels, data) {
+function createOverallClonesChart(labels, data, uniquesData) {
     try {
-        const ctx = document.getElementById('overallClonesChart').getContext('2d');
+        const canvasEl = document.getElementById('overallClonesChart');
+        const existingChart = Chart.getChart(canvasEl);
+        if (existingChart) existingChart.destroy();
+        const ctx = canvasEl.getContext('2d');
         window.overallClonesChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -645,7 +678,8 @@ function createOverallClonesChart(labels, data) {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return context.parsed.y + ' clones';
+                                const uniques = uniquesData ? uniquesData[context.dataIndex] : 0;
+                                return `${context.parsed.y} clones (${uniques} unique)`;
                             }
                         }
                     },

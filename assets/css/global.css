@@ -328,9 +328,8 @@ button {
     width: 400px;
     height: 400px;
     background: radial-gradient(circle, var(--success), transparent);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 200px);
+    left: calc(50% - 200px);
     animation-duration: 35s;
     animation-delay: 10s;
 }
@@ -1219,4 +1218,12 @@ button {
     .container {
         padding: 0 var(--space-md);
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

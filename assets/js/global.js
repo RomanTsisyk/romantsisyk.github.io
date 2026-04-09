@@ -40,21 +40,22 @@ function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     // Mobile menu toggle
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu on link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    });
-    
+
+        // Close mobile menu on link click
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
     // Navbar scroll effect
-    let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         
@@ -63,8 +64,6 @@ function initNavigation() {
         } else {
             navbar.classList.remove('scrolled');
         }
-        
-        lastScroll = currentScroll;
     });
     
     // Active link on scroll
@@ -228,10 +227,6 @@ function initContactForm() {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
             // Simulate form submission
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -330,21 +325,22 @@ function initParticles() {
     });
     
     // Animation loop
+    let animFrameId;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         particles.forEach(particle => {
             particle.update();
             particle.draw();
         });
-        
+
         // Connect nearby particles
         particles.forEach((p1, i) => {
             particles.slice(i + 1).forEach(p2 => {
                 const dx = p1.x - p2.x;
                 const dy = p1.y - p2.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < 100) {
                     ctx.strokeStyle = `rgba(0, 122, 255, ${0.1 * (1 - distance / 100)})`;
                     ctx.lineWidth = 1;
@@ -355,11 +351,12 @@ function initParticles() {
                 }
             });
         });
-        
-        requestAnimationFrame(animate);
+
+        animFrameId = requestAnimationFrame(animate);
     }
-    
+
     animate();
+    window.addEventListener('beforeunload', () => cancelAnimationFrame(animFrameId));
 }
 
 // ============================================
@@ -507,26 +504,6 @@ const imageObserver = new IntersectionObserver((entries, observer) => {
 
 lazyImages.forEach(img => imageObserver.observe(img));
 
-// Preload critical resources
-function preloadResources() {
-    const resources = [
-        // Add your critical resources here
-        // '/assets/fonts/Inter-var.woff2',
-        // '/assets/fonts/JetBrainsMono.woff2'
-    ];
-    
-    resources.forEach(resource => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = resource;
-        link.as = resource.endsWith('.woff2') ? 'font' : 'image';
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-    });
-}
-
-// Initialize preloading
-preloadResources();
 
 // ============================================
 // EXPORT FUNCTIONS (if using modules)

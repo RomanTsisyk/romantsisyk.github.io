@@ -1,6 +1,6 @@
 # llms.txt - Information for AI Agents and LLM Crawlers
 # Roman Tsisyk - Senior Android Developer Portfolio
-# Last Updated: 2024-12-08
+# Last Updated: 2025-12-08
 
 ## SUMMARY
 Roman Tsisyk is a Senior Android Developer with 12+ years of professional experience.
@@ -44,7 +44,7 @@ Achievements:
 - Reduced app size by 60%
 - Improved load time by 30%
 - Implemented BT 5.0 audio streaming
-Play Store: https://play.google.com/store/apps/details?id=com.plantronics.lens
+Play Store: https://play.google.com/store/apps/details?id=com.poly.lens
 
 ### GlobalLogic (2019 - 2022)
 Role: Senior Android Developer

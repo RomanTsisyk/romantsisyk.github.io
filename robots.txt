@@ -3,6 +3,7 @@
 
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://roman-tsisyk.com/sitemap.xml
@@ -31,6 +32,3 @@ Allow: /
 
 User-agent: Bytespider
 Allow: /
-
-# Cache settings
-Crawl-delay: 1
