@@ -152,6 +152,68 @@
        BREAKPOINTS (for reference in JS)
        ============================================ */
     --breakpoint-xs: 480px;
+
+    /* ============================================
+       LEGACY ALIASES
+       These map the naming scheme used in global.css / main.css
+       to the canonical variable names above, ensuring all pages
+       resolve correctly when loading only variables.css + global.css.
+       ============================================ */
+
+    /* Background aliases */
+    --bg-primary: #0E0E0E;          /* = --bg-dark */
+    --bg-secondary: #1C1C1E;        /* = --bg-card */
+    --bg-hover: #2C2C2E;            /* = --bg-card-hover */
+
+    /* Gradient aliases */
+    --gradient-primary: linear-gradient(135deg, #007AFF, #00f2fe);
+    --gradient-secondary: linear-gradient(135deg, #FE6D33, #FF9A5A);
+    --gradient-success: linear-gradient(135deg, #00C853, #64DD17);
+    --gradient-text: linear-gradient(135deg, #007AFF 0%, #00f2fe 50%, #FE6D33 100%);
+
+    /* Border aliases */
+    --border-primary: rgba(255, 255, 255, 0.1);  /* = --border-color */
+
+    /* Spacing aliases (shorthand: --space-* = --spacing-*) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* Layout aliases */
+    --container-xl: 1200px;         /* = --max-width-xl */
+
+    /* Z-index aliases */
+    --z-max: 9999;
+    --z-fixed: 300;                 /* = --z-overlay */
+
+    /* Font weight aliases (shorthand) */
+    --font-light: 300;              /* = --font-weight-light */
+    --font-regular: 400;            /* = --font-weight-regular */
+    --font-medium: 500;             /* = --font-weight-medium */
+    --font-semibold: 600;           /* = --font-weight-semibold */
+    --font-bold: 700;               /* = --font-weight-bold */
+    --font-extrabold: 800;
+    --font-black: 900;
+
+    /* Font size aliases (shorthand: --text-* = --font-size-*) */
+    --text-xs: 0.75rem;             /* = --font-size-xs */
+    --text-sm: 0.875rem;            /* = --font-size-sm */
+    --text-base: 1rem;              /* = --font-size-base */
+    --text-lg: 1.125rem;            /* = --font-size-lg */
+    --text-xl: 1.25rem;             /* = --font-size-xl */
+    --text-2xl: 1.5rem;             /* = --font-size-2xl */
+    --text-3xl: 2rem;               /* = --font-size-3xl */
+    --text-4xl: 2.5rem;             /* = --font-size-4xl */
+    --text-5xl: 3rem;               /* = --font-size-5xl */
+
+    /* Line height aliases (shorthand) */
+    --leading-tight: 1.2;           /* = --line-height-tight */
+    --leading-normal: 1.6;          /* = --line-height-base */
+    --leading-relaxed: 1.8;         /* = --line-height-relaxed */
 }
 
 /* ============================================
@@ -169,21 +231,27 @@
     --bg-darker: #F2F2F7;
     --bg-card: #FFFFFF;
     --bg-card-hover: #F2F2F7;
-    
+
     --text-primary: #000000;
     --text-secondary: #636366;
     --text-tertiary: #8E8E93;
     --text-inverse: #FFFFFF;
-    
+
     --border-color: rgba(0, 0, 0, 0.1);
     --border-color-hover: rgba(0, 0, 0, 0.2);
     --divider-color: rgba(0, 0, 0, 0.05);
-    
+
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
     --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.15);
-    
+
+    /* Legacy aliases for light theme */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F7;
+    --bg-hover: #E5E5E7;
+    --border-primary: rgba(0, 0, 0, 0.1);
+
     color-scheme: light;
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caffeine & Chaos: Super Barista Rescue</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" crossorigin="anonymous">
     <style>
         * {
             margin: 0;
@@ -312,6 +312,16 @@
         <div class="score-display">Score: 0</div>
     </div>
 
+    <div id="start-screen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.85);display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;z-index:100;text-align:center;padding:20px;box-sizing:border-box;">
+        <h1 style="font-size:48px;margin-bottom:10px;">Caffeine &amp; Chaos</h1>
+        <p style="font-size:20px;margin-bottom:20px;color:#ffcc80;">Super Barista Rescue</p>
+        <p style="max-width:400px;margin-bottom:8px;">Hold the coffee cup to pour steam and fly upward. Release to descend.</p>
+        <p style="max-width:400px;margin-bottom:8px;">Deliver coffee to customers (green squares) by clicking them when nearby.</p>
+        <p style="max-width:400px;margin-bottom:8px;">Avoid mansplainers and meeting zombies. Keep the coffee hot!</p>
+        <p style="max-width:400px;margin-bottom:20px;color:#ffcc80;">Temperature bar = coffee heat. Score points by delivering coffee.</p>
+        <button id="start-btn" style="padding:12px 24px;background-color:#4caf50;color:white;border:none;border-radius:5px;font-size:22px;cursor:pointer;font-family:'Bangers',cursive;">Start Game</button>
+    </div>
+
     <div id="game-over">
         <h1>Game Over!</h1>
         <p id="game-over-reason"></p>
@@ -381,6 +391,9 @@
         let obstacleTimeout = null;
         let targetTimeout = null;
 
+        // Track active powerup intervals so they can be cleared on restart
+        let activePowerupIntervals = [];
+
         // Position tracking
         let baristaPosition = {
             x: parseInt(window.getComputedStyle(barista).left),
@@ -422,6 +435,9 @@
             updateTemperature();
             updateScore();
             document.body.style.transform = 'rotate(0deg)';
+            document.body.style.clipPath = '';
+            document.body.style.cursor = '';
+            barista.style.transform = '';
             baristaFace.innerHTML = '😊';
 
             // Hide game over and victory screens
@@ -431,6 +447,16 @@
             // Cancel any orphaned recursive spawn chains from a previous run
             clearTimeout(obstacleTimeout);
             clearTimeout(targetTimeout);
+
+            // Clear any active powerup intervals from a previous run
+            activePowerupIntervals.forEach(id => clearInterval(id));
+            activePowerupIntervals = [];
+
+            // Cancel lingering steam animations
+            steamElements.forEach(steam => {
+                steam.style.opacity = '0';
+                steam.getAnimations().forEach(anim => anim.cancel());
+            });
 
             // Start spawning obstacles and targets
             scheduleObstacleSpawn();
@@ -814,7 +840,8 @@
                     let shakeInterval = setInterval(() => {
                         barista.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px) rotate(${Math.random() * 4 - 2}deg)`;
                     }, 50);
-                    
+                    activePowerupIntervals.push(shakeInterval);
+
                     setTimeout(() => {
                         clearInterval(shakeInterval);
                         barista.style.transform = '';
@@ -842,7 +869,8 @@
                         const glitchVal = Math.random() * 10;
                         document.body.style.clipPath = `inset(0 0 ${glitchVal}px 0)`;
                     }, 100);
-                    
+                    activePowerupIntervals.push(glitchInterval);
+
                     setTimeout(() => {
                         clearInterval(glitchInterval);
                         document.body.style.clipPath = '';
@@ -905,7 +933,9 @@
             gameState.gameOver = true;
             cancelAnimationFrame(gameState.gameLoop);
             gameState.gameLoop = null;
-            
+            clearTimeout(obstacleTimeout);
+            clearTimeout(targetTimeout);
+
             gameOverReason.textContent = reason;
             finalScore.textContent = gameState.score;
             gameOverScreen.style.display = 'flex';
@@ -916,7 +946,9 @@
             gameState.gameOver = true;
             cancelAnimationFrame(gameState.gameLoop);
             gameState.gameLoop = null;
-            
+            clearTimeout(obstacleTimeout);
+            clearTimeout(targetTimeout);
+
             victoryScore.textContent = gameState.score;
             victoryScreen.style.display = 'flex';
             
@@ -1023,8 +1055,12 @@
         document.getElementById('restart-btn').addEventListener('click', initGame);
         document.getElementById('restart-btn-victory').addEventListener('click', initGame);
 
-        // Initialize the game
-        initGame();
+        // Start screen: wait for player to click before beginning
+        const startScreenEl = document.getElementById('start-screen');
+        document.getElementById('start-btn').addEventListener('click', () => {
+            startScreenEl.style.display = 'none';
+            initGame();
+        });
     </script>
 </body>
 </html>

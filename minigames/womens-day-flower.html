@@ -503,13 +503,13 @@
     <div class="final-message" id="final-message">
         <h2>🎉 Your Gift is Ready! 🎉</h2>
         <p>Share this link with your special someone:</p>
-        <p><strong id="gift-link">https://your-flower-gift.com/gift/123456</strong></p>
+        <p><strong id="gift-link"></strong></p>
         <p>When they open it, they'll see your beautiful flower and message!</p>
         <p>Happy International Women's Day! 💐</p>
     </div>
     
     <div class="footer">
-        Created by <a href="https://www.linkedin.com/in/roman-tsisyk/" target="_blank">Roman Tsisyk</a> | For International Women's Day 2025
+        Created by <a href="https://www.linkedin.com/in/roman-tsisyk/" target="_blank">Roman Tsisyk</a> | For International Women's Day 2026
     </div>
     
     <script>
@@ -532,6 +532,49 @@
             const finalMessage = document.getElementById('final-message');
             const giftLink = document.getElementById('gift-link');
             
+            // Handle incoming gift links: ?gift=<code>&from=<name>&to=<name>&msg=<message>
+            (function handleGiftParam() {
+                const params = new URLSearchParams(window.location.search);
+                if (!params.has('gift')) return;
+
+                const fromName = params.get('from') || 'Someone special';
+                const toName   = params.get('to')   || 'you';
+                const msg      = params.get('msg')  || '';
+
+                // Show a gift-received banner above the flower container
+                const banner = document.createElement('div');
+                banner.style.cssText = [
+                    'max-width:500px', 'width:100%', 'margin:10px auto 0',
+                    'padding:16px 20px', 'background:#fff0f5',
+                    'border:2px solid #ff69b4', 'border-radius:12px',
+                    'text-align:center', 'box-shadow:0 4px 12px rgba(255,105,180,0.2)'
+                ].join(';');
+                banner.innerHTML = `
+                    <div style="font-size:2em;margin-bottom:6px">💐</div>
+                    <h2 style="color:#ff1493;margin:0 0 6px;font-size:1.3rem">
+                        ${escapeHtml(fromName)} sent you flowers, ${escapeHtml(toName)}!
+                    </h2>
+                    ${msg ? `<p style="color:#9370db;font-style:italic;margin:4px 0">"${escapeHtml(msg)}"</p>` : ''}
+                    <p style="color:#666;font-size:0.9rem;margin:8px 0 0">
+                        Watch the flower bloom below — it was grown just for you!
+                    </p>`;
+                document.querySelector('.container').insertAdjacentElement('beforebegin', banner);
+
+                // Auto-play: water the flower to full bloom
+                let autoWaterCount = 0;
+                const autoWater = setInterval(() => {
+                    if (autoWaterCount >= 5) { clearInterval(autoWater); return; }
+                    waterFlower();
+                    autoWaterCount++;
+                }, 700);
+            })();
+
+            function escapeHtml(str) {
+                return String(str)
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
             // Create petals
             const petalCount = 8;
             for (let i = 0; i < petalCount; i++) {
@@ -691,13 +734,14 @@
                 
                 // In a real app, you would save the gift data to a server here
                 
-                // Show the final message with link
+                // Show the final message with a real shareable link to this page
+                const giftLinkUrl = `${window.location.origin}/minigames/womens-day-flower.html?gift=${giftCode}&from=${encodeURIComponent(yourName)}&to=${encodeURIComponent(recipientName)}&msg=${encodeURIComponent(message)}`;
                 giftSection.style.opacity = 0;
                 setTimeout(() => {
                     giftSection.style.display = 'none';
                     finalMessage.style.display = 'block';
-                    giftLink.textContent = `https://flower-gift.com/${giftCode}`;
-                    
+                    giftLink.textContent = giftLinkUrl;
+
                     setTimeout(() => {
                         finalMessage.style.opacity = 1;
                     }, 100);

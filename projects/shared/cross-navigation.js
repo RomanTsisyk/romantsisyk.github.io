@@ -12,43 +12,43 @@
         },
         {
             name: 'HP Poly Lens',
-            path: '/poly lens portfolio/index.html',
+            path: '/projects/poly-lens/index.html',
             icon: '🎧',
             description: 'Enterprise Headset Management'
         },
         {
             name: 'Kasa Stefczyka',
-            path: '/portfolio kasa stefczyka/index.html',
+            path: '/projects/kasa-stefczyka/index.html',
             icon: '💳',
             description: 'Banking Application'
         },
         {
             name: 'Earnly',
-            path: '/earnly portfolio/index.html',
+            path: '/projects/earnly/index.html',
             icon: '💰',
             description: 'Financial Management'
         },
         {
             name: 'FollowMyMoney',
-            path: '/followmymoney-portfolio/index.html',
+            path: '/projects/followmymoney/index.html',
             icon: '📊',
             description: 'Expense Tracking'
         },
         {
-            name: 'Fels',
-            path: '/portfolio fels/index.html',
+            name: 'Job Recruiter',
+            path: '/projects/job-recruiter/index.html',
             icon: '🏢',
-            description: 'Business Solutions'
+            description: 'Smart Recruitment Platform'
         },
         {
-            name: 'Adapter',
-            path: '/portfolio adapter/index.html',
+            name: 'Mercedes Adapter',
+            path: '/projects/mercedes-adapter/index.html',
             icon: '🔌',
             description: 'Integration Platform'
         },
         {
-            name: 'Netti Demo',
-            path: '/netti portfolio-demo/index.html',
+            name: 'Netti',
+            path: '/projects/netti/index.html',
             icon: '📱',
             description: 'App Portfolio Demo'
         }

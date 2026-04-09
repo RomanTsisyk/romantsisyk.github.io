@@ -600,6 +600,10 @@
     animation-delay: -14s;
 }
 
+/* NOTE: This @keyframes float intentionally differs from the one in global.css.
+   global.css uses 4 keypoints with larger translate distances (100px).
+   This version uses 3 keypoints with subtler translate distances (30px) for
+   the project page background orbs. Both must be kept. */
 @keyframes float {
     0%, 100% {
         transform: translate(0, 0) scale(1);
@@ -693,16 +697,7 @@
    ANIMATIONS
    ============================================ */
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* @keyframes fadeInUp — defined in global.css (identical definition) */
 
 /* Scroll animations */
 .animate-on-scroll {

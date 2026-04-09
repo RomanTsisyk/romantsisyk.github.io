@@ -178,7 +178,7 @@ function initProjectFilters() {
                 const categories = card.getAttribute('data-category').split(' ');
                 
                 if (filter === 'all' || categories.includes(filter)) {
-                    card.style.display = 'block';
+                    card.style.display = '';
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'scale(1)';
@@ -317,21 +317,22 @@ function initParticles() {
     });
     
     // Animation loop
+    let animFrameId;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         particles.forEach(particle => {
             particle.update();
             particle.draw();
         });
-        
+
         // Connect nearby particles
         particles.forEach((p1, i) => {
             particles.slice(i + 1).forEach(p2 => {
                 const dx = p1.x - p2.x;
                 const dy = p1.y - p2.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < 100) {
                     ctx.strokeStyle = `rgba(0, 122, 255, ${0.1 * (1 - distance / 100)})`;
                     ctx.lineWidth = 1;
@@ -342,11 +343,14 @@ function initParticles() {
                 }
             });
         });
-        
-        requestAnimationFrame(animate);
+
+        animFrameId = requestAnimationFrame(animate);
     }
-    
+
     animate();
+
+    // Clean up animation when leaving page
+    window.addEventListener('beforeunload', () => cancelAnimationFrame(animFrameId));
 }
 
 // ============================================
@@ -369,10 +373,12 @@ function initAnimations() {
                 if (entry.target.classList.contains('skill-item')) {
                     const progressBar = entry.target.querySelector('.skill-progress');
                     if (progressBar) {
-                        const width = progressBar.style.width;
+                        const targetWidth = progressBar.getAttribute('style').match(/width:\s*([^;]+)/)?.[1] || progressBar.style.width;
                         progressBar.style.width = '0';
+                        progressBar.style.animation = 'none';
                         setTimeout(() => {
-                            progressBar.style.width = width;
+                            progressBar.style.width = targetWidth;
+                            progressBar.style.animation = 'fillBar 1.5s ease-out';
                         }, 100);
                     }
                 }
@@ -415,18 +421,23 @@ function initAnimations() {
     // Typing effect for hero title
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
+        const originalHTML = heroTitle.innerHTML;
+        // Extract plain text to type (strips inner HTML tags for character count)
         const text = heroTitle.textContent;
         heroTitle.textContent = '';
         let i = 0;
-        
+
         function typeWriter() {
             if (i < text.length) {
                 heroTitle.textContent += text.charAt(i);
                 i++;
                 setTimeout(typeWriter, 50);
+            } else {
+                // Typing complete — restore original HTML (preserves gradient-text span)
+                heroTitle.innerHTML = originalHTML;
             }
         }
-        
+
         // Start typing after loader hides
         setTimeout(typeWriter, 1000);
     }
@@ -491,25 +502,6 @@ const imageObserver = new IntersectionObserver((entries, observer) => {
 
 lazyImages.forEach(img => imageObserver.observe(img));
 
-// Preload critical resources
-function preloadResources() {
-    const resources = [
-        '/assets/fonts/Inter-var.woff2',
-        '/assets/fonts/JetBrainsMono.woff2'
-    ];
-    
-    resources.forEach(resource => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = resource;
-        link.as = resource.endsWith('.woff2') ? 'font' : 'image';
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-    });
-}
-
-// Initialize preloading
-preloadResources();
 
 // ============================================
 // EXPORT FUNCTIONS (if using modules)

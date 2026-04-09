@@ -127,7 +127,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0066DD;
+    background: var(--primary-dark);
 }
 
 /* Links */
@@ -213,10 +213,7 @@ button {
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-}
+/* @keyframes pulse — defined in global.css */
 
 .loader-bar {
     width: 150px;
@@ -236,10 +233,7 @@ button {
     animation: loading 1.5s ease-in-out infinite;
 }
 
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(300%); }
-}
+/* @keyframes loading — defined in global.css */
 
 /* ============================================
    NAVIGATION
@@ -424,12 +418,7 @@ button {
     animation-delay: 10s;
 }
 
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(100px, -100px) scale(1.1); }
-    50% { transform: translate(-100px, 100px) scale(0.9); }
-    75% { transform: translate(50px, 50px) scale(1.05); }
-}
+/* @keyframes float — defined in global.css */
 
 #particleCanvas {
     position: absolute;
@@ -459,7 +448,7 @@ button {
     padding: var(--space-sm) var(--space-md);
     background: rgba(0, 122, 255, 0.1);
     border: 1px solid rgba(0, 122, 255, 0.3);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-size: 0.9rem;
     margin-bottom: var(--space-xl);
     animation: fadeInUp 0.8s ease;
@@ -489,16 +478,7 @@ button {
     animation: fadeInUp 0.8s ease 0.3s both;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* @keyframes fadeInUp — defined in global.css */
 
 .hero-buttons {
     display: flex;
@@ -510,7 +490,7 @@ button {
 
 .btn {
     padding: var(--space-md) var(--space-xl);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     font-weight: 600;
     display: inline-flex;
     align-items: center;
@@ -598,7 +578,7 @@ button {
 /* Code Window */
 .code-window {
     background: var(--bg-secondary);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
     animation: fadeInUp 0.8s ease 0.6s both;
@@ -671,7 +651,7 @@ button {
     padding: var(--space-xs) var(--space-md);
     background: rgba(0, 122, 255, 0.1);
     color: var(--primary);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-size: 0.875rem;
     font-weight: 600;
     margin-bottom: var(--space-md);
@@ -699,7 +679,7 @@ button {
 .filter-btn {
     padding: var(--space-sm) var(--space-lg);
     background: var(--bg-card);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     color: var(--text-secondary);
     font-weight: 500;
     transition: all var(--transition-base);
@@ -723,7 +703,7 @@ button {
 
 .project-card {
     background: var(--bg-card);
-    border-radius: 20px;
+    border-radius: var(--radius-2xl);
     overflow: hidden;
     transition: all var(--transition-base);
     border: 1px solid var(--border-color);
@@ -776,7 +756,7 @@ button {
     font-weight: 600;
     padding: var(--space-sm) var(--space-lg);
     background: var(--gradient-primary);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     transform: translateY(20px);
     transition: transform var(--transition-base);
 }
@@ -872,7 +852,7 @@ button {
 
 .skill-category {
     background: var(--bg-secondary);
-    border-radius: 20px;
+    border-radius: var(--radius-2xl);
     padding: var(--space-2xl);
     border: 1px solid var(--border-color);
 }
@@ -899,7 +879,7 @@ button {
 .skill-item {
     background: var(--bg-card);
     padding: var(--space-lg);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
 }
 
 .skill-header {
@@ -921,20 +901,18 @@ button {
 .skill-bar {
     height: 8px;
     background: var(--bg-hover);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     overflow: hidden;
 }
 
 .skill-progress {
     height: 100%;
     background: var(--gradient-primary);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     animation: fillBar 1.5s ease-out;
 }
 
-@keyframes fillBar {
-    from { width: 0; }
-}
+/* @keyframes fillBar — defined in global.css */
 
 .skills-tags {
     display: flex;
@@ -945,7 +923,7 @@ button {
 .skill-tag {
     padding: var(--space-sm) var(--space-lg);
     background: var(--bg-card);
-    border-radius: 50px;
+    border-radius: var(--radius-full);
     font-weight: 500;
     transition: all var(--transition-base);
 }
@@ -995,7 +973,7 @@ button {
     width: 60px;
     height: 60px;
     background: var(--bg-card);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1019,7 +997,7 @@ button {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    border-radius: 20px;
+    border-radius: var(--radius-2xl);
     position: relative;
     z-index: 2;
 }
@@ -1031,7 +1009,7 @@ button {
     right: -20px;
     bottom: -20px;
     background: var(--gradient-primary);
-    border-radius: 20px;
+    border-radius: var(--radius-2xl);
     z-index: 1;
 }
 
@@ -1099,7 +1077,7 @@ button {
     width: 60px;
     height: 60px;
     background: var(--bg-secondary);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1129,7 +1107,7 @@ button {
     padding: var(--space-md) var(--space-lg);
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     color: var(--text-primary);
     font-family: inherit;
     font-size: 1rem;
@@ -1215,7 +1193,7 @@ button {
 
 .cert-card {
     background: var(--bg-card);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: var(--space-xl);
     border: 1px solid var(--border-color);
     transition: all var(--transition-base);
@@ -1288,7 +1266,7 @@ button {
 
 .opensource-card {
     background: var(--bg-secondary);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: var(--space-xl);
     border: 1px solid var(--border-color);
     transition: all var(--transition-base);

@@ -75,8 +75,7 @@ function initializeUI() {
     // Login screen elements
     const loginButton = document.getElementById('loginButton');
     const tokenInput = document.getElementById('tokenInput');
-    const errorMessage = document.getElementById('errorMessage');
-    
+
     // Dashboard elements
     const logoutButton = document.getElementById('logoutButton');
 
@@ -93,7 +92,7 @@ function initializeUI() {
     
     // Clear error on input change
     tokenInput.addEventListener('input', () => {
-        errorMessage.classList.add('hidden');
+        document.getElementById('errorMessage').classList.add('hidden');
     });
     
     console.log('UI elements initialized');
@@ -207,73 +206,77 @@ async function fetchUserData(token) {
 
 async function fetchRepositoryData(token, username) {
     showLoading('Fetching repository data...');
-    
+
     try {
-        // Fetch repositories
-        const reposResponse = await axios.get(`https://api.github.com/user/repos`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            },
-            params: { 
-                per_page: 100 
-            }
-        });
-        
-        const repos = reposResponse.data;
+        // Fetch all repositories with pagination (handles > 100 repos)
+        const authHeaders = {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        };
+
+        let page = 1;
+        let allRepos = [];
+        let hasMore = true;
+        while (hasMore) {
+            const reposResponse = await axios.get('https://api.github.com/user/repos', {
+                headers: authHeaders,
+                params: { per_page: 100, page }
+            });
+            allRepos = [...allRepos, ...reposResponse.data];
+            hasMore = reposResponse.data.length === 100;
+            page++;
+        }
+
+        const repos = allRepos;
         console.log(`Found ${repos.length} repositories`);
-        
+
         if (repos.length === 0) {
             hideLoading();
             showError('No repositories found for this account.');
             return;
         }
-        
-        // For each repo, get traffic data
-        const repoData = [];
-        for (const repo of repos) {
-            try {
-                // Update loading text to show progress
-                showLoading(`Fetching data for ${repo.name}...`);
-                
-                const viewsResponse = await axios.get(
+
+        // Fetch traffic data for all repos in parallel
+        showLoading(`Fetching traffic data for ${repos.length} repositories...`);
+
+        async function fetchRepoTraffic(repo) {
+            const [viewsResponse, clonesResponse] = await Promise.all([
+                axios.get(
                     `https://api.github.com/repos/${username}/${repo.name}/traffic/views`,
-                    { 
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    }
-                );
-                
-                const clonesResponse = await axios.get(
+                    { headers: authHeaders }
+                ),
+                axios.get(
                     `https://api.github.com/repos/${username}/${repo.name}/traffic/clones`,
-                    { 
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    }
-                );
-                
-                repoData.push({
-                    name: repo.name,
-                    views: viewsResponse.data,
-                    clones: clonesResponse.data
-                });
-            } catch (error) {
-                console.error(`Error fetching data for ${repo.name}:`, error);
-                // Continue with other repos
-            }
+                    { headers: authHeaders }
+                )
+            ]);
+            return {
+                name: repo.name,
+                views: viewsResponse.data,
+                clones: clonesResponse.data
+            };
         }
-        
+
+        const results = await Promise.allSettled(
+            repos.map(repo => fetchRepoTraffic(repo))
+        );
+
+        const repoData = [];
+        results.forEach((result, i) => {
+            if (result.status === 'fulfilled') {
+                repoData.push(result.value);
+            } else {
+                console.error(`Error fetching data for ${repos[i].name}:`, result.reason);
+            }
+        });
+
         // Process data and create charts
         processRepositoryData({
             success: true,
-            username, 
+            username,
             repos: repoData
         });
-        
+
         // Hide loading and show dashboard content
         hideLoading();
     } catch (error) {

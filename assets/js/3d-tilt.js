@@ -20,6 +20,8 @@ class TiltEffect {
     }
 
     init() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         // Add perspective to parent
         this.element.style.transformStyle = 'preserve-3d';
         this.element.style.transition = `transform ${this.settings.speed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
@@ -158,6 +160,8 @@ class TiltEffect {
 
     // Destroy method to clean up
     destroy() {
+        if (!this._boundMouseEnter) return;
+
         this.element.removeEventListener('mouseenter', this._boundMouseEnter);
         this.element.removeEventListener('mousemove', this._boundMouseMove);
         this.element.removeEventListener('mouseleave', this._boundMouseLeave);
@@ -168,6 +172,11 @@ class TiltEffect {
         if (this.glareElement && this.glareElement.parentElement) {
             this.glareElement.parentElement.remove();
         }
+
+        this.element.style.transform = '';
+        this.element.style.transformStyle = '';
+        this.element.style.transition = '';
+        this.element.style.willChange = '';
     }
 }
 

@@ -430,23 +430,29 @@
                     <label class="form-label" for="extension">Choose an Extension</label>
                     <select id="extension" name="extension" class="form-select" required aria-label="Select an extension">
                         <option value="" disabled selected>-- Select an extension --</option>
-                        <option value="Hide Suggested & Sponsored Posts for LinkedIn">Hide Suggested & Sponsored Posts for LinkedIn</option>
-                        <option value="LinkedIn Feed Cleaner">LinkedIn Feed Cleaner</option>
-                        <option value="Censor.net RSS Extension">Censor.net RSS Extension</option>
+                        <option value="Hide Suggested & Sponsored Posts for LinkedIn">Hide Suggested &amp; Sponsored Posts for LinkedIn</option>
+                        <option value="Ukraine News RSS">Ukraine News RSS</option>
                         <option value="Wrocławski Kiosk Wiadomości">Wrocławski Kiosk Wiadomości</option>
-                        <option value="Keep Active Extension Demo">Keep Active Extension Demo</option>
-                        <option value="Deities List Viewer">Deities List Viewer</option>
+                        <option value="Keep Active">Keep Active</option>
+                        <option value="EnglishWebHub">EnglishWebHub</option>
+                        <option value="Productivity Booster">Productivity Booster</option>
                     </select>
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label" for="support-email">Your Email (so we can reply)</label>
+                    <input type="email" id="support-email" name="email" placeholder="your@email.com" required
+                        class="form-select" style="background-image: none; padding-right: 1rem;">
+                </div>
+
+                <div class="form-group">
                     <label class="form-label" for="feedback">Your Message</label>
-                    <textarea 
-                        id="feedback" 
-                        name="feedback" 
-                        class="form-textarea" 
+                    <textarea
+                        id="feedback"
+                        name="feedback"
+                        class="form-textarea"
                         placeholder="Please describe your issue, suggestion, or question in detail..."
-                        required 
+                        required
                         aria-label="Enter your feedback"
                     ></textarea>
                 </div>
@@ -467,27 +473,27 @@
                 <div class="extensions-grid">
                     <div class="extension-item">
                         <span class="extension-icon">💼</span>
-                        <span class="extension-name">LinkedIn Feed Cleaner</span>
+                        <span class="extension-name">Hide Suggested &amp; Sponsored Posts for LinkedIn</span>
                     </div>
                     <div class="extension-item">
-                        <span class="extension-icon">🚫</span>
-                        <span class="extension-name">Hide Sponsored Posts</span>
-                    </div>
-                    <div class="extension-item">
-                        <span class="extension-icon">📰</span>
-                        <span class="extension-name">Censor.net RSS</span>
+                        <span class="extension-icon">🇺🇦</span>
+                        <span class="extension-name">Ukraine News RSS</span>
                     </div>
                     <div class="extension-item">
                         <span class="extension-icon">🏙️</span>
-                        <span class="extension-name">Wrocławski Kiosk</span>
+                        <span class="extension-name">Wrocławski Kiosk Wiadomości</span>
                     </div>
                     <div class="extension-item">
                         <span class="extension-icon">⏰</span>
-                        <span class="extension-name">Keep Active Demo</span>
+                        <span class="extension-name">Keep Active</span>
                     </div>
                     <div class="extension-item">
-                        <span class="extension-icon">📋</span>
-                        <span class="extension-name">Deities List Viewer</span>
+                        <span class="extension-icon">📚</span>
+                        <span class="extension-name">EnglishWebHub</span>
+                    </div>
+                    <div class="extension-item">
+                        <span class="extension-icon">🎯</span>
+                        <span class="extension-name">Productivity Booster</span>
                     </div>
                 </div>
             </div>
@@ -501,16 +507,17 @@
     <script>
         document.getElementById('feedbackForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const extension = document.getElementById('extension').value;
+            const email = document.getElementById('support-email').value;
             const feedback = document.getElementById('feedback').value;
-            
-            if (!extension || !feedback) {
+
+            if (!extension || !email || !feedback) {
                 alert('Please fill out all fields before submitting.');
                 return;
             }
-            
-            const mailtoLink = `mailto:roman.tsisyk.1@gmail.com?subject=Feedback: ${encodeURIComponent(extension)}&body=${encodeURIComponent(feedback)}`;
+
+            const mailtoLink = `mailto:roman.tsisyk.1@gmail.com?subject=Feedback: ${encodeURIComponent(extension)}&body=${encodeURIComponent(feedback)}%0AFrom%3A%20${encodeURIComponent(email)}`;
             window.location.href = mailtoLink;
         });
     </script>

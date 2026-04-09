@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initLoader() {
     const loader = document.getElementById('loader');
-    
+    if (!loader) return;
+
     // Hide loader after page loads
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -56,21 +57,23 @@ function initNavigation() {
     }
 
     // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
     
     // Active link on scroll
     const sections = document.querySelectorAll('section[id]');
     
     function highlightNav() {
-        const scrollY = window.pageYOffset;
+        const scrollY = window.scrollY;
         
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
@@ -135,7 +138,7 @@ function initScrollEffects() {
 
     if (backToTop) {
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
+            if (window.scrollY > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
@@ -325,21 +328,22 @@ function initParticles() {
     });
     
     // Animation loop
+    let animFrameId;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         particles.forEach(particle => {
             particle.update();
             particle.draw();
         });
-        
+
         // Connect nearby particles
         particles.forEach((p1, i) => {
             particles.slice(i + 1).forEach(p2 => {
                 const dx = p1.x - p2.x;
                 const dy = p1.y - p2.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < 100) {
                     ctx.strokeStyle = `rgba(0, 122, 255, ${0.1 * (1 - distance / 100)})`;
                     ctx.lineWidth = 1;
@@ -350,11 +354,12 @@ function initParticles() {
                 }
             });
         });
-        
-        requestAnimationFrame(animate);
+
+        animFrameId = requestAnimationFrame(animate);
     }
-    
+
     animate();
+    window.addEventListener('beforeunload', () => cancelAnimationFrame(animFrameId));
 }
 
 // ============================================
@@ -403,7 +408,7 @@ function initAnimations() {
     
     // Counter animation
     function animateCounter(counter) {
-        const target = parseFloat(counter.getAttribute('data-value'));
+        const target = parseFloat(counter.getAttribute('data-value') || counter.textContent);
         const duration = 2000;
         const start = 0;
         const increment = target / (duration / 16);

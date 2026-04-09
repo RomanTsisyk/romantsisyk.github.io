@@ -468,30 +468,32 @@
 
         // Move tanks
         function moveTanks() {
-            tanks.forEach((tank, index) => {
+            for (let index = tanks.length - 1; index >= 0; index--) {
+                const tank = tanks[index];
                 tank.position -= gameSpeed;
                 tank.element.style.left = `${tank.position}px`;
-                
+
                 // Remove tank when it goes off screen
                 if (tank.position < -60) {
                     tank.element.remove();
                     tanks.splice(index, 1);
                 }
-            });
+            }
         }
 
         // Move clouds
         function moveClouds() {
-            clouds.forEach((cloud, index) => {
+            for (let index = clouds.length - 1; index >= 0; index--) {
+                const cloud = clouds[index];
                 cloud.position -= cloud.speed;
                 cloud.element.style.left = `${cloud.position}px`;
-                
+
                 // Remove cloud when it goes off screen
                 if (cloud.position < -100) {
                     cloud.element.remove();
                     clouds.splice(index, 1);
                 }
-            });
+            }
         }
         
         // Move mountains (background)
@@ -565,6 +567,8 @@
         // Restart game
         function restartGame() {
             gameOverElement.style.display = 'none';
+            android.classList.remove('jump', 'crouch');
+            isJumping = false;
             startGame();
         }
 

@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initLoader() {
     const loader = document.getElementById('loader');
-    
+    if (!loader) return;
+
     // Hide loader after page loads
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -56,21 +57,23 @@ function initNavigation() {
     }
 
     // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
     
     // Active link on scroll
     const sections = document.querySelectorAll('section[id]');
     
     function highlightNav() {
-        const scrollY = window.pageYOffset;
+        const scrollY = window.scrollY;
         
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
@@ -135,7 +138,7 @@ function initScrollEffects() {
     
     if (backToTop) {
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
+            if (window.scrollY > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');

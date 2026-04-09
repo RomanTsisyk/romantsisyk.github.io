@@ -52,8 +52,9 @@ const animateValue = (element, start, end, duration) => {
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const current = Math.floor(progress * (end - start) + start);
-        element.textContent = current;
+        const current = progress * (end - start) + start;
+        const displayValue = Number.isInteger(end) ? Math.floor(current) : parseFloat(current.toFixed(1));
+        element.textContent = displayValue;
         if (progress < 1) {
             window.requestAnimationFrame(step);
         } else {
@@ -94,8 +95,11 @@ const metricObserver = new IntersectionObserver((entries) => {
             
             const fillElement = entry.target.querySelector('.metric-fill');
             if (fillElement) {
+                const targetWidth = fillElement.style.width;
+                fillElement.style.width = '0';
+                void fillElement.offsetWidth; // force reflow
                 setTimeout(() => {
-                    fillElement.style.width = fillElement.style.width;
+                    fillElement.style.width = targetWidth; // then animate to target
                 }, 100);
             }
             
@@ -305,4 +309,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==================== Console Easter Egg ==================== //
 console.log('%c🚀 Welcome to Earnly!', 'font-size: 24px; font-weight: bold; color: #004AAD;');
 console.log('%cBuilt with ❤️ using Android, Kotlin, and Jetpack Compose', 'font-size: 14px; color: #00BF63;');
-console.log('%cInterested in the code? Check out: https://github.com/yourusername/earnly', 'font-size: 12px; color: #666;');
+console.log('%cInterested in the code? Check out: https://github.com/RomanTsisyk', 'font-size: 12px; color: #666;');

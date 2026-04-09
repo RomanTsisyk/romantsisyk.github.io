@@ -404,23 +404,18 @@ class PortfolioNavigation {
 
     setupMobileGestures() {
         if (!this.currentProject) return;
-        
+
         let touchStartX = 0;
-        let touchEndX = 0;
         const threshold = 50;
-        
+
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
-        });
-        
+        }, { passive: true });
+
         document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            this.handleSwipe();
-        });
-        
-        const handleSwipe = () => {
+            const touchEndX = e.changedTouches[0].screenX;
             const currentIndex = this.projects.findIndex(p => p.id === this.currentProject.id);
-            
+
             if (touchEndX < touchStartX - threshold) {
                 // Swipe left - next project
                 const nextIndex = currentIndex < this.projects.length - 1 ? currentIndex + 1 : 0;
@@ -428,9 +423,7 @@ class PortfolioNavigation {
                 setTimeout(() => {
                     window.location.href = `../${this.projects[nextIndex].path}/index.html`;
                 }, 300);
-            }
-            
-            if (touchEndX > touchStartX + threshold) {
+            } else if (touchEndX > touchStartX + threshold) {
                 // Swipe right - previous project
                 const prevIndex = currentIndex > 0 ? currentIndex - 1 : this.projects.length - 1;
                 this.showSwipeIndicator('prev', this.projects[prevIndex].name);
@@ -438,9 +431,7 @@ class PortfolioNavigation {
                     window.location.href = `../${this.projects[prevIndex].path}/index.html`;
                 }, 300);
             }
-        };
-        
-        this.handleSwipe = handleSwipe;
+        }, { passive: true });
     }
 
     showSwipeIndicator(direction, projectName) {
