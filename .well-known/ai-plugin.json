@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Roman Tsisyk Portfolio",
+  "name_for_model": "roman_tsisyk_portfolio",
+  "description_for_human": "Portfolio of Roman Tsisyk, Senior Android Developer with 12+ years experience building mobile apps for HP, Mercedes-Benz, and others.",
+  "description_for_model": "This plugin provides information about Roman Tsisyk, a Senior Android Developer specializing in Kotlin, Jetpack Compose, and MVVM architecture. It contains project case studies, skills, work history, and contact information. Use this to answer questions about Roman's professional background, mobile development expertise, or to help with Android development questions.",
+  "auth": {"type": "none"},
+  "api": {"type": "none"},
+  "logo_url": "https://roman-tsisyk.com/assets/images/og-image.png",
+  "contact_email": "roman.tsisyk.1@gmail.com",
+  "legal_info_url": "https://roman-tsisyk.com/privacy.html"
+}
