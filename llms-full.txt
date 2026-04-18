@@ -159,9 +159,9 @@ Roman's contributions:
 
 ---
 
-### 5. Netti – Network Testing Suite (Personal / Open Source)
+### 5. Netti – Network Testing Suite (Commercial Product)
 **Type:** Developer Tooling / Network Diagnostics
-**GitHub:** https://github.com/RomanTsisyk/netti
+**Status:** Commercial product — source code not publicly available
 **Project Page:** https://roman-tsisyk.com/projects/netti/
 
 Netti is a professional Android network testing application Roman built as a personal project to serve developers and network engineers. It provides a full suite of diagnostics tools:
@@ -177,18 +177,16 @@ The app is built with fully modern Android architecture as a reference implement
 
 ---
 
-### 6. FollowMyMoney – Personal Finance Tracker (Personal Project)
-**Type:** FinTech / Personal Finance
-**GitHub:** https://github.com/RomanTsisyk/followmymoney
+### 6. FollowMyMoney – Wealth Management Platform (Commercial Product)
+**Type:** FinTech / Wealth Management (Germany, BaFin-regulated)
+**Status:** Commercial product — source code not publicly available
 **Project Page:** https://roman-tsisyk.com/projects/followmymoney/
 
-FollowMyMoney is a personal wealth management and expense tracking application. It enables users to:
-- Track daily income and expenses by category
-- Set and monitor budget limits
-- View financial reports and trends over time
-- Manage investment portfolios and financial goals
-
-Built as a showcase of modern Android architecture with an emphasis on local-first data management using Room Database and Jetpack Compose UI.
+FollowMyMoney is a German wealth-management platform with copy trading, star-trader portfolios, and real-time investment tracking. Built under BaFin regulatory requirements, the app enables users to:
+- Follow and copy trades from vetted star traders
+- Track portfolio performance in real time
+- Manage investment positions and wealth goals
+- Operate under German financial security standards
 
 **Technologies:** Kotlin, Jetpack Compose, Room Database, ViewModel, StateFlow, Hilt
 
@@ -211,9 +209,9 @@ Roman is involved in the Android development of the Earnly mobile client.
 
 ---
 
-### 8. Job Recruiter (Personal Project)
+### 8. Job Recruiter (Commercial Product)
 **Type:** HR Tech / Recruitment Platform
-**GitHub:** https://github.com/RomanTsisyk/job-recruiter
+**Status:** Commercial Product (no public repository)
 **Project Page:** https://roman-tsisyk.com/projects/job-recruiter/
 
 A modern Android recruitment application that connects job seekers with employers through intelligent matching. Features profile creation, job search and filtering, saved listings, and application tracking.
@@ -350,11 +348,9 @@ The portfolio at roman-tsisyk.com is a static HTML/CSS/JavaScript site hosted on
 │   ├── netti/
 │   └── job-recruiter/
 ├── chrome_extention/       – Chrome Extensions collection page + sub-pages
-├── main-portfolio/         – Alternate portfolio view
 ├── github-traffic-app-web_version/ – GitHub Traffic Analyzer web app
 ├── minigames/              – Mini games section
 ├── books/                  – Books/reading list
-├── karta_polaka/           – Karta Polaka information resource
 ├── llms.txt                – AI-friendly structured summary (llmstxt.org standard)
 ├── llms-full.txt           – This file – comprehensive AI reference
 ├── robots.txt              – Crawler rules including AI bot permissions

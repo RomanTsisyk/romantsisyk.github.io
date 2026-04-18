@@ -154,10 +154,10 @@
     --breakpoint-xs: 480px;
 
     /* ============================================
-       LEGACY ALIASES
-       These map the naming scheme used in global.css / main.css
-       to the canonical variable names above, ensuring all pages
-       resolve correctly when loading only variables.css + global.css.
+       SHORTHAND TOKENS
+       Active shorthand naming used across global.css / main.css /
+       components.css. Kept alongside the canonical names above so
+       existing component styles resolve cleanly.
        ============================================ */
 
     /* Background aliases (match main.css values) */

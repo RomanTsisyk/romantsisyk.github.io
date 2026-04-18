@@ -116,18 +116,18 @@ Roman Tsisyk is a passionate Android developer with a track record of transformi
 - Play Store: https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
 - Project Page: https://roman-tsisyk.com/projects/kasa-stefczyka/
 
-### 5. Netti (Personal Project)
+### 5. Netti (Commercial Product)
 - Type: Network Testing Suite
 - Description: Professional-grade Android network diagnostics app with speed test, iPerf3, ping, and traceroute tools. Built for developers and network engineers.
 - Technologies: Kotlin, Jetpack Compose, Material Design 3
-- GitHub: https://github.com/RomanTsisyk/netti
+- Status: Commercial product — source code not publicly available
 - Project Page: https://roman-tsisyk.com/projects/netti/
 
-### 6. FollowMyMoney (Personal Project)
-- Type: Personal Finance / Wealth Management
-- Description: Android app for tracking investments, expenses, and financial goals. Provides budget tracking, reports, and financial goal management.
+### 6. FollowMyMoney (Commercial Product)
+- Type: Wealth Management Platform (Germany, BaFin-regulated)
+- Description: German wealth-management Android app with copy trading, star-trader portfolios, and real-time investment tracking. BaFin-regulated security.
 - Technologies: Kotlin, Jetpack Compose, Room Database
-- GitHub: https://github.com/RomanTsisyk/followmymoney
+- Status: Commercial product — source code not publicly available
 - Project Page: https://roman-tsisyk.com/projects/followmymoney/
 
 ### 7. Earnly (In Development)
@@ -137,11 +137,11 @@ Roman Tsisyk is a passionate Android developer with a track record of transformi
 - Website: https://www.earnly.co.uk/
 - Project Page: https://roman-tsisyk.com/projects/earnly/
 
-### 8. Job Recruiter (Personal Project)
+### 8. Job Recruiter (Commercial Product)
 - Type: HR Tech / Recruitment
 - Description: Modern Android recruitment platform connecting job seekers with employers through intelligent matching.
 - Technologies: Kotlin, MVVM, Retrofit, Room Database
-- GitHub: https://github.com/RomanTsisyk/job-recruiter
+- Status: Commercial product — source code not publicly available
 - Project Page: https://roman-tsisyk.com/projects/job-recruiter/
 
 ### 9. SMS HUB (Enterprise / GSM Billing)
@@ -246,7 +246,6 @@ Roman Tsisyk is a passionate Android developer with a track record of transformi
 - https://roman-tsisyk.com/projects/netti/ – Netti network testing app details
 - https://roman-tsisyk.com/projects/job-recruiter/ – Job Recruiter app details
 - https://roman-tsisyk.com/chrome_extention/ – Chrome Extensions collection (6+ extensions)
-- https://roman-tsisyk.com/main-portfolio/ – Alternate portfolio view
 - https://roman-tsisyk.com/github-traffic-app-web_version/ – GitHub Traffic web app
 - https://roman-tsisyk.com/llms.txt – This file (structured summary for AI agents)
 - https://roman-tsisyk.com/llms-full.txt – Extended version with full project descriptions
@@ -263,10 +262,7 @@ Roman Tsisyk is a passionate Android developer with a track record of transformi
 - Kasa Stefczyka (Play Store): https://play.google.com/store/apps/details?id=pl.online.kasastefczyka
 - CryptoKit (GitHub): https://github.com/RomanTsisyk/CryptoKit
 - bleX (GitHub): https://github.com/RomanTsisyk/bleX
-- Netti (GitHub): https://github.com/RomanTsisyk/netti
-- FollowMyMoney (GitHub): https://github.com/RomanTsisyk/followmymoney
 - Sunrise-Sunset-SDK (GitHub): https://github.com/RomanTsisyk/Sunrise-Sunset-SDK
-- Job Recruiter (GitHub): https://github.com/RomanTsisyk/job-recruiter
 
 ---
 Last Updated: 2026-04-10
